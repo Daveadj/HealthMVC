@@ -1,0 +1,65 @@
+﻿@model IEnumerable<HealthMVC.Models.DoctorPatient>
+
+@{
+    ViewData["Title"] = "DoctorPatient";
+}
+
+<h1>Appointment</h1>
+<table class="table table table-bordered table-striped" id="example1">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Person)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppointmentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Person.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Person.YearOfBirth)
+            </th>
+           
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+
+             <td>
+                    @item.Person.FirstName @item.Person.LastName
+             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppointmentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Person.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Person.YearOfBirth)
+            </td>
+            <td>
+
+                 <a asp-action="PersonIssues" asp-route-personId="@item.Person.Id" class="btn btn-primary">View Diagnosis</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+        });
+    </script>
+}

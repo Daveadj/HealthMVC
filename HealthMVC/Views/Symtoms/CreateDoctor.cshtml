@@ -1,0 +1,70 @@
+﻿@model HealthMVC.Dto.DoctorVm
+
+@{
+    ViewData["Title"] = "CreateDoctor";
+    var Specialisation = ViewBag.Specilisation as List<HealthMVC.Models.Specialisation>;
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Create Doctor</h3>
+            </div>
+            <form asp-action="CreateDoctor">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="specialisation">Select Body Location</label>
+                    <select class="select2bs4" asp-for="specialisation" data-placeholder="Select Specialisation" style="width: 100%;">
+                        <option value="">Select</option>
+                        @if (Specialisation != null)
+                        {
+
+                            foreach (var spec in Specialisation)
+                            {
+                                <option value="@spec.Id">@spec.Name</option>
+                            }
+                        }
+                        else
+                        {
+                            <option value="">No specialisation available</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ListOfDoctors" class="btn btn-primary">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        })
+
+
+
+    </script>
+}

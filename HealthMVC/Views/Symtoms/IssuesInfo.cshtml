@@ -1,0 +1,22 @@
+﻿@model HealthMVC.Dto.IssuesInfo
+
+
+@{
+    ViewBag.Title = "Diagnosis";
+}
+
+<h2>Diagnosis</h2>
+
+<div>
+    <h3>Issue Information</h3>
+
+    <p><strong>Short Description:</strong> @Model.DescriptionShort</p>
+    <p><strong> Description:</strong> @Model.Description</p>
+    <p><strong> Name:</strong> @Model.Name</p>
+    <p><strong> Medical Condition:</strong> @Model.MedicalCondition</p>
+    <p><strong> Possible Symptoms:</strong> @Model.PossibleSymptoms</p>
+    <p><strong> ProfName:</strong> @Model.ProfName</p>
+    <p><strong> Treatment Description:</strong> @Model.TreatmentDescription</p>
+</div>
+
+

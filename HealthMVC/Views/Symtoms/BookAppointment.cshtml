@@ -1,0 +1,118 @@
+﻿@model HealthMVC.Dto.DoctorPatientVM
+
+@{
+    ViewData["Title"] = "BookAppointment";
+    var selecteddoctor = ViewBag.SelectedDoctor as HealthMVC.Models.Doctor;
+    var selectedperson = ViewBag.SelectedPerson as HealthMVC.Models.Person;
+}
+
+<h1 class="row justify-content-center">Book Appointment</h1>
+<hr />
+<div class="row justify-content-center">
+   
+    <!-- Doctor Column -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <h4>Doctor</h4>
+        <div class="info-box shadow-lg">
+            <span class="info-box-icon bg-success"><i class="far fa-user"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">@selecteddoctor.FirstName @selecteddoctor.LastName</span>
+                <span class="info-box-number">@selecteddoctor.Specialisation.Name</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    
+    <!-- Patient Column -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <h4>Patient</h4>
+        <div class="info-box shadow-lg">
+            <span class="info-box-icon bg-success"><i class="far fa-user"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">@selectedperson.FirstName @selectedperson.LastName</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="BookAppointment" id="bookAppointmentForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="DoctorId" type="hidden" />
+            <input asp-for="PersonId" type="hidden" />
+            <!-- Date and time -->
+            <div class="form-group">
+                <label>Date and time:</label>
+                <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
+                    <input asp-for="AppointmentDate" type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime" />
+                    <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="form-group">
+                <input type="submit" value="Book Appointment" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+        $('.swalDefaultSuccess').click(function () {
+            Toast.fire({
+                icon: 'success',
+                title: 'Appointment successfully booked!'
+            });
+        });
+
+        $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+        // AJAX form submission
+        $('#bookAppointmentForm').on('submit', function (e) {
+            e.preventDefault();
+            var form = this;
+
+            $.ajax({
+                url: form.action,
+                type: form.method,
+                data: $(form).serialize(),
+                success: function (data) {
+                    if (data.success) {
+                        // Show the success toast
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Appointment successfully booked!'
+                        });
+
+                        // Delay the redirection
+                        setTimeout(function () {
+                            window.location.href = "@Url.Action("Form", "Symtoms")";
+                        }, 3000); // Redirect after 3 seconds (adjust the delay as needed)
+                    } else {
+                        // Handle errors if needed
+                        console.error('Error: ' + data.error);
+                    }
+                }
+            });
+        });
+    </script>
+
+}

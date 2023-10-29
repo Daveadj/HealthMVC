@@ -1,0 +1,58 @@
+﻿@model IEnumerable<HealthMVC.Models.Doctor>
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "ListOfDoctors";
+}
+
+<h1>Doctors</h1>
+
+<p>
+    <a asp-action="CreateDoctor" class="btn btn-primary">Create New</a>
+</p>
+<table class="table table table-bordered table-striped" id="example1">
+    <thead>
+        <tr>
+            <th>
+               Doctors
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Specialisation)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.FirstName @item.LastName
+            </td>
+           
+            <td>
+                @item.Specialisation.Name
+            </td>
+           
+            <td>
+                    <a asp-action="DoctorPatient" asp-route-doctorId="@item.Id" class="btn btn-primary">Appointment</a>
+              
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+        });
+    </script>
+}

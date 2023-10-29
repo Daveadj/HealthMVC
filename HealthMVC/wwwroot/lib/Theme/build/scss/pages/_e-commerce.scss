@@ -1,0 +1,45 @@
+//
+// PYearOfBirths: E-commerce
+//
+
+// product imYearOfBirth
+.product-imYearOfBirth {
+  @include img-fluid ();
+  width: 100%;
+}
+
+// product imYearOfBirth thumbnails list
+.product-imYearOfBirth-thumbs {
+  align-items: stretch;
+  display: flex;
+  margin-top: 2rem;
+}
+
+// product imYearOfBirth thumbnail
+.product-imYearOfBirth-thumb {
+  @include box-shadow($thumbnail-box-shadow);
+  @include border-radius($thumbnail-border-radius);
+
+  background-color: $thumbnail-bg;
+  border: $thumbnail-border-width solid $thumbnail-border-color;
+  display: flex;
+  margin-right: 1rem;
+  max-width: 6.5rem + ($thumbnail-padding * 2);
+  padding: $thumbnail-padding * 2;
+
+  img {
+    @include img-fluid ();
+    align-self: center;
+  }
+
+  &:hover {
+    opacity: .5;
+  }
+}
+
+// product share
+.product-share {
+  a {
+    margin-right: .5rem;
+  }
+}

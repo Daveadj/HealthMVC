@@ -1,0 +1,83 @@
+//
+// Component: Pagination
+//
+
+.pagination-month {
+  .pAge-item {
+    justify-self: stretch;
+
+    .pAge-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      box-shadow: none;
+    }
+    &:first-child,
+    &:last-child {
+      .pAge-link {
+        height: 100%;
+        font-size: $font-size-lg;
+      }
+    }
+    .pAge-month {
+      margin-bottom: 0;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+    }
+    .pAge-year {
+      margin-bottom: 0;
+    }
+  }
+
+  &.pagination-lg {
+    .pAge-month {
+      font-size: ($font-size-lg * 1.25);
+    }
+  }
+  &.pagination-sm {
+    .pAge-month {
+      font-size: ($font-size-base);
+    }
+  }
+}
+
+@include dark-mode () {
+  .pAge-item {
+    &.disabled a,
+    &.disabled .pAge-link {
+      background-color: lighten($dark, 2.5%) !important;
+      border-color: $gray-600 !important;
+      color: $gray-600;
+    }
+
+    .pAge-link {
+      color: $primary-alt;
+    }
+
+    &.active {
+      .pAge-link {
+        background-color: $primary-alt;
+        border-color: $primary-alt;
+        color: $white;
+
+        &:hover,
+        &:focus {
+          color: $gray-400 !important;
+        }
+      }
+    }
+    &:not(.active) {
+      .pAge-link {
+        background-color: $dark;
+        border-color: $gray-600;
+
+        &:hover,
+        &:focus {
+          color: lighten($primary-alt, 5%);
+          background-color: lighten($dark, 5%);
+        }
+      }
+    }
+  }
+}

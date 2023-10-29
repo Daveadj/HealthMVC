@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Home PAge";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<!-- Main content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Check Diagnosis</h5>
+
+                        <p class="card-text">
+                            A quick way to check diagnosis based on symptoms
+                        </p>
+
+                        <a class="card-link" asp-area="" asp-controller="Symtoms" asp-action="Form">check diagnosis</a>
+                     
+                    </div>
+                </div>
+
+                <div class="card card-primary card-outline">
+                    <div class="card-body">
+                        <h5 class="card-title">Doctors</h5>
+
+                        <p class="card-text">
+                            List of Available Doctors
+                        </p>
+                        <a class="card-link" asp-area="" asp-controller="Symtoms" asp-action="ListOfDoctors">Doctors</a>
+                        
+                    </div>
+                </div><!-- /.card -->
+            </div>
+            <!-- /.col-md-6 -->
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="m-0">Featured</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title">Symptoms</h6>
+
+                        <p class="card-text">Quick dictionary on available symtoms</p>
+                        <a class="btn btn-primary" asp-area="" asp-controller="Symtoms" asp-action="Index">Go</a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.col-md-6 -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-wrapper -->

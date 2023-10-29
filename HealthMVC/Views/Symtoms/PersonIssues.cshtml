@@ -1,0 +1,56 @@
+﻿@model IEnumerable<HealthMVC.Models.PersonIssue>
+
+@{
+    ViewData["Title"] = "PersonIssues";
+}
+
+<h1>Diagnosis</h1>
+<table class="table table table-bordered table-striped" id="example1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Person)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Issue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Issue.Accuracy)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.Person.FirstName @item.Person.LastName
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Issue.Name)
+            </td>
+            <td>
+                @item.Issue.Accuracy
+            </td>
+            <td>
+                <a asp-action="IssuesInfo" asp-route-id="@item.Issue.Id" class="btn btn-primary">View Issue Info</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+        });
+    </script>
+}
+
