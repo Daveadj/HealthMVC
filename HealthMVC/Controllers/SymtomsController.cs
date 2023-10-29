@@ -275,5 +275,11 @@ namespace HealthMVC.Controllers
             ViewBag.ErrorMessage = errormessage;
             return View("ErrorView");
         }
+
+        public async Task<IActionResult> Persons()
+        {
+            var person = await _healthDbContext.Persons.ToListAsync();
+            return View(person);
+        }
     }
 }
