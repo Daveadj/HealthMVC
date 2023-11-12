@@ -231,8 +231,8 @@
 
         function updateCurrentForDoubleTap(e) {
             gestureState.currentTap = {
-                x: e.touches[0].pAgeX,
-                y: e.touches[0].pAgeY
+                x: e.touches[0].pageX,
+                y: e.touches[0].pageY
             };
         }
 
@@ -240,19 +240,19 @@
             gestureState.tapStartTime = new Date().getTime();
             gestureState.interceptedLongTap = false;
             gestureState.currentTapStart = {
-                x: e.touches[0].pAgeX,
-                y: e.touches[0].pAgeY
+                x: e.touches[0].pageX,
+                y: e.touches[0].pageY
             };
             gestureState.currentTapEnd = {
-                x: e.touches[0].pAgeX,
-                y: e.touches[0].pAgeY
+                x: e.touches[0].pageX,
+                y: e.touches[0].pageY
             };
         };
 
         function updateStateForLongTapEnd(e) {
             gestureState.currentTapEnd = {
-                x: e.touches[0].pAgeX,
-                y: e.touches[0].pAgeY
+                x: e.touches[0].pageX,
+                y: e.touches[0].pageY
             };
         };
 

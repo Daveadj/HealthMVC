@@ -950,10 +950,10 @@ $.extend( ColReorder.prototype, {
 			return;
 		}
 
-		this.s.mouse.startX = this._fnCursorPosition( e, 'pAgeX' );
-		this.s.mouse.startY = this._fnCursorPosition( e, 'pAgeY' );
-		this.s.mouse.offsetX = this._fnCursorPosition( e, 'pAgeX' ) - offset.left;
-		this.s.mouse.offsetY = this._fnCursorPosition( e, 'pAgeY' ) - offset.top;
+		this.s.mouse.startX = this._fnCursorPosition( e, 'pageX' );
+		this.s.mouse.startY = this._fnCursorPosition( e, 'pageY' );
+		this.s.mouse.offsetX = this._fnCursorPosition( e, 'pageX' ) - offset.left;
+		this.s.mouse.offsetY = this._fnCursorPosition( e, 'pageY' ) - offset.top;
 		this.s.mouse.target = this.s.dt.aoColumns[ idx ].nTh;//target[0];
 		this.s.mouse.targetIndex = idx;
 		this.s.mouse.fromIndex = idx;
@@ -989,8 +989,8 @@ $.extend( ColReorder.prototype, {
 			 * possibly confusing drag element showing up
 			 */
 			if ( Math.pow(
-				Math.pow(this._fnCursorPosition( e, 'pAgeX') - this.s.mouse.startX, 2) +
-				Math.pow(this._fnCursorPosition( e, 'pAgeY') - this.s.mouse.startY, 2), 0.5 ) < 5 )
+				Math.pow(this._fnCursorPosition( e, 'pageX') - this.s.mouse.startX, 2) +
+				Math.pow(this._fnCursorPosition( e, 'pageY') - this.s.mouse.startY, 2), 0.5 ) < 5 )
 			{
 				return;
 			}
@@ -999,14 +999,14 @@ $.extend( ColReorder.prototype, {
 
 		/* Position the element - we respect where in the element the click occured */
 		this.dom.drag.css( {
-			left: this._fnCursorPosition( e, 'pAgeX' ) - this.s.mouse.offsetX,
-			top: this._fnCursorPosition( e, 'pAgeY' ) - this.s.mouse.offsetY
+			left: this._fnCursorPosition( e, 'pageX' ) - this.s.mouse.offsetX,
+			top: this._fnCursorPosition( e, 'pageY' ) - this.s.mouse.offsetY
 		} );
 
 		/* Based on the current mouse position, calculate where the insert should go */
 		var target;
 		var lastToIndex = this.s.mouse.toIndex;
-		var cursorXPosiotion = this._fnCursorPosition(e, 'pAgeX');
+		var cursorXPosiotion = this._fnCursorPosition(e, 'pageX');
 		var targetsPrev = function (i) {
 			while (i >= 0) {
 				i--;
@@ -1207,7 +1207,7 @@ $.extend( ColReorder.prototype, {
 
 	/**
 	 * Copy the TH element that is being drags so the user has the idea that they are actually
-	 * moving it around the pAge.
+	 * moving it around the page.
 	 *  @method  _fnCreateDragNode
 	 *  @returns void
 	 *  @private

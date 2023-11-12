@@ -4,17 +4,17 @@
         grid: {
             noDataContent: "暫無資料",
             deleteConfirm: "確認刪除？",
-            pAgerFormat: "頁碼: {first} {prev} {pAges} {next} {last} &nbsp;&nbsp; {pAgeIndex} / {pAgeCount}",
-            pAgePrevText: "上一頁",
-            pAgeNextText: "下一頁",
-            pAgeFirstText: "第一頁",
-            pAgeLastText: "最後一頁",
-            loadMessAge: "請稍候...",
-            invalidMessAge: "輸入資料不正確"
+            pagerFormat: "頁碼: {first} {prev} {pages} {next} {last} &nbsp;&nbsp; {pageIndex} / {pageCount}",
+            pagePrevText: "上一頁",
+            pageNextText: "下一頁",
+            pageFirstText: "第一頁",
+            pageLastText: "最後一頁",
+            loadMessage: "請稍候...",
+            invalidMessage: "輸入資料不正確"
         },
 
         loadIndicator: {
-            messAge: "載入中..."
+            message: "載入中..."
         },
 
         fields: {
@@ -32,14 +32,14 @@
         },
 
         validators: {
-            required: { messAge: "欄位必填" },
-            rangeLength: { messAge: "欄位字串長度超出範圍" },
-            minLength: { messAge: "欄位字串長度太短" },
-            maxLength: { messAge: "欄位字串長度太長" },
-            pattern: { messAge: "欄位字串不符合規則" },
-            range: { messAge: "欄位數值超出範圍" },
-            min: { messAge: "欄位數值太小" },
-            max: { messAge: "欄位數值太大" }
+            required: { message: "欄位必填" },
+            rangeLength: { message: "欄位字串長度超出範圍" },
+            minLength: { message: "欄位字串長度太短" },
+            maxLength: { message: "欄位字串長度太長" },
+            pattern: { message: "欄位字串不符合規則" },
+            range: { message: "欄位數值超出範圍" },
+            min: { message: "欄位數值太小" },
+            max: { message: "欄位數值太大" }
         }
     };
 

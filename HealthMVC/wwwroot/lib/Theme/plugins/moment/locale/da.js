@@ -45,7 +45,7 @@
             h: 'en time',
             hh: '%d timer',
             d: 'en dag',
-            dd: '%d dAge',
+            dd: '%d dage',
             M: 'en måned',
             MM: '%d måneder',
             y: 'et år',

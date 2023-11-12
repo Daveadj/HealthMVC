@@ -40,12 +40,12 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
     "bins binsof bit break buf bufif0 bufif1 byte case casex casez cell chandle checker class clocking cmos config " +
     "const constraint context continue cover covergroup coverpoint cross deassign default defparam design disable " +
     "dist do edge else end endcase endchecker endclass endclocking endconfig endfunction endgenerate endgroup " +
-    "endinterface endmodule endpackAge endprimitive endprogram endproperty endspecify endsequence endtable endtask " +
+    "endinterface endmodule endpackage endprimitive endprogram endproperty endspecify endsequence endtable endtask " +
     "enum event eventually expect export extends extern final first_match for force foreach forever fork forkjoin " +
     "function generate genvar global highz0 highz1 if iff ifnone ignore_bins illegal_bins implements implies import " +
     "incdir include initial inout input inside instance int integer interconnect interface intersect join join_any " +
     "join_none large let liblist library local localparam logic longint macromodule matches medium modport module " +
-    "nand negedge nettype new nexttime nmos nor noshowcancelled not notif0 notif1 null or output packAge packed " +
+    "nand negedge nettype new nexttime nmos nor noshowcancelled not notif0 notif1 null or output package packed " +
     "parameter pmos posedge primitive priority program property protected pull0 pull1 pulldown pullup " +
     "pulsestyle_ondetect pulsestyle_onevent pure rand randc randcase randsequence rcmos real realtime ref reg " +
     "reject_on release repeat restrict return rnmos rpmos rtran rtranif0 rtranif1 s_always s_eventually s_nexttime " +
@@ -92,7 +92,7 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
   // Block openings which are closed by a matching keyword in the form of ("end" + keyword)
   // E.g. "task" => "endtask"
   var blockKeywords = words(
-    "case checker class clocking config function generate interface module packAge " +
+    "case checker class clocking config function generate interface module package " +
     "primitive program property specify sequence table task"
   );
 
@@ -490,7 +490,7 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
 
 
   // TL-Verilog mode.
-  // See tl-x.org for languAge spec.
+  // See tl-x.org for language spec.
   // See the mode in action at makerchip.com.
   // Contact: steve.hoover@redwoodeda.com
 
@@ -537,7 +537,7 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
     "-": "phys-hier",
     "|": "pipe",
     "?": "when",
-    "@": "stAge",
+    "@": "stage",
     "\\": "keyword"
   };
   var tlvIndentUnit = 3;

@@ -108,6 +108,6 @@ CodeMirror.defineMode("http", function() {
   };
 });
 
-CodeMirror.defineMIME("messAge/http", "http");
+CodeMirror.defineMIME("message/http", "http");
 
 });

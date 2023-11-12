@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Superscript',
         size: 'اندازه ی فونت'
       },
-      imAge: {
-        imAge: 'تصویر',
+      image: {
+        image: 'تصویر',
         insert: 'وارد کردن تصویر',
         resizeFull: 'تغییر به اندازه ی کامل',
         resizeHalf: 'تغییر به اندازه نصف',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Shape: Circle',
         shapeThumbnail: 'Shape: Thumbnail',
         shapeNone: 'Shape: None',
-        dragImAgeHere: 'یک تصویر را اینجا بکشید',
-        dropImAge: 'Drop imAge or Text',
+        dragImageHere: 'یک تصویر را اینجا بکشید',
+        dropImage: 'Drop image or Text',
         selectFromFiles: 'فایل ها را انتخاب کنید',
         maximumFileSize: 'حداکثر اندازه پرونده',
         maximumFileSizeError: 'Maximum file size exceeded.',

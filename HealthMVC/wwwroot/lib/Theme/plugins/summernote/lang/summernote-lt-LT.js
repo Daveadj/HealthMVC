@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         subscript: 'Indeksas',
         size: 'Šrifto dydis'
       },
-      imAge: {
-        imAge: 'Paveikslėlis',
+      image: {
+        image: 'Paveikslėlis',
         insert: 'Įterpti paveikslėlį',
         resizeFull: 'Pilnas dydis',
         resizeHalf: 'Sumažinti dydį 50%',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Forma: apskritimas',
         shapeThumbnail: 'Forma: miniatiūra',
         shapeNone: 'Forma: jokia',
-        dragImAgeHere: 'Vilkite paveikslėlį čia',
-        dropImAge: 'Drop imAge or Text',
+        dragImageHere: 'Vilkite paveikslėlį čia',
+        dropImage: 'Drop image or Text',
         selectFromFiles: 'Pasirinkite failą',
         maximumFileSize: 'Maskimalus failo dydis',
         maximumFileSizeError: 'Maskimalus failo dydis viršytas!',

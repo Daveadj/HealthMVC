@@ -124,9 +124,9 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default().extend((jquery__WEBPACK_IMPORTED_M
       size: 'Font Size',
       sizeunit: 'Font Size Unit'
     },
-    imAge: {
-      imAge: 'Picture',
-      insert: 'Insert ImAge',
+    image: {
+      image: 'Picture',
+      insert: 'Insert Image',
       resizeFull: 'Resize full',
       resizeHalf: 'Resize half',
       resizeQuarter: 'Resize quarter',
@@ -138,13 +138,13 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default().extend((jquery__WEBPACK_IMPORTED_M
       shapeCircle: 'Shape: Circle',
       shapeThumbnail: 'Shape: Thumbnail',
       shapeNone: 'Shape: None',
-      dragImAgeHere: 'Drag imAge or text here',
-      dropImAge: 'Drop imAge or Text',
+      dragImageHere: 'Drag image or text here',
+      dropImage: 'Drop image or Text',
       selectFromFiles: 'Select from files',
       maximumFileSize: 'Maximum file size',
       maximumFileSizeError: 'Maximum file size exceeded.',
-      url: 'ImAge URL',
-      remove: 'Remove ImAge',
+      url: 'Image URL',
+      remove: 'Remove Image',
       original: 'Original'
     },
     video: {

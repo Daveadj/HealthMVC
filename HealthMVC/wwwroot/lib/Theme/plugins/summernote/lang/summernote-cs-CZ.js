@@ -34,8 +34,8 @@ var __webpack_exports__ = {};
         strikethrough: 'Přeškrtnuté',
         size: 'Velikost písma'
       },
-      imAge: {
-        imAge: 'Obrázek',
+      image: {
+        image: 'Obrázek',
         insert: 'Vložit obrázek',
         resizeFull: 'Původní velikost',
         resizeHalf: 'Poloviční velikost',
@@ -47,8 +47,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Tvar: kruh',
         shapeThumbnail: 'Tvar: náhled',
         shapeNone: 'Tvar: žádný',
-        dragImAgeHere: 'Přetáhnout sem obrázek',
-        dropImAge: 'Přetáhnout obrázek nebo text',
+        dragImageHere: 'Přetáhnout sem obrázek',
+        dropImage: 'Přetáhnout obrázek nebo text',
         selectFromFiles: 'Vybrat soubor',
         url: 'URL obrázku',
         remove: 'Odebrat obrázek',

@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Indeks górny',
         size: 'Rozmiar'
       },
-      imAge: {
-        imAge: 'Grafika',
+      image: {
+        image: 'Grafika',
         insert: 'Wstaw grafikę',
         resizeFull: 'Zmień rozmiar na 100%',
         resizeHalf: 'Zmień rozmiar na 50%',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Kształt: okrąg',
         shapeThumbnail: 'Kształt: miniatura',
         shapeNone: 'Kształt: brak',
-        dragImAgeHere: 'Przeciągnij grafikę lub tekst tutaj',
-        dropImAge: 'Przeciągnij grafikę lub tekst',
+        dragImageHere: 'Przeciągnij grafikę lub tekst tutaj',
+        dropImage: 'Przeciągnij grafikę lub tekst',
         selectFromFiles: 'Wybierz z dysku',
         maximumFileSize: 'Limit wielkości pliku',
         maximumFileSizeError: 'Przekroczono limit wielkości pliku.',

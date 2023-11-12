@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Superscript',
         size: 'Tekstgrootte'
       },
-      imAge: {
-        imAge: 'Afbeelding',
+      image: {
+        image: 'Afbeelding',
         insert: 'Afbeelding invoegen',
         resizeFull: 'Volledige breedte',
         resizeHalf: 'Halve breedte',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Shape: Circle',
         shapeThumbnail: 'Shape: Thumbnail',
         shapeNone: 'Shape: None',
-        dragImAgeHere: 'Sleep hier een afbeelding naar toe',
-        dropImAge: 'Drop imAge or Text',
+        dragImageHere: 'Sleep hier een afbeelding naar toe',
+        dropImage: 'Drop image or Text',
         selectFromFiles: 'Selecteer een bestand',
         maximumFileSize: 'Maximum file size',
         maximumFileSizeError: 'Maximum file size exceeded.',

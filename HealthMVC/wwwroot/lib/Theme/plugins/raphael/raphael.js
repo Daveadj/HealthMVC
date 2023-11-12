@@ -155,7 +155,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      * or
      - onReadyCallback (function) function that is going to be called on DOM ready event. You can also subscribe to this event via Eve’s “DOMLoad” event. In this case method returns `undefined`.
      = (object) @Paper
-     > UsAge
+     > Usage
      | // Each of the following examples create a canvas
      | // that is 320px wide by 200px high.
      | // Canvas is created at the viewport’s 10,50 coordinate.
@@ -165,7 +165,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      | var paper = Raphael(document.getElementById("notepad"), 320, 200);
      | // Same as above
      | var paper = Raphael("notepad", 320, 200);
-     | // ImAge dump
+     | // Image dump
      | var set = Raphael(["notepad", 320, 200, {
      |     type: "rect",
      |     x: 10,
@@ -201,7 +201,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
     R.eve = eve;
     var loaded,
         separator = /[, ]+/,
-        elements = {circle: 1, rect: 1, path: 1, ellipse: 1, text: 1, imAge: 1},
+        elements = {circle: 1, rect: 1, path: 1, ellipse: 1, text: 1, image: 1},
         formatrg = /\{(\d+)\}/g,
         proto = "prototype",
         has = "hasOwnProperty",
@@ -226,7 +226,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
              **
              * If you have a set of attributes that you would like to represent
              * as a function of some number you can do it easily with custom attributes:
-             > UsAge
+             > Usage
              | paper.customAttributes.hue = function (num) {
              |     num = num % 1;
              |     return {fill: "hsb(" + num + ", 0.75, 1)"};
@@ -398,7 +398,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
                 var a = el.attrs;
                 return rectPath(a.x, a.y, a.width, a.height, a.r);
             },
-            imAge: function (el) {
+            image: function (el) {
                 var a = el.attrs;
                 return rectPath(a.x, a.y, a.width, a.height);
             },
@@ -482,7 +482,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      * Raphaël instance is created, otherwise it will take no effect. Please note that the
      * ability for namespaced plugins was removed in Raphael 2.0. It is up to the plugin to
      * ensure any namespacing ensures proper context.
-     > UsAge
+     > Usage
      | Raphael.fn.arrow = function (x1, y1, x2, y2, size) {
      |     return this.path( ... );
      | };
@@ -714,7 +714,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 
         return [r, g, b];
     },
-    packAgeRGB = function (r, g, b, o) {
+    packageRGB = function (r, g, b, o) {
         r *= 255;
         g *= 255;
         b *= 255;
@@ -817,7 +817,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
         R += [C, X, 0, 0, X, C][h];
         G += [X, C, C, X, 0, 0][h];
         B += [0, 0, X, C, C, X][h];
-        return packAgeRGB(R, G, B, o);
+        return packageRGB(R, G, B, o);
     };
     /*\
      * Raphael.hsl2rgb
@@ -858,7 +858,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
         R += [C, X, 0, 0, X, C][h];
         G += [X, C, C, X, 0, 0][h];
         B += [0, 0, X, C, C, X][h];
-        return packAgeRGB(R, G, B, o);
+        return packageRGB(R, G, B, o);
     };
     /*\
      * Raphael.rgb2hsb
@@ -2740,7 +2740,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
                 [this.get(0), this.get(2), this.get(1), this.get(3), 0, 0].join();
         };
         matrixproto.toFilter = function () {
-            return "progid:DXImAgeTransform.Microsoft.Matrix(M11=" + this.get(0) +
+            return "progid:DXImageTransform.Microsoft.Matrix(M11=" + this.get(0) +
                 ", M12=" + this.get(2) + ", M21=" + this.get(1) + ", M22=" + this.get(3) +
                 ", Dx=" + this.get(4) + ", Dy=" + this.get(5) + ", sizingmethod='auto expand')";
         };
@@ -2965,7 +2965,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      * You can add your own method to elements. This is useful when you want to hack default functionality or
      * want to wrap some common transformation or attributes in one method. In difference to canvas methods,
      * you can redefine element method at any time. Expending element methods wouldn’t affect set.
-     > UsAge
+     > Usage
      | Raphael.el.red = function () {
      |     this.attr({fill: "#f00"});
      | };
@@ -3220,7 +3220,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      = (any) value
      * or, if key and value are not specified:
      = (object) Key/value pairs for all the data associated with the element.
-     > UsAge
+     > Usage
      | for (var i = 0, i < 5, i++) {
      |     paper.circle(10 + 15 * i, 10, 10)
      |          .attr({fill: "#000"})
@@ -3410,7 +3410,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      - r (number) radius
      = (object) Raphaël element object with type “circle”
      **
-     > UsAge
+     > Usage
      | var c = paper.circle(50, 50, 40);
     \*/
     paperproto.circle = function (x, y, r) {
@@ -3433,7 +3433,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      - r (number) #optional radius for rounded corners, default is 0
      = (object) Raphaël element object with type “rect”
      **
-     > UsAge
+     > Usage
      | // regular rectangle
      | var c = paper.rect(10, 10, 50, 50);
      | // rectangle with rounded corners
@@ -3458,7 +3458,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      - ry (number) vertical radius
      = (object) Raphaël element object with type “ellipse”
      **
-     > UsAge
+     > Usage
      | var c = paper.ellipse(50, 50, 40, 20);
     \*/
     paperproto.ellipse = function (x, y, rx, ry) {
@@ -3492,7 +3492,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      # <tr><td>R</td><td><a href="http://en.wikipedia.org/wiki/Catmull–Rom_spline#Catmull.E2.80.93Rom_spline">Catmull-Rom curveto</a>*</td><td>x1 y1 (x y)+</td></tr></tbody></table>
      * * “Catmull-Rom curveto” is a not standard SVG command and added in 2.0 to make life easier.
      * Note: there is a special case when path consist of just three commands: “M10,10R…z”. In this case path will smoothly connects to its beginning.
-     > UsAge
+     > Usage
      | var c = paper.path("M10 10L90 90");
      | // draw a diagonal line:
      | // move to 10,10, line to 90,90
@@ -3505,25 +3505,25 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
         return out;
     };
     /*\
-     * Paper.imAge
+     * Paper.image
      [ method ]
      **
-     * Embeds an imAge into the surface.
+     * Embeds an image into the surface.
      **
      > Parameters
      **
-     - src (string) URI of the source imAge
+     - src (string) URI of the source image
      - x (number) x coordinate position
      - y (number) y coordinate position
-     - width (number) width of the imAge
-     - height (number) height of the imAge
-     = (object) Raphaël element object with type “imAge”
+     - width (number) width of the image
+     - height (number) height of the image
+     = (object) Raphaël element object with type “image”
      **
-     > UsAge
-     | var c = paper.imAge("apple.png", 10, 10, 80, 80);
+     > Usage
+     | var c = paper.image("apple.png", 10, 10, 80, 80);
     \*/
-    paperproto.imAge = function (src, x, y, w, h) {
-        var out = R._engine.imAge(this, src || "about:blank", x || 0, y || 0, w || 0, h || 0);
+    paperproto.image = function (src, x, y, w, h) {
+        var out = R._engine.image(this, src || "about:blank", x || 0, y || 0, w || 0, h || 0);
         this.__set__ && this.__set__.push(out);
         return out;
     };
@@ -3540,7 +3540,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      - text (string) The text string to draw
      = (object) Raphaël element object with type “text”
      **
-     > UsAge
+     > Usage
      | var t = paper.text(50, 50, "Raphaël\nkicks\nbutt!");
     \*/
     paperproto.text = function (x, y, text) {
@@ -3553,11 +3553,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      [ method ]
      **
      * Creates array-like object to keep and operate several elements at once.
-     * Warning: it doesn’t create any elements for itself in the pAge, it just groups existing elements.
+     * Warning: it doesn’t create any elements for itself in the page, it just groups existing elements.
      * Sets act as pseudo elements — all methods available to an element can be used on a set.
      = (object) array-like object that represents set of elements
      **
-     > UsAge
+     > Usage
      | var st = paper.set();
      | st.push(
      |     paper.circle(10, 10, 5),
@@ -3580,7 +3580,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      * Creates @Paper.set. All elements that will be created after calling this method and before calling
      * @Paper.setFinish will be added to the set.
      **
-     > UsAge
+     > Usage
      | paper.setStart();
      | paper.circle(10, 10, 5),
      | paper.circle(30, 10, 5)
@@ -3676,8 +3676,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
             body = doc.body,
             docElem = doc.documentElement,
             clientTop = docElem.clientTop || body.clientTop || 0, clientLeft = docElem.clientLeft || body.clientLeft || 0,
-            top  = box.top  + (g.win.pAgeYOffset || docElem.scrollTop || body.scrollTop ) - clientTop,
-            left = box.left + (g.win.pAgeXOffset || docElem.scrollLeft || body.scrollLeft) - clientLeft;
+            top  = box.top  + (g.win.pageYOffset || docElem.scrollTop || body.scrollTop ) - clientTop,
+            left = box.left + (g.win.pageXOffset || docElem.scrollLeft || body.scrollLeft) - clientLeft;
         return {
             y: top,
             x: left
@@ -3694,7 +3694,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      **
      - x (number) x coordinate from the top left corner of the window
      - y (number) y coordinate from the top left corner of the window
-     > UsAge
+     > Usage
      | paper.getElementByPoint(mouseX, mouseY).attr({stroke: "#f00"});
     \*/
     paperproto.getElementByPoint = function (x, y) {
@@ -3778,7 +3778,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      - callback (function) function to run
      - thisArg (object) context object for the callback
      = (object) Paper object
-     > UsAge
+     > Usage
      | paper.forEach(function (el) {
      |     el.attr({ stroke: "blue" });
      | });
@@ -5214,7 +5214,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      **
      - font (object) the font to register
      = (object) the font you passed in
-     > UsAge
+     > Usage
      | Cufon.registerFont(Raphael.registerFont({…}));
     \*/
     R.registerFont = function (font) {
@@ -5269,7 +5269,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      - style (string) #optional font style
      - stretch (string) #optional font stretch
      = (object) the font object
-     > UsAge
+     > Usage
      | paper.print(100, 100, "Test string", paper.getFont("Times", 800), 30);
     \*/
     paperproto.getFont = function (family, weight, style, stretch) {
@@ -5318,7 +5318,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      - letter_spacing (number) #optional number in range `-1..1`, default is `0`
      - line_spacing (number) #optional number in range `1..3`, default is `1`
      = (object) resulting path element, which consist of all letters
-     > UsAge
+     > Usage
      | var txt = r.print(10, 50, "print", r.getFont("Museo"), 30).attr({fill: "#fff"});
     \*/
     paperproto.print = function (x, y, string, font, size, origin, letter_spacing, line_spacing) {
@@ -5371,7 +5371,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      **
      - json (array)
      = (object) resulting set of imported elements
-     > UsAge
+     > Usage
      | paper.add([
      |     {
      |         type: "circle",
@@ -5414,7 +5414,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      - token (string) string to format
      - … (string) rest of arguments will be treated as parameters for replacement
      = (string) formated string
-     > UsAge
+     > Usage
      | var x = 10,
      |     y = 20,
      |     width = 40,
@@ -5440,7 +5440,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      - token (string) string to format
      - json (object) object which properties will be used as a replacement
      = (string) formated string
-     > UsAge
+     > Usage
      | // this will draw a rectangular shape equivalent to "M10,20h40v50h-40z"
      | paper.path(Raphael.fullfill("M{x},{y}h{dim.width}v{dim.height}h{dim['negative width']}z", {
      |     x: 10,
@@ -5483,7 +5483,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      * Beware, that in this case plugins could stop working, because they are depending on global variable existence.
      **
      = (object) Raphael object
-     > UsAge
+     > Usage
      | (function (local_raphael) {
      |     var paper = local_raphael(10, 10, 320, 200);
      |     …
@@ -5509,7 +5509,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      * you added, so you will be able to call the same method on sets too.
      **
      * See also @Raphael.el.
-     > UsAge
+     > Usage
      | Raphael.el.red = function () {
      |     this.attr({fill: "#f00"});
      | };
@@ -6024,7 +6024,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
                         o._.dirty = 1;
                         break;
                     case "src":
-                        if (o.type == "imAge") {
+                        if (o.type == "image") {
                             node.setAttributeNS(xlink, "href", value);
                         }
                         break;
@@ -6048,7 +6048,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
                         var isURL = Str(value).match(R._ISURL);
                         if (isURL) {
                             el = $("pattern");
-                            var ig = $("imAge");
+                            var ig = $("image");
                             el.id = R.createUUID();
                             $(el, {x: 0, y: 0, patternUnits: "userSpaceOnUse", height: 1, width: 1});
                             $(ig, {x: 0, y: 0, "xlink:href": isURL[1]});
@@ -6188,7 +6188,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
          * Gives you a reference to the DOM object, so you can assign event handlers or just mess around.
          **
          * Note: Don’t mess with it.
-         > UsAge
+         > Usage
          | // draw a circle at coordinate 10,10 with radius of 10
          | var c = paper.circle(10, 10, 10);
          | c.node.onclick = function () {
@@ -6201,7 +6201,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
          [ property (object) ]
          **
          * Internal reference to @Raphael object. In case it is not available.
-         > UsAge
+         > Usage
          | Raphael.el.red = function () {
          |     var hsb = this.paper.raphael.rgb2hsb(this.attr("fill"));
          |     hsb.h = 1;
@@ -6234,7 +6234,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
          [ property (object) ]
          **
          * Internal reference to “paper” where object drawn. Mainly for use in plugins and element extensions.
-         > UsAge
+         > Usage
          | Raphael.el.cross = function () {
          |     this.attr({fill: "red"});
          |     this.paper.path("M10,10L50,50M50,10L10,50")
@@ -6397,7 +6397,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      * rotate 45° around centre; scale 1.5 times relative to centre”. As you can see rotate and scale commands have origin
      * coordinates as optional parameters, the default is the centre point of the element.
      * Matrix accepts six parameters.
-     > UsAge
+     > Usage
      | var el = paper.rect(10, 20, 300, 200);
      | // translate 100, 100, rotate 45°, translate -100, 0
      | el.transform("t100,100r45t-100,0");
@@ -6543,13 +6543,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      = (array) array of values of the attribute if attrsNames is passed in.
      = (object) object of attributes if nothing is passed in.
      > Possible parameters
-     # <p>Please refer to the <a href="http://www.w3.org/TR/SVG/" title="The W3C Recommendation for the SVG languAge describes these properties in detail.">SVG specification</a> for an explanation of these parameters.</p>
+     # <p>Please refer to the <a href="http://www.w3.org/TR/SVG/" title="The W3C Recommendation for the SVG language describes these properties in detail.">SVG specification</a> for an explanation of these parameters.</p>
      o arrow-end (string) arrowhead on the end of the path. The format for string is `<type>[-<width>[-<length>]]`. Possible types: `classic`, `block`, `open`, `oval`, `diamond`, `none`, width: `wide`, `narrow`, `medium`, length: `long`, `short`, `midium`.
      o clip-rect (string) comma or space separated values: x, y, width and height
      o cursor (string) CSS type of the cursor
      o cx (number) the x-axis coordinate of the center of the circle, or ellipse
      o cy (number) the y-axis coordinate of the center of the circle, or ellipse
-     o fill (string) colour, gradient or imAge
+     o fill (string) colour, gradient or image
      o fill-opacity (number)
      o font (string)
      o font-family (string)
@@ -6562,7 +6562,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      o r (number) radius of the circle, ellipse or rounded corner on the rect
      o rx (number) horisontal radius of the ellipse
      o ry (number) vertical radius of the ellipse
-     o src (string) imAge URL, only works for @Element.imAge element
+     o src (string) image URL, only works for @Element.image element
      o stroke (string) stroke colour
      o stroke-dasharray (string) [“”, “none”, “`-`”, “`.`”, “`-.`”, “`-..`”, “`. `”, “`- `”, “`--`”, “`- .`”, “`--.`”, “`--..`”]
      o stroke-linecap (string) [“`butt`”, “`square`”, “`round`”]
@@ -6599,7 +6599,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      #     <li>hsb(•••, •••, •••) — hue, saturation and brightness values: (“<code>hsb(0.5,&nbsp;0.25,&nbsp;1)</code>”)</li>
      #     <li>hsb(•••%, •••%, •••%) — same as above, but in %</li>
      #     <li>hsba(•••, •••, •••, •••) — same as above, but with opacity</li>
-     #     <li>hsl(•••, •••, •••) — almost the same as hsb, see <a href="http://en.wikipedia.org/wiki/HSL_and_HSV" title="HSL and HSV - Wikipedia, the free encyclopedia">Wikipedia pAge</a></li>
+     #     <li>hsl(•••, •••, •••) — almost the same as hsb, see <a href="http://en.wikipedia.org/wiki/HSL_and_HSV" title="HSL and HSV - Wikipedia, the free encyclopedia">Wikipedia page</a></li>
      #     <li>hsl(•••%, •••%, •••%) — same as above, but in %</li>
      #     <li>hsla(•••, •••, •••, •••) — same as above, but with opacity</li>
      #     <li>Optionally for hsb and hsl you could specify hue as a degree: “<code>hsl(240deg,&nbsp;1,&nbsp;.5)</code>” or, if you want to go fancy, “<code>hsl(240°,&nbsp;1,&nbsp;.5)</code>”</li>
@@ -6790,14 +6790,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
         $(el, res.attrs);
         return res;
     };
-    R._engine.imAge = function (svg, src, x, y, w, h) {
-        var el = $("imAge");
+    R._engine.image = function (svg, src, x, y, w, h) {
+        var el = $("image");
         $(el, {x: x, y: y, width: w, height: h, preserveAspectRatio: "none"});
         el.setAttributeNS(xlink, "href", src);
         svg.canvas && svg.canvas.appendChild(el);
         var res = new Element(el, svg);
         res.attrs = {x: x, y: y, width: w, height: h, src: src};
-        res.type = "imAge";
+        res.type = "image";
         return res;
     };
     R._engine.text = function (svg, x, y, text) {
@@ -7008,7 +7008,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
         fillString = "fill",
         separator = /[, ]+/,
         eve = R.eve,
-        ms = " progid:DXImAgeTransform.Microsoft",
+        ms = " progid:DXImageTransform.Microsoft",
         S = " ",
         E = "",
         map = {M: "m", L: "l", C: "c", Z: "x", m: "t", l: "r", c: "v", z: "x"},
@@ -7017,7 +7017,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
         val = /-?[^,\s-]+/g,
         cssDot = "position:absolute;left:0;top:0;width:1px;height:1px;behavior:url(#default#VML)",
         zoom = 21600,
-        pathTypes = {path: 1, rect: 1, imAge: 1},
+        pathTypes = {path: 1, rect: 1, image: 1},
         ovalTypes = {circle: 1, ellipse: 1},
         path2vml = function (path) {
             var total =  /[ahqstv]/ig,
@@ -7160,7 +7160,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
         if (params.path && o.type == "path" || newpath) {
             node.path = path2vml(~Str(a.path).toLowerCase().indexOf("r") ? R._pathToAbsolute(a.path) : a.path);
             o._.dirty = 1;
-            if (o.type == "imAge") {
+            if (o.type == "image") {
                 o._.fillpos = [a.x, a.y];
                 o._.fillsize = [a.width, a.height];
                 setCoords(o, 1, 1, 0, 0, 0);
@@ -7227,7 +7227,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
                 newfill = false;
             fill = fill && fill[0];
             !fill && (newfill = fill = createNode(fillString));
-            if (o.type == "imAge" && params.src) {
+            if (o.type == "image" && params.src) {
                 fill.src = params.src;
             }
             params.fill && (fill.on = true);
@@ -7463,7 +7463,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
             isGrad = ~Str(this.attrs.fill).indexOf("-"),
             isPatt = !Str(this.attrs.fill).indexOf("url(");
         matrix.translate(1, 1);
-        if (isPatt || isGrad || this.type == "imAge") {
+        if (isPatt || isGrad || this.type == "image") {
             skew.matrix = "1 0 0 1";
             skew.offset = "0 0";
             split = matrix.split();
@@ -7792,7 +7792,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
         });
         return res;
     };
-    R._engine.imAge = function (vml, src, x, y, w, h) {
+    R._engine.image = function (vml, src, x, y, w, h) {
         var path = R._rectPath(x, y, w, h),
             res = vml.path(path).attr({stroke: "none"}),
             a = res.attrs,
@@ -7804,7 +7804,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
         res.W = a.width = w;
         res.H = a.height = h;
         a.path = path;
-        res.type = "imAge";
+        res.type = "image";
         fill.parentNode == node && node.removeChild(fill);
         fill.rotate = true;
         fill.src = src;
@@ -8014,7 +8014,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Copyright (c)
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific languAge governing permissions and
+// See the License for the specific language governing permissions and
 // limitations under the License.
 // ┌────────────────────────────────────────────────────────────┐ \\
 // │ Eve 0.5.0 - JavaScript Events Library                      │ \\

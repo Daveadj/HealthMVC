@@ -22,11 +22,11 @@
   width: 0;
   background: green;
 }
-.dropzone .dz-preview .dz-error-messAge {
+.dropzone .dz-preview .dz-error-message {
   color: red;
   display: none;
 }
-.dropzone .dz-preview.dz-error .dz-error-messAge, .dropzone .dz-preview.dz-error .dz-error-mark {
+.dropzone .dz-preview.dz-error .dz-error-message, .dropzone .dz-preview.dz-error .dz-error-mark {
   display: block;
 }
 .dropzone .dz-preview.dz-success .dz-success-mark {

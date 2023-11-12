@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Superscript',
         size: 'Skriftstørrelse'
       },
-      imAge: {
-        imAge: 'Bilde',
+      image: {
+        image: 'Bilde',
         insert: 'Sett inn bilde',
         resizeFull: 'Sett full størrelse',
         resizeHalf: 'Sett halv størrelse',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Form: Sirkel',
         shapeThumbnail: 'Form: Miniatyr',
         shapeNone: 'Form: Ingen',
-        dragImAgeHere: 'Dra et bilde hit',
-        dropImAge: 'Drop imAge or Text',
+        dragImageHere: 'Dra et bilde hit',
+        dropImage: 'Drop image or Text',
         selectFromFiles: 'Velg fra filer',
         maximumFileSize: 'Max filstørrelse',
         maximumFileSizeError: 'Maks filstørrelse overskredet.',

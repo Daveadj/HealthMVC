@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Superscript',
         size: 'Veličina fonta'
       },
-      imAge: {
-        imAge: 'Slika',
+      image: {
+        image: 'Slika',
         insert: 'Ubaci sliku',
         resizeFull: 'Puna veličina',
         resizeHalf: 'Umanji na 50%',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Shape: Circle',
         shapeThumbnail: 'Shape: Thumbnail',
         shapeNone: 'Shape: None',
-        dragImAgeHere: 'Povuci sliku ovdje',
-        dropImAge: 'Drop imAge or Text',
+        dragImageHere: 'Povuci sliku ovdje',
+        dropImage: 'Drop image or Text',
         selectFromFiles: 'Izaberi iz datoteke',
         maximumFileSize: 'Maximum file size',
         maximumFileSizeError: 'Maximum file size exceeded.',

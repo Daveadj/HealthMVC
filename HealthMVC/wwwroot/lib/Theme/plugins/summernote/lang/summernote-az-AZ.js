@@ -27,7 +27,7 @@ var __webpack_exports__ = {};
 //Tarix: 20.07.2019
 //Baki Azerbaycan
 //Website: https://ramilaliyev.com
-//Azerbaijan languAge for Summernote WYSIWYG 
+//Azerbaijan language for Summernote WYSIWYG 
 //Translated by: RAMIL ALIYEV
 //Date: 20.07.2019
 //Baku Azerbaijan
@@ -47,8 +47,8 @@ var __webpack_exports__ = {};
         superscript: 'Üst simvol',
         size: 'Yazı ölçüsü'
       },
-      imAge: {
-        imAge: 'Şəkil',
+      image: {
+        image: 'Şəkil',
         insert: 'Şəkil əlavə et',
         resizeFull: 'Original ölçü',
         resizeHalf: '1/2 ölçü',
@@ -60,8 +60,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Şəkil: Dairə',
         shapeThumbnail: 'Şəkil: Thumbnail',
         shapeNone: 'Şəkil: Yox',
-        dragImAgeHere: 'Bura sürüşdür',
-        dropImAge: 'Şəkil və ya mətni buraxın',
+        dragImageHere: 'Bura sürüşdür',
+        dropImage: 'Şəkil və ya mətni buraxın',
         selectFromFiles: 'Sənəd seçin',
         maximumFileSize: 'Maksimum sənəd ölçüsü',
         maximumFileSizeError: 'Maksimum sənəd ölçüsünü keçdiniz.',

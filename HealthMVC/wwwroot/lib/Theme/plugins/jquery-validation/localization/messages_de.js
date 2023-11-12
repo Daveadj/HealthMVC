@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: DE (German, Deutsch)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "Dieses Feld ist ein Pflichtfeld.",
 	maxlength: $.validator.format( "Geben Sie bitte maximal {0} Zeichen ein." ),
 	minlength: $.validator.format( "Geben Sie bitte mindestens {0} Zeichen ein." ),

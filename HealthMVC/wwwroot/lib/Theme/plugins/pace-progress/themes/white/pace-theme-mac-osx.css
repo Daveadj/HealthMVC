@@ -48,10 +48,10 @@
   right: -28px;
   bottom: 0;
 
-  -webkit-background-imAge: radial-gradient(rgba(255, 255, 255, .65) 0%, rgba(255, 255, 255, .15) 100%);
-  -moz-background-imAge: radial-gradient(rgba(255, 255, 255, .65) 0%, rgba(255, 255, 255, .15) 100%);
-  -o-background-imAge: radial-gradient(rgba(255, 255, 255, .65) 0%, rgba(255, 255, 255, .15) 100%);
-  background-imAge: radial-gradient(rgba(255, 255, 255, .65) 0%, rgba(255, 255, 255, .15) 100%);
+  -webkit-background-image: radial-gradient(rgba(255, 255, 255, .65) 0%, rgba(255, 255, 255, .15) 100%);
+  -moz-background-image: radial-gradient(rgba(255, 255, 255, .65) 0%, rgba(255, 255, 255, .15) 100%);
+  -o-background-image: radial-gradient(rgba(255, 255, 255, .65) 0%, rgba(255, 255, 255, .15) 100%);
+  background-image: radial-gradient(rgba(255, 255, 255, .65) 0%, rgba(255, 255, 255, .15) 100%);
 
   -webkit-background-size: 28px 100%;
   -moz-background-size: 28px 100%;

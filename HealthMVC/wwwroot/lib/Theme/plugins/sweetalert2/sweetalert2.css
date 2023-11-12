@@ -26,7 +26,7 @@
   margin: 0.5em;
   font-size: 1em;
 }
-.swal2-popup.swal2-toast .swal2-validation-messAge {
+.swal2-popup.swal2-toast .swal2-validation-message {
   font-size: 1em;
 }
 .swal2-popup.swal2-toast .swal2-footer {
@@ -305,10 +305,10 @@
   opacity: 0.4;
 }
 .swal2-actions:not(.swal2-loading) .swal2-styled:hover {
-  background-imAge: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
 }
 .swal2-actions:not(.swal2-loading) .swal2-styled:active {
-  background-imAge: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
 }
 
 .swal2-loader {
@@ -405,7 +405,7 @@
   background: rgba(0, 0, 0, 0.2);
 }
 
-.swal2-imAge {
+.swal2-image {
   max-width: 100%;
   margin: 2em auto 1em;
 }
@@ -579,7 +579,7 @@
   margin: 1em auto 0;
 }
 
-.swal2-validation-messAge {
+.swal2-validation-message {
   align-items: center;
   justify-content: center;
   margin: 1em 0 0;
@@ -590,7 +590,7 @@
   font-size: 1em;
   font-weight: 300;
 }
-.swal2-validation-messAge::before {
+.swal2-validation-message::before {
   content: "!";
   display: inline-block;
   width: 1.5em;

@@ -28,7 +28,7 @@ CodeMirror.registerHelper("lint", "coffeescript", function(text) {
     found.push({from: CodeMirror.Pos(loc-1, 0),
                 to: CodeMirror.Pos(loc, 0),
                 severity: err.level,
-                messAge: err.messAge});
+                message: err.message});
   };
   try {
     var res = coffeelint.lint(text);
@@ -39,7 +39,7 @@ CodeMirror.registerHelper("lint", "coffeescript", function(text) {
     found.push({from: CodeMirror.Pos(e.location.first_line, 0),
                 to: CodeMirror.Pos(e.location.last_line, e.location.last_column),
                 severity: 'error',
-                messAge: e.messAge});
+                message: e.message});
   }
   return found;
 });

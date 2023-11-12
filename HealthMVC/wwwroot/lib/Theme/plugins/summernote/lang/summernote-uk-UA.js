@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Верхній індекс',
         size: 'Розмір шрифту'
       },
-      imAge: {
-        imAge: 'Картинка',
+      image: {
+        image: 'Картинка',
         insert: 'Вставити картинку',
         resizeFull: 'Відновити розмір',
         resizeHalf: 'Зменшити до 50%',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Форма: Коло',
         shapeThumbnail: 'Форма: Мініатюра',
         shapeNone: 'Форма: Немає',
-        dragImAgeHere: 'Перетягніть сюди картинку',
-        dropImAge: 'Перетягніть картинку',
+        dragImageHere: 'Перетягніть сюди картинку',
+        dropImage: 'Перетягніть картинку',
         selectFromFiles: 'Вибрати з файлів',
         maximumFileSize: 'Maximum file size',
         maximumFileSizeError: 'Maximum file size exceeded.',

@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Superscript',
         size: 'Cỡ chữ'
       },
-      imAge: {
-        imAge: 'Hình ảnh',
+      image: {
+        image: 'Hình ảnh',
         insert: 'Chèn',
         resizeFull: '100%',
         resizeHalf: '50%',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Shape: Circle',
         shapeThumbnail: 'Shape: Thumbnail',
         shapeNone: 'Shape: None',
-        dragImAgeHere: 'Thả Ảnh ở vùng này',
-        dropImAge: 'Drop imAge or Text',
+        dragImageHere: 'Thả Ảnh ở vùng này',
+        dropImage: 'Drop image or Text',
         selectFromFiles: 'Chọn từ File',
         maximumFileSize: 'Maximum file size',
         maximumFileSizeError: 'Maximum file size exceeded.',

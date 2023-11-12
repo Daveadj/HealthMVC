@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Hævet skrift',
         size: 'Skriftstørrelse'
       },
-      imAge: {
-        imAge: 'Billede',
+      image: {
+        image: 'Billede',
         insert: 'Indsæt billede',
         resizeFull: 'Original størrelse',
         resizeHalf: 'Halv størrelse',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Form: Cirkel',
         shapeThumbnail: 'Form: Miniature',
         shapeNone: 'Form: Ingen',
-        dragImAgeHere: 'Træk billede hertil',
-        dropImAge: 'Slip billede',
+        dragImageHere: 'Træk billede hertil',
+        dropImage: 'Slip billede',
         selectFromFiles: 'Vælg billed-fil',
         maximumFileSize: 'Maks fil størrelse',
         maximumFileSizeError: 'Filen er større end maks tilladte fil størrelse!',

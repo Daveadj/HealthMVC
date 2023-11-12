@@ -24,7 +24,7 @@
  * `emptyTags` (default is none)
  *   An array of XML tag names that should be autoclosed with '/>'.
  *
- * See demos/closetag.html for a usAge example.
+ * See demos/closetag.html for a usage example.
  */
 
 (function(mod) {
@@ -76,7 +76,7 @@
           tok.type == "tag" && tagInfo.close ||
           tok.string.indexOf("/") == (pos.ch - tok.start - 1) || // match something like <someTagName />
           dontCloseTags && indexOf(dontCloseTags, lowerTagName) > -1 ||
-          closingTAgexists(cm, inner.mode.xmlCurrentContext && inner.mode.xmlCurrentContext(state) || [], tagName, pos, true))
+          closingTagExists(cm, inner.mode.xmlCurrentContext && inner.mode.xmlCurrentContext(state) || [], tagName, pos, true))
         return CodeMirror.Pass;
 
       var emptyTags = typeof opt == "object" && opt.emptyTags;
@@ -119,7 +119,7 @@
         return CodeMirror.Pass;
       // Kludge to get around the fact that we are not in XML mode
       // when completing in JS/CSS snippet in htmlmixed mode. Does not
-      // work for other XML embedded languAges (there is no general
+      // work for other XML embedded languages (there is no general
       // way to go from a mixed mode to its current XML state).
       var replacement, mixed = inner.mode.name != "xml" && cm.getMode().name == "htmlmixed"
       if (mixed && inner.mode.name == "javascript") {
@@ -129,7 +129,7 @@
       } else {
         var context = inner.mode.xmlCurrentContext && inner.mode.xmlCurrentContext(state)
         var top = context.length ? context[context.length - 1] : ""
-        if (!context || (context.length && closingTAgexists(cm, context, top, pos)))
+        if (!context || (context.length && closingTagExists(cm, context, top, pos)))
           return CodeMirror.Pass;
         replacement = head + top
       }
@@ -161,7 +161,7 @@
 
   // If xml-fold is loaded, we use its functionality to try and verify
   // whether a given tag is actually unclosed.
-  function closingTAgexists(cm, context, tagName, pos, newTag) {
+  function closingTagExists(cm, context, tagName, pos, newTag) {
     if (!CodeMirror.scanForClosingTag) return false;
     var end = Math.min(cm.lastLine() + 1, pos.line + 500);
     var nextClose = CodeMirror.scanForClosingTag(cm, pos, null, end);

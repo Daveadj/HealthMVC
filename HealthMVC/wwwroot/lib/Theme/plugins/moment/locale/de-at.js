@@ -19,7 +19,7 @@
             m: ['eine Minute', 'einer Minute'],
             h: ['eine Stunde', 'einer Stunde'],
             d: ['ein Tag', 'einem Tag'],
-            dd: [number + ' TAge', number + ' TAgen'],
+            dd: [number + ' Tage', number + ' Tagen'],
             w: ['eine Woche', 'einer Woche'],
             M: ['ein Monat', 'einem Monat'],
             MM: [number + ' Monate', number + ' Monaten'],

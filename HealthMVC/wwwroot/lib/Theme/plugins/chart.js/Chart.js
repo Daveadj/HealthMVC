@@ -49,7 +49,7 @@ var colorName = {
 	"darkgreen": [0, 100, 0],
 	"darkgrey": [169, 169, 169],
 	"darkkhaki": [189, 183, 107],
-	"darkmAgenta": [139, 0, 139],
+	"darkmagenta": [139, 0, 139],
 	"darkolivegreen": [85, 107, 47],
 	"darkorange": [255, 140, 0],
 	"darkorchid": [153, 50, 204],
@@ -106,7 +106,7 @@ var colorName = {
 	"lime": [0, 255, 0],
 	"limegreen": [50, 205, 50],
 	"linen": [250, 240, 230],
-	"mAgenta": [255, 0, 255],
+	"magenta": [255, 0, 255],
 	"maroon": [128, 0, 0],
 	"mediumaquamarine": [102, 205, 170],
 	"mediumblue": [0, 0, 205],
@@ -1257,7 +1257,7 @@ var colorName$1 = {
 	"darkgreen": [0, 100, 0],
 	"darkgrey": [169, 169, 169],
 	"darkkhaki": [189, 183, 107],
-	"darkmAgenta": [139, 0, 139],
+	"darkmagenta": [139, 0, 139],
 	"darkolivegreen": [85, 107, 47],
 	"darkorange": [255, 140, 0],
 	"darkorchid": [153, 50, 204],
@@ -1314,7 +1314,7 @@ var colorName$1 = {
 	"lime": [0, 255, 0],
 	"limegreen": [50, 205, 50],
 	"linen": [250, 240, 230],
-	"mAgenta": [255, 0, 255],
+	"magenta": [255, 0, 255],
 	"maroon": [128, 0, 0],
 	"mediumaquamarine": [102, 205, 170],
 	"mediumblue": [0, 0, 205],
@@ -1758,7 +1758,7 @@ Color.prototype = {
 	cyan: function (val) {
 		return this.setChannel('cmyk', 0, val);
 	},
-	mAgenta: function (val) {
+	magenta: function (val) {
 		return this.setChannel('cmyk', 1, val);
 	},
 	yellow: function (val) {
@@ -1979,7 +1979,7 @@ Color.prototype.spaces = {
 	hsl: ['hue', 'saturation', 'lightness'],
 	hsv: ['hue', 'saturation', 'value'],
 	hwb: ['hue', 'whiteness', 'blackness'],
-	cmyk: ['cyan', 'mAgenta', 'yellow', 'black']
+	cmyk: ['cyan', 'magenta', 'yellow', 'black']
 };
 
 Color.prototype.maxes = {
@@ -2792,11 +2792,11 @@ var exports$1 = {
 
 		if (style && typeof style === 'object') {
 			type = style.toString();
-			if (type === '[object HTMLImAgeElement]' || type === '[object HTMLCanvasElement]') {
+			if (type === '[object HTMLImageElement]' || type === '[object HTMLCanvasElement]') {
 				ctx.save();
 				ctx.translate(x, y);
 				ctx.rotate(rad);
-				ctx.drawImAge(style, -style.width / 2, -style.height / 2, style.width, style.height);
+				ctx.drawImage(style, -style.width / 2, -style.height / 2, style.width, style.height);
 				ctx.restore();
 				return;
 			}
@@ -4768,8 +4768,8 @@ core_defaults._set('bar', {
 core_defaults._set('global', {
 	datasets: {
 		bar: {
-			categoryPercentAge: 0.8,
-			barPercentAge: 0.9
+			categoryPercentage: 0.8,
+			barPercentage: 0.9
 		}
 	}
 });
@@ -4811,12 +4811,12 @@ function computeFitCategoryTraits(index, ruler, options) {
 	var size, ratio;
 
 	if (helpers$1.isNullOrUndef(thickness)) {
-		size = min * options.categoryPercentAge;
-		ratio = options.barPercentAge;
+		size = min * options.categoryPercentage;
+		ratio = options.barPercentage;
 	} else {
-		// When bar thickness is enforced, category and bar percentAges are ignored.
+		// When bar thickness is enforced, category and bar percentages are ignored.
 		// Note(SB): we could add support for relative bar thickness (e.g. barThickness: '50%')
-		// and deprecate barPercentAge since this value is ignored when thickness is absolute.
+		// and deprecate barPercentage since this value is ignored when thickness is absolute.
 		size = thickness * count;
 		ratio = 1;
 	}
@@ -4830,7 +4830,7 @@ function computeFitCategoryTraits(index, ruler, options) {
 
 /**
  * Computes an "optimal" category that globally arranges bars side by side (no gap when
- * percentAge options are 1), based on the previous and following categories. This mode
+ * percentage options are 1), based on the previous and following categories. This mode
  * generates bars with different widths when data are not evenly spaced.
  * @private
  */
@@ -4839,7 +4839,7 @@ function computeFlexCategoryTraits(index, ruler, options) {
 	var curr = pixels[index];
 	var prev = index > 0 ? pixels[index - 1] : null;
 	var next = index < pixels.length - 1 ? pixels[index + 1] : null;
-	var percent = options.categoryPercentAge;
+	var percent = options.categoryPercentage;
 	var start, size;
 
 	if (prev === null) {
@@ -4858,7 +4858,7 @@ function computeFlexCategoryTraits(index, ruler, options) {
 
 	return {
 		chunk: size / ruler.stackCount,
-		ratio: options.barPercentAge,
+		ratio: options.barPercentage,
 		start: start
 	};
 }
@@ -4875,9 +4875,9 @@ var controller_bar = core_datasetController.extend({
 		'borderColor',
 		'borderSkipped',
 		'borderWidth',
-		'barPercentAge',
+		'barPercentage',
 		'barThickness',
-		'categoryPercentAge',
+		'categoryPercentage',
 		'maxBarThickness',
 		'minBarLength'
 	],
@@ -4893,9 +4893,9 @@ var controller_bar = core_datasetController.extend({
 		meta.bar = true;
 
 		scaleOpts = me._getIndexScale().options;
-		deprecated('bar chart', scaleOpts.barPercentAge, 'scales.[x/y]Axes.barPercentAge', 'dataset.barPercentAge');
+		deprecated('bar chart', scaleOpts.barPercentage, 'scales.[x/y]Axes.barPercentage', 'dataset.barPercentage');
 		deprecated('bar chart', scaleOpts.barThickness, 'scales.[x/y]Axes.barThickness', 'dataset.barThickness');
-		deprecated('bar chart', scaleOpts.categoryPercentAge, 'scales.[x/y]Axes.categoryPercentAge', 'dataset.categoryPercentAge');
+		deprecated('bar chart', scaleOpts.categoryPercentage, 'scales.[x/y]Axes.categoryPercentage', 'dataset.categoryPercentage');
 		deprecated('bar chart', me._getValueScale().options.minBarLength, 'scales.[x/y]Axes.minBarLength', 'dataset.minBarLength');
 		deprecated('bar chart', scaleOpts.maxBarThickness, 'scales.[x/y]Axes.maxBarThickness', 'dataset.maxBarThickness');
 	},
@@ -5156,9 +5156,9 @@ var controller_bar = core_datasetController.extend({
 		var indexOpts = me._getIndexScale().options;
 		var valueOpts = me._getValueScale().options;
 
-		values.barPercentAge = valueOrDefault$3(indexOpts.barPercentAge, values.barPercentAge);
+		values.barPercentage = valueOrDefault$3(indexOpts.barPercentage, values.barPercentage);
 		values.barThickness = valueOrDefault$3(indexOpts.barThickness, values.barThickness);
-		values.categoryPercentAge = valueOrDefault$3(indexOpts.categoryPercentAge, values.categoryPercentAge);
+		values.categoryPercentage = valueOrDefault$3(indexOpts.categoryPercentage, values.categoryPercentage);
 		values.maxBarThickness = valueOrDefault$3(indexOpts.maxBarThickness, values.maxBarThickness);
 		values.minBarLength = valueOrDefault$3(valueOpts.minBarLength, values.minBarLength);
 
@@ -5412,8 +5412,8 @@ core_defaults._set('doughnut', {
 		}
 	},
 
-	// The percentAge of the chart that we cut out of the middle.
-	cutoutPercentAge: 50,
+	// The percentage of the chart that we cut out of the middle.
+	cutoutPercentage: 50,
 
 	// The rotation of the chart, where the first data arc begins.
 	rotation: -HALF_PI$1,
@@ -5489,7 +5489,7 @@ var controller_doughnut = core_datasetController.extend({
 		var offsetY = 0;
 		var meta = me.getMeta();
 		var arcs = meta.data;
-		var cutout = opts.cutoutPercentAge / 100 || 0;
+		var cutout = opts.cutoutPercentage / 100 || 0;
 		var circumference = opts.circumference;
 		var chartWeight = me._getRingWeight(me.index);
 		var maxWidth, maxHeight, i, ilen;
@@ -5754,8 +5754,8 @@ core_defaults._set('horizontalBar', {
 core_defaults._set('global', {
 	datasets: {
 		horizontalBar: {
-			categoryPercentAge: 0.8,
-			barPercentAge: 0.9
+			categoryPercentage: 0.8,
+			barPercentage: 0.9
 		}
 	}
 });
@@ -6311,7 +6311,7 @@ var controller_polarArea = core_datasetController.extend({
 		var minSize = Math.min(chartArea.right - chartArea.left, chartArea.bottom - chartArea.top);
 
 		chart.outerRadius = Math.max(minSize / 2, 0);
-		chart.innerRadius = Math.max(opts.cutoutPercentAge ? (chart.outerRadius / 100) * (opts.cutoutPercentAge) : 1, 0);
+		chart.innerRadius = Math.max(opts.cutoutPercentage ? (chart.outerRadius / 100) * (opts.cutoutPercentage) : 1, 0);
 		chart.radiusLength = (chart.outerRadius - chart.innerRadius) / chart.getVisibleDatasetCount();
 
 		me.outerRadius = chart.outerRadius - (chart.radiusLength * me.index);
@@ -6428,7 +6428,7 @@ var controller_polarArea = core_datasetController.extend({
 
 core_defaults._set('pie', helpers$1.clone(core_defaults.doughnut));
 core_defaults._set('pie', {
-	cutoutPercentAge: 0
+	cutoutPercentage: 0
 });
 
 // Pie charts are Doughnut chart with different defaults
@@ -8139,7 +8139,7 @@ core_defaults._set('global', {
 		enabled: true,
 		custom: null,
 		mode: 'nearest',
-		position: 'averAge',
+		position: 'average',
 		intersect: true,
 		backgroundColor: 'rgba(0,0,0,0.8)',
 		titleFontStyle: 'bold',
@@ -8232,12 +8232,12 @@ core_defaults._set('global', {
 
 var positioners = {
 	/**
-	 * AverAge mode places the tooltip at the averAge position of the elements shown
-	 * @function Chart.Tooltip.positioners.averAge
+	 * Average mode places the tooltip at the average position of the elements shown
+	 * @function Chart.Tooltip.positioners.average
 	 * @param elements {ChartElement[]} the elements being displayed in the tooltip
 	 * @returns {object} tooltip position
 	 */
-	averAge: function(elements) {
+	average: function(elements) {
 		if (!elements.length) {
 			return false;
 		}
@@ -10076,7 +10076,7 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 		delete Chart.instances[me.id];
 	},
 
-	toBase64ImAge: function() {
+	toBase64Image: function() {
 		return this.canvas.toDataURL.apply(this.canvas, arguments);
 	},
 
@@ -10684,14 +10684,14 @@ var core_helpers = function() {
 
 	};
 
-	// Private helper function to convert max-width/max-height values that may be percentAges into a number
+	// Private helper function to convert max-width/max-height values that may be percentages into a number
 	function parseMaxStyle(styleValue, node, parentProperty) {
 		var valueInPixels;
 		if (typeof styleValue === 'string') {
 			valueInPixels = parseInt(styleValue, 10);
 
 			if (styleValue.indexOf('%') !== -1) {
-				// percentAge * size in dimension
+				// percentage * size in dimension
 				valueInPixels = valueInPixels / 100 * node.parentNode[parentProperty];
 			}
 		} else {
@@ -10713,10 +10713,10 @@ var core_helpers = function() {
 	 * Returns the max width or height of the given DOM node in a cross-browser compatible fashion
 	 * @param {HTMLElement} domNode - the node to check the constraint on
 	 * @param {string} maxStyle - the style that defines the maximum for the direction we are using ('max-width' / 'max-height')
-	 * @param {string} percentAgeProperty - property of parent to use when calculating width as a percentAge
+	 * @param {string} percentageProperty - property of parent to use when calculating width as a percentage
 	 * @see {@link https://www.nathanaeljones.com/blog/2013/reading-max-width-cross-browser}
 	 */
-	function getConstraintDimension(domNode, maxStyle, percentAgeProperty) {
+	function getConstraintDimension(domNode, maxStyle, percentageProperty) {
 		var view = document.defaultView;
 		var parentNode = helpers$1._getParentNode(domNode);
 		var constrainedNode = view.getComputedStyle(domNode)[maxStyle];
@@ -10727,8 +10727,8 @@ var core_helpers = function() {
 
 		if (hasCNode || hasCContainer) {
 			return Math.min(
-				hasCNode ? parseMaxStyle(constrainedNode, domNode, percentAgeProperty) : infinity,
-				hasCContainer ? parseMaxStyle(constrainedContainer, parentNode, percentAgeProperty) : infinity);
+				hasCNode ? parseMaxStyle(constrainedNode, domNode, percentageProperty) : infinity,
+				hasCContainer ? parseMaxStyle(constrainedContainer, parentNode, percentageProperty) : infinity);
 		}
 
 		return 'none';
@@ -10821,11 +10821,11 @@ var core_helpers = function() {
 	helpers$1.longestText = function(ctx, font, arrayOfThings, cache) {
 		cache = cache || {};
 		var data = cache.data = cache.data || {};
-		var gc = cache.garbAgeCollect = cache.garbAgeCollect || [];
+		var gc = cache.garbageCollect = cache.garbageCollect || [];
 
 		if (cache.font !== font) {
 			data = cache.data = {};
-			gc = cache.garbAgeCollect = [];
+			gc = cache.garbageCollect = [];
 			cache.font = font;
 		}
 
@@ -11203,7 +11203,7 @@ function getPixelForGridLine(scale, index, offsetGridLines) {
 	return lineValue;
 }
 
-function garbAgeCollect(caches, length) {
+function garbageCollect(caches, length) {
 	helpers$1.each(caches, function(cache) {
 		var gc = cache.gc;
 		var gcLen = gc.length / 2;
@@ -11258,7 +11258,7 @@ function computeLabelSizes(ctx, tickFonts, ticks, caches) {
 		widestLabelSize = Math.max(width, widestLabelSize);
 		highestLabelSize = Math.max(height, highestLabelSize);
 	}
-	garbAgeCollect(caches, length);
+	garbageCollect(caches, length);
 
 	widest = widths.indexOf(widestLabelSize);
 	highest = heights.indexOf(highestLabelSize);
@@ -12014,7 +12014,7 @@ var Scale = core_element.extend({
 	},
 
 	/**
-	 * Utility for getting the pixel location of a percentAge of scale
+	 * Utility for getting the pixel location of a percentage of scale
 	 * The coordinate (0, 0) is at the upper-left corner of the canvas
 	 */
 	getPixelForDecimal: function(decimal) {
@@ -13502,7 +13502,7 @@ function fitWithPointLabels(scale) {
 	// After finding the largest index and angle we calculate how much we need to remove
 	// from the shape radius to move the point inwards by that x.
 	//
-	// We averAge the left and right distances to get the maximum shape radius that can fit in the box
+	// We average the left and right distances to get the maximum shape radius that can fit in the box
 	// along with labels.
 	//
 	// Once we have that, we can find the centre point for the chart, by taking the x text protrusion
@@ -14386,7 +14386,7 @@ var scale_time = core_scale.extend({
 		var time = options.time || (options.time = {});
 		var adapter = me._adapter = new core_adapters._date(options.adapters.date);
 
-		// DEPRECATIONS: output a messAge only one time per update
+		// DEPRECATIONS: output a message only one time per update
 		deprecated$1('time scale', time.format, 'time.format', 'time.parser');
 		deprecated$1('time scale', time.min, 'time.min', 'ticks.min');
 		deprecated$1('time scale', time.max, 'time.max', 'ticks.max');

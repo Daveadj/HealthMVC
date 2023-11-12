@@ -218,7 +218,7 @@
                 className: className,
                 display: display !== '' ?
                     display :
-                    this.emptyMessAge(),
+                    this.emptyMessage(),
                 filter: filter,
                 index: index,
                 shown: shown,
@@ -318,19 +318,19 @@
             this.s.listSet = false;
         };
         /**
-         * Getting the legacy messAge is a little complex due a legacy parameter
+         * Getting the legacy message is a little complex due a legacy parameter
          */
-        SearchPane.prototype.emptyMessAge = function () {
-            var def = this.c.i18n.emptyMessAge;
+        SearchPane.prototype.emptyMessage = function () {
+            var def = this.c.i18n.emptyMessage;
             // Legacy parameter support
-            if (this.c.emptyMessAge) {
-                def = this.c.emptyMessAge;
+            if (this.c.emptyMessage) {
+                def = this.c.emptyMessage;
             }
             // Override per column
-            if (this.s.colOpts.emptyMessAge !== false && this.s.colOpts.emptyMessAge !== null) {
-                def = this.s.colOpts.emptyMessAge;
+            if (this.s.colOpts.emptyMessage !== false && this.s.colOpts.emptyMessage !== null) {
+                def = this.s.colOpts.emptyMessage;
             }
-            return this.s.dt.i18n('searchPanes.emptyMessAge', def);
+            return this.s.dt.i18n('searchPanes.emptyMessage', def);
         };
         /**
          * Updates the number of filters that have been applied in the title
@@ -360,7 +360,7 @@
             // When rebuilding strip all of the HTML Elements out of the container and start from scratch
             if (this.s.dtPane !== undefined) {
                 if (maintainSelection) {
-                    if (!this.s.dt.pAge.info().serverSide) {
+                    if (!this.s.dt.page.info().serverSide) {
                         selectedRows = this.s.dtPane.rows({ selected: true }).data().toArray();
                     }
                     else {
@@ -375,13 +375,13 @@
             }
             this.dom.container.removeClass(this.classes.hidden);
             this.s.displayed = false;
-            this._buildPane(!this.s.dt.pAge.info().serverSide ?
+            this._buildPane(!this.s.dt.page.info().serverSide ?
                 selectedRows :
                 this.s.serverSelect, last, dataIn, init, prevEl);
             return this;
         };
         /**
-         * removes the pane from the pAge and sets the displayed property to false.
+         * removes the pane from the page and sets the displayed property to false.
          */
         SearchPane.prototype.removePane = function () {
             this.s.displayed = false;
@@ -453,7 +453,7 @@
         };
         /**
          * Updates the panes if one of the options to do so has been set to true
-         * rather than the filtered messAge when using viewTotal.
+         * rather than the filtered message when using viewTotal.
          */
         SearchPane.prototype.updateTable = function () {
             var selectedRows = this.s.dtPane.rows({ selected: true }).data().toArray();
@@ -478,7 +478,7 @@
             this.s.dtPane.off('select.dtsp');
             this.s.dtPane.on('select.dtsp', function () {
                 clearTimeout(t0);
-                if (_this.s.dt.pAge.info().serverSide && !_this.s.updating) {
+                if (_this.s.dt.page.info().serverSide && !_this.s.updating) {
                     if (!_this.s.serverSelecting) {
                         _this.s.serverSelect = _this.s.dtPane.rows({ selected: true }).data().toArray();
                         _this.s.scrollTop = $(_this.s.dtPane.table().node()).parent()[0].scrollTop;
@@ -499,7 +499,7 @@
             this.s.dtPane.on('deselect.dtsp', function () {
                 t0 = setTimeout(function () {
                     _this.s.scrollTop = $(_this.s.dtPane.table().node()).parent()[0].scrollTop;
-                    if (_this.s.dt.pAge.info().serverSide && !_this.s.updating) {
+                    if (_this.s.dt.page.info().serverSide && !_this.s.updating) {
                         if (!_this.s.serverSelecting) {
                             _this.s.serverSelect = _this.s.dtPane.rows({ selected: true }).data().toArray();
                             _this.s.deselect = true;
@@ -744,8 +744,8 @@
             var colOpts = this.s.colOpts;
             var rowData = this.s.rowData;
             // Other Variables
-            var countMessAge = table.i18n('searchPanes.count', this.c.i18n.count);
-            var filteredMessAge = table.i18n('searchPanes.countFiltered', this.c.i18n.countFiltered);
+            var countMessage = table.i18n('searchPanes.count', this.c.i18n.count);
+            var filteredMessage = table.i18n('searchPanes.countFiltered', this.c.i18n.countFiltered);
             var loadedFilter = table.state.loaded();
             // If the listeners have not been set yet then using the latest state may result in funny errors
             if (this.s.listSet) {
@@ -773,7 +773,7 @@
                 else if (colOpts.show === true || idx !== -1) {
                     this.s.displayed = true;
                 }
-                if (!this.s.dt.pAge.info().serverSide &&
+                if (!this.s.dt.page.info().serverSide &&
                     (dataIn === null ||
                         dataIn.searchPanes === null ||
                         dataIn.searchPanes.options === null)) {
@@ -892,23 +892,23 @@
                             else if (type === 'type') {
                                 return row.type;
                             }
-                            var messAge;
-                            messAge =
+                            var message;
+                            message =
                                 (_this.s.filteringActive || _this.s.showFiltered) && _this.c.viewTotal ||
                                     _this.c.viewTotal && _this.s.forceViewTotal ?
-                                    filteredMessAge.replace(/{total}/, row.total) :
-                                    countMessAge.replace(/{total}/, row.total);
-                            messAge = messAge.replace(/{shown}/, row.shown);
-                            while (messAge.includes('{total}')) {
-                                messAge = messAge.replace(/{total}/, row.total);
+                                    filteredMessage.replace(/{total}/, row.total) :
+                                    countMessage.replace(/{total}/, row.total);
+                            message = message.replace(/{shown}/, row.shown);
+                            while (message.includes('{total}')) {
+                                message = message.replace(/{total}/, row.total);
                             }
-                            while (messAge.includes('{shown}')) {
-                                messAge = messAge.replace(/{shown}/, row.shown);
+                            while (message.includes('{shown}')) {
+                                message = message.replace(/{shown}/, row.shown);
                             }
                             // We are displaying the count in the same columne as the name of the search option.
                             // This is so that there is not need to call columns.adjust()
                             //  which in turn speeds up the code
-                            var pill = '<span class="' + _this.classes.pill + '">' + messAge + '</span>';
+                            var pill = '<span class="' + _this.classes.pill + '">' + message + '</span>';
                             if (!_this.c.viewCount || !colOpts.viewCount) {
                                 pill = '';
                             }
@@ -951,7 +951,7 @@
                 deferRender: true,
                 dom: 't',
                 info: false,
-                languAge: this.s.dt.settings()[0].oLanguAge,
+                language: this.s.dt.settings()[0].oLanguage,
                 paging: haveScroller ? true : false,
                 scrollX: false,
                 scrollY: '200px',
@@ -1017,7 +1017,7 @@
                             selected = true;
                         }
                     }
-                    if (this.s.dt.pAge.info().serverSide &&
+                    if (this.s.dt.page.info().serverSide &&
                         (!this.c.cascadePanes ||
                             this.c.cascadePanes && rowData.bins[rowData.arrayFilter[i].filter] !== 0 ||
                             this.c.cascadePanes && init !== null ||
@@ -1036,13 +1036,13 @@
                             }
                         }
                     }
-                    else if (!this.s.dt.pAge.info().serverSide &&
+                    else if (!this.s.dt.page.info().serverSide &&
                         rowData.arrayFilter[i] &&
                         (rowData.bins[rowData.arrayFilter[i].filter] !== undefined || !this.c.cascadePanes)) {
                         this.addRow(rowData.arrayFilter[i].display, rowData.arrayFilter[i].filter, rowData.bins[rowData.arrayFilter[i].filter], rowData.binsTotal[rowData.arrayFilter[i].filter], rowData.arrayFilter[i].sort, rowData.arrayFilter[i].type);
                     }
-                    else if (!this.s.dt.pAge.info().serverSide) {
-                        // Just pass an empty string as the messAge will be calculated based on that in addRow()
+                    else if (!this.s.dt.page.info().serverSide) {
+                        // Just pass an empty string as the message will be calculated based on that in addRow()
                         this.addRow('', count_1, count_1, '', '', '');
                     }
                 }
@@ -1071,7 +1071,7 @@
                             selection.filter === this.s.dtPane.row(row).data().filter) {
                             // If this is happening when serverSide processing is happening then
                             //  different behaviour is needed
-                            if (this.s.dt.pAge.info().serverSide) {
+                            if (this.s.dt.page.info().serverSide) {
                                 this.s.serverSelecting = true;
                                 this.s.dtPane.row(row).select();
                                 this.s.serverSelecting = false;
@@ -1084,7 +1084,7 @@
                 }
             }
             //  If SSP and the table is ready, apply the search for the pane
-            if (this.s.dt.pAge.info().serverSide) {
+            if (this.s.dt.page.info().serverSide) {
                 this.s.dtPane.search(this.dom.searchBox.val()).draw();
             }
             if ((this.c.initCollapsed && this.s.colOpts.initCollapsed !== false ||
@@ -1133,7 +1133,7 @@
             this.s.rowData.binsTotal = {};
             var settings = this.s.dt.settings()[0];
             var indexArray = table.rows().indexes();
-            if (!this.s.dt.pAge.info().serverSide) {
+            if (!this.s.dt.page.info().serverSide) {
                 for (var _i = 0, indexArray_1 = indexArray; _i < indexArray_1.length; _i++) {
                     var rowIdx = indexArray_1[_i];
                     this._populatePaneArray(rowIdx, this.s.rowData.arrayTotals, settings, this.s.rowData.binsTotal);
@@ -1244,7 +1244,7 @@
                 // Initialise the object which is to be placed in the row
                 var insert = comp.label !== '' ?
                     comp.label :
-                    this.emptyMessAge();
+                    this.emptyMessage();
                 var comparisonObj = {
                     className: comp.className,
                     display: insert,
@@ -1290,7 +1290,7 @@
             // We need to reset the thresholds as if they have a value in colOpts then that value will be used
             var defaultMutator = {
                 collapse: null,
-                emptyMessAge: false,
+                emptyMessage: false,
                 initCollapsed: null,
                 orthogonal: {
                     threshold: null
@@ -1331,7 +1331,7 @@
             // If cascadePanes or viewTotal are active it is necessary to get the data which is currently
             // being displayed for their functionality.
             // Also make sure that this was not the last pane to have a selection made
-            if (!this.s.dt.pAge.info().serverSide) {
+            if (!this.s.dt.page.info().serverSide) {
                 var indexArray = (this.c.cascadePanes || this.c.viewTotal) && (!this.s.clearing && !last) ?
                     table.rows({ search: 'applied' }).indexes() :
                     table.rows().indexes();
@@ -1502,7 +1502,7 @@
             var updating = this.s.updating;
             this.s.updating = true;
             var filters = this.s.dtPane.rows({ selected: true }).data().pluck('filter').toArray();
-            var nullIndex = filters.indexOf(this.emptyMessAge());
+            var nullIndex = filters.indexOf(this.emptyMessage());
             var container = $(this.s.dtPane.table().container());
             // If null index is found then search for empty cells as a filter.
             if (nullIndex > -1) {
@@ -1526,8 +1526,8 @@
          */
         SearchPane.prototype._uniqueRatio = function (bins, rowCount) {
             if (rowCount > 0 &&
-                (this.s.rowData.totalOptions > 0 && !this.s.dt.pAge.info().serverSide ||
-                    this.s.dt.pAge.info().serverSide && this.s.tableLength > 0)) {
+                (this.s.rowData.totalOptions > 0 && !this.s.dt.page.info().serverSide ||
+                    this.s.dt.page.info().serverSide && this.s.tableLength > 0)) {
                 return bins / this.s.rowData.totalOptions;
             }
             else {
@@ -1543,7 +1543,7 @@
             if (draw === void 0) { draw = false; }
             // Update the panes if doing a deselect. if doing a select then
             // update all of the panes except for the one causing the change
-            if (!this.s.dt.pAge.info().serverSide &&
+            if (!this.s.dt.page.info().serverSide &&
                 this.s.dtPane !== undefined &&
                 (!this.s.filteringActive || this.c.cascadePanes || draw === true) &&
                 (this.c.cascadePanes !== true || this.s.selectPresent !== true) &&
@@ -1697,13 +1697,13 @@
             },
             controls: true,
             dtOpts: {},
-            emptyMessAge: null,
+            emptyMessage: null,
             hideCount: false,
             i18n: {
                 clearPane: '&times;',
                 count: '{total}',
                 countFiltered: '{shown} ({total})',
-                emptyMessAge: '<em>No data</em>'
+                emptyMessage: '<em>No data</em>'
             },
             initCollapsed: false,
             layout: 'auto',
@@ -1756,8 +1756,8 @@
             this.dom = {
                 clearAll: $$1('<button type="button">Clear All</button>').addClass(this.classes.clearAll),
                 collapseAll: $$1('<button type="button">Collapse All</button>').addClass(this.classes.collapseAll),
-                container: $$1('<div/>').addClass(this.classes.panes).text(table.i18n('searchPanes.loadMessAge', this.c.i18n.loadMessAge)),
-                emptyMessAge: $$1('<div/>').addClass(this.classes.emptyMessAge),
+                container: $$1('<div/>').addClass(this.classes.panes).text(table.i18n('searchPanes.loadMessage', this.c.i18n.loadMessage)),
+                emptyMessage: $$1('<div/>').addClass(this.classes.emptyMessage),
                 options: $$1('<div/>').addClass(this.classes.container),
                 panes: $$1('<div/>').addClass(this.classes.container),
                 showAll: $$1('<button type="button">Show All</button>')
@@ -1773,7 +1773,7 @@
                 dt: table,
                 filterCount: 0,
                 filterPane: -1,
-                pAge: 0,
+                page: 0,
                 paging: false,
                 panes: [],
                 selectionList: [],
@@ -1785,7 +1785,7 @@
                 return;
             }
             this._getState();
-            if (this.s.dt.pAge.info().serverSide) {
+            if (this.s.dt.page.info().serverSide) {
                 table.on('preXhr.dt', function (e, settings, data) {
                     if (data.searchPanes === undefined) {
                         data.searchPanes = {};
@@ -1821,9 +1821,9 @@
                 }
             });
             table.settings()[0]._searchPanes = this;
-            this.dom.clearAll.text(table.i18n('searchPanes.clearMessAge', this.c.i18n.clearMessAge));
-            this.dom.collapseAll.text(table.i18n('searchPanes.collapseMessAge', this.c.i18n.collapseMessAge));
-            this.dom.showAll.text(table.i18n('searchPanes.showMessAge', this.c.i18n.showMessAge));
+            this.dom.clearAll.text(table.i18n('searchPanes.clearMessage', this.c.i18n.clearMessage));
+            this.dom.collapseAll.text(table.i18n('searchPanes.collapseMessage', this.c.i18n.collapseMessage));
+            this.dom.showAll.text(table.i18n('searchPanes.showMessage', this.c.i18n.showMessage));
             if (this.s.dt.settings()[0]._bInitComplete || fromInit) {
                 this._paneDeclare(table, paneSettings, opts);
             }
@@ -1870,7 +1870,7 @@
         SearchPanes.prototype.rebuild = function (targetIdx, maintainSelection) {
             if (targetIdx === void 0) { targetIdx = false; }
             if (maintainSelection === void 0) { maintainSelection = false; }
-            this.dom.emptyMessAge.remove();
+            this.dom.emptyMessage.remove();
             // As a rebuild from scratch is required, empty the searchpanes container.
             var returnArray = [];
             // Rebuild each pane individually, if a specific pane has been selected then only rebuild that one
@@ -1887,7 +1887,7 @@
                 // Pass a boolean to say whether this is the last choice made for maintaining selections when rebuilding
                 pane.rebuildPane(this.s.selectionList[this.s.selectionList.length - 1] !== undefined ?
                     pane.s.index === this.s.selectionList[this.s.selectionList.length - 1].index :
-                    false, this.s.dt.pAge.info().serverSide ?
+                    false, this.s.dt.page.info().serverSide ?
                     this.s.serverData :
                     undefined, null, maintainSelection));
                 this.dom.panes.append(pane.dom.container);
@@ -1922,7 +1922,7 @@
             if (rebuild === void 0) { rebuild = false; }
             var table = this.s.dt;
             // Only do this if the redraw isn't being triggered by the panes updating themselves
-            if (!this.s.updating && !this.s.dt.pAge.info().serverSide) {
+            if (!this.s.updating && !this.s.dt.page.info().serverSide) {
                 var filterActive = true;
                 var filterPane = this.s.filterPane;
                 var selectTotal = null;
@@ -1939,7 +1939,7 @@
                     filterActive = false;
                 }
                 // Otherwise if viewTotal is active then it is necessary to determine which panes a select is present in.
-                // If there is only one pane with a selection present then it should not show the filtered messAge as
+                // If there is only one pane with a selection present then it should not show the filtered message as
                 // more selections may be made in that pane.
                 else if (this.c.viewTotal) {
                     for (var _b = 0, _c = this.s.panes; _b < _c.length; _b++) {
@@ -2210,20 +2210,20 @@
         };
         /**
          * If there are no panes to display then this method is called to either
-         * display a messAge in their place or hide them completely.
+         * display a message in their place or hide them completely.
          */
-        SearchPanes.prototype._attachMessAge = function () {
-            // Create a messAge to display on the screen
-            var messAge;
+        SearchPanes.prototype._attachMessage = function () {
+            // Create a message to display on the screen
+            var message;
             try {
-                messAge = this.s.dt.i18n('searchPanes.emptyPanes', this.c.i18n.emptyPanes);
+                message = this.s.dt.i18n('searchPanes.emptyPanes', this.c.i18n.emptyPanes);
             }
             catch (error) {
-                messAge = null;
+                message = null;
             }
-            // If the messAge is an empty string then searchPanes.emptyPanes is undefined,
+            // If the message is an empty string then searchPanes.emptyPanes is undefined,
             // therefore the pane container should be removed from the display
-            if (messAge === null) {
+            if (message === null) {
                 this.dom.container.addClass(this.classes.hide);
                 this.dom.titleRow.removeClass(this.classes.hide);
                 return;
@@ -2232,13 +2232,13 @@
                 this.dom.container.removeClass(this.classes.hide);
                 this.dom.titleRow.addClass(this.classes.hide);
             }
-            // Otherwise display the messAge
-            this.dom.emptyMessAge.text(messAge);
-            this.dom.emptyMessAge.appendTo(this.dom.container);
+            // Otherwise display the message
+            this.dom.emptyMessage.text(message);
+            this.dom.emptyMessage.appendTo(this.dom.container);
             return this.dom.container;
         };
         /**
-         * Attaches the panes to the document and displays a messAge or hides if there are none
+         * Attaches the panes to the document and displays a message or hides if there are none
          */
         SearchPanes.prototype._attachPaneContainer = function () {
             // If a pane is to be displayed then attach the normal pane output
@@ -2248,8 +2248,8 @@
                     return this._attach();
                 }
             }
-            // Otherwise attach the custom messAge or remove the container from the display
-            return this._attachMessAge();
+            // Otherwise attach the custom message or remove the container from the display
+            return this._attachMessage();
         };
         /**
          * Prepares the panes for selections to be made when cascade is active and a deselect has occured
@@ -2311,21 +2311,21 @@
             }
         };
         /**
-         * Attaches the messAge to the document but does not add any panes
+         * Attaches the message to the document but does not add any panes
          */
-        SearchPanes.prototype._checkMessAge = function () {
+        SearchPanes.prototype._checkMessage = function () {
             // If a pane is to be displayed then attach the normal pane output
             for (var _i = 0, _a = this.s.panes; _i < _a.length; _i++) {
                 var pane = _a[_i];
                 if (pane.s.displayed === true) {
-                    // Ensure that the empty messAge is removed if a pane is displayed
-                    this.dom.emptyMessAge.remove();
+                    // Ensure that the empty message is removed if a pane is displayed
+                    this.dom.emptyMessage.remove();
                     this.dom.titleRow.removeClass(this.classes.hide);
                     return;
                 }
             }
-            // Otherwise attach the custom messAge or remove the container from the display
-            return this._attachMessAge();
+            // Otherwise attach the custom message or remove the container from the display
+            return this._attachMessage();
         };
         /**
          * Checks which panes are collapsed and then performs relevant actions to the collapse/show all buttons
@@ -2601,7 +2601,7 @@
             for (var _k = 0, _l = this.s.panes; _k < _l.length; _k++) {
                 var pane = _l[_k];
                 if (!pane.s.lastSelect) {
-                    pane.rebuildPane(undefined, this.s.dt.pAge.info().serverSide ? this.s.serverData : undefined, pane.s.index === initIdx ? true : null, true);
+                    pane.rebuildPane(undefined, this.s.dt.page.info().serverSide ? this.s.serverData : undefined, pane.s.index === initIdx ? true : null, true);
                 }
                 else {
                     pane._setListeners();
@@ -2695,8 +2695,8 @@
             }
             // Reset the paging if that has been saved in the state
             if (!this.s.stateRead && loadedFilter !== null && loadedFilter !== undefined) {
-                this.s.dt.pAge(loadedFilter.start / this.s.dt.pAge.len());
-                this.s.dt.draw('pAge');
+                this.s.dt.page(loadedFilter.start / this.s.dt.page.len());
+                this.s.dt.draw('page');
             }
             this.s.stateRead = true;
             if (this.c.viewTotal && !this.c.cascadePanes) {
@@ -2705,13 +2705,13 @@
                     pane.updatePane();
                 }
             }
-            this._checkMessAge();
+            this._checkMessage();
             // When a draw is called on the DataTable, update all of the panes incase the data in the DataTable has changed
             table.on('preDraw.dtsps', function () {
                 // Check that the panes are not updating to avoid infinite loops
                 // Also check that this draw is not due to paging
                 if (!_this.s.updating && !_this.s.paging) {
-                    if ((_this.c.cascadePanes || _this.c.viewTotal) && !_this.s.dt.pAge.info().serverSide) {
+                    if ((_this.c.cascadePanes || _this.c.viewTotal) && !_this.s.dt.page.info().serverSide) {
                         _this.redrawPanes(_this.c.viewTotal);
                     }
                     else {
@@ -2734,12 +2734,12 @@
                 data.searchPanes.selectionList = _this.s.selectionList;
             });
             // Listener for paging on main table
-            table.off('pAge');
-            table.on('pAge', function () {
+            table.off('page');
+            table.on('page', function () {
                 _this.s.paging = true;
-                _this.s.pAge = _this.s.dt.pAge();
+                _this.s.page = _this.s.dt.page();
             });
-            if (this.s.dt.pAge.info().serverSide) {
+            if (this.s.dt.page.info().serverSide) {
                 table.off('preXhr.dt');
                 table.on('preXhr.dt', function (e, settings, data) {
                     if (data.searchPanes === undefined) {
@@ -2780,13 +2780,13 @@
                         // result set and reset the paging
                         if (filterCount !== _this.s.filterCount) {
                             data.start = 0;
-                            _this.s.pAge = 0;
+                            _this.s.page = 0;
                         }
                         // Otherwise it is a paging request and we need to read from whatever the paging has been set to
                         else {
-                            data.start = _this.s.pAge * _this.s.dt.pAge.len();
+                            data.start = _this.s.page * _this.s.dt.page.len();
                         }
-                        _this.s.dt.pAge(_this.s.pAge);
+                        _this.s.dt.page(_this.s.page);
                         _this.s.filterCount = filterCount;
                     }
                 });
@@ -2806,12 +2806,12 @@
                     return;
                 }
                 var processing = false;
-                if (!_this.s.dt.pAge.info().serverSide) {
+                if (!_this.s.dt.page.info().serverSide) {
                     _this.s.dt.one('preDraw', function () {
                         if (processing) {
                             return;
                         }
-                        var pAge = _this.s.dt.pAge();
+                        var page = _this.s.dt.page();
                         processing = true;
                         _this.s.updating = true;
                         _this.dom.panes.empty();
@@ -2825,7 +2825,7 @@
                                 false, undefined, undefined, true);
                             _this.dom.panes.append(pane.dom.container);
                         }
-                        if (!_this.s.dt.pAge.info().serverSide) {
+                        if (!_this.s.dt.page.info().serverSide) {
                             _this.s.dt.draw();
                         }
                         _this.s.updating = false;
@@ -2835,10 +2835,10 @@
                         else {
                             _this._updateSelection();
                         }
-                        _this._checkMessAge();
+                        _this._checkMessage();
                         _this.s.dt.one('draw', function () {
                             _this.s.updating = true;
-                            _this.s.dt.pAge(pAge).draw(false);
+                            _this.s.dt.page(page).draw(false);
                             _this.s.updating = false;
                         });
                     });
@@ -2951,9 +2951,9 @@
                     filterCount += pane.getPaneCount();
                 }
             }
-            // Run the messAge through the internationalisation method to improve readability
-            var messAge = this.s.dt.i18n('searchPanes.title', this.c.i18n.title, filterCount);
-            this.dom.title.text(messAge);
+            // Run the message through the internationalisation method to improve readability
+            var message = this.s.dt.i18n('searchPanes.title', this.c.i18n.title, filterCount);
+            this.dom.title.text(message);
             if (this.c.filterChanged !== undefined && typeof this.c.filterChanged === 'function') {
                 this.c.filterChanged.call(this.s.dt, filterCount);
             }
@@ -2987,7 +2987,7 @@
             collapseAll: 'dtsp-collapseAll',
             container: 'dtsp-searchPanes',
             disabledButton: 'dtsp-disabledButton',
-            emptyMessAge: 'dtsp-emptyMessAge',
+            emptyMessage: 'dtsp-emptyMessage',
             hide: 'dtsp-hidden',
             panes: 'dtsp-panesContainer',
             search: 'dtsp-search',
@@ -3006,19 +3006,19 @@
             },
             filterChanged: undefined,
             i18n: {
-                clearMessAge: 'Clear All',
+                clearMessage: 'Clear All',
                 clearPane: '&times;',
                 collapse: {
                     0: 'SearchPanes',
                     _: 'SearchPanes (%d)'
                 },
-                collapseMessAge: 'Collapse All',
+                collapseMessage: 'Collapse All',
                 count: '{total}',
                 countFiltered: '{shown} ({total})',
-                emptyMessAge: '<em>No data</em>',
+                emptyMessage: '<em>No data</em>',
                 emptyPanes: 'No SearchPanes',
-                loadMessAge: 'Loading Search Panes...',
-                showMessAge: 'Show All',
+                loadMessage: 'Loading Search Panes...',
+                showMessage: 'Show All',
                 title: 'Filters Active - %d'
             },
             layout: 'auto',
@@ -3122,13 +3122,13 @@
                 var panes = new $.fn.dataTable.SearchPanes(dt, $.extend({
                     filterChanged: function (count) {
                         // console.log(dt.context[0])
-                        dt.button(node).text(dt.i18n('searchPanes.collapse', dt.context[0].oLanguAge.searchPanes !== undefined ?
-                            dt.context[0].oLanguAge.searchPanes.collapse :
+                        dt.button(node).text(dt.i18n('searchPanes.collapse', dt.context[0].oLanguage.searchPanes !== undefined ?
+                            dt.context[0].oLanguage.searchPanes.collapse :
                             dt.context[0]._searchPanes.c.i18n.collapse, count));
                     }
                 }, config.config));
-                var messAge = dt.i18n('searchPanes.collapse', panes.c.i18n.collapse, 0);
-                dt.button(node).text(messAge);
+                var message = dt.i18n('searchPanes.collapse', panes.c.i18n.collapse, 0);
+                dt.button(node).text(message);
                 config._panes = panes;
             },
             text: 'Search Panes'

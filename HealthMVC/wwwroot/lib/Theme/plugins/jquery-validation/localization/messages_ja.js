@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: JA (Japanese; 日本語)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "このフィールドは必須です。",
 	remote: "このフィールドを修正してください。",
 	email: "有効なEメールアドレスを入力してください。",

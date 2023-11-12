@@ -13,7 +13,7 @@ builder.Services.Configure<ConfigModel>(builder.Configuration.GetSection("Parame
 
 builder.Services.AddHttpClient("HealthClient", (httpClient) =>
 {
-    httpClient.BaseAddress = new Uri("https://sandbox-healthservice.priaid.ch/");
+    httpClient.BaseAddress = new Uri("https://healthservice.priaid.ch/");
 });
 
 builder.Services.AddScoped<SymtomService>();

@@ -104,7 +104,7 @@ The plugin allso adds the following methods to the plot object:
 
         // FIXME: The drag handling implemented here should be
         // abstracted out, there's some similar code from a library in
-        // the navigation plugin, this should be massAged a bit to fit
+        // the navigation plugin, this should be massaged a bit to fit
         // the Flot cases here better and reused. Doing this would
         // make this plugin much slimmer.
         var savedhandlers = {};
@@ -143,7 +143,7 @@ The plugin allso adds the following methods to the plot object:
             selection.active = true;
         }
 
-        function onDrAgend(e) {
+        function onDragEnd(e) {
             // revert drag stuff for old-school browsers
             if (document.onselectstart !== undefined) {
                 document.onselectstart = savedhandlers.onselectstart;
@@ -241,8 +241,8 @@ The plugin allso adds the following methods to the plot object:
         function setSelectionPos(pos, e) {
             var offset = plot.getPlaceholder().offset();
             var plotOffset = plot.getPlotOffset();
-            pos.x = clamp(0, e.pAgeX - offset.left - plotOffset.left, plot.width());
-            pos.y = clamp(0, e.pAgeY - offset.top - plotOffset.top, plot.height());
+            pos.x = clamp(0, e.pageX - offset.left - plotOffset.left, plot.width());
+            pos.y = clamp(0, e.pageY - offset.top - plotOffset.top, plot.height());
 
             if (pos !== selection.first) updateMode(pos);
 
@@ -256,7 +256,7 @@ The plugin allso adds the following methods to the plot object:
         }
 
         function updateSelection(pos) {
-            if (pos.pAgeX == null) return;
+            if (pos.pageX == null) return;
 
             setSelectionPos(selection.second, pos);
             if (selectionIsSane()) {
@@ -357,7 +357,7 @@ The plugin allso adds the following methods to the plot object:
             if (o.selection.mode != null) {
                 plot.addEventHandler("dragstart", onDragStart, eventHolder, 0);
                 plot.addEventHandler("drag", onDrag, eventHolder, 0);
-                plot.addEventHandler("drAgend", onDrAgend, eventHolder, 0);
+                plot.addEventHandler("dragend", onDragEnd, eventHolder, 0);
             }
         });
 
@@ -505,7 +505,7 @@ The plugin allso adds the following methods to the plot object:
         plot.hooks.shutdown.push(function (plot, eventHolder) {
             eventHolder.unbind("dragstart", onDragStart);
             eventHolder.unbind("drag", onDrag);
-            eventHolder.unbind("drAgend", onDrAgend);
+            eventHolder.unbind("dragend", onDragEnd);
         });
     }
 

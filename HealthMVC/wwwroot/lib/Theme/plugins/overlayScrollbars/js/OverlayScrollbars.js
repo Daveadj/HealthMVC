@@ -230,14 +230,14 @@
                 },
 
                 /**
-                 * Gets the pAgeX and pAgeY values of the given mouse event.
-                 * @param event The mouse event of which the pAgeX and pAgeX shall be got.
-                 * @returns {{x: number, y: number}} x = pAgeX value, y = pAgeY value.
+                 * Gets the pageX and pageY values of the given mouse event.
+                 * @param event The mouse event of which the pageX and pageX shall be got.
+                 * @returns {{x: number, y: number}} x = pageX value, y = pageY value.
                  */
-                pAge: function (event) {
+                page: function (event) {
                     event = event.originalEvent || event;
 
-                    var strPAge = 'pAge';
+                    var strPage = 'page';
                     var strClient = 'client';
                     var strX = 'X';
                     var strY = 'Y';
@@ -246,17 +246,17 @@
                     var doc = eventDoc.documentElement;
                     var body = eventDoc.body;
 
-                    //if touch event return return pAgeX/Y of it
+                    //if touch event return return pageX/Y of it
                     if (event.touches !== undefined) {
                         var touch = event.touches[0];
                         return {
-                            x: touch[strPAge + strX],
-                            y: touch[strPAge + strY]
+                            x: touch[strPage + strX],
+                            y: touch[strPage + strY]
                         }
                     }
 
-                    // Calculate pAgeX/Y if not native supported
-                    if (!event[strPAge + strX] && event[strClient + strX] && event[strClient + strX] != null) {
+                    // Calculate pageX/Y if not native supported
+                    if (!event[strPage + strX] && event[strClient + strX] && event[strClient + strX] != null) {
 
                         return {
                             x: event[strClient + strX] +
@@ -268,8 +268,8 @@
                         }
                     }
                     return {
-                        x: event[strPAge + strX],
-                        y: event[strPAge + strY]
+                        x: event[strPage + strX],
+                        y: event[strPage + strY]
                     };
                 },
 
@@ -524,11 +524,11 @@
              * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
              * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
              *  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-             *  EXEMPLARY, OR CONSEQUENTIAL DAMAgeS (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+             *  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
              *  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
              * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
              *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
-             * OF THE POSSIBILITY OF SUCH DAMAge. 
+             * OF THE POSSIBILITY OF SUCH DAMAGE. 
              *
              */
         })();
@@ -1270,8 +1270,8 @@
                 offset: function () {
                     var el = this[0];
                     var rect = el[LEXICON.bCR]();
-                    var scrollLeft = window.pAgeXOffset || document.documentElement[_strScrollLeft];
-                    var scrollTop = window.pAgeYOffset || document.documentElement[_strScrollTop];
+                    var scrollLeft = window.pageXOffset || document.documentElement[_strScrollLeft];
+                    var scrollTop = window.pageYOffset || document.documentElement[_strScrollTop];
                     return {
                         top: rect.top + scrollTop,
                         left: rect.left + scrollLeft
@@ -1918,7 +1918,7 @@
             }
 
             /**
-             * The object which manAges the auto update loop for all OverlayScrollbars objects. This object is initialized only once: if the first OverlayScrollbars object gets initialized.
+             * The object which manages the auto update loop for all OverlayScrollbars objects. This object is initialized only once: if the first OverlayScrollbars object gets initialized.
              * @constructor
              */
             function OverlayScrollbarsAutoUpdateLoop(globals) {
@@ -2021,7 +2021,7 @@
             }
 
             /**
-             * A object which manAges the scrollbars visibility of the target element.
+             * A object which manages the scrollbars visibility of the target element.
              * @param pluginTargetElement The element from which the scrollbars shall be hidden.
              * @param options The custom options.
              * @param extensions The custom extensions.
@@ -2222,7 +2222,7 @@
                 var _hostElement;                       //the host element of this OverlayScrollbars object -> may be the same as targetElement	
                 var _sizeAutoObserverElement;           //observes size auto changes	
                 var _sizeObserverElement;               //observes size and padding changes	
-                var _paddingElement;                    //manAges the padding	
+                var _paddingElement;                    //manages the padding	
                 var _viewportElement;                   //is the viewport of our scrollbar model	
                 var _contentElement;                    //the element which holds the content	
                 var _contentArrangeElement;             //is needed for correct sizing of the content element (only if native scrollbars are overlays)	
@@ -3106,7 +3106,7 @@
                 }
 
                 /**
-                 * Updates the variables and size of the textarea element, and manAges the scroll on new line or new character.
+                 * Updates the variables and size of the textarea element, and manages the scroll on new line or new character.
                  */
                 function textareaUpdate() {
                     if (!_sleeping) {
@@ -3988,7 +3988,7 @@
                             _hostElement[_strScrollTop](0);
                         _viewportElement[_strScrollLeft](currScroll.x)[_strScrollTop](currScroll.y);
 
-                        //scrollbars manAgement:
+                        //scrollbars management:
                         var scrollbarsVisibilityVisible = scrollbarsVisibility === 'v';
                         var scrollbarsVisibilityHidden = scrollbarsVisibility === 'h';
                         var scrollbarsVisibilityAuto = scrollbarsVisibility === 'a';
@@ -3998,7 +3998,7 @@
                             refreshScrollbarAppearance(false, showY, canScroll.y)
                         };
 
-                        //manAge class name which indicates scrollable overflow
+                        //manage class name which indicates scrollable overflow
                         addRemoveClass(_hostElement, _classNameHostOverflow, hideOverflow.x || hideOverflow.y);
                         addRemoveClass(_hostElement, _classNameHostOverflowX, hideOverflow.x);
                         addRemoveClass(_hostElement, _classNameHostOverflowY, hideOverflow.y);
@@ -4008,7 +4008,7 @@
                             addRemoveClass(_hostElement, _classNameHostRTL, _isRTL);
                         }
 
-                        //manAge the resize feature (CSS3 resize "polyfill" for this plugin)
+                        //manage the resize feature (CSS3 resize "polyfill" for this plugin)
                         if (_isBody)
                             addClass(_hostElement, _classNameHostResizeDisabled);
                         if (resizeChanged) {
@@ -4019,7 +4019,7 @@
                             addRemoveClass(_scrollbarCornerElement, _classNameScrollbarCornerResizeV, _resizeVertical);
                         }
 
-                        //manAge the scrollbars general visibility + the scrollbar interactivity (unusable class name)
+                        //manage the scrollbars general visibility + the scrollbar interactivity (unusable class name)
                         if (scrollbarsVisibilityChanged || overflowBehaviorChanged || hideOverflow.c || hasOverflow.c || ignoreOverlayScrollbarHidingChanged) {
                             if (ignoreOverlayScrollbarHiding) {
                                 if (ignoreOverlayScrollbarHidingChanged) {
@@ -4040,13 +4040,13 @@
                             }
                         }
 
-                        //manAge the scrollbars auto hide feature (auto hide them after specific actions)
+                        //manage the scrollbars auto hide feature (auto hide them after specific actions)
                         if (scrollbarsAutoHideChanged || ignoreOverlayScrollbarHidingChanged) {
                             setupHostMouseTouchEvents(!_scrollbarsAutoHideLeave && !_scrollbarsAutoHideMove);
                             refreshScrollbarsAutoHide(_scrollbarsAutoHideNever, !_scrollbarsAutoHideNever);
                         }
 
-                        //manAge scrollbars handle length & offset - don't remove!
+                        //manage scrollbars handle length & offset - don't remove!
                         if (hostSizeChanged || overflowAmount.c || heightAutoChanged || widthAutoChanged || resizeChanged || boxSizingChanged || paddingAbsoluteChanged || ignoreOverlayScrollbarHidingChanged || cssDirectionChanged) {
                             refreshScrollbarHandleLength(true);
                             refreshScrollbarHandleOffset(true);
@@ -4054,7 +4054,7 @@
                             refreshScrollbarHandleOffset(false);
                         }
 
-                        //manAge interactivity
+                        //manage interactivity
                         if (scrollbarsClickScrollingChanged)
                             refreshScrollbarsInteractive(true, scrollbarsClickScrolling);
                         if (scrollbarsDragScrollingChanged)
@@ -4316,7 +4316,7 @@
                 function setupStructureEvents() {
                     var textareaKeyDownRestrictedKeyCodes = [
                         112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 123,    //F1 to F12
-                        33, 34,                                                   //pAge up, pAge down
+                        33, 34,                                                   //page up, page down
                         37, 38, 39, 40,                                           //left, up, right, down arrows
                         16, 17, 18, 19, 20, 144                                   //Shift, Ctrl, Alt, Pause, CapsLock, NumLock
                     ];
@@ -4534,7 +4534,7 @@
                     var mouseDownInvertedScale;
 
                     function getPointerPosition(event) {
-                        return _msieVersion && insideIFrame ? event['screen' + XY] : COMPATIBILITY.pAge(event)[xy]; //use screen coordinates in EDGE & IE because the pAge values are incorrect in frames.
+                        return _msieVersion && insideIFrame ? event['screen' + XY] : COMPATIBILITY.page(event)[xy]; //use screen coordinates in EDGE & IE because the page values are incorrect in frames.
                     }
                     function getPreparedScrollbarsOption(name) {
                         return _currentPreparedOptions.scrollbars[name];
@@ -4758,7 +4758,7 @@
                                 increaseTrackScrollAmount();
 
                             mouseDownInvertedScale = getHostElementInvertedScale()[xy];
-                            mouseDownOffset = COMPATIBILITY.pAge(event)[xy];
+                            mouseDownOffset = COMPATIBILITY.page(event)[xy];
 
                             _scrollbarsHandlesDefineScrollPos = !getPreparedScrollbarsOption(strSnapHandle);
                             addClass(_bodyElement, _classNameDragging);
@@ -5031,12 +5031,12 @@
 
                     function documentDragMove(event) {
                         if (onMouseTouchDownContinue(event)) {
-                            var pAgeOffset = getCoordinates(event);
+                            var pageOffset = getCoordinates(event);
                             var hostElementCSS = {};
                             if (_resizeHorizontal || _resizeBoth)
-                                hostElementCSS[_strWidth] = (mouseDownSize.w + (pAgeOffset.x - mouseDownPosition.x) * mouseDownInvertedScale.x);
+                                hostElementCSS[_strWidth] = (mouseDownSize.w + (pageOffset.x - mouseDownPosition.x) * mouseDownInvertedScale.x);
                             if (_resizeVertical || _resizeBoth)
-                                hostElementCSS[_strHeight] = (mouseDownSize.h + (pAgeOffset.y - mouseDownPosition.y) * mouseDownInvertedScale.y);
+                                hostElementCSS[_strHeight] = (mouseDownSize.h + (pageOffset.y - mouseDownPosition.y) * mouseDownInvertedScale.y);
                             _hostElement.css(hostElementCSS);
                             COMPATIBILITY.stpP(event);
                         }
@@ -5069,7 +5069,7 @@
                         return _sleeping || _destroyed ? false : COMPATIBILITY.mBtn(event) === 1 || isTouchEvent;
                     }
                     function getCoordinates(event) {
-                        return _msieVersion && insideIFrame ? { x: event.screenX, y: event.screenY } : COMPATIBILITY.pAge(event);
+                        return _msieVersion && insideIFrame ? { x: event.screenX, y: event.screenY } : COMPATIBILITY.page(event);
                     }
 
                     addDestroyEventListener(_scrollbarCornerElement, _strMouseTouchDownEvent, function (event) {
@@ -5538,7 +5538,7 @@
                  * Updates the plugin and DOM to the current options.
                  * This method should only be called if a update is 100% required.
                  * @param force True if every property shall be updated and the cache shall be ignored.
-                 * !INTERNAL USAge! : force can be a string "auto", "sync" or "zoom" too
+                 * !INTERNAL USAGE! : force can be a string "auto", "sync" or "zoom" too
                  * if "auto" then before a real update the content size and host element attributes gets checked, and if they changed only then the update method will be called.
                  * if "sync" then the async update process (MutationObserver or UpdateLoop) gets synchronized and a corresponding update takes place if one was needed due to pending changes.
                  * if "zoom" then a update takes place where it's assumed that content and host size changed
@@ -5671,7 +5671,7 @@
                     setupScrollbarCornerDOM(true);
                     setupStructureDOM(true);
 
-                    //remove all generated imAge load events
+                    //remove all generated image load events
                     for (var i = 0; i < _updateOnLoadElms[LEXICON.l]; i++)
                         FRAMEWORK(_updateOnLoadElms[i]).off(_updateOnLoadEventName, updateOnLoadCallback);
                     _updateOnLoadElms = undefined;
@@ -6461,7 +6461,7 @@
                         //apply the body scroll to handle it right in the update method
                         _viewportElement[_strScrollLeft](initBodyScroll.l)[_strScrollTop](initBodyScroll.t);
 
-                        //set the focus on the viewport element so you dont have to click on the pAge to use keyboard keys (up / down / space) for scrolling
+                        //set the focus on the viewport element so you dont have to click on the page to use keyboard keys (up / down / space) for scrolling
                         if (document.activeElement == targetElement && _viewportElementNative.focus) {
                             //set a tabindex to make the viewportElement focusable
                             _viewportElement.attr(LEXICON.ti, '-1');

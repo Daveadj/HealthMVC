@@ -207,15 +207,15 @@
                 var filter = rowData[this.s.dataIdx];
                 // This check is in place for if a custom decimal character is in place
                 if (this.s.type.includes('num') &&
-                    (this.s.dt.settings()[0].oLanguAge.sDecimal !== '' ||
-                        this.s.dt.settings()[0].oLanguAge.sThousands !== '')) {
+                    (this.s.dt.settings()[0].oLanguage.sDecimal !== '' ||
+                        this.s.dt.settings()[0].oLanguage.sThousands !== '')) {
                     var splitRD = [rowData[this.s.dataIdx]];
-                    if (this.s.dt.settings()[0].oLanguAge.sDecimal !== '') {
-                        splitRD = rowData[this.s.dataIdx].split(this.s.dt.settings()[0].oLanguAge.sDecimal);
+                    if (this.s.dt.settings()[0].oLanguage.sDecimal !== '') {
+                        splitRD = rowData[this.s.dataIdx].split(this.s.dt.settings()[0].oLanguage.sDecimal);
                     }
-                    if (this.s.dt.settings()[0].oLanguAge.sThousands !== '') {
+                    if (this.s.dt.settings()[0].oLanguage.sThousands !== '') {
                         for (var i = 0; i < splitRD.length; i++) {
-                            splitRD[i] = splitRD[i].replace(this.s.dt.settings()[0].oLanguAge.sThousands, ',');
+                            splitRD[i] = splitRD[i].replace(this.s.dt.settings()[0].oLanguage.sThousands, ',');
                         }
                     }
                     filter = splitRD.join('.');
@@ -262,15 +262,15 @@
             // This check is in place for if a custom decimal character is in place
             if (this.s.type !== null &&
                 this.s.type.includes('num') &&
-                (this.s.dt.settings()[0].oLanguAge.sDecimal !== '' || this.s.dt.settings()[0].oLanguAge.sThousands !== '')) {
+                (this.s.dt.settings()[0].oLanguage.sDecimal !== '' || this.s.dt.settings()[0].oLanguage.sThousands !== '')) {
                 for (var i = 0; i < this.s.value.length; i++) {
                     var splitRD = [this.s.value[i].toString()];
-                    if (this.s.dt.settings()[0].oLanguAge.sDecimal !== '') {
-                        splitRD = this.s.value[i].split(this.s.dt.settings()[0].oLanguAge.sDecimal);
+                    if (this.s.dt.settings()[0].oLanguage.sDecimal !== '') {
+                        splitRD = this.s.value[i].split(this.s.dt.settings()[0].oLanguage.sDecimal);
                     }
-                    if (this.s.dt.settings()[0].oLanguAge.sThousands !== '') {
+                    if (this.s.dt.settings()[0].oLanguage.sThousands !== '') {
                         for (var j = 0; j < splitRD.length; j++) {
-                            splitRD[j] = splitRD[j].replace(this.s.dt.settings()[0].oLanguAge.sThousands, ',');
+                            splitRD[j] = splitRD[j].replace(this.s.dt.settings()[0].oLanguage.sThousands, ',');
                         }
                     }
                     this.s.value[i] = splitRD.join('.');
@@ -296,7 +296,7 @@
                     }
                 }
             }
-            if (this.s.type.includes('num') && this.s.dt.pAge.info().serverSide) {
+            if (this.s.type.includes('num') && this.s.dt.page.info().serverSide) {
                 for (var i = 0; i < this.s.value.length; i++) {
                     this.s.value[i] = this.s.value[i].replace(/[^0-9.]/g, '');
                 }
@@ -672,7 +672,7 @@
                     .addClass(this.classes.italic);
                 this.dom.conditionTitle
                     .prop('selected', true);
-                var decimal = this.s.dt.settings()[0].oLanguAge.sDecimal;
+                var decimal = this.s.dt.settings()[0].oLanguage.sDecimal;
                 // This check is in place for if a custom decimal character is in place
                 if (decimal !== '' && this.s.type.indexOf(decimal) === this.s.type.length - decimal.length) {
                     if (this.s.type.includes('num-fmt')) {
@@ -703,7 +703,7 @@
                     if (conditionObj[condition] !== null) {
                         // Serverside processing does not supply the options for the select elements
                         // Instead input elements need to be used for these instead
-                        if (this.s.dt.pAge.info().serverSide && conditionObj[condition].init === Criteria.initSelect) {
+                        if (this.s.dt.page.info().serverSide && conditionObj[condition].init === Criteria.initSelect) {
                             conditionObj[condition].init = Criteria.initInput;
                             conditionObj[condition].inputValue = Criteria.inputValueInput;
                             conditionObj[condition].isInputValid = Criteria.isInputValidInput;
@@ -898,7 +898,7 @@
             if (prevFilled !== this.s.filled) {
                 // If using SSP we want to restrict the amount of server calls that take place
                 //  and this will already have taken place
-                if (!this.s.dt.pAge.info().serverSide) {
+                if (!this.s.dt.page.info().serverSide) {
                     this.s.dt.draw();
                 }
                 this.setListeners();
@@ -1409,15 +1409,15 @@
                 }
                 // Otherwise replace the decimal place character for i18n
                 else if (that.s.type.includes('num') &&
-                    (that.s.dt.settings()[0].oLanguAge.sDecimal !== '' ||
-                        that.s.dt.settings()[0].oLanguAge.sThousands !== '')) {
+                    (that.s.dt.settings()[0].oLanguage.sDecimal !== '' ||
+                        that.s.dt.settings()[0].oLanguage.sThousands !== '')) {
                     var splitRD = [that.s.value[i].toString()];
-                    if (that.s.dt.settings()[0].oLanguAge.sDecimal !== '') {
-                        splitRD = that.s.value[i].split(that.s.dt.settings()[0].oLanguAge.sDecimal);
+                    if (that.s.dt.settings()[0].oLanguage.sDecimal !== '') {
+                        splitRD = that.s.value[i].split(that.s.dt.settings()[0].oLanguage.sDecimal);
                     }
-                    if (that.s.dt.settings()[0].oLanguAge.sThousands !== '') {
+                    if (that.s.dt.settings()[0].oLanguage.sThousands !== '') {
                         for (var j = 0; j < splitRD.length; j++) {
-                            splitRD[j] = splitRD[j].replace(that.s.dt.settings()[0].oLanguAge.sThousands, ',');
+                            splitRD[j] = splitRD[j].replace(that.s.dt.settings()[0].oLanguage.sThousands, ',');
                         }
                     }
                     that.s.value[i] = splitRD.join('.');
@@ -2650,7 +2650,7 @@
             return true;
         };
         /**
-         * Locates the groups logic button to the correct location on the pAge
+         * Locates the groups logic button to the correct location on the page
          */
         Group.prototype.setupLogic = function () {
             // Remove logic button
@@ -3201,7 +3201,7 @@
             }
             table.settings()[0]._searchBuilder = this;
             // If using SSP we want to include the previous state in the very first server call
-            if (this.s.dt.pAge.info().serverSide) {
+            if (this.s.dt.page.info().serverSide) {
                 this.s.dt.on('preXhr.dtsb', function (e, settings, data) {
                     var loadedState = _this.s.dt.state.loaded();
                     if (loadedState && loadedState.searchBuilder) {
@@ -3336,14 +3336,14 @@
             this._setClearListener();
             this.s.dt.on('stateSaveParams.dtsb', function (e, settings, data) {
                 data.searchBuilder = _this.getDetails();
-                data.pAge = _this.s.dt.pAge();
+                data.page = _this.s.dt.page();
             });
             this.s.dt.on('stateLoadParams.dtsb', function (e, settings, data) {
                 _this.rebuild(data.searchBuilder);
             });
             this._build();
             this.s.dt.on('preXhr.dtsb', function (e, settings, data) {
-                if (_this.s.dt.pAge.info().serverSide) {
+                if (_this.s.dt.page.info().serverSide) {
                     data.searchBuilder = _this._collapseArray(_this.getDetails(true));
                 }
             });
@@ -3358,8 +3358,8 @@
                     this.s.topGroup.dom.container.trigger('dtsb-redrawContents');
                     // If using SSP we want to restrict the amount of server calls that take place
                     //  and this information will already have been processed
-                    if (!this.s.dt.pAge.info().serverSide) {
-                        this.s.dt.pAge(loadedState.pAge).draw('pAge');
+                    if (!this.s.dt.page.info().serverSide) {
+                        this.s.dt.page(loadedState.page).draw('page');
                     }
                     this.s.topGroup.setListeners();
                 }
@@ -3504,7 +3504,7 @@
                 _this._filterChanged(count);
                 // If using SSP we want to restrict the amount of server calls that take place
                 //  and this information will already have been processed
-                if (!_this.s.dt.pAge.info().serverSide) {
+                if (!_this.s.dt.page.info().serverSide) {
                     _this.s.dt.draw();
                 }
                 _this.s.dt.state.save();

@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: bn_BD (Bengali, Bangladesh)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "এই তথ্যটি আবশ্যক।",
 	remote: "এই তথ্যটি ঠিক করুন।",
 	email: "অনুগ্রহ করে একটি সঠিক মেইল ঠিকানা লিখুন।",

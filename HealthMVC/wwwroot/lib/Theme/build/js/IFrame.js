@@ -421,7 +421,7 @@ class IFrame {
       }
 
       const _options = $.extend({}, Default, typeof config === 'object' ? config : data)
-      localStorAge.setItem('AdminLTE:IFrame:Options', JSON.stringify(_options))
+      localStorage.setItem('AdminLTE:IFrame:Options', JSON.stringify(_options))
 
       const plugin = new IFrame($(this), _options)
 
@@ -431,7 +431,7 @@ class IFrame {
         plugin[config]()
       }
     } else {
-      new IFrame($(this), JSON.parse(localStorAge.getItem('AdminLTE:IFrame:Options')))._initFrameElement()
+      new IFrame($(this), JSON.parse(localStorage.getItem('AdminLTE:IFrame:Options')))._initFrameElement()
     }
   }
 }

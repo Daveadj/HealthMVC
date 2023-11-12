@@ -14,13 +14,13 @@
         SORT_ORDER_ASC = "asc",
         SORT_ORDER_DESC = "desc",
 
-        FIRST_PAge_PLACEHOLDER = "{first}",
-        PAgeS_PLACEHOLDER = "{pAges}",
-        PREV_PAge_PLACEHOLDER = "{prev}",
-        NEXT_PAge_PLACEHOLDER = "{next}",
-        LAST_PAge_PLACEHOLDER = "{last}",
-        PAge_INDEX_PLACEHOLDER = "{pAgeIndex}",
-        PAge_COUNT_PLACEHOLDER = "{pAgeCount}",
+        FIRST_PAGE_PLACEHOLDER = "{first}",
+        PAGES_PLACEHOLDER = "{pages}",
+        PREV_PAGE_PLACEHOLDER = "{prev}",
+        NEXT_PAGE_PLACEHOLDER = "{next}",
+        LAST_PAGE_PLACEHOLDER = "{last}",
+        PAGE_INDEX_PLACEHOLDER = "{pageIndex}",
+        PAGE_COUNT_PLACEHOLDER = "{pageCount}",
         ITEM_COUNT_PLACEHOLDER = "{itemCount}",
 
         EMPTY_HREF = "javascript:void(0);";
@@ -69,7 +69,7 @@
         this._editingRow = null;
         this._sortField = null;
         this._sortOrder = SORT_ORDER_ASC;
-        this._firstDisplayingPAge = 1;
+        this._firstDisplayingPage = 1;
 
         this._init(config);
         this.render();
@@ -125,49 +125,49 @@
         sortDescClass: "jsgrid-header-sort jsgrid-header-sort-desc",
 
         paging: false,
-        pAgerContainer: null,
-        pAgeIndex: 1,
-        pAgeSize: 20,
-        pAgeButtonCount: 15,
-        pAgerFormat: "PAges: {first} {prev} {pAges} {next} {last} &nbsp;&nbsp; {pAgeIndex} of {pAgeCount}",
-        pAgePrevText: "Prev",
-        pAgeNextText: "Next",
-        pAgeFirstText: "First",
-        pAgeLastText: "Last",
-        pAgeNavigatorNextText: "...",
-        pAgeNavigatorPrevText: "...",
-        pAgerContainerClass: "jsgrid-pAger-container",
-        pAgerClass: "jsgrid-pAger",
-        pAgerNavButtonClass: "jsgrid-pAger-nav-button",
-        pAgerNavButtonInactiveClass: "jsgrid-pAger-nav-inactive-button",
-        pAgeClass: "jsgrid-pAger-pAge",
-        currentPAgeClass: "jsgrid-pAger-current-pAge",
+        pagerContainer: null,
+        pageIndex: 1,
+        pageSize: 20,
+        pageButtonCount: 15,
+        pagerFormat: "Pages: {first} {prev} {pages} {next} {last} &nbsp;&nbsp; {pageIndex} of {pageCount}",
+        pagePrevText: "Prev",
+        pageNextText: "Next",
+        pageFirstText: "First",
+        pageLastText: "Last",
+        pageNavigatorNextText: "...",
+        pageNavigatorPrevText: "...",
+        pagerContainerClass: "jsgrid-pager-container",
+        pagerClass: "jsgrid-pager",
+        pagerNavButtonClass: "jsgrid-pager-nav-button",
+        pagerNavButtonInactiveClass: "jsgrid-pager-nav-inactive-button",
+        pageClass: "jsgrid-pager-page",
+        currentPageClass: "jsgrid-pager-current-page",
 
         customLoading: false,
-        pAgeLoading: false,
+        pageLoading: false,
 
         autoload: false,
         controller: defaultController,
 
         loadIndication: true,
         loadIndicationDelay: 500,
-        loadMessAge: "Please, wait...",
+        loadMessage: "Please, wait...",
         loadShading: true,
 
-        invalidMessAge: "Invalid data entered!",
+        invalidMessage: "Invalid data entered!",
 
         invalidNotify: function(args) {
-            var messAges = $.map(args.errors, function(error) {
-                return error.messAge || null;
+            var messages = $.map(args.errors, function(error) {
+                return error.message || null;
             });
 
-            window.alert([this.invalidMessAge].concat(messAges).join("\n"));
+            window.alert([this.invalidMessage].concat(messages).join("\n"));
         },
 
         onInit: $.noop,
         onRefreshing: $.noop,
         onRefreshed: $.noop,
-        onPAgeChanged: $.noop,
+        onPageChanged: $.noop,
         onItemDeleting: $.noop,
         onItemDeleted: $.noop,
         onItemInserting: $.noop,
@@ -200,8 +200,8 @@
         },
 
         loadStrategy: function() {
-            return this.pAgeLoading
-                ? new jsGrid.loadStrategies.PAgeLoadingStrategy(this)
+            return this.pageLoading
+                ? new jsGrid.loadStrategies.PageLoadingStrategy(this)
                 : new jsGrid.loadStrategies.DirectLoadingStrategy(this);
         },
 
@@ -312,20 +312,20 @@
                 case "evenRowClass":
                     this._refreshContent();
                     break;
-                case "pAgeButtonCount":
-                case "pAgerFormat":
-                case "pAgePrevText":
-                case "pAgeNextText":
-                case "pAgeFirstText":
-                case "pAgeLastText":
-                case "pAgeNavigatorNextText":
-                case "pAgeNavigatorPrevText":
-                case "pAgerClass":
-                case "pAgerNavButtonClass":
-                case "pAgeClass":
-                case "currentPAgeClass":
-                case "pAgerRenderer":
-                    this._refreshPAger();
+                case "pageButtonCount":
+                case "pagerFormat":
+                case "pagePrevText":
+                case "pageNextText":
+                case "pageFirstText":
+                case "pageLastText":
+                case "pageNavigatorNextText":
+                case "pageNavigatorPrevText":
+                case "pagerClass":
+                case "pagerNavButtonClass":
+                case "pageClass":
+                case "currentPageClass":
+                case "pagerRenderer":
+                    this._refreshPager();
                     break;
                 case "fields":
                     this._initFields();
@@ -340,14 +340,14 @@
                     this.refresh();
                     break;
                 case "loadStrategy":
-                case "pAgeLoading":
+                case "pageLoading":
                     this._initLoadStrategy();
                     this.search();
                     break;
-                case "pAgeIndex":
-                    this.openPAge(value);
+                case "pageIndex":
+                    this.openPage(value);
                     break;
-                case "pAgeSize":
+                case "pageSize":
                     this.refresh();
                     this.search();
                     break;
@@ -360,7 +360,7 @@
                     this._attachWindowResizeCallback();
                     break;
                 case "invalidNotify":
-                case "invalidMessAge":
+                case "invalidMessage":
                     break;
                 default:
                     this.render();
@@ -387,7 +387,7 @@
                 .append(this._createHeader())
                 .append(this._createBody());
 
-            this._pAgerContainer = this._createPAgerContainer();
+            this._pagerContainer = this._createPagerContainer();
             this._loadIndicator = this._createLoadIndicator();
             this._validation = this._createValidation();
 
@@ -396,7 +396,7 @@
 
         _createLoadIndicator: function() {
             return getOrApply(this.loadIndicator, this, {
-                messAge: this.loadMessAge,
+                message: this.loadMessage,
                 shading: this.loadShading,
                 container: this._container
             });
@@ -411,7 +411,7 @@
 
             clearTimeout(this._loadingTimer);
 
-            this._pAgerContainer && this._pAgerContainer.empty();
+            this._pagerContainer && this._pagerContainer.empty();
 
             this._container.empty()
                 .css({ position: "", width: "", height: "" });
@@ -449,9 +449,9 @@
             return $body;
         },
 
-        _createPAgerContainer: function() {
-            var pAgerContainer = this.pAgerContainer || $("<div>").appendTo(this._container);
-            return $(pAgerContainer).addClass(this.pAgerContainerClass);
+        _createPagerContainer: function() {
+            var pagerContainer = this.pagerContainer || $("<div>").appendTo(this._container);
+            return $(pagerContainer).addClass(this.pagerContainerClass);
         },
 
         _eachField: function(callBack) {
@@ -532,13 +532,13 @@
 
         reset: function() {
             this._resetSorting();
-            this._resetPAger();
+            this._resetPager();
             return this._loadStrategy.reset();
         },
 
-        _resetPAger: function() {
-            this._firstDisplayingPAge = 1;
-            this._setPAge(1);
+        _resetPager: function() {
+            this._firstDisplayingPage = 1;
+            this._setPage(1);
         },
 
         _resetSorting: function() {
@@ -556,7 +556,7 @@
             this._refreshFiltering();
             this._refreshInserting();
             this._refreshContent();
-            this._refreshPAger();
+            this._refreshPager();
             this._refreshSize();
 
             this._callEventHandler(this.onRefreshed);
@@ -782,65 +782,65 @@
             return this._loadStrategy.itemsCount();
         },
 
-        _pAgesCount: function() {
+        _pagesCount: function() {
             var itemsCount = this._itemsCount(),
-                pAgeSize = this.pAgeSize;
-            return Math.floor(itemsCount / pAgeSize) + (itemsCount % pAgeSize ? 1 : 0);
+                pageSize = this.pageSize;
+            return Math.floor(itemsCount / pageSize) + (itemsCount % pageSize ? 1 : 0);
         },
 
-        _refreshPAger: function() {
-            var $pAgerContainer = this._pAgerContainer;
-            $pAgerContainer.empty();
+        _refreshPager: function() {
+            var $pagerContainer = this._pagerContainer;
+            $pagerContainer.empty();
 
             if(this.paging) {
-                $pAgerContainer.append(this._createPAger());
+                $pagerContainer.append(this._createPager());
             }
 
-            var showPAger = this.paging && this._pAgesCount() > 1;
-            $pAgerContainer.toggle(showPAger);
+            var showPager = this.paging && this._pagesCount() > 1;
+            $pagerContainer.toggle(showPager);
         },
 
-        _createPAger: function() {
+        _createPager: function() {
             var $result;
 
-            if($.isFunction(this.pAgerRenderer)) {
-                $result = $(this.pAgerRenderer({
-                    pAgeIndex: this.pAgeIndex,
-                    pAgeCount: this._pAgesCount()
+            if($.isFunction(this.pagerRenderer)) {
+                $result = $(this.pagerRenderer({
+                    pageIndex: this.pageIndex,
+                    pageCount: this._pagesCount()
                 }));
             } else {
-                $result = $("<div>").append(this._createPAgerByFormat());
+                $result = $("<div>").append(this._createPagerByFormat());
             }
 
-            $result.addClass(this.pAgerClass);
+            $result.addClass(this.pagerClass);
 
             return $result;
         },
 
-        _createPAgerByFormat: function() {
-            var pAgeIndex = this.pAgeIndex,
-                pAgeCount = this._pAgesCount(),
+        _createPagerByFormat: function() {
+            var pageIndex = this.pageIndex,
+                pageCount = this._pagesCount(),
                 itemCount = this._itemsCount(),
-                pAgerParts = this.pAgerFormat.split(" ");
+                pagerParts = this.pagerFormat.split(" ");
 
-            return $.map(pAgerParts, $.proxy(function(pAgerPart) {
-                var result = pAgerPart;
+            return $.map(pagerParts, $.proxy(function(pagerPart) {
+                var result = pagerPart;
 
-                if(pAgerPart === PAgeS_PLACEHOLDER) {
-                    result = this._createPAges();
-                } else if(pAgerPart === FIRST_PAge_PLACEHOLDER) {
-                    result = this._createPAgerNavButton(this.pAgeFirstText, 1, pAgeIndex > 1);
-                } else if(pAgerPart === PREV_PAge_PLACEHOLDER) {
-                    result = this._createPAgerNavButton(this.pAgePrevText, pAgeIndex - 1, pAgeIndex > 1);
-                } else if(pAgerPart === NEXT_PAge_PLACEHOLDER) {
-                    result = this._createPAgerNavButton(this.pAgeNextText, pAgeIndex + 1, pAgeIndex < pAgeCount);
-                } else if(pAgerPart === LAST_PAge_PLACEHOLDER) {
-                    result = this._createPAgerNavButton(this.pAgeLastText, pAgeCount, pAgeIndex < pAgeCount);
-                } else if(pAgerPart === PAge_INDEX_PLACEHOLDER) {
-                    result = pAgeIndex;
-                } else if(pAgerPart === PAge_COUNT_PLACEHOLDER) {
-                    result = pAgeCount;
-                } else if(pAgerPart === ITEM_COUNT_PLACEHOLDER) {
+                if(pagerPart === PAGES_PLACEHOLDER) {
+                    result = this._createPages();
+                } else if(pagerPart === FIRST_PAGE_PLACEHOLDER) {
+                    result = this._createPagerNavButton(this.pageFirstText, 1, pageIndex > 1);
+                } else if(pagerPart === PREV_PAGE_PLACEHOLDER) {
+                    result = this._createPagerNavButton(this.pagePrevText, pageIndex - 1, pageIndex > 1);
+                } else if(pagerPart === NEXT_PAGE_PLACEHOLDER) {
+                    result = this._createPagerNavButton(this.pageNextText, pageIndex + 1, pageIndex < pageCount);
+                } else if(pagerPart === LAST_PAGE_PLACEHOLDER) {
+                    result = this._createPagerNavButton(this.pageLastText, pageCount, pageIndex < pageCount);
+                } else if(pagerPart === PAGE_INDEX_PLACEHOLDER) {
+                    result = pageIndex;
+                } else if(pagerPart === PAGE_COUNT_PLACEHOLDER) {
+                    result = pageCount;
+                } else if(pagerPart === ITEM_COUNT_PLACEHOLDER) {
                     result = itemCount;
                 }
 
@@ -848,45 +848,45 @@
             }, this));
         },
 
-        _createPAges: function() {
-            var pAgeCount = this._pAgesCount(),
-                pAgeButtonCount = this.pAgeButtonCount,
-                firstDisplayingPAge = this._firstDisplayingPAge,
-                pAges = [];
+        _createPages: function() {
+            var pageCount = this._pagesCount(),
+                pageButtonCount = this.pageButtonCount,
+                firstDisplayingPage = this._firstDisplayingPage,
+                pages = [];
 
-            if(firstDisplayingPAge > 1) {
-                pAges.push(this._createPAgerPAgeNavButton(this.pAgeNavigatorPrevText, this.showPrevPAges));
+            if(firstDisplayingPage > 1) {
+                pages.push(this._createPagerPageNavButton(this.pageNavigatorPrevText, this.showPrevPages));
             }
 
-            for(var i = 0, pAgeNumber = firstDisplayingPAge; i < pAgeButtonCount && pAgeNumber <= pAgeCount; i++, pAgeNumber++) {
-                pAges.push(pAgeNumber === this.pAgeIndex
-                    ? this._createPAgerCurrentPAge()
-                    : this._createPAgerPAge(pAgeNumber));
+            for(var i = 0, pageNumber = firstDisplayingPage; i < pageButtonCount && pageNumber <= pageCount; i++, pageNumber++) {
+                pages.push(pageNumber === this.pageIndex
+                    ? this._createPagerCurrentPage()
+                    : this._createPagerPage(pageNumber));
             }
 
-            if((firstDisplayingPAge + pAgeButtonCount - 1) < pAgeCount) {
-                pAges.push(this._createPAgerPAgeNavButton(this.pAgeNavigatorNextText, this.showNextPAges));
+            if((firstDisplayingPage + pageButtonCount - 1) < pageCount) {
+                pages.push(this._createPagerPageNavButton(this.pageNavigatorNextText, this.showNextPages));
             }
 
-            return pAges;
+            return pages;
         },
 
-        _createPAgerNavButton: function(text, pAgeIndex, isActive) {
-            return this._createPAgerButton(text, this.pAgerNavButtonClass + (isActive ? "" : " " + this.pAgerNavButtonInactiveClass),
-                isActive ? function() { this.openPAge(pAgeIndex); } : $.noop);
+        _createPagerNavButton: function(text, pageIndex, isActive) {
+            return this._createPagerButton(text, this.pagerNavButtonClass + (isActive ? "" : " " + this.pagerNavButtonInactiveClass),
+                isActive ? function() { this.openPage(pageIndex); } : $.noop);
         },
 
-        _createPAgerPAgeNavButton: function(text, handler) {
-            return this._createPAgerButton(text, this.pAgerNavButtonClass, handler);
+        _createPagerPageNavButton: function(text, handler) {
+            return this._createPagerButton(text, this.pagerNavButtonClass, handler);
         },
 
-        _createPAgerPAge: function(pAgeIndex) {
-            return this._createPAgerButton(pAgeIndex, this.pAgeClass, function() {
-                this.openPAge(pAgeIndex);
+        _createPagerPage: function(pageIndex) {
+            return this._createPagerButton(pageIndex, this.pageClass, function() {
+                this.openPage(pageIndex);
             });
         },
 
-        _createPAgerButton: function(text, css, handler) {
+        _createPagerButton: function(text, css, handler) {
             var $link = $("<a>").attr("href", EMPTY_HREF)
                 .html(text)
                 .on("click", $.proxy(handler, this));
@@ -894,11 +894,11 @@
             return $("<span>").addClass(css).append($link);
         },
 
-        _createPAgerCurrentPAge: function() {
+        _createPagerCurrentPage: function() {
             return $("<span>")
-                .addClass(this.pAgeClass)
-                .addClass(this.currentPAgeClass)
-                .text(this.pAgeIndex);
+                .addClass(this.pageClass)
+                .addClass(this.currentPageClass)
+                .text(this.pageIndex);
         },
 
         _refreshSize: function() {
@@ -946,7 +946,7 @@
 
         _refreshHeight: function() {
             var container = this._container,
-                pAgerContainer = this._pAgerContainer,
+                pagerContainer = this._pagerContainer,
                 height = this.height,
                 nonBodyHeight;
 
@@ -956,59 +956,59 @@
                 height = container.height();
 
                 nonBodyHeight = this._header.outerHeight(true);
-                if(pAgerContainer.parents(container).length) {
-                    nonBodyHeight += pAgerContainer.outerHeight(true);
+                if(pagerContainer.parents(container).length) {
+                    nonBodyHeight += pagerContainer.outerHeight(true);
                 }
 
                 this._body.outerHeight(height - nonBodyHeight);
             }
         },
 
-        showPrevPAges: function() {
-            var firstDisplayingPAge = this._firstDisplayingPAge,
-                pAgeButtonCount = this.pAgeButtonCount;
+        showPrevPages: function() {
+            var firstDisplayingPage = this._firstDisplayingPage,
+                pageButtonCount = this.pageButtonCount;
 
-            this._firstDisplayingPAge = (firstDisplayingPAge > pAgeButtonCount) ? firstDisplayingPAge - pAgeButtonCount : 1;
+            this._firstDisplayingPage = (firstDisplayingPage > pageButtonCount) ? firstDisplayingPage - pageButtonCount : 1;
 
-            this._refreshPAger();
+            this._refreshPager();
         },
 
-        showNextPAges: function() {
-            var firstDisplayingPAge = this._firstDisplayingPAge,
-                pAgeButtonCount = this.pAgeButtonCount,
-                pAgeCount = this._pAgesCount();
+        showNextPages: function() {
+            var firstDisplayingPage = this._firstDisplayingPage,
+                pageButtonCount = this.pageButtonCount,
+                pageCount = this._pagesCount();
 
-            this._firstDisplayingPAge = (firstDisplayingPAge + 2 * pAgeButtonCount > pAgeCount)
-                ? pAgeCount - pAgeButtonCount + 1
-                : firstDisplayingPAge + pAgeButtonCount;
+            this._firstDisplayingPage = (firstDisplayingPage + 2 * pageButtonCount > pageCount)
+                ? pageCount - pageButtonCount + 1
+                : firstDisplayingPage + pageButtonCount;
 
-            this._refreshPAger();
+            this._refreshPager();
         },
 
-        openPAge: function(pAgeIndex) {
-            if(pAgeIndex < 1 || pAgeIndex > this._pAgesCount())
+        openPage: function(pageIndex) {
+            if(pageIndex < 1 || pageIndex > this._pagesCount())
                 return;
 
-            this._setPAge(pAgeIndex);
-            this._loadStrategy.openPAge(pAgeIndex);
+            this._setPage(pageIndex);
+            this._loadStrategy.openPage(pageIndex);
         },
 
-        _setPAge: function(pAgeIndex) {
-            var firstDisplayingPAge = this._firstDisplayingPAge,
-                pAgeButtonCount = this.pAgeButtonCount;
+        _setPage: function(pageIndex) {
+            var firstDisplayingPage = this._firstDisplayingPage,
+                pageButtonCount = this.pageButtonCount;
 
-            this.pAgeIndex = pAgeIndex;
+            this.pageIndex = pageIndex;
 
-            if(pAgeIndex < firstDisplayingPAge) {
-                this._firstDisplayingPAge = pAgeIndex;
+            if(pageIndex < firstDisplayingPage) {
+                this._firstDisplayingPage = pageIndex;
             }
 
-            if(pAgeIndex > firstDisplayingPAge + pAgeButtonCount - 1) {
-                this._firstDisplayingPAge = pAgeIndex - pAgeButtonCount + 1;
+            if(pageIndex > firstDisplayingPage + pageButtonCount - 1) {
+                this._firstDisplayingPage = pageIndex - pageButtonCount + 1;
             }
 
-            this._callEventHandler(this.onPAgeChanged, {
-                pAgeIndex: pAgeIndex
+            this._callEventHandler(this.onPageChanged, {
+                pageIndex: pageIndex
             });
         },
 
@@ -1056,7 +1056,7 @@
 
         search: function(filter) {
             this._resetSorting();
-            this._resetPAger();
+            this._resetPager();
             return this.loadData(filter);
         },
 
@@ -1179,8 +1179,8 @@
                     return;
 
                 validationErrors.push.apply(validationErrors,
-                    $.map(errors, function(messAge) {
-                        return { field: field, messAge: messAge };
+                    $.map(errors, function(message) {
+                        return { field: field, message: message };
                     }));
             });
 
@@ -1481,7 +1481,7 @@
     LoadIndicator.prototype = {
 
         container: "body",
-        messAge: "Loading...",
+        message: "Loading...",
         shading: true,
 
         zIndex: 1000,
@@ -1519,7 +1519,7 @@
 
         _initLoadPanel: function() {
             this._loadPanel = $("<div>").addClass(this.loadPanelClass)
-                .text(this.messAge)
+                .text(this.message)
                 .hide()
                 .css({
                     position: "absolute",
@@ -1565,7 +1565,7 @@
 
         firstDisplayIndex: function() {
             var grid = this._grid;
-            return grid.option("paging") ? (grid.option("pAgeIndex") - 1) * grid.option("pAgeSize") : 0;
+            return grid.option("paging") ? (grid.option("pageIndex") - 1) * grid.option("pageSize") : 0;
         },
 
         lastDisplayIndex: function() {
@@ -1573,7 +1573,7 @@
             var itemsCount = grid.option("data").length;
 
             return grid.option("paging")
-                ? Math.min(grid.option("pAgeIndex") * grid.option("pAgeSize"), itemsCount)
+                ? Math.min(grid.option("pageIndex") * grid.option("pageSize"), itemsCount)
                 : itemsCount;
         },
 
@@ -1581,7 +1581,7 @@
             return this._grid.option("data").length;
         },
 
-        openPAge: function(index) {
+        openPage: function(index) {
             this._grid.refresh();
         },
 
@@ -1618,12 +1618,12 @@
     };
 
 
-    function PAgeLoadingStrategy(grid) {
+    function PageLoadingStrategy(grid) {
         this._grid = grid;
         this._itemsCount = 0;
     }
 
-    PAgeLoadingStrategy.prototype = {
+    PageLoadingStrategy.prototype = {
 
         firstDisplayIndex: function() {
             return 0;
@@ -1637,15 +1637,15 @@
             return this._itemsCount;
         },
 
-        openPAge: function(index) {
+        openPage: function(index) {
             this._grid.loadData();
         },
 
         loadParams: function() {
             var grid = this._grid;
             return {
-                pAgeIndex: grid.option("pAgeIndex"),
-                pAgeSize: grid.option("pAgeSize")
+                pageIndex: grid.option("pageIndex"),
+                pageSize: grid.option("pageSize")
             };
         },
 
@@ -1673,7 +1673,7 @@
 
     jsGrid.loadStrategies = {
         DirectLoadingStrategy: DirectLoadingStrategy,
-        PAgeLoadingStrategy: PAgeLoadingStrategy
+        PageLoadingStrategy: PageLoadingStrategy
     };
 
 }(jsGrid, jQuery));
@@ -1734,8 +1734,8 @@
                 if(rule.validator(args.value, args.item, rule.param))
                     return;
 
-                var errorMessAge = $.isFunction(rule.messAge) ? rule.messAge(args.value, args.item) : rule.messAge;
-                errors.push(errorMessAge);
+                var errorMessage = $.isFunction(rule.message) ? rule.message(args.value, args.item) : rule.message;
+                errors.push(errorMessage);
             });
 
             return errors;
@@ -1788,35 +1788,35 @@
 
     var validators = {
         required: {
-            messAge: "Field is required",
+            message: "Field is required",
             validator: function(value) {
                 return value !== undefined && value !== null && value !== "";
             }
         },
 
         rangeLength: {
-            messAge: "Field value length is out of the defined range",
+            message: "Field value length is out of the defined range",
             validator: function(value, _, param) {
                 return value.length >= param[0] && value.length <= param[1];
             }
         },
 
         minLength: {
-            messAge: "Field value is too short",
+            message: "Field value is too short",
             validator: function(value, _, param) {
                 return value.length >= param;
             }
         },
 
         maxLength: {
-            messAge: "Field value is too long",
+            message: "Field value is too long",
             validator: function(value, _, param) {
                 return value.length <= param;
             }
         },
 
         pattern: {
-            messAge: "Field value is not matching the defined pattern",
+            message: "Field value is not matching the defined pattern",
             validator: function(value, _, param) {
                 if(typeof param === "string") {
                     param = new RegExp("^(?:" + param + ")$");
@@ -1826,21 +1826,21 @@
         },
 
         range: {
-            messAge: "Field value is out of the defined range",
+            message: "Field value is out of the defined range",
             validator: function(value, _, param) {
                 return value >= param[0] && value <= param[1];
             }
         },
 
         min: {
-            messAge: "Field value is too small",
+            message: "Field value is too small",
             validator: function(value, _, param) {
                 return value >= param;
             }
         },
 
         max: {
-            messAge: "Field value is too large",
+            message: "Field value is too large",
             validator: function(value, _, param) {
                 return value <= param;
             }

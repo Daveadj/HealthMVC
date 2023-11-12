@@ -208,13 +208,13 @@ CodeMirror.defineMode("perl",function(){
                 '$^A'                           :    5,
                 '$FORMAT_FORMFEED'              :    5,
                 '$^L'                           :    5,
-                '$FORMAT_PAge_NUMBER'           :    5,
+                '$FORMAT_PAGE_NUMBER'           :    5,
                 '$%'                            :    5,
                 '$FORMAT_LINES_LEFT'            :    5,
                 '$-'                            :    5,
                 '$FORMAT_LINE_BREAK_CHARACTERS' :    5,
                 '$:'                            :    5,
-                '$FORMAT_LINES_PER_PAge'        :    5,
+                '$FORMAT_LINES_PER_PAGE'        :    5,
                 '$='                            :    5,
                 '$FORMAT_TOP_NAME'              :    5,
                 '$^'                            :    5,
@@ -357,10 +357,10 @@ CodeMirror.defineMode("perl",function(){
                 m                               :null,  // - match a string with a regular expression pattern
                 map                             :1,     // - apply a change to a list to get back a new list with the changes
                 mkdir                           :1,     // - create a directory
-                msgctl                          :1,     // - SysV IPC messAge control operations
-                msgget                          :1,     // - get SysV IPC messAge queue
-                msgrcv                          :1,     // - receive a SysV IPC messAge from a messAge queue
-                msgsnd                          :1,     // - send a SysV IPC messAge to a messAge queue
+                msgctl                          :1,     // - SysV IPC message control operations
+                msgget                          :1,     // - get SysV IPC message queue
+                msgrcv                          :1,     // - receive a SysV IPC message from a message queue
+                msgsnd                          :1,     // - send a SysV IPC message to a message queue
                 my                              : 2,    // - declare and assign a local variable (lexical scoping)
                 'new'                           :1,     //
                 next                            :1,     // - iterate a block prematurely
@@ -369,9 +369,9 @@ CodeMirror.defineMode("perl",function(){
                 open                            :1,     // - open a file, pipe, or descriptor
                 opendir                         :1,     // - open a directory
                 ord                             :1,     // - find a character's numeric representation
-                our                             : 2,    // - declare and assign a packAge variable (lexical scoping)
+                our                             : 2,    // - declare and assign a package variable (lexical scoping)
                 pack                            :1,     // - convert a list into a binary representation
-                'packAge'                       :1,     // - declare a separate global namespace
+                'package'                       :1,     // - declare a separate global namespace
                 pipe                            :1,     // - open a pair of connected filehandles
                 pop                             :1,     // - remove the last element from an array and return it
                 pos                             :1,     // - find or set the offset for the last/next m//g search
@@ -391,7 +391,7 @@ CodeMirror.defineMode("perl",function(){
                 readline                        :1,     // - fetch a record from a file
                 readlink                        :1,     // - determine where a symbolic link is pointing
                 readpipe                        :1,     // - execute a system command and collect standard output
-                recv                            :1,     // - receive a messAge over a Socket
+                recv                            :1,     // - receive a message over a Socket
                 redo                            :1,     // - start this loop iteration over again
                 ref                             :1,     // - find out the type of thing being referenced
                 rename                          :1,     // - change a filename
@@ -411,7 +411,7 @@ CodeMirror.defineMode("perl",function(){
                 semctl                          :1,     // - SysV semaphore control operations
                 semget                          :1,     // - get set of SysV semaphores
                 semop                           :1,     // - SysV semaphore operations
-                send                            :1,     // - send a messAge over a socket
+                send                            :1,     // - send a message over a socket
                 setgrent                        :1,     // - prepare group file for use
                 sethostent                      :1,     // - prepare hosts file for use
                 setnetent                       :1,     // - prepare networks file for use

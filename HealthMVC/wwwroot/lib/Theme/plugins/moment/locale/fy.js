@@ -64,7 +64,7 @@
             h: 'ien oere',
             hh: '%d oeren',
             d: 'ien dei',
-            dd: '%d dAgen',
+            dd: '%d dagen',
             M: 'ien moanne',
             MM: '%d moannen',
             y: 'ien jier',

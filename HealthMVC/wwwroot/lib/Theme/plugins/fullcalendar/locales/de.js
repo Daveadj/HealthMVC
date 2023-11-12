@@ -45,7 +45,7 @@ FullCalendar.globalLocales.push(function () {
       },
     },
     viewHint(buttonText) {
-      // → TAgesansicht, Wochenansicht, Monatsansicht, Jahresansicht
+      // → Tagesansicht, Wochenansicht, Monatsansicht, Jahresansicht
       const glue = buttonText === 'Woche' ? 'n' : buttonText === 'Monat' ? 's' : 'es';
       return buttonText + glue + 'ansicht'
     },

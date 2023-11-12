@@ -4,17 +4,17 @@
         grid: {
             noDataContent: "Nie znaleziono",
             deleteConfirm: "Czy jesteś pewien?",
-            pAgerFormat: "Strony: {first} {prev} {pAges} {next} {last} &nbsp;&nbsp; {pAgeIndex} z {pAgeCount}",
-            pAgePrevText: "Poprzednia",
-            pAgeNextText: "Następna",
-            pAgeFirstText: "Pierwsza",
-            pAgeLastText: "Ostatnia",
-            loadMessAge: "Proszę czekać...",
-            invalidMessAge: "Wprowadzono nieprawidłowe dane!"
+            pagerFormat: "Strony: {first} {prev} {pages} {next} {last} &nbsp;&nbsp; {pageIndex} z {pageCount}",
+            pagePrevText: "Poprzednia",
+            pageNextText: "Następna",
+            pageFirstText: "Pierwsza",
+            pageLastText: "Ostatnia",
+            loadMessage: "Proszę czekać...",
+            invalidMessage: "Wprowadzono nieprawidłowe dane!"
         },
 
         loadIndicator: {
-            messAge: "Ładowanie..."
+            message: "Ładowanie..."
         },
 
         fields: {
@@ -33,28 +33,28 @@
 
         validators: {
             required: {
-                messAge: "Pole jest wymagane"
+                message: "Pole jest wymagane"
             },
             rangeLength: {
-                messAge: "Długość wartości pola znajduje się poza zdefiniowanym zakresem"
+                message: "Długość wartości pola znajduje się poza zdefiniowanym zakresem"
             },
             minLength: {
-                messAge: "Wartość pola jest zbyt krótka"
+                message: "Wartość pola jest zbyt krótka"
             },
             maxLength: {
-                messAge: "Wartość pola jest zbyt długa"
+                message: "Wartość pola jest zbyt długa"
             },
             pattern: {
-                messAge: "Wartość pola nie zgadza się ze zdefiniowanym wzorem"
+                message: "Wartość pola nie zgadza się ze zdefiniowanym wzorem"
             },
             range: {
-                messAge: "Wartość pola znajduje się poza zdefiniowanym zakresem"
+                message: "Wartość pola znajduje się poza zdefiniowanym zakresem"
             },
             min: {
-                messAge: "Wartość pola jest zbyt mała"
+                message: "Wartość pola jest zbyt mała"
             },
             max: {
-                messAge: "Wartość pola jest zbyt duża"
+                message: "Wartość pola jest zbyt duża"
             }
         }
     };

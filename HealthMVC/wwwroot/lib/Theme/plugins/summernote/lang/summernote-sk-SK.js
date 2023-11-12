@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Superscript',
         size: 'Veľkosť písma'
       },
-      imAge: {
-        imAge: 'Obrázok',
+      image: {
+        image: 'Obrázok',
         insert: 'Vložiť obrázok',
         resizeFull: 'Pôvodná veľkosť',
         resizeHalf: 'Polovičná veľkosť',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Tvar: Kruh',
         shapeThumbnail: 'Tvar: Náhľad',
         shapeNone: 'Tvar: Žiadne',
-        dragImAgeHere: 'Pretiahnuť sem obrázok',
-        dropImAge: 'Pretiahnuť sem obrázok alebo text',
+        dragImageHere: 'Pretiahnuť sem obrázok',
+        dropImage: 'Pretiahnuť sem obrázok alebo text',
         selectFromFiles: 'Vybrať súbor',
         maximumFileSize: 'Maximálna veľkosť súboru',
         maximumFileSizeError: 'Maximálna veľkosť súboru bola prekročená.',

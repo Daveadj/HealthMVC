@@ -19,7 +19,7 @@
 //   to documents before passing them on to Tern.
 // * switchToDoc: A function(name, doc) that should, when providing a
 //   multi-file view, switch the view or focus to the named file.
-// * showError: A function(editor, messAge) that can be used to
+// * showError: A function(editor, message) that can be used to
 //   override the way errors are displayed.
 // * completionTip: Customize the content in tooltips for completions.
 //   Is passed a single argument—the completion's data as returned by
@@ -230,8 +230,8 @@
         remove(tooltip);
         var content = ts.options.completionTip ? ts.options.completionTip(cur.data) : cur.data.doc;
         if (content) {
-          tooltip = makeTooltip(node.parentNode.getBoundingClientRect().right + window.pAgeXOffset,
-                                node.getBoundingClientRect().top + window.pAgeYOffset, content, cm, cls + "hint-doc");
+          tooltip = makeTooltip(node.parentNode.getBoundingClientRect().right + window.pageXOffset,
+                                node.getBoundingClientRect().top + window.pageYOffset, content, cm, cls + "hint-doc");
         }
       });
       c(obj);
@@ -332,7 +332,7 @@
     }
     tip.appendChild(document.createTextNode(tp.rettype ? ") ->\u00a0" : ")"));
     if (tp.rettype) tip.appendChild(elt("span", cls + "type", tp.rettype));
-    var place = cm.cursorCoords(null, "pAge");
+    var place = cm.cursorCoords(null, "page");
     var tooltip = ts.activeArgHints = makeTooltip(place.right + 1, place.bottom, tip, cm)
     setTimeout(function() {
       tooltip.clear = onEditorActivity(cm, function() {
@@ -712,7 +712,7 @@
 
   function WorkerServer(ts) {
     var worker = ts.worker = new Worker(ts.options.workerScript);
-    worker.postMessAge({type: "init",
+    worker.postMessage({type: "init",
                         defs: ts.options.defs,
                         plugins: ts.options.plugins,
                         scripts: ts.options.workerDeps});
@@ -723,16 +723,16 @@
         data.id = ++msgId;
         pending[msgId] = c;
       }
-      worker.postMessAge(data);
+      worker.postMessage(data);
     }
-    worker.onmessAge = function(e) {
+    worker.onmessage = function(e) {
       var data = e.data;
       if (data.type == "getFile") {
         getFile(ts, data.name, function(err, text) {
           send({type: "getFile", err: String(err), text: text, id: data.id});
         });
       } else if (data.type == "debug") {
-        window.console.log(data.messAge);
+        window.console.log(data.message);
       } else if (data.id && pending[data.id]) {
         pending[data.id](data.err, data.body);
         delete pending[data.id];

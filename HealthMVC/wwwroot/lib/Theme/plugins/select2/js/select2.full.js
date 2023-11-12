@@ -37,7 +37,7 @@
   // returns the AMD loader references.
   var S2 =(function () {
   // Restore the Select2 AMD loader so it can be used
-  // Needed mostly in the languAge files, where the loader is not inserted
+  // Needed mostly in the language files, where the loader is not inserted
   if (jQuery && jQuery.fn && jQuery.fn.select2 && jQuery.fn.select2.amd) {
     var S2 = jQuery.fn.select2.amd;
   }
@@ -429,7 +429,7 @@ var requirejs, require, define;
         } else {
             //Using a non-zero value because of concern for what old browsers
             //do, and latest browsers "upgrade" to 4 if lower value is used:
-            //http://www.whatwg.org/specs/web-apps/current-work/multipAge/timers.html#dom-windowtimers-settimeout:
+            //http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html#dom-windowtimers-settimeout:
             //If want a value immediately, use require('id') instead -- something
             //that works in almond on the global level, but not guaranteed and
             //unlikely to work in other AMD implementations.
@@ -491,7 +491,7 @@ S2.define('jquery',[],function () {
     console.error(
       'Select2: An instance of jQuery or a jQuery-compatible library was not ' +
       'found. Make sure that you are including jQuery before Select2 on your ' +
-      'web pAge.'
+      'web page.'
     );
   }
 
@@ -871,32 +871,32 @@ S2.define('select2/results',[
     this.$results.empty();
   };
 
-  Results.prototype.displayMessAge = function (params) {
+  Results.prototype.displayMessage = function (params) {
     var escapeMarkup = this.options.get('escapeMarkup');
 
     this.clear();
     this.hideLoading();
 
-    var $messAge = $(
+    var $message = $(
       '<li role="alert" aria-live="assertive"' +
       ' class="select2-results__option"></li>'
     );
 
-    var messAge = this.options.get('translations').get(params.messAge);
+    var message = this.options.get('translations').get(params.message);
 
-    $messAge.append(
+    $message.append(
       escapeMarkup(
-        messAge(params.args)
+        message(params.args)
       )
     );
 
-    $messAge[0].className += ' select2-results__messAge';
+    $message[0].className += ' select2-results__message';
 
-    this.$results.append($messAge);
+    this.$results.append($message);
   };
 
-  Results.prototype.hideMessAges = function () {
-    this.$results.find('.select2-results__messAge').remove();
+  Results.prototype.hideMessages = function () {
+    this.$results.find('.select2-results__message').remove();
   };
 
   Results.prototype.append = function (data) {
@@ -906,8 +906,8 @@ S2.define('select2/results',[
 
     if (data.results == null || data.results.length === 0) {
       if (this.$results.children().length === 0) {
-        this.trigger('results:messAge', {
-          messAge: 'noResults'
+        this.trigger('results:message', {
+          message: 'noResults'
         });
       }
 
@@ -1112,7 +1112,7 @@ S2.define('select2/results',[
     });
 
     container.on('query', function (params) {
-      self.hideMessAges();
+      self.hideMessages();
       self.showLoading(params);
     });
 
@@ -1253,8 +1253,8 @@ S2.define('select2/results',[
       params.element.addClass('select2-results__option--highlighted');
     });
 
-    container.on('results:messAge', function (params) {
-      self.displayMessAge(params);
+    container.on('results:message', function (params) {
+      self.displayMessage(params);
     });
 
     if ($.fn.mousewheel) {
@@ -1387,8 +1387,8 @@ S2.define('select2/keys',[
     ALT: 18,
     ESC: 27,
     SPACE: 32,
-    PAge_UP: 33,
-    PAge_DOWN: 34,
+    PAGE_UP: 33,
+    PAGE_DOWN: 34,
     END: 35,
     HOME: 36,
     LEFT: 37,
@@ -2077,7 +2077,7 @@ S2.define('select2/selection/search',[
 
     // Try to detect the IE version should the `documentMode` property that
     // is stored on the document. This is only implemented in IE and is
-    // slightly cleaner than doing a user Agent check.
+    // slightly cleaner than doing a user agent check.
     // This property is not available in Edge, but Edge also doesn't have
     // this bug.
     var msie = document.documentMode;
@@ -3643,8 +3643,8 @@ S2.define('select2/data/ajax',[
           return;
         }
 
-        self.trigger('results:messAge', {
-          messAge: 'errorLoading'
+        self.trigger('results:message', {
+          message: 'errorLoading'
         });
       });
 
@@ -3702,7 +3702,7 @@ S2.define('select2/data/tags',[
 
     this._removeOldTags();
 
-    if (params.term == null || params.pAge != null) {
+    if (params.term == null || params.page != null) {
       decorated.call(this, params, callback);
       return;
     }
@@ -3922,8 +3922,8 @@ S2.define('select2/data/minimumInputLength',[
     params.term = params.term || '';
 
     if (params.term.length < this.minimumInputLength) {
-      this.trigger('results:messAge', {
-        messAge: 'inputTooShort',
+      this.trigger('results:message', {
+        message: 'inputTooShort',
         args: {
           minimum: this.minimumInputLength,
           input: params.term,
@@ -3954,8 +3954,8 @@ S2.define('select2/data/maximumInputLength',[
 
     if (this.maximumInputLength > 0 &&
         params.term.length > this.maximumInputLength) {
-      this.trigger('results:messAge', {
-        messAge: 'inputTooLong',
+      this.trigger('results:message', {
+        message: 'inputTooLong',
         args: {
           maximum: this.maximumInputLength,
           input: params.term,
@@ -4009,8 +4009,8 @@ S2.define('select2/data/maximumSelectionLength',[
         var count = currentData != null ? currentData.length : 0;
         if (self.maximumSelectionLength > 0 &&
           count >= self.maximumSelectionLength) {
-          self.trigger('results:messAge', {
-            messAge: 'maximumSelected',
+          self.trigger('results:message', {
+            message: 'maximumSelected',
             args: {
               maximum: self.maximumSelectionLength
             }
@@ -4294,9 +4294,9 @@ S2.define('select2/dropdown/infiniteScroll',[
   InfiniteScroll.prototype.loadMore = function () {
     this.loading = true;
 
-    var params = $.extend({}, {pAge: 1}, this.lastParams);
+    var params = $.extend({}, {page: 1}, this.lastParams);
 
-    params.pAge++;
+    params.page++;
 
     this.trigger('query:append', params);
   };
@@ -4312,9 +4312,9 @@ S2.define('select2/dropdown/infiniteScroll',[
       'role="option" aria-disabled="true"></li>'
     );
 
-    var messAge = this.options.get('translations').get('loadingMore');
+    var message = this.options.get('translations').get('loadingMore');
 
-    $option.html(messAge(this.lastParams));
+    $option.html(message(this.lastParams));
 
     return $option;
   };
@@ -4411,7 +4411,7 @@ S2.define('select2/dropdown/attachBody',[
       self._resizeDropdown();
     });
 
-    container.on('results:messAge', function () {
+    container.on('results:message', function () {
       self._positionDropdown();
       self._resizeDropdown();
     });
@@ -4716,32 +4716,32 @@ S2.define('select2/i18n/en',[],function () {
     inputTooLong: function (args) {
       var overChars = args.input.length - args.maximum;
 
-      var messAge = 'Please delete ' + overChars + ' character';
+      var message = 'Please delete ' + overChars + ' character';
 
       if (overChars != 1) {
-        messAge += 's';
+        message += 's';
       }
 
-      return messAge;
+      return message;
     },
     inputTooShort: function (args) {
       var remainingChars = args.minimum - args.input.length;
 
-      var messAge = 'Please enter ' + remainingChars + ' or more characters';
+      var message = 'Please enter ' + remainingChars + ' or more characters';
 
-      return messAge;
+      return message;
     },
     loadingMore: function () {
       return 'Loading more results…';
     },
     maximumSelected: function (args) {
-      var messAge = 'You can only select ' + args.maximum + ' item';
+      var message = 'You can only select ' + args.maximum + ' item';
 
       if (args.maximum != 1) {
-        messAge += 's';
+        message += 's';
       }
 
-      return messAge;
+      return message;
     },
     noResults: function () {
       return 'No results found';
@@ -4990,26 +4990,26 @@ S2.define('select2/defaults',[
     }
 
     // If the defaults were not previously applied from an element, it is
-    // possible for the languAge option to have not been resolved
-    options.languAge = this._resolveLanguAge(options.languAge);
+    // possible for the language option to have not been resolved
+    options.language = this._resolveLanguage(options.language);
 
     // Always fall back to English since it will always be complete
-    options.languAge.push('en');
+    options.language.push('en');
 
-    var uniqueLanguAges = [];
+    var uniqueLanguages = [];
 
-    for (var l = 0; l < options.languAge.length; l++) {
-      var languAge = options.languAge[l];
+    for (var l = 0; l < options.language.length; l++) {
+      var language = options.language[l];
 
-      if (uniqueLanguAges.indexOf(languAge) === -1) {
-        uniqueLanguAges.push(languAge);
+      if (uniqueLanguages.indexOf(language) === -1) {
+        uniqueLanguages.push(language);
       }
     }
 
-    options.languAge = uniqueLanguAges;
+    options.language = uniqueLanguages;
 
     options.translations = this._processTranslations(
-      options.languAge,
+      options.language,
       options.debug
     );
 
@@ -5073,12 +5073,12 @@ S2.define('select2/defaults',[
 
     this.defaults = {
       amdBase: './',
-      amdLanguAgeBase: './i18n/',
+      amdLanguageBase: './i18n/',
       closeOnSelect: true,
       debug: false,
       dropdownAutoWidth: false,
       escapeMarkup: Utils.escapeMarkup,
-      languAge: {},
+      language: {},
       matcher: matcher,
       minimumInputLength: 0,
       maximumInputLength: 0,
@@ -5101,97 +5101,97 @@ S2.define('select2/defaults',[
   };
 
   Defaults.prototype.applyFromElement = function (options, $element) {
-    var optionLanguAge = options.languAge;
-    var defaultLanguAge = this.defaults.languAge;
-    var elementLanguAge = $element.prop('lang');
-    var parentLanguAge = $element.closest('[lang]').prop('lang');
+    var optionLanguage = options.language;
+    var defaultLanguage = this.defaults.language;
+    var elementLanguage = $element.prop('lang');
+    var parentLanguage = $element.closest('[lang]').prop('lang');
 
-    var languAges = Array.prototype.concat.call(
-      this._resolveLanguAge(elementLanguAge),
-      this._resolveLanguAge(optionLanguAge),
-      this._resolveLanguAge(defaultLanguAge),
-      this._resolveLanguAge(parentLanguAge)
+    var languages = Array.prototype.concat.call(
+      this._resolveLanguage(elementLanguage),
+      this._resolveLanguage(optionLanguage),
+      this._resolveLanguage(defaultLanguage),
+      this._resolveLanguage(parentLanguage)
     );
 
-    options.languAge = languAges;
+    options.language = languages;
 
     return options;
   };
 
-  Defaults.prototype._resolveLanguAge = function (languAge) {
-    if (!languAge) {
+  Defaults.prototype._resolveLanguage = function (language) {
+    if (!language) {
       return [];
     }
 
-    if ($.isEmptyObject(languAge)) {
+    if ($.isEmptyObject(language)) {
       return [];
     }
 
-    if ($.isPlainObject(languAge)) {
-      return [languAge];
+    if ($.isPlainObject(language)) {
+      return [language];
     }
 
-    var languAges;
+    var languages;
 
-    if (!$.isArray(languAge)) {
-      languAges = [languAge];
+    if (!$.isArray(language)) {
+      languages = [language];
     } else {
-      languAges = languAge;
+      languages = language;
     }
 
-    var resolvedLanguAges = [];
+    var resolvedLanguages = [];
 
-    for (var l = 0; l < languAges.length; l++) {
-      resolvedLanguAges.push(languAges[l]);
+    for (var l = 0; l < languages.length; l++) {
+      resolvedLanguages.push(languages[l]);
 
-      if (typeof languAges[l] === 'string' && languAges[l].indexOf('-') > 0) {
+      if (typeof languages[l] === 'string' && languages[l].indexOf('-') > 0) {
         // Extract the region information if it is included
-        var languAgeParts = languAges[l].split('-');
-        var baseLanguAge = languAgeParts[0];
+        var languageParts = languages[l].split('-');
+        var baseLanguage = languageParts[0];
 
-        resolvedLanguAges.push(baseLanguAge);
+        resolvedLanguages.push(baseLanguage);
       }
     }
 
-    return resolvedLanguAges;
+    return resolvedLanguages;
   };
 
-  Defaults.prototype._processTranslations = function (languAges, debug) {
+  Defaults.prototype._processTranslations = function (languages, debug) {
     var translations = new Translation();
 
-    for (var l = 0; l < languAges.length; l++) {
-      var languAgeData = new Translation();
+    for (var l = 0; l < languages.length; l++) {
+      var languageData = new Translation();
 
-      var languAge = languAges[l];
+      var language = languages[l];
 
-      if (typeof languAge === 'string') {
+      if (typeof language === 'string') {
         try {
           // Try to load it with the original name
-          languAgeData = Translation.loadPath(languAge);
+          languageData = Translation.loadPath(language);
         } catch (e) {
           try {
             // If we couldn't load it, check if it wasn't the full path
-            languAge = this.defaults.amdLanguAgeBase + languAge;
-            languAgeData = Translation.loadPath(languAge);
+            language = this.defaults.amdLanguageBase + language;
+            languageData = Translation.loadPath(language);
           } catch (ex) {
             // The translation could not be loaded at all. Sometimes this is
             // because of a configuration problem, other times this can be
             // because of how Select2 helps load all possible translation files
             if (debug && window.console && console.warn) {
               console.warn(
-                'Select2: The languAge file for "' + languAge + '" could ' +
+                'Select2: The language file for "' + language + '" could ' +
                 'not be automatically loaded. A fallback will be used instead.'
               );
             }
           }
         }
-      } else if ($.isPlainObject(languAge)) {
-        languAgeData = new Translation(languAge);
+      } else if ($.isPlainObject(language)) {
+        languageData = new Translation(language);
       } else {
-        languAgeData = languAge;
+        languageData = language;
       }
 
-      translations.extend(languAgeData);
+      translations.extend(languageData);
     }
 
     return translations;
@@ -6562,9 +6562,9 @@ S2.define('select2/selection/stopPropagation',[
             } else {
                 this.onmousewheel = handler;
             }
-            // Store the line height and pAge height for this particular element
+            // Store the line height and page height for this particular element
             $.data(this, 'mousewheel-line-height', special.getLineHeight(this));
-            $.data(this, 'mousewheel-pAge-height', special.getPAgeHeight(this));
+            $.data(this, 'mousewheel-page-height', special.getPageHeight(this));
         },
 
         teardown: function() {
@@ -6577,7 +6577,7 @@ S2.define('select2/selection/stopPropagation',[
             }
             // Clean up the data we added to the element
             $.removeData(this, 'mousewheel-line-height');
-            $.removeData(this, 'mousewheel-pAge-height');
+            $.removeData(this, 'mousewheel-page-height');
         },
 
         getLineHeight: function(elem) {
@@ -6589,7 +6589,7 @@ S2.define('select2/selection/stopPropagation',[
             return parseInt($parent.css('fontSize'), 10) || parseInt($elem.css('fontSize'), 10) || 16;
         },
 
-        getPAgeHeight: function(elem) {
+        getPageHeight: function(elem) {
             return $(elem).height();
         },
 
@@ -6650,21 +6650,21 @@ S2.define('select2/selection/stopPropagation',[
         // No change actually happened, no reason to go any further
         if ( deltaY === 0 && deltaX === 0 ) { return; }
 
-        // Need to convert lines and pAges to pixels if we aren't already in pixels
+        // Need to convert lines and pages to pixels if we aren't already in pixels
         // There are three delta modes:
         //   * deltaMode 0 is by pixels, nothing to do
         //   * deltaMode 1 is by lines
-        //   * deltaMode 2 is by pAges
+        //   * deltaMode 2 is by pages
         if ( orgEvent.deltaMode === 1 ) {
             var lineHeight = $.data(this, 'mousewheel-line-height');
             delta  *= lineHeight;
             deltaY *= lineHeight;
             deltaX *= lineHeight;
         } else if ( orgEvent.deltaMode === 2 ) {
-            var pAgeHeight = $.data(this, 'mousewheel-pAge-height');
-            delta  *= pAgeHeight;
-            deltaY *= pAgeHeight;
-            deltaX *= pAgeHeight;
+            var pageHeight = $.data(this, 'mousewheel-page-height');
+            delta  *= pageHeight;
+            deltaY *= pageHeight;
+            deltaX *= pageHeight;
         }
 
         // Store lowest absolute delta to normalize the delta values
@@ -6812,7 +6812,7 @@ S2.define('jquery.select2',[
 
   // Hold the AMD module references on the jQuery function that was just loaded
   // This allows Select2 to use the internal loader outside of this file, such
-  // as in the languAge files.
+  // as in the language files.
   jQuery.fn.select2.amd = S2;
 
   // Return the Select2 instance for anyone who is importing it.

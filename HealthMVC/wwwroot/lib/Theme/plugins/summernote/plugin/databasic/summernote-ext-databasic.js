@@ -44,21 +44,21 @@
     context.memo('button.databasicSize100', function() {
       return ui.button({
         contents: '<span class="note-fontsize-10">100%</span>',
-        tooltip: lang.imAge.resizeFull,
+        tooltip: lang.image.resizeFull,
         click: context.createInvokeHandler('editor.resize', '1'),
       }).render();
     });
     context.memo('button.databasicSize50', function() {
       return ui.button({
         contents: '<span class="note-fontsize-10">50%</span>',
-        tooltip: lang.imAge.resizeHalf,
+        tooltip: lang.image.resizeHalf,
         click: context.createInvokeHandler('editor.resize', '0.5'),
       }).render();
     });
     context.memo('button.databasicSize25', function() {
       return ui.button({
         contents: '<span class="note-fontsize-10">25%</span>',
-        tooltip: lang.imAge.resizeQuarter,
+        tooltip: lang.image.resizeQuarter,
         click: context.createInvokeHandler('editor.resize', '0.25'),
       }).render();
     });

@@ -48,9 +48,9 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default().extend((jquery__WEBPACK_IMPORTED_M
       size: 'Font Size',
       sizeunit: 'Font Size Unit'
     },
-    imAge: {
-      imAge: 'Picture',
-      insert: 'Insert ImAge',
+    image: {
+      image: 'Picture',
+      insert: 'Insert Image',
       resizeFull: 'Resize full',
       resizeHalf: 'Resize half',
       resizeQuarter: 'Resize quarter',
@@ -62,13 +62,13 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default().extend((jquery__WEBPACK_IMPORTED_M
       shapeCircle: 'Shape: Circle',
       shapeThumbnail: 'Shape: Thumbnail',
       shapeNone: 'Shape: None',
-      dragImAgeHere: 'Drag imAge or text here',
-      dropImAge: 'Drop imAge or Text',
+      dragImageHere: 'Drag image or text here',
+      dropImage: 'Drop image or Text',
       selectFromFiles: 'Select from files',
       maximumFileSize: 'Maximum file size',
       maximumFileSizeError: 'Maximum file size exceeded.',
-      url: 'ImAge URL',
-      remove: 'Remove ImAge',
+      url: 'Image URL',
+      remove: 'Remove Image',
       original: 'Original'
     },
     video: {
@@ -337,7 +337,7 @@ var inputEventName = isMSIE ? 'DOMCharacterDataModified DOMSubtreeModified DOMNo
 /**
  * @class core.env
  *
- * Object which check platform and Agent
+ * Object which check platform and agent
  *
  * @singleton
  * @alternateClassName env
@@ -3431,8 +3431,8 @@ var KEY_MAP = {
   // Navigation
   'HOME': 36,
   'END': 35,
-  'PAgeUP': 33,
-  'PAgeDOWN': 34
+  'PAGEUP': 33,
+  'PAGEDOWN': 34
 };
 /**
  * @class core.key
@@ -3471,7 +3471,7 @@ var KEY_MAP = {
    * @return {Boolean}
    */
   isNavigation: function isNavigation(keyCode) {
-    return lists.contains([KEY_MAP.HOME, KEY_MAP.END, KEY_MAP.PAgeUP, KEY_MAP.PAgeDOWN], keyCode);
+    return lists.contains([KEY_MAP.HOME, KEY_MAP.END, KEY_MAP.PAGEUP, KEY_MAP.PAGEDOWN], keyCode);
   },
 
   /**
@@ -3506,15 +3506,15 @@ function readFileAsDataURL(file) {
   }).promise();
 }
 /**
- * @method createImAge
+ * @method createImage
  *
- * create `<imAge>` from url string
+ * create `<image>` from url string
  *
  * @param {String} url
- * @return {Promise} - then: $imAge
+ * @return {Promise} - then: $image
  */
 
-function createImAge(url) {
+function createImage(url) {
   return external_jQuery_default().Deferred(function (deferred) {
     var $img = external_jQuery_default()('<img>');
     $img.one('load', function () {
@@ -5814,7 +5814,7 @@ var Editor = /*#__PURE__*/function () {
       };
     }
     /**
-     * insert imAge
+     * insert image
      *
      * @param {String} src
      * @param {String|Function} param
@@ -5822,72 +5822,72 @@ var Editor = /*#__PURE__*/function () {
      */
 
   }, {
-    key: "insertImAge",
-    value: function insertImAge(src, param) {
+    key: "insertImage",
+    value: function insertImage(src, param) {
       var _this3 = this;
 
-      return createImAge(src, param).then(function ($imAge) {
+      return createImage(src, param).then(function ($image) {
         _this3.beforeCommand();
 
         if (typeof param === 'function') {
-          param($imAge);
+          param($image);
         } else {
           if (typeof param === 'string') {
-            $imAge.attr('data-filename', param);
+            $image.attr('data-filename', param);
           }
 
-          $imAge.css('width', Math.min(_this3.$editable.width(), $imAge.width()));
+          $image.css('width', Math.min(_this3.$editable.width(), $image.width()));
         }
 
-        $imAge.show();
+        $image.show();
 
-        _this3.getLastRange().insertNode($imAge[0]);
+        _this3.getLastRange().insertNode($image[0]);
 
-        _this3.setLastRange(range.createFromNodeAfter($imAge[0]).select());
+        _this3.setLastRange(range.createFromNodeAfter($image[0]).select());
 
         _this3.afterCommand();
       }).fail(function (e) {
-        _this3.context.triggerEvent('imAge.upload.error', e);
+        _this3.context.triggerEvent('image.upload.error', e);
       });
     }
     /**
-     * insertImAges
+     * insertImages
      * @param {File[]} files
      */
 
   }, {
-    key: "insertImAgesAsDataURL",
-    value: function insertImAgesAsDataURL(files) {
+    key: "insertImagesAsDataURL",
+    value: function insertImagesAsDataURL(files) {
       var _this4 = this;
 
       external_jQuery_default().each(files, function (idx, file) {
         var filename = file.name;
 
-        if (_this4.options.maximumImAgeFileSize && _this4.options.maximumImAgeFileSize < file.size) {
-          _this4.context.triggerEvent('imAge.upload.error', _this4.lang.imAge.maximumFileSizeError);
+        if (_this4.options.maximumImageFileSize && _this4.options.maximumImageFileSize < file.size) {
+          _this4.context.triggerEvent('image.upload.error', _this4.lang.image.maximumFileSizeError);
         } else {
           readFileAsDataURL(file).then(function (dataURL) {
-            return _this4.insertImAge(dataURL, filename);
+            return _this4.insertImage(dataURL, filename);
           }).fail(function () {
-            _this4.context.triggerEvent('imAge.upload.error');
+            _this4.context.triggerEvent('image.upload.error');
           });
         }
       });
     }
     /**
-     * insertImAgesOrCallback
+     * insertImagesOrCallback
      * @param {File[]} files
      */
 
   }, {
-    key: "insertImAgesOrCallback",
-    value: function insertImAgesOrCallback(files) {
-      var callbacks = this.options.callbacks; // If onImAgeUpload set,
+    key: "insertImagesOrCallback",
+    value: function insertImagesOrCallback(files) {
+      var callbacks = this.options.callbacks; // If onImageUpload set,
 
-      if (callbacks.onImAgeUpload) {
-        this.context.triggerEvent('imAge.upload', files); // else insert ImAge as dataURL
+      if (callbacks.onImageUpload) {
+        this.context.triggerEvent('image.upload', files); // else insert Image as dataURL
       } else {
-        this.insertImAgesAsDataURL(files);
+        this.insertImagesAsDataURL(files);
       }
     }
     /**
@@ -6081,23 +6081,23 @@ var Editor = /*#__PURE__*/function () {
   }, {
     key: "resizeTo",
     value: function resizeTo(pos, $target, bKeepRatio) {
-      var imAgeSize;
+      var imageSize;
 
       if (bKeepRatio) {
         var newRatio = pos.y / pos.x;
         var ratio = $target.data('ratio');
-        imAgeSize = {
+        imageSize = {
           width: ratio > newRatio ? pos.x : pos.y / ratio,
           height: ratio > newRatio ? pos.x * ratio : pos.y
         };
       } else {
-        imAgeSize = {
+        imageSize = {
           width: pos.x,
           height: pos.y
         };
       }
 
-      $target.css(imAgeSize);
+      $target.css(imageSize);
     }
     /**
      * returns whether editable area has focus or not.
@@ -6115,7 +6115,7 @@ var Editor = /*#__PURE__*/function () {
   }, {
     key: "focus",
     value: function focus() {
-      // [workaround] Screen will move when pAge is scolled in IE.
+      // [workaround] Screen will move when page is scolled in IE.
       //  - do focus when not focused
       if (!this.hasFocus()) {
         this.$editable.focus();
@@ -6193,9 +6193,9 @@ var Clipboard = /*#__PURE__*/function () {
       if (clipboardData && clipboardData.items && clipboardData.items.length) {
         var item = clipboardData.items.length > 1 ? clipboardData.items[1] : lists.head(clipboardData.items);
 
-        if (item.kind === 'file' && item.type.indexOf('imAge/') !== -1) {
+        if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
           // paste img file
-          this.context.invoke('editor.insertImAgesOrCallback', [item.getAsFile()]);
+          this.context.invoke('editor.insertImagesOrCallback', [item.getAsFile()]);
           event.preventDefault();
         } else if (item.kind === 'string') {
           // paste text with maxTextLength check
@@ -6243,7 +6243,7 @@ var Dropzone = /*#__PURE__*/function () {
     this.options = context.options;
     this.lang = this.options.langInfo;
     this.documentEventHandlers = {};
-    this.$dropzone = external_jQuery_default()(['<div class="note-dropzone">', '<div class="note-dropzone-messAge"></div>', '</div>'].join('')).prependTo(this.$editor);
+    this.$dropzone = external_jQuery_default()(['<div class="note-dropzone">', '<div class="note-dropzone-message"></div>', '</div>'].join('')).prependTo(this.$editor);
   }
   /**
    * attach Drag and Drop Events
@@ -6276,9 +6276,9 @@ var Dropzone = /*#__PURE__*/function () {
       var _this = this;
 
       var collection = external_jQuery_default()();
-      var $dropzoneMessAge = this.$dropzone.find('.note-dropzone-messAge');
+      var $dropzoneMessage = this.$dropzone.find('.note-dropzone-message');
 
-      this.documentEventHandlers.onDrAgenter = function (e) {
+      this.documentEventHandlers.onDragenter = function (e) {
         var isCodeview = _this.context.invoke('codeview.isActivated');
 
         var hasEditorSize = _this.$editor.width() > 0 && _this.$editor.height() > 0;
@@ -6290,7 +6290,7 @@ var Dropzone = /*#__PURE__*/function () {
 
           _this.$dropzone.height(_this.$editor.height());
 
-          $dropzoneMessAge.text(_this.lang.imAge.dragImAgeHere);
+          $dropzoneMessage.text(_this.lang.image.dragImageHere);
         }
 
         collection = collection.add(e.target);
@@ -6310,21 +6310,21 @@ var Dropzone = /*#__PURE__*/function () {
         collection = external_jQuery_default()();
 
         _this.$editor.removeClass('dragover');
-      }; // show dropzone on drAgenter when dragging a object to document
+      }; // show dropzone on dragenter when dragging a object to document
       // -but only if the editor is visible, i.e. has a positive width and height
 
 
-      this.$eventListener.on('drAgenter', this.documentEventHandlers.onDrAgenter).on('dragleave', this.documentEventHandlers.onDragleave).on('drop', this.documentEventHandlers.onDrop); // change dropzone's messAge on hover.
+      this.$eventListener.on('dragenter', this.documentEventHandlers.onDragenter).on('dragleave', this.documentEventHandlers.onDragleave).on('drop', this.documentEventHandlers.onDrop); // change dropzone's message on hover.
 
-      this.$dropzone.on('drAgenter', function () {
+      this.$dropzone.on('dragenter', function () {
         _this.$dropzone.addClass('hover');
 
-        $dropzoneMessAge.text(_this.lang.imAge.dropImAge);
+        $dropzoneMessage.text(_this.lang.image.dropImage);
       }).on('dragleave', function () {
         _this.$dropzone.removeClass('hover');
 
-        $dropzoneMessAge.text(_this.lang.imAge.dragImAgeHere);
-      }); // attach dropImAge
+        $dropzoneMessage.text(_this.lang.image.dragImageHere);
+      }); // attach dropImage
 
       this.$dropzone.on('drop', function (event) {
         var dataTransfer = event.originalEvent.dataTransfer; // stop the browser from opening the dropped content
@@ -6334,7 +6334,7 @@ var Dropzone = /*#__PURE__*/function () {
         if (dataTransfer && dataTransfer.files && dataTransfer.files.length) {
           _this.$editable.focus();
 
-          _this.context.invoke('editor.insertImAgesOrCallback', dataTransfer.files);
+          _this.context.invoke('editor.insertImagesOrCallback', dataTransfer.files);
         } else {
           external_jQuery_default().each(dataTransfer.types, function (idx, type) {
             // skip moz-specific types
@@ -6791,7 +6791,7 @@ var Handle = /*#__PURE__*/function () {
     value: function initialize() {
       var _this2 = this;
 
-      this.$handle = external_jQuery_default()(['<div class="note-handle">', '<div class="note-control-selection">', '<div class="note-control-selection-bg"></div>', '<div class="note-control-holder note-control-nw"></div>', '<div class="note-control-holder note-control-ne"></div>', '<div class="note-control-holder note-control-sw"></div>', '<div class="', this.options.disableResizeImAge ? 'note-control-holder' : 'note-control-sizing', ' note-control-se"></div>', this.options.disableResizeImAge ? '' : '<div class="note-control-selection-info"></div>', '</div>', '</div>'].join('')).prependTo(this.$editingArea);
+      this.$handle = external_jQuery_default()(['<div class="note-handle">', '<div class="note-control-selection">', '<div class="note-control-selection-bg"></div>', '<div class="note-control-holder note-control-nw"></div>', '<div class="note-control-holder note-control-ne"></div>', '<div class="note-control-holder note-control-sw"></div>', '<div class="', this.options.disableResizeImage ? 'note-control-holder' : 'note-control-sizing', ' note-control-se"></div>', this.options.disableResizeImage ? '' : '<div class="note-control-selection-info"></div>', '</div>', '</div>'].join('')).prependTo(this.$editingArea);
       this.$handle.on('mousedown', function (event) {
         if (dom.isControlSizing(event.target)) {
           event.preventDefault();
@@ -6845,40 +6845,40 @@ var Handle = /*#__PURE__*/function () {
         return false;
       }
 
-      var isImAge = dom.isImg(target);
+      var isImage = dom.isImg(target);
       var $selection = this.$handle.find('.note-control-selection');
-      this.context.invoke('imAgePopover.update', target, event);
+      this.context.invoke('imagePopover.update', target, event);
 
-      if (isImAge) {
-        var $imAge = external_jQuery_default()(target);
-        var position = $imAge.position();
+      if (isImage) {
+        var $image = external_jQuery_default()(target);
+        var position = $image.position();
         var pos = {
-          left: position.left + parseInt($imAge.css('marginLeft'), 10),
-          top: position.top + parseInt($imAge.css('marginTop'), 10)
+          left: position.left + parseInt($image.css('marginLeft'), 10),
+          top: position.top + parseInt($image.css('marginTop'), 10)
         }; // exclude margin
 
-        var imAgeSize = {
-          w: $imAge.outerWidth(false),
-          h: $imAge.outerHeight(false)
+        var imageSize = {
+          w: $image.outerWidth(false),
+          h: $image.outerHeight(false)
         };
         $selection.css({
           display: 'block',
           left: pos.left,
           top: pos.top,
-          width: imAgeSize.w,
-          height: imAgeSize.h
-        }).data('target', $imAge); // save current imAge element.
+          width: imageSize.w,
+          height: imageSize.h
+        }).data('target', $image); // save current image element.
 
-        var origImAgeObj = new ImAge();
-        origImAgeObj.src = $imAge.attr('src');
-        var sizingText = imAgeSize.w + 'x' + imAgeSize.h + ' (' + this.lang.imAge.original + ': ' + origImAgeObj.width + 'x' + origImAgeObj.height + ')';
+        var origImageObj = new Image();
+        origImageObj.src = $image.attr('src');
+        var sizingText = imageSize.w + 'x' + imageSize.h + ' (' + this.lang.image.original + ': ' + origImageObj.width + 'x' + origImageObj.height + ')';
         $selection.find('.note-control-selection-info').text(sizingText);
         this.context.invoke('editor.saveTarget', target);
       } else {
         this.hide();
       }
 
-      return isImAge;
+      return isImage;
     }
     /**
      * hide
@@ -7250,7 +7250,7 @@ var Buttons = /*#__PURE__*/function () {
     key: "initialize",
     value: function initialize() {
       this.addToolbarButtons();
-      this.addImAgePopoverButtons();
+      this.addImagePopoverButtons();
       this.addLinkPopoverButtons();
       this.addTablePopoverButtons();
       this.fontInstalledMap = {};
@@ -7691,8 +7691,8 @@ var Buttons = /*#__PURE__*/function () {
       this.context.memo('button.picture', function () {
         return _this2.button({
           contents: _this2.ui.icon(_this2.options.icons.picture),
-          tooltip: _this2.lang.imAge.imAge,
-          click: _this2.context.createInvokeHandler('imAgeDialog.show')
+          tooltip: _this2.lang.image.image,
+          click: _this2.context.createInvokeHandler('imageDialog.show')
         }).render();
       });
       this.context.memo('button.video', function () {
@@ -7748,44 +7748,44 @@ var Buttons = /*#__PURE__*/function () {
       });
     }
     /**
-     * imAge: [
-     *   ['imAgeResize', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+     * image: [
+     *   ['imageResize', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
      *   ['float', ['floatLeft', 'floatRight', 'floatNone']],
      *   ['remove', ['removeMedia']],
      * ],
      */
 
   }, {
-    key: "addImAgePopoverButtons",
-    value: function addImAgePopoverButtons() {
+    key: "addImagePopoverButtons",
+    value: function addImagePopoverButtons() {
       var _this3 = this;
 
-      // ImAge Size Buttons
+      // Image Size Buttons
       this.context.memo('button.resizeFull', function () {
         return _this3.button({
           contents: '<span class="note-fontsize-10">100%</span>',
-          tooltip: _this3.lang.imAge.resizeFull,
+          tooltip: _this3.lang.image.resizeFull,
           click: _this3.context.createInvokeHandler('editor.resize', '1')
         }).render();
       });
       this.context.memo('button.resizeHalf', function () {
         return _this3.button({
           contents: '<span class="note-fontsize-10">50%</span>',
-          tooltip: _this3.lang.imAge.resizeHalf,
+          tooltip: _this3.lang.image.resizeHalf,
           click: _this3.context.createInvokeHandler('editor.resize', '0.5')
         }).render();
       });
       this.context.memo('button.resizeQuarter', function () {
         return _this3.button({
           contents: '<span class="note-fontsize-10">25%</span>',
-          tooltip: _this3.lang.imAge.resizeQuarter,
+          tooltip: _this3.lang.image.resizeQuarter,
           click: _this3.context.createInvokeHandler('editor.resize', '0.25')
         }).render();
       });
       this.context.memo('button.resizeNone', function () {
         return _this3.button({
           contents: _this3.ui.icon(_this3.options.icons.rollback),
-          tooltip: _this3.lang.imAge.resizeNone,
+          tooltip: _this3.lang.image.resizeNone,
           click: _this3.context.createInvokeHandler('editor.resize', '0')
         }).render();
       }); // Float Buttons
@@ -7793,21 +7793,21 @@ var Buttons = /*#__PURE__*/function () {
       this.context.memo('button.floatLeft', function () {
         return _this3.button({
           contents: _this3.ui.icon(_this3.options.icons.floatLeft),
-          tooltip: _this3.lang.imAge.floatLeft,
+          tooltip: _this3.lang.image.floatLeft,
           click: _this3.context.createInvokeHandler('editor.floatMe', 'left')
         }).render();
       });
       this.context.memo('button.floatRight', function () {
         return _this3.button({
           contents: _this3.ui.icon(_this3.options.icons.floatRight),
-          tooltip: _this3.lang.imAge.floatRight,
+          tooltip: _this3.lang.image.floatRight,
           click: _this3.context.createInvokeHandler('editor.floatMe', 'right')
         }).render();
       });
       this.context.memo('button.floatNone', function () {
         return _this3.button({
           contents: _this3.ui.icon(_this3.options.icons.rollback),
-          tooltip: _this3.lang.imAge.floatNone,
+          tooltip: _this3.lang.image.floatNone,
           click: _this3.context.createInvokeHandler('editor.floatMe', 'none')
         }).render();
       }); // Remove Buttons
@@ -7815,7 +7815,7 @@ var Buttons = /*#__PURE__*/function () {
       this.context.memo('button.removeMedia', function () {
         return _this3.button({
           contents: _this3.ui.icon(_this3.options.icons.trash),
-          tooltip: _this3.lang.imAge.remove,
+          tooltip: _this3.lang.image.remove,
           click: _this3.context.createInvokeHandler('editor.removeMedia')
         }).render();
       });
@@ -8028,8 +8028,8 @@ var Buttons = /*#__PURE__*/function () {
       if (event.offsetX === undefined) {
         var posCatcher = external_jQuery_default()(event.target).offset();
         posOffset = {
-          x: event.pAgeX - posCatcher.left,
-          y: event.pAgeY - posCatcher.top
+          x: event.pageX - posCatcher.left,
+          y: event.pageY - posCatcher.top
         };
       } else {
         posOffset = {
@@ -8536,20 +8536,20 @@ var LinkPopover = /*#__PURE__*/function () {
 }();
 
 
-;// CONCATENATED MODULE: ./src/js/module/ImAgeDialog.js
-function ImAgeDialog_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+;// CONCATENATED MODULE: ./src/js/module/ImageDialog.js
+function ImageDialog_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function ImAgeDialog_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function ImageDialog_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function ImAgeDialog_createClass(Constructor, protoProps, staticProps) { if (protoProps) ImAgeDialog_defineProperties(Constructor.prototype, protoProps); if (staticProps) ImAgeDialog_defineProperties(Constructor, staticProps); return Constructor; }
-
-
+function ImageDialog_createClass(Constructor, protoProps, staticProps) { if (protoProps) ImageDialog_defineProperties(Constructor.prototype, protoProps); if (staticProps) ImageDialog_defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
-var ImAgeDialog = /*#__PURE__*/function () {
-  function ImAgeDialog(context) {
-    ImAgeDialog_classCallCheck(this, ImAgeDialog);
+
+
+var ImageDialog = /*#__PURE__*/function () {
+  function ImageDialog(context) {
+    ImageDialog_classCallCheck(this, ImageDialog);
 
     this.context = context;
     this.ui = (external_jQuery_default()).summernote.ui;
@@ -8559,23 +8559,23 @@ var ImAgeDialog = /*#__PURE__*/function () {
     this.lang = this.options.langInfo;
   }
 
-  ImAgeDialog_createClass(ImAgeDialog, [{
+  ImageDialog_createClass(ImageDialog, [{
     key: "initialize",
     value: function initialize() {
-      var imAgeLimitation = '';
+      var imageLimitation = '';
 
-      if (this.options.maximumImAgeFileSize) {
-        var unit = Math.floor(Math.log(this.options.maximumImAgeFileSize) / Math.log(1024));
-        var readableSize = (this.options.maximumImAgeFileSize / Math.pow(1024, unit)).toFixed(2) * 1 + ' ' + ' KMGTP'[unit] + 'B';
-        imAgeLimitation = "<small>".concat(this.lang.imAge.maximumFileSize + ' : ' + readableSize, "</small>");
+      if (this.options.maximumImageFileSize) {
+        var unit = Math.floor(Math.log(this.options.maximumImageFileSize) / Math.log(1024));
+        var readableSize = (this.options.maximumImageFileSize / Math.pow(1024, unit)).toFixed(2) * 1 + ' ' + ' KMGTP'[unit] + 'B';
+        imageLimitation = "<small>".concat(this.lang.image.maximumFileSize + ' : ' + readableSize, "</small>");
       }
 
       var $container = this.options.dialogsInBody ? this.$body : this.options.container;
-      var body = ['<div class="form-group note-form-group note-group-select-from-files">', '<label for="note-dialog-imAge-file-' + this.options.id + '" class="note-form-label">' + this.lang.imAge.selectFromFiles + '</label>', '<input id="note-dialog-imAge-file-' + this.options.id + '" class="note-imAge-input form-control-file note-form-control note-input" ', ' type="file" name="files" accept="' + this.options.acceptImAgeFileTypes + '" multiple="multiple"/>', imAgeLimitation, '</div>', '<div class="form-group note-group-imAge-url">', '<label for="note-dialog-imAge-url-' + this.options.id + '" class="note-form-label">' + this.lang.imAge.url + '</label>', '<input id="note-dialog-imAge-url-' + this.options.id + '" class="note-imAge-url form-control note-form-control note-input" type="text"/>', '</div>'].join('');
-      var buttonClass = 'btn btn-primary note-btn note-btn-primary note-imAge-btn';
-      var footer = "<input type=\"button\" href=\"#\" class=\"".concat(buttonClass, "\" value=\"").concat(this.lang.imAge.insert, "\" disabled>");
+      var body = ['<div class="form-group note-form-group note-group-select-from-files">', '<label for="note-dialog-image-file-' + this.options.id + '" class="note-form-label">' + this.lang.image.selectFromFiles + '</label>', '<input id="note-dialog-image-file-' + this.options.id + '" class="note-image-input form-control-file note-form-control note-input" ', ' type="file" name="files" accept="' + this.options.acceptImageFileTypes + '" multiple="multiple"/>', imageLimitation, '</div>', '<div class="form-group note-group-image-url">', '<label for="note-dialog-image-url-' + this.options.id + '" class="note-form-label">' + this.lang.image.url + '</label>', '<input id="note-dialog-image-url-' + this.options.id + '" class="note-image-url form-control note-form-control note-input" type="text"/>', '</div>'].join('');
+      var buttonClass = 'btn btn-primary note-btn note-btn-primary note-image-btn';
+      var footer = "<input type=\"button\" href=\"#\" class=\"".concat(buttonClass, "\" value=\"").concat(this.lang.image.insert, "\" disabled>");
       this.$dialog = this.ui.dialog({
-        title: this.lang.imAge.insert,
+        title: this.lang.image.insert,
         fade: this.options.dialogsFade,
         body: body,
         footer: footer
@@ -8603,74 +8603,74 @@ var ImAgeDialog = /*#__PURE__*/function () {
       var _this = this;
 
       this.context.invoke('editor.saveRange');
-      this.showImAgeDialog().then(function (data) {
+      this.showImageDialog().then(function (data) {
         // [workaround] hide dialog before restore range for IE range focus
         _this.ui.hideDialog(_this.$dialog);
 
         _this.context.invoke('editor.restoreRange');
 
         if (typeof data === 'string') {
-          // imAge url
-          // If onImAgeLinkInsert set,
-          if (_this.options.callbacks.onImAgeLinkInsert) {
-            _this.context.triggerEvent('imAge.link.insert', data);
+          // image url
+          // If onImageLinkInsert set,
+          if (_this.options.callbacks.onImageLinkInsert) {
+            _this.context.triggerEvent('image.link.insert', data);
           } else {
-            _this.context.invoke('editor.insertImAge', data);
+            _this.context.invoke('editor.insertImage', data);
           }
         } else {
           // array of files
-          _this.context.invoke('editor.insertImAgesOrCallback', data);
+          _this.context.invoke('editor.insertImagesOrCallback', data);
         }
       }).fail(function () {
         _this.context.invoke('editor.restoreRange');
       });
     }
     /**
-     * show imAge dialog
+     * show image dialog
      *
      * @param {jQuery} $dialog
      * @return {Promise}
      */
 
   }, {
-    key: "showImAgeDialog",
-    value: function showImAgeDialog() {
+    key: "showImageDialog",
+    value: function showImageDialog() {
       var _this2 = this;
 
       return external_jQuery_default().Deferred(function (deferred) {
-        var $imAgeInput = _this2.$dialog.find('.note-imAge-input');
+        var $imageInput = _this2.$dialog.find('.note-image-input');
 
-        var $imAgeUrl = _this2.$dialog.find('.note-imAge-url');
+        var $imageUrl = _this2.$dialog.find('.note-image-url');
 
-        var $imAgeBtn = _this2.$dialog.find('.note-imAge-btn');
+        var $imageBtn = _this2.$dialog.find('.note-image-btn');
 
         _this2.ui.onDialogShown(_this2.$dialog, function () {
-          _this2.context.triggerEvent('dialog.shown'); // Cloning imAgeInput to clear element.
+          _this2.context.triggerEvent('dialog.shown'); // Cloning imageInput to clear element.
 
 
-          $imAgeInput.replaceWith($imAgeInput.clone().on('change', function (event) {
+          $imageInput.replaceWith($imageInput.clone().on('change', function (event) {
             deferred.resolve(event.target.files || event.target.value);
           }).val(''));
-          $imAgeUrl.on('input paste propertychange', function () {
-            _this2.ui.toggleBtn($imAgeBtn, $imAgeUrl.val());
+          $imageUrl.on('input paste propertychange', function () {
+            _this2.ui.toggleBtn($imageBtn, $imageUrl.val());
           }).val('');
 
           if (!env.isSupportTouch) {
-            $imAgeUrl.trigger('focus');
+            $imageUrl.trigger('focus');
           }
 
-          $imAgeBtn.click(function (event) {
+          $imageBtn.click(function (event) {
             event.preventDefault();
-            deferred.resolve($imAgeUrl.val());
+            deferred.resolve($imageUrl.val());
           });
 
-          _this2.bindEnterKey($imAgeUrl, $imAgeBtn);
+          _this2.bindEnterKey($imageUrl, $imageBtn);
         });
 
         _this2.ui.onDialogHidden(_this2.$dialog, function () {
-          $imAgeInput.off();
-          $imAgeUrl.off();
-          $imAgeBtn.off();
+          $imageInput.off();
+          $imageUrl.off();
+          $imageBtn.off();
 
           if (deferred.state() === 'pending') {
             deferred.reject();
@@ -8682,31 +8682,31 @@ var ImAgeDialog = /*#__PURE__*/function () {
     }
   }]);
 
-  return ImAgeDialog;
+  return ImageDialog;
 }();
 
 
-;// CONCATENATED MODULE: ./src/js/module/ImAgePopover.js
-function ImAgePopover_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+;// CONCATENATED MODULE: ./src/js/module/ImagePopover.js
+function ImagePopover_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function ImAgePopover_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function ImagePopover_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function ImAgePopover_createClass(Constructor, protoProps, staticProps) { if (protoProps) ImAgePopover_defineProperties(Constructor.prototype, protoProps); if (staticProps) ImAgePopover_defineProperties(Constructor, staticProps); return Constructor; }
+function ImagePopover_createClass(Constructor, protoProps, staticProps) { if (protoProps) ImagePopover_defineProperties(Constructor.prototype, protoProps); if (staticProps) ImagePopover_defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
 
 /**
- * ImAge popover module
+ * Image popover module
  *  mouse events that show/hide popover will be handled by Handle.js.
- *  Handle.js will receive the events and invoke 'imAgePopover.update'.
+ *  Handle.js will receive the events and invoke 'imagePopover.update'.
  */
 
-var ImAgePopover = /*#__PURE__*/function () {
-  function ImAgePopover(context) {
+var ImagePopover = /*#__PURE__*/function () {
+  function ImagePopover(context) {
     var _this = this;
 
-    ImAgePopover_classCallCheck(this, ImAgePopover);
+    ImagePopover_classCallCheck(this, ImagePopover);
 
     this.context = context;
     this.ui = (external_jQuery_default()).summernote.ui;
@@ -8728,19 +8728,19 @@ var ImAgePopover = /*#__PURE__*/function () {
     };
   }
 
-  ImAgePopover_createClass(ImAgePopover, [{
+  ImagePopover_createClass(ImagePopover, [{
     key: "shouldInitialize",
     value: function shouldInitialize() {
-      return !lists.isEmpty(this.options.popover.imAge);
+      return !lists.isEmpty(this.options.popover.image);
     }
   }, {
     key: "initialize",
     value: function initialize() {
       this.$popover = this.ui.popover({
-        className: 'note-imAge-popover'
+        className: 'note-image-popover'
       }).render().appendTo(this.options.container);
       var $content = this.$popover.find('.popover-content,.note-popover-content');
-      this.context.invoke('buttons.build', $content, this.options.popover.imAge);
+      this.context.invoke('buttons.build', $content, this.options.popover.image);
       this.$popover.on('mousedown', function (e) {
         e.preventDefault();
       });
@@ -8759,8 +8759,8 @@ var ImAgePopover = /*#__PURE__*/function () {
         var pos = {};
 
         if (this.options.popatmouse) {
-          pos.left = event.pAgeX - 20;
-          pos.top = event.pAgeY;
+          pos.left = event.pageX - 20;
+          pos.top = event.pageY;
         } else {
           pos = position;
         }
@@ -8783,7 +8783,7 @@ var ImAgePopover = /*#__PURE__*/function () {
     }
   }]);
 
-  return ImAgePopover;
+  return ImagePopover;
 }();
 
 
@@ -8969,7 +8969,7 @@ var VideoDialog = /*#__PURE__*/function () {
       var peerTubeMatch = url.match(peerTubeRegExp);
       var qqRegExp = /\/\/v\.qq\.com.*?vid=(.+)/;
       var qqMatch = url.match(qqRegExp);
-      var qqRegExp2 = /\/\/v\.qq\.com\/x?\/?(pAge|cover).*?\/([^\/]+)\.html\??.*/;
+      var qqRegExp2 = /\/\/v\.qq\.com\/x?\/?(page|cover).*?\/([^\/]+)\.html\??.*/;
       var qqMatch2 = url.match(qqRegExp2);
       var mp4RegExp = /^.+.(mp4|m4v)$/;
       var mp4Match = url.match(mp4RegExp);
@@ -9235,8 +9235,8 @@ var AirPopover = /*#__PURE__*/function () {
     this.options = context.options;
     this.hidable = true;
     this.onContextmenu = false;
-    this.pAgeX = null;
-    this.pAgeY = null;
+    this.pageX = null;
+    this.pageY = null;
     this.events = {
       'summernote.contextmenu': function summernoteContextmenu(e) {
         if (_this.options.editing) {
@@ -9248,13 +9248,13 @@ var AirPopover = /*#__PURE__*/function () {
         }
       },
       'summernote.mousedown': function summernoteMousedown(we, e) {
-        _this.pAgeX = e.pAgeX;
-        _this.pAgeY = e.pAgeY;
+        _this.pageX = e.pageX;
+        _this.pageY = e.pageY;
       },
       'summernote.keyup summernote.mouseup summernote.scroll': function summernoteKeyupSummernoteMouseupSummernoteScroll(we, e) {
         if (_this.options.editing && !_this.onContextmenu) {
-          _this.pAgeX = e.pAgeX;
-          _this.pAgeY = e.pAgeY;
+          _this.pageX = e.pageX;
+          _this.pageY = e.pageY;
 
           _this.update();
         }
@@ -9308,8 +9308,8 @@ var AirPopover = /*#__PURE__*/function () {
 
       if (styleInfo.range && (!styleInfo.range.isCollapsed() || forcelyOpen)) {
         var rect = {
-          left: this.pAgeX,
-          top: this.pAgeY
+          left: this.pageX,
+          top: this.pageY
         };
         var containerOffset = external_jQuery_default()(this.options.container).offset();
         rect.top -= containerOffset.top;
@@ -9717,8 +9717,8 @@ var HintPopover = /*#__PURE__*/function () {
       'toolbar': Toolbar,
       'linkDialog': LinkDialog,
       'linkPopover': LinkPopover,
-      'imAgeDialog': ImAgeDialog,
-      'imAgePopover': ImAgePopover,
+      'imageDialog': ImageDialog,
+      'imagePopover': ImagePopover,
       'tablePopover': TablePopover,
       'videoDialog': VideoDialog,
       'helpDialog': HelpDialog,
@@ -9735,7 +9735,7 @@ var HintPopover = /*#__PURE__*/function () {
     // popover
     popatmouse: true,
     popover: {
-      imAge: [['resize', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']], ['float', ['floatLeft', 'floatRight', 'floatNone']], ['remove', ['removeMedia']]],
+      image: [['resize', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']], ['float', ['floatLeft', 'floatRight', 'floatNone']], ['remove', ['removeMedia']]],
       link: [['link', ['linkDialogShow', 'unlink']]],
       table: [['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']], ['delete', ['deleteRow', 'deleteCol', 'deleteTable']]],
       air: [['color', ['color']], ['font', ['bold', 'underline', 'clear']], ['para', ['ul', 'paragraph']], ['table', ['table']], ['insert', ['link', 'picture']], ['view', ['fullscreen', 'codeview']]]
@@ -9781,7 +9781,7 @@ var HintPopover = /*#__PURE__*/function () {
     // pallete colors(n x n)
     colors: [['#000000', '#424242', '#636363', '#9C9C94', '#CEC6CE', '#EFEFEF', '#F7F7F7', '#FFFFFF'], ['#FF0000', '#FF9C00', '#FFFF00', '#00FF00', '#00FFFF', '#0000FF', '#9C00FF', '#FF00FF'], ['#F7C6CE', '#FFE7CE', '#FFEFC6', '#D6EFD6', '#CEDEE7', '#CEE7F7', '#D6D6E7', '#E7D6DE'], ['#E79C9C', '#FFC69C', '#FFE79C', '#B5D6A5', '#A5C6CE', '#9CC6EF', '#B5A5D6', '#D6A5BD'], ['#E76363', '#F7AD6B', '#FFD663', '#94BD7B', '#73A5AD', '#6BADDE', '#8C7BC6', '#C67BA5'], ['#CE0000', '#E79439', '#EFC631', '#6BA54A', '#4A7B8C', '#3984C6', '#634AA5', '#A54A7B'], ['#9C0000', '#B56308', '#BD9400', '#397B21', '#104A5A', '#085294', '#311873', '#731842'], ['#630000', '#7B3900', '#846300', '#295218', '#083139', '#003163', '#21104A', '#4A1031']],
     // http://chir.ag/projects/name-that-color/
-    colorsName: [['Black', 'Tundora', 'Dove Gray', 'Star Dust', 'Pale Slate', 'Gallery', 'Alabaster', 'White'], ['Red', 'Orange Peel', 'Yellow', 'Green', 'Cyan', 'Blue', 'Electric Violet', 'MAgenta'], ['Azalea', 'Karry', 'Egg White', 'Zanah', 'Botticelli', 'Tropical Blue', 'Mischka', 'Twilight'], ['Tonys Pink', 'Peach Orange', 'Cream Brulee', 'Sprout', 'Casper', 'Perano', 'Cold Purple', 'Careys Pink'], ['Mandy', 'Rajah', 'Dandelion', 'Olivine', 'Gulf Stream', 'Viking', 'Blue Marguerite', 'Puce'], ['Guardsman Red', 'Fire Bush', 'Golden Dream', 'Chelsea Cucumber', 'Smalt Blue', 'Boston Blue', 'Butterfly Bush', 'Cadillac'], ['Sangria', 'Mai Tai', 'Buddha Gold', 'Forest Green', 'Eden', 'Venice Blue', 'Meteorite', 'Claret'], ['Rosewood', 'Cinnamon', 'Olive', 'Parsley', 'Tiber', 'Midnight Blue', 'Valentino', 'Loulou']],
+    colorsName: [['Black', 'Tundora', 'Dove Gray', 'Star Dust', 'Pale Slate', 'Gallery', 'Alabaster', 'White'], ['Red', 'Orange Peel', 'Yellow', 'Green', 'Cyan', 'Blue', 'Electric Violet', 'Magenta'], ['Azalea', 'Karry', 'Egg White', 'Zanah', 'Botticelli', 'Tropical Blue', 'Mischka', 'Twilight'], ['Tonys Pink', 'Peach Orange', 'Cream Brulee', 'Sprout', 'Casper', 'Perano', 'Cold Purple', 'Careys Pink'], ['Mandy', 'Rajah', 'Dandelion', 'Olivine', 'Gulf Stream', 'Viking', 'Blue Marguerite', 'Puce'], ['Guardsman Red', 'Fire Bush', 'Golden Dream', 'Chelsea Cucumber', 'Smalt Blue', 'Boston Blue', 'Butterfly Bush', 'Cadillac'], ['Sangria', 'Mai Tai', 'Buddha Gold', 'Forest Green', 'Eden', 'Venice Blue', 'Meteorite', 'Claret'], ['Rosewood', 'Cinnamon', 'Olive', 'Parsley', 'Tiber', 'Midnight Blue', 'Valentino', 'Loulou']],
     colorButton: {
       foreColor: '#000000',
       backColor: '#FFFF00'
@@ -9795,8 +9795,8 @@ var HintPopover = /*#__PURE__*/function () {
     // By default, dialogs are attached in container.
     dialogsInBody: false,
     dialogsFade: false,
-    maximumImAgeFileSize: null,
-    acceptImAgeFileTypes: "imAge/*",
+    maximumImageFileSize: null,
+    acceptImageFileTypes: "image/*",
     callbacks: {
       onBeforeCommand: null,
       onBlur: null,
@@ -9806,9 +9806,9 @@ var HintPopover = /*#__PURE__*/function () {
       onDialogShown: null,
       onEnter: null,
       onFocus: null,
-      onImAgeLinkInsert: null,
-      onImAgeUpload: null,
-      onImAgeUploadError: null,
+      onImageLinkInsert: null,
+      onImageUpload: null,
+      onImageUploadError: null,
       onInit: null,
       onKeydown: null,
       onKeyup: null,
@@ -10442,8 +10442,8 @@ var tableMoveHandler = function tableMoveHandler(event, col, row) {
   if (event.offsetX === undefined) {
     var posCatcher = external_jQuery_default()(event.target).offset();
     posOffset = {
-      x: event.pAgeX - posCatcher.left,
-      y: event.pAgeY - posCatcher.top
+      x: event.pageX - posCatcher.left,
+      y: event.pageY - posCatcher.top
     };
   } else {
     posOffset = {
@@ -10631,11 +10631,11 @@ var videoDialog = function videoDialog(opt) {
   }).render();
 };
 
-var imAgeDialog = function imAgeDialog(opt) {
-  var body = '<div class="note-form-group note-group-select-from-files">' + '<label for="note-dialog-imAge-file-' + opt.id + '" class="note-form-label">' + opt.lang.imAge.selectFromFiles + '</label>' + '<input id="note-dialog-imAge-file-' + opt.id + '" class="note-note-imAge-input note-input" type="file" name="files" accept="imAge/*" multiple="multiple"/>' + opt.imAgeLimitation + '</div>' + '<div class="note-form-group">' + '<label for="note-dialog-imAge-url-' + opt.id + '" class="note-form-label">' + opt.lang.imAge.url + '</label>' + '<input id="note-dialog-imAge-url-' + opt.id + '" class="note-imAge-url note-input" type="text"/>' + '</div>';
-  var footer = ['<button href="#" type="button" class="note-btn note-btn-primary note-btn-large note-imAge-btn disabled" disabled>', opt.lang.imAge.insert, '</button>'].join('');
+var imageDialog = function imageDialog(opt) {
+  var body = '<div class="note-form-group note-group-select-from-files">' + '<label for="note-dialog-image-file-' + opt.id + '" class="note-form-label">' + opt.lang.image.selectFromFiles + '</label>' + '<input id="note-dialog-image-file-' + opt.id + '" class="note-note-image-input note-input" type="file" name="files" accept="image/*" multiple="multiple"/>' + opt.imageLimitation + '</div>' + '<div class="note-form-group">' + '<label for="note-dialog-image-url-' + opt.id + '" class="note-form-label">' + opt.lang.image.url + '</label>' + '<input id="note-dialog-image-url-' + opt.id + '" class="note-image-url note-input" type="text"/>' + '</div>';
+  var footer = ['<button href="#" type="button" class="note-btn note-btn-primary note-btn-large note-image-btn disabled" disabled>', opt.lang.image.insert, '</button>'].join('');
   return dialog({
-    title: opt.lang.imAge.insert,
+    title: opt.lang.image.insert,
     fade: opt.fade,
     body: body,
     footer: footer
@@ -10698,7 +10698,7 @@ var ui = function ui(editorOptions) {
     palette: palette,
     dialog: dialog,
     videoDialog: videoDialog,
-    imAgeDialog: imAgeDialog,
+    imageDialog: imageDialog,
     linkDialog: linkDialog,
     popover: popover,
     checkbox: summernote_lite_checkbox,

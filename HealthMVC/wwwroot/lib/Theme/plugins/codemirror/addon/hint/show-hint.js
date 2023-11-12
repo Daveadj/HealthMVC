@@ -177,8 +177,8 @@
     var baseMap = {
       Up: function() {handle.moveFocus(-1);},
       Down: function() {handle.moveFocus(1);},
-      PAgeUp: function() {handle.moveFocus(-handle.menuSize() + 1, true);},
-      PAgeDown: function() {handle.moveFocus(handle.menuSize() - 1, true);},
+      PageUp: function() {handle.moveFocus(-handle.menuSize() + 1, true);},
+      PageDown: function() {handle.moveFocus(handle.menuSize() - 1, true);},
       Home: function() {handle.setFocus(0);},
       End: function() {handle.setFocus(handle.length - 1);},
       Enter: handle.pick,
@@ -334,7 +334,7 @@
       var curScroll = cm.getScrollInfo(), editor = cm.getWrapperElement().getBoundingClientRect();
       if (!startScroll) startScroll = cm.getScrollInfo();
       var newTop = top + startScroll.top - curScroll.top;
-      var point = newTop - (parentWindow.pAgeYOffset || (ownerDocument.documentElement || ownerDocument.body).scrollTop);
+      var point = newTop - (parentWindow.pageYOffset || (ownerDocument.documentElement || ownerDocument.body).scrollTop);
       if (!below) point += hints.offsetHeight;
       if (point <= editor.top || point >= editor.bottom) return completion.close();
       hints.style.top = newTop + "px";

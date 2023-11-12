@@ -4,17 +4,17 @@
         grid: {
             noDataContent: "Não encontrado",
             deleteConfirm: "Você tem certeza que deseja remover este item?",
-            pAgerFormat: "Páginas: {first} {prev} {pAges} {next} {last} &nbsp;&nbsp; {pAgeIndex} de {pAgeCount}",
-            pAgePrevText: "Anterior",
-            pAgeNextText: "Seguinte",
-            pAgeFirstText: "Primeira",
-            pAgeLastText: "Última",
-            loadMessAge: "Por favor, espere...",
-            invalidMessAge: "Dados inválidos!"
+            pagerFormat: "Páginas: {first} {prev} {pages} {next} {last} &nbsp;&nbsp; {pageIndex} de {pageCount}",
+            pagePrevText: "Anterior",
+            pageNextText: "Seguinte",
+            pageFirstText: "Primeira",
+            pageLastText: "Última",
+            loadMessage: "Por favor, espere...",
+            invalidMessage: "Dados inválidos!"
         },
 
         loadIndicator: {
-            messAge: "Carregando..."
+            message: "Carregando..."
         },
 
         fields: {
@@ -32,14 +32,14 @@
         },
 
         validators: {
-            required: { messAge: "Campo obrigatório" },
-            rangeLength: { messAge: "O valor esta fora do intervaldo definido" },
-            minLength: { messAge: "O comprimento do valor é muito curto" },
-            maxLength: { messAge: "O comprimento valor é muito longo" },
-            pattern: { messAge: "O valor informado não é compatível com o padrão" },
-            range: { messAge: "O valor informado esta fora do limite definido" },
-            min: { messAge: "O valor é muito curto" },
-            max: { messAge: "O valor é muito longo" }
+            required: { message: "Campo obrigatório" },
+            rangeLength: { message: "O valor esta fora do intervaldo definido" },
+            minLength: { message: "O comprimento do valor é muito curto" },
+            maxLength: { message: "O comprimento valor é muito longo" },
+            pattern: { message: "O valor informado não é compatível com o padrão" },
+            range: { message: "O valor informado esta fora do limite definido" },
+            min: { message: "O valor é muito curto" },
+            max: { message: "O valor é muito longo" }
         }
     };
 

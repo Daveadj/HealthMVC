@@ -37,9 +37,9 @@ var __webpack_exports__ = {};
         subscript: 'Indice',
         size: 'Taille de police'
       },
-      imAge: {
-        imAge: 'ImAge',
-        insert: 'Insérer une imAge',
+      image: {
+        image: 'Image',
+        insert: 'Insérer une image',
         resizeFull: 'Taille originale',
         resizeHalf: 'Redimensionner à 50 %',
         resizeQuarter: 'Redimensionner à 25 %',
@@ -50,13 +50,13 @@ var __webpack_exports__ = {};
         shapeCircle: 'Forme: Cercle',
         shapeThumbnail: 'Forme: Vignette',
         shapeNone: 'Forme: Aucune',
-        dragImAgeHere: 'Faites glisser une imAge ou un texte dans ce cadre',
-        dropImAge: 'Lachez l\'imAge ou le texte',
+        dragImageHere: 'Faites glisser une image ou un texte dans ce cadre',
+        dropImage: 'Lachez l\'image ou le texte',
         selectFromFiles: 'Choisir un fichier',
         maximumFileSize: 'Taille de fichier maximale',
         maximumFileSizeError: 'Taille maximale du fichier dépassée',
-        url: 'URL de l\'imAge',
-        remove: 'Supprimer l\'imAge',
+        url: 'URL de l\'image',
+        remove: 'Supprimer l\'image',
         original: 'Original'
       },
       video: {

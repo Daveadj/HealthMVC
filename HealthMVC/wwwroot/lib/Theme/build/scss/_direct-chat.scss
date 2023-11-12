@@ -29,7 +29,7 @@
   }
 }
 
-.direct-chat-messAges {
+.direct-chat-messages {
   @include translate(0, 0);
   height: 250px;
   overflow: auto;
@@ -46,7 +46,7 @@
   margin-bottom: 10px;
 }
 
-.direct-chat-messAges,
+.direct-chat-messages,
 .direct-chat-contacts {
   transition: transform .5s ease-in-out;
 }

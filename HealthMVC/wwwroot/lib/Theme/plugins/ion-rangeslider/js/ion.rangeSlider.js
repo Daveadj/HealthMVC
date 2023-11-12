@@ -3,8 +3,8 @@
 // © Denis Ineshin, 2019
 // https://github.com/IonDen
 //
-// Project pAge:    http://ionden.com/a/plugins/ion.rangeSlider/en.html
-// GitHub pAge:     https://github.com/IonDen/ion.rangeSlider
+// Project page:    http://ionden.com/a/plugins/ion.rangeSlider/en.html
+// GitHub page:     https://github.com/IonDen/ion.rangeSlider
 //
 // Released under MIT licence:
 // http://ionden.com/a/plugins/licence-en.html
@@ -205,7 +205,7 @@
             grid_labels: []
         };
 
-        // storAge for measure variables
+        // storage for measure variables
         this.coords = {
             // left
             x_gap: 0,
@@ -241,7 +241,7 @@
             big_x: []
         };
 
-        // storAge for labels measure variables
+        // storage for labels measure variables
         this.labels = {
             // width
             w_min: 0,
@@ -753,7 +753,7 @@
                 x = $handle.offset().left;
                 x += ($handle.width() / 2) - 1;
 
-                this.pointerClick("single", {preventDefault: function () {}, pAgeX: x});
+                this.pointerClick("single", {preventDefault: function () {}, pageX: x});
             }
         },
 
@@ -768,7 +768,7 @@
                 return;
             }
 
-            var x = e.pAgeX || e.originalEvent.touches && e.originalEvent.touches[0].pAgeX;
+            var x = e.pageX || e.originalEvent.touches && e.originalEvent.touches[0].pageX;
             this.coords.x_pointer = x - this.coords.x_gap;
 
             this.calc();
@@ -819,7 +819,7 @@
          */
         pointerDown: function (target, e) {
             e.preventDefault();
-            var x = e.pAgeX || e.originalEvent.touches && e.originalEvent.touches[0].pAgeX;
+            var x = e.pageX || e.originalEvent.touches && e.originalEvent.touches[0].pageX;
             if (e.button === 2) {
                 return;
             }
@@ -862,7 +862,7 @@
          */
         pointerClick: function (target, e) {
             e.preventDefault();
-            var x = e.pAgeX || e.originalEvent.touches && e.originalEvent.touches[0].pAgeX;
+            var x = e.pageX || e.originalEvent.touches && e.originalEvent.touches[0].pageX;
             if (e.button === 2) {
                 return;
             }

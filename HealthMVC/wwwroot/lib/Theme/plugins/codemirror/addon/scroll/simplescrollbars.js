@@ -25,7 +25,7 @@
     CodeMirror.on(this.inner, "mousedown", function(e) {
       if (e.which != 1) return;
       CodeMirror.e_preventDefault(e);
-      var axis = self.orientation == "horizontal" ? "pAgeX" : "pAgeY";
+      var axis = self.orientation == "horizontal" ? "pageX" : "pageY";
       var start = e[axis], startpos = self.pos;
       function done() {
         CodeMirror.off(document, "mousemove", move);

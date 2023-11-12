@@ -159,13 +159,13 @@ CodeMirror.defineMode("oz", function (conf) {
       return null;
     }
 
-    if(!state.hasPassedFirstStAge && stream.eat("{")) {
-      state.hasPassedFirstStAge = true;
+    if(!state.hasPassedFirstStage && stream.eat("{")) {
+      state.hasPassedFirstStage = true;
       return "bracket";
     }
-    else if(state.hasPassedFirstStAge) {
+    else if(state.hasPassedFirstStage) {
       stream.match(/([A-Z][A-Za-z0-9_]*)|(`.+`)|\$/);
-      state.hasPassedFirstStAge = false;
+      state.hasPassedFirstStage = false;
       state.tokenize = tokenBase;
       return "def"
     }
@@ -217,7 +217,7 @@ CodeMirror.defineMode("oz", function (conf) {
         tokenize: tokenBase,
         currentIndent: 0,
         doInCurrentLine: false,
-        hasPassedFirstStAge: false
+        hasPassedFirstStage: false
       };
     },
 

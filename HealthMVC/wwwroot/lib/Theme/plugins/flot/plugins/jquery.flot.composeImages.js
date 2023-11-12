@@ -1,53 +1,53 @@
-/** ## jquery.flot.composeImAges.js
+/** ## jquery.flot.composeImages.js
 
 This plugin is used to expose a function used to overlap several canvases and
 SVGs, for the purpose of creating a snaphot out of them.
 
-### When composeImAges is used:
-When multiple canvases and SVGs have to be overlapped into a single imAge
-and their offset on the pAge, must be preserved.
+### When composeImages is used:
+When multiple canvases and SVGs have to be overlapped into a single image
+and their offset on the page, must be preserved.
 
 ### Where can be used:
 In creating a downloadable snapshot of the plots, axes, cursors etc of a graph.
 
 ### How it works:
-The entry point is composeImAges function. It expects an array of objects,
+The entry point is composeImages function. It expects an array of objects,
 which should be either canvases or SVGs (or a mix). It does a prevalidation
 of them, by verifying if they will be usable or not, later in the flow.
 After selecting only usable sources, it passes them to getGenerateTempImg
-function, which generates temporary imAges out of them. This function
+function, which generates temporary images out of them. This function
 expects that some of the passed sources (canvas or SVG) may still have
-problems being converted to an imAge and makes sure the promises system,
-used by composeImAges function, moves forward. As an example, SVGs with
+problems being converted to an image and makes sure the promises system,
+used by composeImages function, moves forward. As an example, SVGs with
 missing information from header or with unsupported content, may lead to
-failure in generating the temporary imAge. Temporary imAges are required
+failure in generating the temporary image. Temporary images are required
 mostly on extracting content from SVGs, but this is also where the x/y
-offsets are extracted for each imAge which will be added. For SVGs in
+offsets are extracted for each image which will be added. For SVGs in
 particular, their CSS rules have to be applied.
-After all temporary imAges are generated, they are overlapped using
+After all temporary images are generated, they are overlapped using
 getExecuteImgComposition function. This is where the destination canvas
-is set to the proper dimensions. It is then output by composeImAges.
+is set to the proper dimensions. It is then output by composeImages.
 This function returns a promise, which can be used to wait for the whole
 composition process. It requires to be asynchronous, because this is how
-temporary imAges load their data.
+temporary images load their data.
 */
 
 (function($) {
     "use strict";
     const GENERALFAILURECALLBACKERROR = -100; //simply a negative number
-    const SUCCESSFULIMAgePREPARATION = 0;
-    const EMPTYARRAYOFIMAgeSOURCES = -1;
-    const NEGATIVEIMAgeSIZE = -2;
+    const SUCCESSFULIMAGEPREPARATION = 0;
+    const EMPTYARRAYOFIMAGESOURCES = -1;
+    const NEGATIVEIMAGESIZE = -2;
     var pixelRatio = 1;
     var browser = $.plot.browser;
     var getPixelRatio = browser.getPixelRatio;
 
-    function composeImAges(canvasOrSvgSources, destinationCanvas) {
+    function composeImages(canvasOrSvgSources, destinationCanvas) {
         var validCanvasOrSvgSources = canvasOrSvgSources.filter(isValidSource);
         pixelRatio = getPixelRatio(destinationCanvas.getContext('2d'));
 
         var allImgCompositionPromises = validCanvasOrSvgSources.map(function(validCanvasOrSvgSource) {
-            var tempImg = new ImAge();
+            var tempImg = new Image();
             var currentPromise = new Promise(getGenerateTempImg(tempImg, validCanvasOrSvgSource));
             return currentPromise;
         });
@@ -84,17 +84,17 @@ temporary imAges load their data.
 
             tempImg.onabort = function(evt) {
                 tempImg.successfullyLoaded = false;
-                console.log('Can\'t generate temp imAge from ' + tempImg.sourceDescription + '. It is possible that it is missing some properties or its content is not supported by this browser. Source component:', tempImg.sourceComponent);
-                successCallbackFunc(tempImg); //call successCallback, to allow snapshot of all working imAges
+                console.log('Can\'t generate temp image from ' + tempImg.sourceDescription + '. It is possible that it is missing some properties or its content is not supported by this browser. Source component:', tempImg.sourceComponent);
+                successCallbackFunc(tempImg); //call successCallback, to allow snapshot of all working images
             };
 
             tempImg.onerror = function(evt) {
                 tempImg.successfullyLoaded = false;
-                console.log('Can\'t generate temp imAge from ' + tempImg.sourceDescription + '. It is possible that it is missing some properties or its content is not supported by this browser. Source component:', tempImg.sourceComponent);
-                successCallbackFunc(tempImg); //call successCallback, to allow snapshot of all working imAges
+                console.log('Can\'t generate temp image from ' + tempImg.sourceDescription + '. It is possible that it is missing some properties or its content is not supported by this browser. Source component:', tempImg.sourceComponent);
+                successCallbackFunc(tempImg); //call successCallback, to allow snapshot of all working images
             };
 
-            generateTempImAgeFromCanvasOrSvg(canvasOrSvgSource, tempImg);
+            generateTempImageFromCanvasOrSvg(canvasOrSvgSource, tempImg);
         };
     }
 
@@ -106,7 +106,7 @@ temporary imAges load their data.
     }
 
     function copyCanvasToImg(canvas, img) {
-        img.src = canvas.toDataURL('imAge/png');
+        img.src = canvas.toDataURL('image/png');
     }
 
     function getCSSRules(document) {
@@ -115,7 +115,7 @@ temporary imAges load their data.
         for (var i = 0; i < styleSheets.length; i++) {
             // CORS requests for style sheets throw and an exception on Chrome > 64
             try {
-                // in Chrome, the external CSS files are empty when the pAge is directly loaded from disk
+                // in Chrome, the external CSS files are empty when the page is directly loaded from disk
                 var rules = styleSheets[i].cssRules || [];
                 for (var j = 0; j < rules.length; j++) {
                     var rule = rules[j];
@@ -148,7 +148,7 @@ temporary imAges load their data.
 
         source = patchSVGSource(source);
 
-        var blob = new Blob([source], {type: "imAge/svg+xml;charset=utf-8"}),
+        var blob = new Blob([source], {type: "image/svg+xml;charset=utf-8"}),
             domURL = self.URL || self.webkitURL || self,
             url = domURL.createObjectURL(blob);
         img.src = url;
@@ -181,7 +181,7 @@ temporary imAges load their data.
         // capture unicode characters correctly.
         utf8BinaryString = buildBinaryString(new (TextEncoder || TextEncoderLite)('utf-8').encode(source));
 
-        data = "data:imAge/svg+xml;base64," + btoa(utf8BinaryString);
+        data = "data:image/svg+xml;base64," + btoa(utf8BinaryString);
         img.src = data;
     }
 
@@ -220,10 +220,10 @@ temporary imAges load their data.
         }
     }
 
-    function prepareImAgesToBeComposed(sources, destination) {
-        var result = SUCCESSFULIMAgePREPARATION;
+    function prepareImagesToBeComposed(sources, destination) {
+        var result = SUCCESSFULIMAGEPREPARATION;
         if (sources.length === 0) {
-            result = EMPTYARRAYOFIMAgeSOURCES; //nothing to do if called without sources
+            result = EMPTYARRAYOFIMAGESOURCES; //nothing to do if called without sources
         } else {
             var minX = sources[0].genLeft;
             var minY = sources[0].genTop;
@@ -252,7 +252,7 @@ temporary imAges load their data.
             }
 
             if ((maxX - minX <= 0) || (maxY - minY <= 0)) {
-                result = NEGATIVEIMAgeSIZE; //this might occur on hidden imAges
+                result = NEGATIVEIMAGESIZE; //this might occur on hidden images
             } else {
                 destination.width = Math.round(maxX - minX);
                 destination.height = Math.round(maxY - minY);
@@ -269,17 +269,17 @@ temporary imAges load their data.
     }
 
     function copyImgsToCanvas(sources, destination) {
-        var prepareImAgesResult = prepareImAgesToBeComposed(sources, destination);
-        if (prepareImAgesResult === SUCCESSFULIMAgePREPARATION) {
+        var prepareImagesResult = prepareImagesToBeComposed(sources, destination);
+        if (prepareImagesResult === SUCCESSFULIMAGEPREPARATION) {
             var destinationCtx = destination.getContext('2d');
 
             for (var i = 0; i < sources.length; i++) {
                 if (sources[i].successfullyLoaded === true) {
-                    destinationCtx.drawImAge(sources[i], sources[i].xCompOffset * pixelRatio, sources[i].yCompOffset * pixelRatio);
+                    destinationCtx.drawImage(sources[i], sources[i].xCompOffset * pixelRatio, sources[i].yCompOffset * pixelRatio);
                 }
             }
         }
-        return prepareImAgesResult;
+        return prepareImagesResult;
     }
 
     function adnotateDestImgWithBoundingClientRect(srcCanvasOrSvg, destImg) {
@@ -297,7 +297,7 @@ temporary imAges load their data.
         }
     }
 
-    function generateTempImAgeFromCanvasOrSvg(srcCanvasOrSvg, destImg) {
+    function generateTempImageFromCanvasOrSvg(srcCanvasOrSvg, destImg) {
         if (srcCanvasOrSvg.tagName === 'CANVAS') {
             copyCanvasToImg(srcCanvasOrSvg, destImg);
         }
@@ -315,16 +315,16 @@ temporary imAges load their data.
     }
 
     // used for testing
-    $.plot.composeImAges = composeImAges;
+    $.plot.composeImages = composeImages;
 
     function init(plot) {
         // used to extend the public API of the plot
-        plot.composeImAges = composeImAges;
+        plot.composeImages = composeImages;
     }
 
     $.plot.plugins.push({
         init: init,
-        name: 'composeImAges',
+        name: 'composeImages',
         version: '1.0'
     });
 })(jQuery);

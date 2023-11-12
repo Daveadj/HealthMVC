@@ -105,7 +105,7 @@ CodeMirror.defineMode('powershell', function() {
     /Resume-(Job|Service)/,
     /Save-Help/,
     /Select-(Object|String|Xml)/,
-    /Send-MailMessAge/,
+    /Send-MailMessage/,
     new RegExp('Set-(Acl|Alias|AuthenticodeSignature|Content|Date|ExecutionPolicy|Item(Property)?|Location|PSBreakpoint|PSDebug' +
                '|PSSessionConfiguration|Service|StrictMode|TraceSource|Variable|WmiInstance)'),
     /Show-(Command|ControlPanelItem|EventLog)/,

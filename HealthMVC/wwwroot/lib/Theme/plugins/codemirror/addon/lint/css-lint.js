@@ -23,15 +23,15 @@ CodeMirror.registerHelper("lint", "css", function(text, options) {
     }
     return found;
   }
-  var results = CSSLint.verify(text, options), messAges = results.messAges, messAge = null;
-  for ( var i = 0; i < messAges.length; i++) {
-    messAge = messAges[i];
-    var startLine = messAge.line -1, endLine = messAge.line -1, startCol = messAge.col -1, endCol = messAge.col;
+  var results = CSSLint.verify(text, options), messages = results.messages, message = null;
+  for ( var i = 0; i < messages.length; i++) {
+    message = messages[i];
+    var startLine = message.line -1, endLine = message.line -1, startCol = message.col -1, endCol = message.col;
     found.push({
       from: CodeMirror.Pos(startLine, startCol),
       to: CodeMirror.Pos(endLine, endCol),
-      messAge: messAge.messAge,
-      severity : messAge.type
+      message: message.message,
+      severity : message.type
     });
   }
   return found;

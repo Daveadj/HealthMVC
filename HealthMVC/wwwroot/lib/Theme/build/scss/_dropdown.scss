@@ -171,7 +171,7 @@
       padding: 10px;
       text-align: center;
 
-      // User imAge
+      // User image
       > img {
         z-index: 5;
         height: 90px;
@@ -227,7 +227,7 @@
     }
   }
 
-  .user-imAge {
+  .user-image {
     @include media-breakpoint-up(sm) {
       float: none;
       line-height: 10px;
@@ -237,10 +237,10 @@
 
     border-radius: 50%;
     float: left;
-    height: $sidebar-user-imAge-width;
+    height: $sidebar-user-image-width;
     margin-right: 10px;
     margin-top: -2px;
-    width: $sidebar-user-imAge-width;
+    width: $sidebar-user-image-width;
   }
 }
 

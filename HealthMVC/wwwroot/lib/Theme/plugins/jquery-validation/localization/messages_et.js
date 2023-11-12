@@ -9,25 +9,25 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: ET (Estonian; eesti, eesti keel)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "See väli peab olema täidetud.",
-	maxlength: $.validator.format( "Palun sisestAge vähem kui {0} tähemärki." ),
-	minlength: $.validator.format( "Palun sisestAge vähemalt {0} tähemärki." ),
-	rangelength: $.validator.format( "Palun sisestAge väärtus vahemikus {0} kuni {1} tähemärki." ),
-	email: "Palun sisestAge korrektne e-maili aadress.",
-	url: "Palun sisestAge korrektne URL.",
-	date: "Palun sisestAge korrektne kuupäev.",
-	dateISO: "Palun sisestAge korrektne kuupäev (YYYY-MM-DD).",
-	number: "Palun sisestAge korrektne number.",
-	digits: "Palun sisestAge ainult numbreid.",
-	equalTo: "Palun sisestAge sama väärtus uuesti.",
-	range: $.validator.format( "Palun sisestAge väärtus vahemikus {0} kuni {1}." ),
-	max: $.validator.format( "Palun sisestAge väärtus, mis on väiksem või võrdne arvuga {0}." ),
-	min: $.validator.format( "Palun sisestAge väärtus, mis on suurem või võrdne arvuga {0}." ),
-	creditcard: "Palun sisestAge korrektne krediitkaardi number."
+	maxlength: $.validator.format( "Palun sisestage vähem kui {0} tähemärki." ),
+	minlength: $.validator.format( "Palun sisestage vähemalt {0} tähemärki." ),
+	rangelength: $.validator.format( "Palun sisestage väärtus vahemikus {0} kuni {1} tähemärki." ),
+	email: "Palun sisestage korrektne e-maili aadress.",
+	url: "Palun sisestage korrektne URL.",
+	date: "Palun sisestage korrektne kuupäev.",
+	dateISO: "Palun sisestage korrektne kuupäev (YYYY-MM-DD).",
+	number: "Palun sisestage korrektne number.",
+	digits: "Palun sisestage ainult numbreid.",
+	equalTo: "Palun sisestage sama väärtus uuesti.",
+	range: $.validator.format( "Palun sisestage väärtus vahemikus {0} kuni {1}." ),
+	max: $.validator.format( "Palun sisestage väärtus, mis on väiksem või võrdne arvuga {0}." ),
+	min: $.validator.format( "Palun sisestage väärtus, mis on suurem või võrdne arvuga {0}." ),
+	creditcard: "Palun sisestage korrektne krediitkaardi number."
 } );
 return $;
 }));

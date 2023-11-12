@@ -30,7 +30,7 @@ CodeMirror.registerHelper("lint", "json", function(text) {
     var loc = hash.loc;
     found.push({from: CodeMirror.Pos(loc.first_line - 1, loc.first_column),
                 to: CodeMirror.Pos(loc.last_line - 1, loc.last_column),
-                messAge: str});
+                message: str});
   };
   try { jsonlint.parse(text); }
   catch(e) {}

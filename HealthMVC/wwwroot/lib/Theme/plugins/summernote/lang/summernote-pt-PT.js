@@ -37,9 +37,9 @@ var __webpack_exports__ = {};
         superscript: 'Superscript',
         size: 'Tamanho da fonte'
       },
-      imAge: {
-        imAge: 'ImAgem',
-        insert: 'Inserir imAgem',
+      image: {
+        image: 'Imagem',
+        insert: 'Inserir imagem',
         resizeFull: 'Redimensionar Completo',
         resizeHalf: 'Redimensionar Metade',
         resizeQuarter: 'Redimensionar Um Quarto',
@@ -50,13 +50,13 @@ var __webpack_exports__ = {};
         shapeCircle: 'Forma: Círculo',
         shapeThumbnail: 'Forma: Minhatura',
         shapeNone: 'Forma: Nenhum',
-        dragImAgeHere: 'Arraste uma imAgem para aqui',
-        dropImAge: 'Arraste uma imAgem ou texto',
+        dragImageHere: 'Arraste uma imagem para aqui',
+        dropImage: 'Arraste uma imagem ou texto',
         selectFromFiles: 'Selecione a partir dos arquivos',
         maximumFileSize: 'Tamanho máximo do fixeiro',
         maximumFileSizeError: 'Tamanho máximo do fixeiro é maior que o permitido.',
-        url: 'Endereço da imAgem',
-        remove: 'Remover ImAgem',
+        url: 'Endereço da imagem',
+        remove: 'Remover Imagem',
         original: 'Original'
       },
       video: {

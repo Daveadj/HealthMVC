@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
- * LanguAge: SL (Slovenian; slovenski jezik)
+ * Translated default messages for the jQuery validation plugin.
+ * Language: SL (Slovenian; slovenski jezik)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "To polje je obvezno.",
 	remote: "Prosimo popravite to polje.",
 	email: "Prosimo vnesite veljaven email naslov.",

@@ -377,7 +377,7 @@ catch (t) {}
  * allows the XSLX file to be easily defined with an object's structure matching
  * the files structure.
  *
- * @param {JSZip} zip ZIP packAge
+ * @param {JSZip} zip ZIP package
  * @param {object} obj Object to add (recursive)
  */
 function _addToZip( zip, obj ) {
@@ -536,23 +536,23 @@ function _excelColWidth( data, col ) {
 var excelStrings = {
 	"_rels/.rels":
 		'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'+
-		'<Relationships xmlns="http://schemas.openxmlformats.org/packAge/2006/relationships">'+
+		'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'+
 			'<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>'+
 		'</Relationships>',
 
 	"xl/_rels/workbook.xml.rels":
 		'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'+
-		'<Relationships xmlns="http://schemas.openxmlformats.org/packAge/2006/relationships">'+
+		'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'+
 			'<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>'+
 			'<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>'+
 		'</Relationships>',
 
 	"[Content_Types].xml":
 		'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'+
-		'<Types xmlns="http://schemas.openxmlformats.org/packAge/2006/content-types">'+
+		'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'+
 			'<Default Extension="xml" ContentType="application/xml" />'+
-			'<Default Extension="rels" ContentType="application/vnd.openxmlformats-packAge.relationships+xml" />'+
-			'<Default Extension="jpeg" ContentType="imAge/jpeg" />'+
+			'<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml" />'+
+			'<Default Extension="jpeg" ContentType="image/jpeg" />'+
 			'<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml" />'+
 			'<Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml" />'+
 			'<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml" />'+
@@ -770,7 +770,7 @@ var excelStrings = {
 // Pattern matching for special number formats. Perhaps this should be exposed
 // via an API in future?
 // Ref: section 3.8.30 - built in formatters in open spreadsheet
-//   https://www.ecma-international.org/news/TC45_current_work/Office%20Open%20XML%20Part%204%20-%20Markup%20LanguAge%20Reference.pdf
+//   https://www.ecma-international.org/news/TC45_current_work/Office%20Open%20XML%20Part%204%20-%20Markup%20Language%20Reference.pdf
 var _excelSpecials = [
 	{ match: /^\-?\d+\.\d%$/,               style: 60, fmt: function (d) { return d/100; } }, // Percent with d.p.
 	{ match: /^\-?\d+\.?\d*%$/,             style: 56, fmt: function (d) { return d/100; } }, // Percent
@@ -824,12 +824,12 @@ DataTable.ext.buttons.copyHtml5 = {
 			output = info.title + newline + newline + output;
 		}
 
-		if ( info.messAgeTop ) {
-			output = info.messAgeTop + newline + newline + output;
+		if ( info.messageTop ) {
+			output = info.messageTop + newline + newline + output;
 		}
 
-		if ( info.messAgeBottom ) {
-			output = output + newline + newline + info.messAgeBottom;
+		if ( info.messageBottom ) {
+			output = output + newline + newline + info.messageBottom;
 		}
 
 		if ( config.customize ) {
@@ -868,21 +868,21 @@ DataTable.ext.buttons.copyHtml5 = {
 		}
 
 		// Otherwise we show the text box and instruct the user to use it
-		var messAge = $('<span>'+dt.i18n( 'buttons.copyKeys',
+		var message = $('<span>'+dt.i18n( 'buttons.copyKeys',
 				'Press <i>ctrl</i> or <i>\u2318</i> + <i>C</i> to copy the table data<br>to your system clipboard.<br><br>'+
-				'To cancel, click this messAge or press escape.' )+'</span>'
+				'To cancel, click this message or press escape.' )+'</span>'
 			)
 			.append( hiddenDiv );
 
-		dt.buttons.info( dt.i18n( 'buttons.copyTitle', 'Copy to clipboard' ), messAge, 0 );
+		dt.buttons.info( dt.i18n( 'buttons.copyTitle', 'Copy to clipboard' ), message, 0 );
 
 		// Select the text so when the user activates their system clipboard
 		// it will copy that text
 		textarea[0].focus();
 		textarea[0].select();
 
-		// Event to hide the messAge when the user is done
-		var container = $(messAge).closest('.dt-button-info');
+		// Event to hide the message when the user is done
+		var container = $(message).closest('.dt-button-info');
 		var close = function () {
 			container.off( 'click.buttons-copy' );
 			$(document).off( '.buttons-copy' );
@@ -915,9 +915,9 @@ DataTable.ext.buttons.copyHtml5 = {
 
 	title: '*',
 
-	messAgeTop: '*',
+	messageTop: '*',
 
-	messAgeBottom: '*'
+	messageBottom: '*'
 };
 
 //
@@ -1163,15 +1163,15 @@ DataTable.ext.buttons.excelHtml5 = {
 			$('row:eq('+(row-1)+') c', rels).attr( 's', '51' ); // centre
 		};
 
-		// Title and top messAges
+		// Title and top messages
 		var exportInfo = dt.buttons.exportInfo( config );
 		if ( exportInfo.title ) {
 			addRow( [exportInfo.title], rowPos );
 			mergeCells( rowPos, data.header.length-1 );
 		}
 
-		if ( exportInfo.messAgeTop ) {
-			addRow( [exportInfo.messAgeTop], rowPos );
+		if ( exportInfo.messageTop ) {
+			addRow( [exportInfo.messageTop], rowPos );
 			mergeCells( rowPos, data.header.length-1 );
 		}
 
@@ -1196,8 +1196,8 @@ DataTable.ext.buttons.excelHtml5 = {
 		}
 
 		// Below the table
-		if ( exportInfo.messAgeBottom ) {
-			addRow( [exportInfo.messAgeBottom], rowPos );
+		if ( exportInfo.messageBottom ) {
+			addRow( [exportInfo.messageBottom], rowPos );
 			mergeCells( rowPos, data.header.length-1 );
 		}
 
@@ -1289,9 +1289,9 @@ DataTable.ext.buttons.excelHtml5 = {
 
 	title: '*',
 
-	messAgeTop: '*',
+	messageTop: '*',
 
-	messAgeBottom: '*',
+	messageBottom: '*',
 
 	createEmptyCells: false,
 
@@ -1353,8 +1353,8 @@ DataTable.ext.buttons.pdfHtml5 = {
 		}
 
 		var doc = {
-			pAgeSize: config.pAgeSize,
-			pAgeOrientation: config.orientation,
+			pageSize: config.pageSize,
+			pageOrientation: config.orientation,
 			content: [
 				{
 					table: {
@@ -1386,25 +1386,25 @@ DataTable.ext.buttons.pdfHtml5 = {
 					alignment: 'center',
 					fontSize: 15
 				},
-				messAge: {}
+				message: {}
 			},
 			defaultStyle: {
 				fontSize: 10
 			}
 		};
 
-		if ( info.messAgeTop ) {
+		if ( info.messageTop ) {
 			doc.content.unshift( {
-				text: info.messAgeTop,
-				style: 'messAge',
+				text: info.messageTop,
+				style: 'message',
 				margin: [ 0, 0, 0, 12 ]
 			} );
 		}
 
-		if ( info.messAgeBottom ) {
+		if ( info.messageBottom ) {
 			doc.content.push( {
-				text: info.messAgeBottom,
-				style: 'messAge',
+				text: info.messageBottom,
+				style: 'message',
 				margin: [ 0, 0, 0, 12 ]
 			} );
 		}
@@ -1443,15 +1443,15 @@ DataTable.ext.buttons.pdfHtml5 = {
 
 	orientation: 'portrait',
 
-	pAgeSize: 'A4',
+	pageSize: 'A4',
 
 	header: true,
 
 	footer: false,
 
-	messAgeTop: '*',
+	messageTop: '*',
 
-	messAgeBottom: '*',
+	messageBottom: '*',
 
 	customize: null,
 

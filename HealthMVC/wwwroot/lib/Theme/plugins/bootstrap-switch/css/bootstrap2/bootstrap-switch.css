@@ -2,7 +2,7 @@
   * bootstrap-switch - Turn checkboxes and radio buttons into toggle switches.
   *
   * @version v3.3.4
-  * @homepAge https://bttstrp.github.io/bootstrap-switch
+  * @homepage https://bttstrp.github.io/bootstrap-switch
   * @author Mattia Larentis <mattia@larentis.eu> (http://larentis.eu)
   * @license Apache-2.0
   */
@@ -95,18 +95,18 @@
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #005fcc;
-  background-imAge: -moz-linear-gradient(top, #0044cc, #08c);
-  background-imAge: -webkit-gradient(linear, 0 0, 0 100%, from(#0044cc), to(#08c));
-  background-imAge: -webkit-linear-gradient(top, #0044cc, #08c);
-  background-imAge: -o-linear-gradient(top, #0044cc, #08c);
-  background-imAge: linear-gradient(to bottom, #0044cc, #08c);
+  background-image: -moz-linear-gradient(top, #0044cc, #08c);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0044cc), to(#08c));
+  background-image: -webkit-linear-gradient(top, #0044cc, #08c);
+  background-image: -o-linear-gradient(top, #0044cc, #08c);
+  background-image: linear-gradient(to bottom, #0044cc, #08c);
   background-repeat: repeat-x;
-  filter: progid:DXImAgeTransform.Microsoft.gradient(startColorstr='#ff0044cc', endColorstr='#ff0088cc', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0044cc', endColorstr='#ff0088cc', GradientType=0);
   border-color: #08c #08c #005580;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   *background-color: #08c;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
-  filter: progid:DXImAgeTransform.Microsoft.gradient(enabled = false);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
 .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary:hover,
 .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary:hover,
@@ -135,18 +135,18 @@
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #41a7c5;
-  background-imAge: -moz-linear-gradient(top, #2f96b4, #5bc0de);
-  background-imAge: -webkit-gradient(linear, 0 0, 0 100%, from(#2f96b4), to(#5bc0de));
-  background-imAge: -webkit-linear-gradient(top, #2f96b4, #5bc0de);
-  background-imAge: -o-linear-gradient(top, #2f96b4, #5bc0de);
-  background-imAge: linear-gradient(to bottom, #2f96b4, #5bc0de);
+  background-image: -moz-linear-gradient(top, #2f96b4, #5bc0de);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2f96b4), to(#5bc0de));
+  background-image: -webkit-linear-gradient(top, #2f96b4, #5bc0de);
+  background-image: -o-linear-gradient(top, #2f96b4, #5bc0de);
+  background-image: linear-gradient(to bottom, #2f96b4, #5bc0de);
   background-repeat: repeat-x;
-  filter: progid:DXImAgeTransform.Microsoft.gradient(startColorstr='#ff2f96b4', endColorstr='#ff5bc0de', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff2f96b4', endColorstr='#ff5bc0de', GradientType=0);
   border-color: #5bc0de #5bc0de #28a1c5;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   *background-color: #5bc0de;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
-  filter: progid:DXImAgeTransform.Microsoft.gradient(enabled = false);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
 .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-info:hover,
 .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-info:hover,
@@ -175,18 +175,18 @@
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #58b058;
-  background-imAge: -moz-linear-gradient(top, #51a351, #62c462);
-  background-imAge: -webkit-gradient(linear, 0 0, 0 100%, from(#51a351), to(#62c462));
-  background-imAge: -webkit-linear-gradient(top, #51a351, #62c462);
-  background-imAge: -o-linear-gradient(top, #51a351, #62c462);
-  background-imAge: linear-gradient(to bottom, #51a351, #62c462);
+  background-image: -moz-linear-gradient(top, #51a351, #62c462);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#51a351), to(#62c462));
+  background-image: -webkit-linear-gradient(top, #51a351, #62c462);
+  background-image: -o-linear-gradient(top, #51a351, #62c462);
+  background-image: linear-gradient(to bottom, #51a351, #62c462);
   background-repeat: repeat-x;
-  filter: progid:DXImAgeTransform.Microsoft.gradient(startColorstr='#ff51a351', endColorstr='#ff62c462', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff51a351', endColorstr='#ff62c462', GradientType=0);
   border-color: #62c462 #62c462 #3b9e3b;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   *background-color: #62c462;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
-  filter: progid:DXImAgeTransform.Microsoft.gradient(enabled = false);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
 .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-success:hover,
 .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-success:hover,
@@ -215,18 +215,18 @@
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #f9a123;
-  background-imAge: -moz-linear-gradient(top, #f89406, #fbb450);
-  background-imAge: -webkit-gradient(linear, 0 0, 0 100%, from(#f89406), to(#fbb450));
-  background-imAge: -webkit-linear-gradient(top, #f89406, #fbb450);
-  background-imAge: -o-linear-gradient(top, #f89406, #fbb450);
-  background-imAge: linear-gradient(to bottom, #f89406, #fbb450);
+  background-image: -moz-linear-gradient(top, #f89406, #fbb450);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f89406), to(#fbb450));
+  background-image: -webkit-linear-gradient(top, #f89406, #fbb450);
+  background-image: -o-linear-gradient(top, #f89406, #fbb450);
+  background-image: linear-gradient(to bottom, #f89406, #fbb450);
   background-repeat: repeat-x;
-  filter: progid:DXImAgeTransform.Microsoft.gradient(startColorstr='#fff89406', endColorstr='#fffbb450', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff89406', endColorstr='#fffbb450', GradientType=0);
   border-color: #fbb450 #fbb450 #f89406;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   *background-color: #fbb450;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
-  filter: progid:DXImAgeTransform.Microsoft.gradient(enabled = false);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
 .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-warning:hover,
 .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-warning:hover,
@@ -255,18 +255,18 @@
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #d14641;
-  background-imAge: -moz-linear-gradient(top, #bd362f, #ee5f5b);
-  background-imAge: -webkit-gradient(linear, 0 0, 0 100%, from(#bd362f), to(#ee5f5b));
-  background-imAge: -webkit-linear-gradient(top, #bd362f, #ee5f5b);
-  background-imAge: -o-linear-gradient(top, #bd362f, #ee5f5b);
-  background-imAge: linear-gradient(to bottom, #bd362f, #ee5f5b);
+  background-image: -moz-linear-gradient(top, #bd362f, #ee5f5b);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#bd362f), to(#ee5f5b));
+  background-image: -webkit-linear-gradient(top, #bd362f, #ee5f5b);
+  background-image: -o-linear-gradient(top, #bd362f, #ee5f5b);
+  background-image: linear-gradient(to bottom, #bd362f, #ee5f5b);
   background-repeat: repeat-x;
-  filter: progid:DXImAgeTransform.Microsoft.gradient(startColorstr='#ffbd362f', endColorstr='#ffee5f5b', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffbd362f', endColorstr='#ffee5f5b', GradientType=0);
   border-color: #ee5f5b #ee5f5b #e51d18;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   *background-color: #ee5f5b;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
-  filter: progid:DXImAgeTransform.Microsoft.gradient(enabled = false);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
 .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-danger:hover,
 .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-danger:hover,
@@ -295,18 +295,18 @@
   color: #333;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   background-color: #f0f0f0;
-  background-imAge: -moz-linear-gradient(top, #e6e6e6, #fff);
-  background-imAge: -webkit-gradient(linear, 0 0, 0 100%, from(#e6e6e6), to(#fff));
-  background-imAge: -webkit-linear-gradient(top, #e6e6e6, #fff);
-  background-imAge: -o-linear-gradient(top, #e6e6e6, #fff);
-  background-imAge: linear-gradient(to bottom, #e6e6e6, #fff);
+  background-image: -moz-linear-gradient(top, #e6e6e6, #fff);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#e6e6e6), to(#fff));
+  background-image: -webkit-linear-gradient(top, #e6e6e6, #fff);
+  background-image: -o-linear-gradient(top, #e6e6e6, #fff);
+  background-image: linear-gradient(to bottom, #e6e6e6, #fff);
   background-repeat: repeat-x;
-  filter: progid:DXImAgeTransform.Microsoft.gradient(startColorstr='#ffe6e6e6', endColorstr='#ffffffff', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffe6e6e6', endColorstr='#ffffffff', GradientType=0);
   border-color: #fff #fff #d9d9d9;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   *background-color: #fff;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
-  filter: progid:DXImAgeTransform.Microsoft.gradient(enabled = false);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
 .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default:hover,
 .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default:hover,
@@ -340,18 +340,18 @@
   color: #333;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #f5f5f5;
-  background-imAge: -moz-linear-gradient(top, #fff, #e6e6e6);
-  background-imAge: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#e6e6e6));
-  background-imAge: -webkit-linear-gradient(top, #fff, #e6e6e6);
-  background-imAge: -o-linear-gradient(top, #fff, #e6e6e6);
-  background-imAge: linear-gradient(to bottom, #fff, #e6e6e6);
+  background-image: -moz-linear-gradient(top, #fff, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #fff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #fff, #e6e6e6);
+  background-image: linear-gradient(to bottom, #fff, #e6e6e6);
   background-repeat: repeat-x;
-  filter: progid:DXImAgeTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
   border-color: #e6e6e6 #e6e6e6 #bfbfbf;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   *background-color: #e6e6e6;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
-  filter: progid:DXImAgeTransform.Microsoft.gradient(enabled = false);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
 .bootstrap-switch .bootstrap-switch-label:hover,
 .bootstrap-switch .bootstrap-switch-label:focus,

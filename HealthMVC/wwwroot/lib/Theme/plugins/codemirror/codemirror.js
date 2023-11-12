@@ -113,7 +113,7 @@
 
   function activeElt() {
     // IE and Edge may throw an "Unspecified Error" when accessing document.activeElement.
-    // IE < 10 will throw when accessed while the pAge is loading or in an iframe.
+    // IE < 10 will throw when accessed while the page is loading or in an iframe.
     // IE > 9 and Edge will throw when accessed in an iframe if document.body is unavailable.
     var activeElement;
     try {
@@ -2572,16 +2572,16 @@
     cm.display.lineNumChars = null;
   }
 
-  function pAgeScrollX() {
+  function pageScrollX() {
     // Work around https://bugs.chromium.org/p/chromium/issues/detail?id=489206
-    // which causes pAge_Offset and bounding client rects to use
+    // which causes page_Offset and bounding client rects to use
     // different reference viewports and invalidate our calculations.
     if (chrome && android) { return -(document.body.getBoundingClientRect().left - parseInt(getComputedStyle(document.body).marginLeft)) }
-    return window.pAgeXOffset || (document.documentElement || document.body).scrollLeft
+    return window.pageXOffset || (document.documentElement || document.body).scrollLeft
   }
-  function pAgeScrollY() {
+  function pageScrollY() {
     if (chrome && android) { return -(document.body.getBoundingClientRect().top - parseInt(getComputedStyle(document.body).marginTop)) }
-    return window.pAgeYOffset || (document.documentElement || document.body).scrollTop
+    return window.pageYOffset || (document.documentElement || document.body).scrollTop
   }
 
   function widgetTopHeight(lineObj) {
@@ -2596,7 +2596,7 @@
   // Converts a {top, bottom, left, right} box from line-local
   // coordinates into another coordinate system. Context may be one of
   // "line", "div" (display.lineDiv), "local"./null (editor), "window",
-  // or "pAge".
+  // or "page".
   function intoCoordSystem(cm, lineObj, rect, context, includeWidgets) {
     if (!includeWidgets) {
       var height = widgetTopHeight(lineObj);
@@ -2607,10 +2607,10 @@
     var yOff = heightAtLine(lineObj);
     if (context == "local") { yOff += paddingTop(cm.display); }
     else { yOff -= cm.display.viewOffset; }
-    if (context == "pAge" || context == "window") {
+    if (context == "page" || context == "window") {
       var lOff = cm.display.lineSpace.getBoundingClientRect();
-      yOff += lOff.top + (context == "window" ? 0 : pAgeScrollY());
-      var xOff = lOff.left + (context == "window" ? 0 : pAgeScrollX());
+      yOff += lOff.top + (context == "window" ? 0 : pageScrollY());
+      var xOff = lOff.left + (context == "window" ? 0 : pageScrollX());
       rect.left += xOff; rect.right += xOff;
     }
     rect.top += yOff; rect.bottom += yOff;
@@ -2618,14 +2618,14 @@
   }
 
   // Coverts a box from "div" coords to another coordinate system.
-  // Context may be "window", "pAge", "div", or "local"./null.
+  // Context may be "window", "page", "div", or "local"./null.
   function fromCoordSystem(cm, coords, context) {
     if (context == "div") { return coords }
     var left = coords.left, top = coords.top;
-    // First move into "pAge" coordinate system
-    if (context == "pAge") {
-      left -= pAgeScrollX();
-      top -= pAgeScrollY();
+    // First move into "page" coordinate system
+    if (context == "page") {
+      left -= pageScrollX();
+      top -= pageScrollY();
     } else if (context == "local" || !context) {
       var localBox = cm.display.sizer.getBoundingClientRect();
       left += localBox.left;
@@ -6609,18 +6609,18 @@
     e.dataTransfer.setData("Text", cm.getSelection());
     e.dataTransfer.effectAllowed = "copyMove";
 
-    // Use dummy imAge instead of default browsers imAge.
+    // Use dummy image instead of default browsers image.
     // Recent Safari (~6.0.2) have a tendency to segfault when this happens, so we don't do it there.
-    if (e.dataTransfer.setDragImAge && !safari) {
+    if (e.dataTransfer.setDragImage && !safari) {
       var img = elt("img", null, null, "position: fixed; left: 0; top: 0;");
-      img.src = "data:imAge/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+      img.src = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
       if (presto) {
         img.width = img.height = 1;
         cm.display.wrapper.appendChild(img);
-        // Force a relayout, or Opera won't use our imAge for some obscure reason
+        // Force a relayout, or Opera won't use our image for some obscure reason
         img._top = img.offsetTop;
       }
-      e.dataTransfer.setDragImAge(img, 0, 0);
+      e.dataTransfer.setDragImage(img, 0, 0);
       if (presto) { img.parentNode.removeChild(img); }
     }
   }
@@ -6646,7 +6646,7 @@
 
   // These must be handled carefully, because naively registering a
   // handler for each editor will cause the editors to never be
-  // garbAge collected.
+  // garbage collected.
 
   function forEachCodeMirror(f) {
     if (!document.getElementsByClassName) { return }
@@ -6689,13 +6689,13 @@
 
   var keyNames = {
     3: "Pause", 8: "Backspace", 9: "Tab", 13: "Enter", 16: "Shift", 17: "Ctrl", 18: "Alt",
-    19: "Pause", 20: "CapsLock", 27: "Esc", 32: "Space", 33: "PAgeUp", 34: "PAgeDown", 35: "End",
+    19: "Pause", 20: "CapsLock", 27: "Esc", 32: "Space", 33: "PageUp", 34: "PageDown", 35: "End",
     36: "Home", 37: "Left", 38: "Up", 39: "Right", 40: "Down", 44: "PrintScrn", 45: "Insert",
     46: "Delete", 59: ";", 61: "=", 91: "Mod", 92: "Mod", 93: "Mod",
     106: "*", 107: "=", 109: "-", 110: ".", 111: "/", 145: "ScrollLock",
     173: "-", 186: ";", 187: "=", 188: ",", 189: "-", 190: ".", 191: "/", 192: "`", 219: "[", 220: "\\",
     221: "]", 222: "'", 224: "Mod", 63232: "Up", 63233: "Down", 63234: "Left", 63235: "Right", 63272: "Delete",
-    63273: "Home", 63275: "End", 63276: "PAgeUp", 63277: "PAgeDown", 63302: "Insert"
+    63273: "Home", 63275: "End", 63276: "PageUp", 63277: "PageDown", 63302: "Insert"
   };
 
   // Number keys
@@ -6709,7 +6709,7 @@
 
   keyMap.basic = {
     "Left": "goCharLeft", "Right": "goCharRight", "Up": "goLineUp", "Down": "goLineDown",
-    "End": "goLineEnd", "Home": "goLineStartSmart", "PAgeUp": "goPAgeUp", "PAgeDown": "goPAgeDown",
+    "End": "goLineEnd", "Home": "goLineStartSmart", "PageUp": "goPageUp", "PageDown": "goPageDown",
     "Delete": "delCharAfter", "Backspace": "delCharBefore", "Shift-Backspace": "delCharBefore",
     "Tab": "defaultTab", "Shift-Tab": "indentAuto",
     "Enter": "newlineAndIndent", "Insert": "toggleOverwrite",
@@ -6731,7 +6731,7 @@
   // Very basic readline/emacs-style bindings, which are standard on Mac.
   keyMap.emacsy = {
     "Ctrl-F": "goCharRight", "Ctrl-B": "goCharLeft", "Ctrl-P": "goLineUp", "Ctrl-N": "goLineDown",
-    "Ctrl-A": "goLineStart", "Ctrl-E": "goLineEnd", "Ctrl-V": "goPAgeDown", "Shift-Ctrl-V": "goPAgeUp",
+    "Ctrl-A": "goLineStart", "Ctrl-E": "goLineEnd", "Ctrl-V": "goPageDown", "Shift-Ctrl-V": "goPageUp",
     "Ctrl-D": "delCharAfter", "Ctrl-H": "delCharBefore", "Alt-Backspace": "delWordBefore", "Ctrl-K": "killLine",
     "Ctrl-T": "transposeChars", "Ctrl-O": "openLine"
   };
@@ -6889,8 +6889,8 @@
       var order = getOrder(lineObj, cm.doc.direction);
       if (order) {
         var part = dir < 0 ? lst(order) : order[0];
-        var moveInStorAgeOrder = (dir < 0) == (part.level == 1);
-        var sticky = moveInStorAgeOrder ? "after" : "before";
+        var moveInStorageOrder = (dir < 0) == (part.level == 1);
+        var sticky = moveInStorageOrder ? "after" : "before";
         var ch;
         // With a wrapped rtl chunk (possibly spanning multiple bidi parts),
         // it could be that the last bidi part is not on the last visual line,
@@ -6938,11 +6938,11 @@
     var wrappedLineExtent = getWrappedLineExtent(start.sticky == "before" ? mv(start, -1) : start.ch);
 
     if (cm.doc.direction == "rtl" || part.level == 1) {
-      var moveInStorAgeOrder = (part.level == 1) == (dir < 0);
-      var ch = mv(start, moveInStorAgeOrder ? 1 : -1);
-      if (ch != null && (!moveInStorAgeOrder ? ch >= part.from && ch >= wrappedLineExtent.begin : ch <= part.to && ch <= wrappedLineExtent.end)) {
+      var moveInStorageOrder = (part.level == 1) == (dir < 0);
+      var ch = mv(start, moveInStorageOrder ? 1 : -1);
+      if (ch != null && (!moveInStorageOrder ? ch >= part.from && ch >= wrappedLineExtent.begin : ch <= part.to && ch <= wrappedLineExtent.end)) {
         // Case 2: We move within an rtl part or in an rtl editor on the same visual line
-        var sticky = moveInStorAgeOrder ? "before" : "after";
+        var sticky = moveInStorageOrder ? "before" : "after";
         return new Pos(start.line, ch, sticky)
       }
     }
@@ -6951,17 +6951,17 @@
     // the current bidi part
 
     var searchInVisualLine = function (partPos, dir, wrappedLineExtent) {
-      var getRes = function (ch, moveInStorAgeOrder) { return moveInStorAgeOrder
+      var getRes = function (ch, moveInStorageOrder) { return moveInStorageOrder
         ? new Pos(start.line, mv(ch, 1), "before")
         : new Pos(start.line, ch, "after"); };
 
       for (; partPos >= 0 && partPos < bidi.length; partPos += dir) {
         var part = bidi[partPos];
-        var moveInStorAgeOrder = (dir > 0) == (part.level != 1);
-        var ch = moveInStorAgeOrder ? wrappedLineExtent.begin : mv(wrappedLineExtent.end, -1);
-        if (part.from <= ch && ch < part.to) { return getRes(ch, moveInStorAgeOrder) }
-        ch = moveInStorAgeOrder ? part.from : mv(part.to, -1);
-        if (wrappedLineExtent.begin <= ch && ch < wrappedLineExtent.end) { return getRes(ch, moveInStorAgeOrder) }
+        var moveInStorageOrder = (dir > 0) == (part.level != 1);
+        var ch = moveInStorageOrder ? wrappedLineExtent.begin : mv(wrappedLineExtent.end, -1);
+        if (part.from <= ch && ch < part.to) { return getRes(ch, moveInStorageOrder) }
+        ch = moveInStorageOrder ? part.from : mv(part.to, -1);
+        if (wrappedLineExtent.begin <= ch && ch < wrappedLineExtent.end) { return getRes(ch, moveInStorageOrder) }
       }
     };
 
@@ -7044,8 +7044,8 @@
     }, sel_move); },
     goLineUp: function (cm) { return cm.moveV(-1, "line"); },
     goLineDown: function (cm) { return cm.moveV(1, "line"); },
-    goPAgeUp: function (cm) { return cm.moveV(-1, "pAge"); },
-    goPAgeDown: function (cm) { return cm.moveV(1, "pAge"); },
+    goPageUp: function (cm) { return cm.moveV(-1, "page"); },
+    goPageDown: function (cm) { return cm.moveV(1, "page"); },
     goCharLeft: function (cm) { return cm.moveH(-1, "char"); },
     goCharRight: function (cm) { return cm.moveH(1, "char"); },
     goColumnLeft: function (cm) { return cm.moveH(-1, "column"); },
@@ -7424,17 +7424,17 @@
   // happen, and treat as a click if it didn't.
   function leftButtonStartDrag(cm, event, pos, behavior) {
     var display = cm.display, moved = false;
-    var drAgend = operation(cm, function (e) {
+    var dragEnd = operation(cm, function (e) {
       if (webkit) { display.scroller.draggable = false; }
       cm.state.draggingText = false;
       if (cm.state.delayingBlurEvent) {
         if (cm.hasFocus()) { cm.state.delayingBlurEvent = false; }
         else { delayBlurEvent(cm); }
       }
-      off(display.wrapper.ownerDocument, "mouseup", drAgend);
+      off(display.wrapper.ownerDocument, "mouseup", dragEnd);
       off(display.wrapper.ownerDocument, "mousemove", mouseMove);
       off(display.scroller, "dragstart", dragStart);
-      off(display.scroller, "drop", drAgend);
+      off(display.scroller, "drop", dragEnd);
       if (!moved) {
         e_preventDefault(e);
         if (!behavior.addNew)
@@ -7452,12 +7452,12 @@
     var dragStart = function () { return moved = true; };
     // Let the drag handler handle this.
     if (webkit) { display.scroller.draggable = true; }
-    cm.state.draggingText = drAgend;
-    drAgend.copy = !behavior.moveOnDrag;
-    on(display.wrapper.ownerDocument, "mouseup", drAgend);
+    cm.state.draggingText = dragEnd;
+    dragEnd.copy = !behavior.moveOnDrag;
+    on(display.wrapper.ownerDocument, "mouseup", dragEnd);
     on(display.wrapper.ownerDocument, "mousemove", mouseMove);
     on(display.scroller, "dragstart", dragStart);
-    on(display.scroller, "drop", drAgend);
+    on(display.scroller, "drop", dragEnd);
 
     cm.state.delayingBlurEvent = true;
     setTimeout(function () { return display.input.focus(); }, 20);
@@ -7857,7 +7857,7 @@
       var funcs = cm.display.dragFunctions;
       var toggle = value ? on : off;
       toggle(cm.display.scroller, "dragstart", funcs.start);
-      toggle(cm.display.scroller, "drAgenter", funcs.enter);
+      toggle(cm.display.scroller, "dragenter", funcs.enter);
       toggle(cm.display.scroller, "dragover", funcs.over);
       toggle(cm.display.scroller, "dragleave", funcs.leave);
       toggle(cm.display.scroller, "drop", funcs.drop);
@@ -8009,8 +8009,8 @@
         d.activeTouch = {start: now, moved: false,
                          prev: now - prevTouch.end <= 300 ? prevTouch : null};
         if (e.touches.length == 1) {
-          d.activeTouch.left = e.touches[0].pAgeX;
-          d.activeTouch.top = e.touches[0].pAgeY;
+          d.activeTouch.left = e.touches[0].pageX;
+          d.activeTouch.top = e.touches[0].pageY;
         }
       }
     });
@@ -8021,7 +8021,7 @@
       var touch = d.activeTouch;
       if (touch && !eventInWidget(d, e) && touch.left != null &&
           !touch.moved && new Date - touch.start < 300) {
-        var pos = cm.coordsChar(d.activeTouch, "pAge"), range;
+        var pos = cm.coordsChar(d.activeTouch, "page"), range;
         if (!touch.prev || farAway(touch, touch.prev)) // Single tap
           { range = new Range(pos, pos); }
         else if (!touch.prev.prev || farAway(touch, touch.prev.prev)) // Double tap
@@ -8422,20 +8422,20 @@
         if (start == null) { pos = range.head; }
         else if (typeof start == "object") { pos = clipPos(this.doc, start); }
         else { pos = start ? range.from() : range.to(); }
-        return cursorCoords(this, pos, mode || "pAge")
+        return cursorCoords(this, pos, mode || "page")
       },
 
       charCoords: function(pos, mode) {
-        return charCoords(this, clipPos(this.doc, pos), mode || "pAge")
+        return charCoords(this, clipPos(this.doc, pos), mode || "page")
       },
 
       coordsChar: function(coords, mode) {
-        coords = fromCoordSystem(this, coords, mode || "pAge");
+        coords = fromCoordSystem(this, coords, mode || "page");
         return coordsChar(this, coords.left, coords.top)
       },
 
       lineAtHeight: function(height, mode) {
-        height = fromCoordSystem(this, {top: height, left: 0}, mode || "pAge").top;
+        height = fromCoordSystem(this, {top: height, left: 0}, mode || "page").top;
         return lineAtHeight(this.doc, height + this.display.viewOffset)
       },
       heightAtLine: function(line, mode, includeWidgets) {
@@ -8448,7 +8448,7 @@
         } else {
           lineObj = line;
         }
-        return intoCoordSystem(this, lineObj, {top: 0, left: 0}, mode || "pAge", includeWidgets || end).top +
+        return intoCoordSystem(this, lineObj, {top: 0, left: 0}, mode || "page", includeWidgets || end).top +
           (end ? this.doc.height - heightAtLine(lineObj) : 0)
       },
 
@@ -8563,7 +8563,7 @@
           if (range.goalColumn != null) { headPos.left = range.goalColumn; }
           goals.push(headPos.left);
           var pos = findPosV(this$1, headPos, dir, unit);
-          if (unit == "pAge" && range == doc.sel.primary())
+          if (unit == "page" && range == doc.sel.primary())
             { addToScrollTop(this$1, charCoords(this$1, pos, "div").top - headPos.top); }
           return pos
         }, sel_move);
@@ -8774,13 +8774,13 @@
   }
 
   // For relative vertical movement. Dir may be -1 or 1. Unit can be
-  // "pAge" or "line". The resulting position will have a hitSide=true
+  // "page" or "line". The resulting position will have a hitSide=true
   // property if it reached the end of the document.
   function findPosV(cm, pos, dir, unit) {
     var doc = cm.doc, x = pos.left, y;
-    if (unit == "pAge") {
-      var pAgeSize = Math.min(cm.display.wrapper.clientHeight, window.innerHeight || document.documentElement.clientHeight);
-      var moveAmount = Math.max(pAgeSize - .5 * textHeight(cm.display), 3);
+    if (unit == "page") {
+      var pageSize = Math.min(cm.display.wrapper.clientHeight, window.innerHeight || document.documentElement.clientHeight);
+      var moveAmount = Math.max(pageSize - .5 * textHeight(cm.display), 3);
       y = (dir > 0 ? pos.bottom : pos.top) + dir * moveAmount;
 
     } else if (unit == "line") {

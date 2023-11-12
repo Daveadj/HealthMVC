@@ -1640,7 +1640,7 @@
 
         var _options = $__default["default"].extend({}, Default$7, typeof config === 'object' ? config : data);
 
-        localStorAge.setItem('AdminLTE:IFrame:Options', JSON.stringify(_options));
+        localStorage.setItem('AdminLTE:IFrame:Options', JSON.stringify(_options));
         var plugin = new IFrame($__default["default"](this), _options);
         $__default["default"](this).data(DATA_KEY$7, typeof config === 'object' ? config : data);
 
@@ -1648,7 +1648,7 @@
           plugin[config]();
         }
       } else {
-        new IFrame($__default["default"](this), JSON.parse(localStorAge.getItem('AdminLTE:IFrame:Options')))._initFrameElement();
+        new IFrame($__default["default"](this), JSON.parse(localStorage.getItem('AdminLTE:IFrame:Options')))._initFrameElement();
       }
     };
 
@@ -1993,7 +1993,7 @@
       });
 
       if (this._options.enableRemember) {
-        localStorAge.setItem("remember" + EVENT_KEY$2, CLASS_NAME_OPEN$3);
+        localStorage.setItem("remember" + EVENT_KEY$2, CLASS_NAME_OPEN$3);
       }
 
       $__default["default"](this._element).trigger($__default["default"].Event(EVENT_SHOWN));
@@ -2011,7 +2011,7 @@
       $bodySelector.addClass(CLASS_NAME_COLLAPSED);
 
       if (this._options.enableRemember) {
-        localStorAge.setItem("remember" + EVENT_KEY$2, CLASS_NAME_COLLAPSED);
+        localStorage.setItem("remember" + EVENT_KEY$2, CLASS_NAME_COLLAPSED);
       }
 
       $__default["default"](this._element).trigger($__default["default"].Event(EVENT_COLLAPSED$1));
@@ -2058,7 +2058,7 @@
       }
 
       var $body = $__default["default"]('body');
-      var toggleState = localStorAge.getItem("remember" + EVENT_KEY$2);
+      var toggleState = localStorage.getItem("remember" + EVENT_KEY$2);
 
       if (toggleState === CLASS_NAME_COLLAPSED) {
         if (this._options.noTransitionAfterReload) {
@@ -2596,9 +2596,9 @@
     delay: 1000,
     fade: true,
     icon: null,
-    imAge: null,
-    imAgeAlt: null,
-    imAgeHeight: '25px',
+    image: null,
+    imageAlt: null,
+    imageHeight: '25px',
     title: null,
     subtitle: null,
     close: true,
@@ -2637,14 +2637,14 @@
 
       var toastHeader = $__default["default"]('<div class="toast-header">');
 
-      if (this._config.imAge != null) {
-        var toastImAge = $__default["default"]('<img />').addClass('rounded mr-2').attr('src', this._config.imAge).attr('alt', this._config.imAgeAlt);
+      if (this._config.image != null) {
+        var toastImage = $__default["default"]('<img />').addClass('rounded mr-2').attr('src', this._config.image).attr('alt', this._config.imageAlt);
 
-        if (this._config.imAgeHeight != null) {
-          toastImAge.height(this._config.imAgeHeight).width('auto');
+        if (this._config.imageHeight != null) {
+          toastImage.height(this._config.imageHeight).width('auto');
         }
 
-        toastHeader.append(toastImAge);
+        toastHeader.append(toastImage);
       }
 
       if (this._config.icon != null) {

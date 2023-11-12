@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Superscript',
         size: 'Betűméret'
       },
-      imAge: {
-        imAge: 'Kép',
+      image: {
+        image: 'Kép',
         insert: 'Kép beszúrása',
         resizeFull: 'Átméretezés teljes méretre',
         resizeHalf: 'Átméretezés felére',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Shape: Circle',
         shapeThumbnail: 'Shape: Thumbnail',
         shapeNone: 'Shape: None',
-        dragImAgeHere: 'Ide húzhat képet vagy szöveget',
-        dropImAge: 'Engedje el a képet vagy szöveget',
+        dragImageHere: 'Ide húzhat képet vagy szöveget',
+        dropImage: 'Engedje el a képet vagy szöveget',
         selectFromFiles: 'Fájlok kiválasztása',
         maximumFileSize: 'Maximum file size',
         maximumFileSizeError: 'Maximum file size exceeded.',

@@ -234,7 +234,7 @@ $.extend( RowReorder.prototype, {
 		// Need to pass the nodes through jQuery to get them in document order,
 		// not what DataTables thinks it is, since we have been altering the
 		// order
-		var nodes = $.unique( dt.rows( { pAge: 'current' } ).nodes().toArray() );
+		var nodes = $.unique( dt.rows( { page: 'current' } ).nodes().toArray() );
 		var middles = $.map( nodes, function ( node, i ) {
 			var top = $(node).position().top - headerHeight;
 
@@ -294,8 +294,8 @@ $.extend( RowReorder.prototype, {
 	_clonePosition: function ( e )
 	{
 		var start = this.s.start;
-		var topDiff = this._eventToPAge( e, 'Y' ) - start.top;
-		var leftDiff = this._eventToPAge( e, 'X' ) - start.left;
+		var topDiff = this._eventToPage( e, 'Y' ) - start.top;
+		var leftDiff = this._eventToPage( e, 'X' ) - start.left;
 		var snap = this.c.snapX;
 		var left;
 		var top = topDiff + start.offsetTop;
@@ -340,20 +340,20 @@ $.extend( RowReorder.prototype, {
 
 
 	/**
-	 * Get pAgeX/Y position from an event, regardless of if it is a mouse or
+	 * Get pageX/Y position from an event, regardless of if it is a mouse or
 	 * touch event.
 	 *
 	 * @param  {object} e Event
 	 * @param  {string} pos X or Y (must be a capital)
 	 * @private
 	 */
-	_eventToPAge: function ( e, pos )
+	_eventToPage: function ( e, pos )
 	{
 		if ( e.type.indexOf( 'touch' ) !== -1 ) {
-			return e.originalEvent.touches[0][ 'pAge'+pos ];
+			return e.originalEvent.touches[0][ 'page'+pos ];
 		}
 
-		return e[ 'pAge'+pos ];
+		return e[ 'page'+pos ];
 	},
 
 
@@ -372,11 +372,11 @@ $.extend( RowReorder.prototype, {
 		var start = this.s.start;
 
 		var offset = target.offset();
-		start.top = this._eventToPAge( e, 'Y' );
-		start.left = this._eventToPAge( e, 'X' );
+		start.top = this._eventToPage( e, 'Y' );
+		start.left = this._eventToPage( e, 'X' );
 		start.offsetTop = offset.top;
 		start.offsetLeft = offset.left;
-		start.nodes = $.unique( dt.rows( { pAge: 'current' } ).nodes().toArray() );
+		start.nodes = $.unique( dt.rows( { page: 'current' } ).nodes().toArray() );
 
 		this._cachePositions();
 		this._clone( target );
@@ -426,7 +426,7 @@ $.extend( RowReorder.prototype, {
 		this._clonePosition( e );
 
 		// Transform the mouse position into a position in the table's body
-		var bodyY = this._eventToPAge( e, 'Y' ) - this.s.bodyTop;
+		var bodyY = this._eventToPage( e, 'Y' ) - this.s.bodyTop;
 		var middles = this.s.middles;
 		var insertPoint = null;
 		var dt = this.s.dt;
@@ -446,7 +446,7 @@ $.extend( RowReorder.prototype, {
 
 		// Perform the DOM shuffle if it has changed from last time
 		if ( this.s.lastInsert === null || this.s.lastInsert !== insertPoint ) {
-			var nodes = $.unique( dt.rows( { pAge: 'current' } ).nodes().toArray() );
+			var nodes = $.unique( dt.rows( { page: 'current' } ).nodes().toArray() );
 
 			if ( insertPoint > this.s.lastInsert ) {
 				this.dom.target.insertAfter( nodes[ insertPoint-1 ] );
@@ -492,7 +492,7 @@ $.extend( RowReorder.prototype, {
 
 		// Calculate the difference
 		var startNodes = this.s.start.nodes;
-		var endNodes = $.unique( dt.rows( { pAge: 'current' } ).nodes().toArray() );
+		var endNodes = $.unique( dt.rows( { page: 'current' } ).nodes().toArray() );
 		var idDiff = {};
 		var fullDiff = [];
 		var diffNodes = [];
@@ -610,7 +610,7 @@ $.extend( RowReorder.prototype, {
 		var scrollSpeed = 5;
 		var buffer = 65;
 		var
-			windowY = e.pAgeY - document.body.scrollTop,
+			windowY = e.pageY - document.body.scrollTop,
 			windowVert,
 			dtVert;
 
@@ -624,11 +624,11 @@ $.extend( RowReorder.prototype, {
 		}
 
 		// DataTables scrolling calculations - based on the table's position in
-		// the document and the mouse position on the pAge
-		if ( scroll.dtTop !== null && e.pAgeY < scroll.dtTop + buffer ) {
+		// the document and the mouse position on the page
+		if ( scroll.dtTop !== null && e.pageY < scroll.dtTop + buffer ) {
 			dtVert = scrollSpeed * -1;
 		}
-		else if ( scroll.dtTop !== null && e.pAgeY > scroll.dtTop + scroll.dtHeight - buffer ) {
+		else if ( scroll.dtTop !== null && e.pageY > scroll.dtTop + scroll.dtHeight - buffer ) {
 			dtVert = scrollSpeed;
 		}
 

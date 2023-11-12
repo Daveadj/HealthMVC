@@ -64,7 +64,7 @@ var _styleToAbs = function( el ) {
  * @param  {string} href URL
  */
 var _relToAbs = function( href ) {
-	// Assign to a link on the original pAge so the browser will do all the
+	// Assign to a link on the original page so the browser will do all the
 	// hard work of figuring out where the file actually is
 	_link.href = href;
 	var linkHost = _link.host;
@@ -169,9 +169,9 @@ DataTable.ext.buttons.print = {
 		// Inject the table and other surrounding information
 		win.document.body.innerHTML =
 			'<h1>'+exportInfo.title+'</h1>'+
-			'<div>'+(exportInfo.messAgeTop || '')+'</div>'+
+			'<div>'+(exportInfo.messageTop || '')+'</div>'+
 			html+
-			'<div>'+(exportInfo.messAgeBottom || '')+'</div>';
+			'<div>'+(exportInfo.messageBottom || '')+'</div>';
 
 		$(win.document.body).addClass('dt-print-view');
 
@@ -201,9 +201,9 @@ DataTable.ext.buttons.print = {
 
 	title: '*',
 
-	messAgeTop: '*',
+	messageTop: '*',
 
-	messAgeBottom: '*',
+	messageBottom: '*',
 
 	exportOptions: {},
 

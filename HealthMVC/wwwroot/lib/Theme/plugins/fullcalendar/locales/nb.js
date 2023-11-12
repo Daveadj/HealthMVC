@@ -18,7 +18,7 @@ FullCalendar.globalLocales.push(function () {
     },
     weekText: 'Uke',
     weekTextLong: 'Uke',
-    allDayText: 'Hele dAgen',
+    allDayText: 'Hele dagen',
     moreLinkText: 'til',
     noEventsText: 'Ingen hendelser å vise',
     buttonHints: {

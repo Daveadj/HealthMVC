@@ -66,9 +66,9 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
     list2: "variable-3",
     list3: "keyword",
     hr: "hr",
-    imAge: "imAge",
-    imAgeAltText: "imAge-alt-text",
-    imAgeMarker: "imAge-marker",
+    image: "image",
+    imageAltText: "image-alt-text",
+    imageMarker: "image-marker",
     formatting: "formatting",
     linkInline: "link",
     linkEmail: "link",
@@ -366,9 +366,9 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       if (state.emoji) { styles.push(tokenTypes.emoji); }
       if (state.linkText) { styles.push(tokenTypes.linkText); }
       if (state.code) { styles.push(tokenTypes.code); }
-      if (state.imAge) { styles.push(tokenTypes.imAge); }
-      if (state.imAgeAltText) { styles.push(tokenTypes.imAgeAltText, "link"); }
-      if (state.imAgeMarker) { styles.push(tokenTypes.imAgeMarker); }
+      if (state.image) { styles.push(tokenTypes.image); }
+      if (state.imageAltText) { styles.push(tokenTypes.imageAltText, "link"); }
+      if (state.imageMarker) { styles.push(tokenTypes.imageMarker); }
     }
 
     if (state.header) { styles.push(tokenTypes.header, tokenTypes.header + "-" + state.header); }
@@ -485,29 +485,29 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
     }
 
     if (ch === '!' && stream.match(/\[[^\]]*\] ?(?:\(|\[)/, false)) {
-      state.imAgeMarker = true;
-      state.imAge = true;
-      if (modeCfg.highlightFormatting) state.formatting = "imAge";
+      state.imageMarker = true;
+      state.image = true;
+      if (modeCfg.highlightFormatting) state.formatting = "image";
       return getType(state);
     }
 
-    if (ch === '[' && state.imAgeMarker && stream.match(/[^\]]*\](\(.*?\)| ?\[.*?\])/, false)) {
-      state.imAgeMarker = false;
-      state.imAgeAltText = true
-      if (modeCfg.highlightFormatting) state.formatting = "imAge";
+    if (ch === '[' && state.imageMarker && stream.match(/[^\]]*\](\(.*?\)| ?\[.*?\])/, false)) {
+      state.imageMarker = false;
+      state.imageAltText = true
+      if (modeCfg.highlightFormatting) state.formatting = "image";
       return getType(state);
     }
 
-    if (ch === ']' && state.imAgeAltText) {
-      if (modeCfg.highlightFormatting) state.formatting = "imAge";
+    if (ch === ']' && state.imageAltText) {
+      if (modeCfg.highlightFormatting) state.formatting = "image";
       var type = getType(state);
-      state.imAgeAltText = false;
-      state.imAge = false;
+      state.imageAltText = false;
+      state.image = false;
       state.inline = state.f = linkHref;
       return type;
     }
 
-    if (ch === '[' && !state.imAge) {
+    if (ch === '[' && !state.image) {
       if (state.linkText && stream.match(/^.*?\]/)) return getType(state)
       state.linkText = true;
       if (modeCfg.highlightFormatting) state.formatting = "link";

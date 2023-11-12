@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Yläindeksi',
         size: 'Kirjasinkoko'
       },
-      imAge: {
-        imAge: 'Kuva',
+      image: {
+        image: 'Kuva',
         insert: 'Lisää kuva',
         resizeFull: 'Koko leveys',
         resizeHalf: 'Puolikas leveys',
@@ -50,7 +50,7 @@ var __webpack_exports__ = {};
         shapeCircle: 'Muoto: Ympyrä',
         shapeThumbnail: 'Muoto: Esikatselukuva',
         shapeNone: 'Muoto: Ei muotoilua',
-        dragImAgeHere: 'Vedä kuva tähän',
+        dragImageHere: 'Vedä kuva tähän',
         selectFromFiles: 'Valitse tiedostoista',
         maximumFileSize: 'Maksimi tiedosto koko',
         maximumFileSizeError: 'Maksimi tiedosto koko ylitetty.',

@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Üst Simge',
         size: 'Yazı tipi boyutu'
       },
-      imAge: {
-        imAge: 'Resim',
+      image: {
+        image: 'Resim',
         insert: 'Resim ekle',
         resizeFull: 'Orjinal boyut',
         resizeHalf: '1/2 boyut',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Şekil: Daire',
         shapeThumbnail: 'Şekil: K.Resim',
         shapeNone: 'Şekil: Yok',
-        dragImAgeHere: 'Buraya sürükleyin',
-        dropImAge: 'Resim veya metni bırakın',
+        dragImageHere: 'Buraya sürükleyin',
+        dropImage: 'Resim veya metni bırakın',
         selectFromFiles: 'Dosya seçin',
         maximumFileSize: 'Maksimum dosya boyutu',
         maximumFileSizeError: 'Maksimum dosya boyutu aşıldı.',

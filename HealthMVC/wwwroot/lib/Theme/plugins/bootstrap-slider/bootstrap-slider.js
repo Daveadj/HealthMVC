@@ -37,7 +37,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
  * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAgeS OR OTHER LIABILITY,
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
@@ -129,8 +129,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 
 			// helper function for logging errors
 			// $.error breaks jQuery chaining
-			var logError = typeof console === 'undefined' ? noop : function (messAge) {
-				console.error(messAge);
+			var logError = typeof console === 'undefined' ? noop : function (message) {
+				console.error(message);
 			};
 
 			/**
@@ -236,8 +236,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 						return value;
 					}
 				},
-				toValue: function toValue(percentAge) {
-					var rawValue = percentAge / 100 * (this.options.max - this.options.min);
+				toValue: function toValue(percentage) {
+					var rawValue = percentage / 100 * (this.options.max - this.options.min);
 					var shouldAdjustWithBase = true;
 					if (this.options.ticks_positions.length > 0) {
 						var minv,
@@ -245,7 +245,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 						    minp,
 						    maxp = 0;
 						for (var i = 1; i < this.options.ticks_positions.length; i++) {
-							if (percentAge <= this.options.ticks_positions[i]) {
+							if (percentage <= this.options.ticks_positions[i]) {
 								minv = this.options.ticks[i - 1];
 								minp = this.options.ticks_positions[i - 1];
 								maxv = this.options.ticks[i];
@@ -254,8 +254,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 								break;
 							}
 						}
-						var partialPercentAge = (percentAge - minp) / (maxp - minp);
-						rawValue = minv + partialPercentAge * (maxv - minv);
+						var partialPercentage = (percentage - minp) / (maxp - minp);
+						rawValue = minv + partialPercentage * (maxv - minv);
 						shouldAdjustWithBase = false;
 					}
 
@@ -263,7 +263,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					var value = adjustment + Math.round(rawValue / this.options.step) * this.options.step;
 					return SliderScale.linear.getValue(value, this.options);
 				},
-				toPercentAge: function toPercentAge(value) {
+				toPercentage: function toPercentage(value) {
 					if (this.options.max === this.options.min) {
 						return 0;
 					}
@@ -284,8 +284,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 							}
 						}
 						if (i > 0) {
-							var partialPercentAge = (value - minv) / (maxv - minv);
-							return minp + partialPercentAge * (maxp - minp);
+							var partialPercentage = (value - minv) / (maxv - minv);
+							return minp + partialPercentage * (maxp - minp);
 						}
 					}
 
@@ -295,11 +295,11 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 
 			logarithmic: {
 				/* Based on http://stackoverflow.com/questions/846221/logarithmic-slider */
-				toValue: function toValue(percentAge) {
+				toValue: function toValue(percentage) {
 					var offset = 1 - this.options.min;
 					var min = Math.log(this.options.min + offset);
 					var max = Math.log(this.options.max + offset);
-					var value = Math.exp(min + (max - min) * percentAge / 100) - offset;
+					var value = Math.exp(min + (max - min) * percentage / 100) - offset;
 					if (Math.round(value) === max) {
 						return max;
 					}
@@ -308,7 +308,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
       * max, so clip to those values. */
 					return SliderScale.linear.getValue(value, this.options);
 				},
-				toPercentAge: function toPercentAge(value) {
+				toPercentage: function toPercentage(value) {
 					if (this.options.max === this.options.min) {
 						return 0;
 					} else {
@@ -341,7 +341,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				enabled: null,
 				offset: null,
 				size: null,
-				percentAge: null,
+				percentage: null,
 				inDrag: false,
 				over: false,
 				tickIndex: null
@@ -665,7 +665,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			if (this.options.orientation === 'vertical') {
 				this._addClass(this.sliderElem, 'slider-vertical');
 				this.stylePos = 'top';
-				this.mousePos = 'pAgeY';
+				this.mousePos = 'pageY';
 				this.sizePos = 'offsetHeight';
 			} else {
 				this._addClass(this.sliderElem, 'slider-horizontal');
@@ -933,9 +933,9 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				this._setTickIndex();
 
 				if (this.options.max > this.options.min) {
-					this._state.percentAge = [this._toPercentAge(this._state.value[0]), this._toPercentAge(this._state.value[1]), this.options.step * 100 / (this.options.max - this.options.min)];
+					this._state.percentage = [this._toPercentage(this._state.value[0]), this._toPercentage(this._state.value[1]), this.options.step * 100 / (this.options.max - this.options.min)];
 				} else {
-					this._state.percentAge = [0, 0, 100];
+					this._state.percentage = [0, 0, 100];
 				}
 
 				this._layout();
@@ -1199,16 +1199,16 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			_setToolTipOnMouseOver: function _setToolTipOnMouseOver(tempState) {
 				var self = this;
 				var formattedTooltipVal = this.options.formatter(!tempState ? this._state.value[0] : tempState.value[0]);
-				var positionPercentAges = !tempState ? getPositionPercentAges(this._state, this.options.reversed) : getPositionPercentAges(tempState, this.options.reversed);
+				var positionPercentages = !tempState ? getPositionPercentages(this._state, this.options.reversed) : getPositionPercentages(tempState, this.options.reversed);
 				this._setText(this.tooltipInner, formattedTooltipVal);
 
-				this.tooltip.style[this.stylePos] = positionPercentAges[0] + "%";
+				this.tooltip.style[this.stylePos] = positionPercentages[0] + "%";
 
-				function getPositionPercentAges(state, reversed) {
+				function getPositionPercentages(state, reversed) {
 					if (reversed) {
-						return [100 - state.percentAge[0], self.options.range ? 100 - state.percentAge[1] : state.percentAge[1]];
+						return [100 - state.percentage[0], self.options.range ? 100 - state.percentage[1] : state.percentage[1]];
 					}
-					return [state.percentAge[0], state.percentAge[1]];
+					return [state.percentage[0], state.percentage[1]];
 				}
 			},
 			_copyState: function _copyState() {
@@ -1217,7 +1217,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					enabled: this._state.enabled,
 					offset: this._state.offset,
 					size: this._state.size,
-					percentAge: [this._state.percentAge[0], this._state.percentAge[1], this._state.percentAge[2]],
+					percentage: [this._state.percentage[0], this._state.percentage[1], this._state.percentage[2]],
 					inDrag: this._state.inDrag,
 					over: this._state.over,
 					// deleted or null'd keys
@@ -1234,16 +1234,16 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 							var val = element === reference.handle1 ? tempState.value[0] : tempState.value[1];
 							var per = void 0;
 
-							// Setup value and percentAge for tick's 'mouseenter'
+							// Setup value and percentage for tick's 'mouseenter'
 							if (index !== undefined) {
 								val = reference.options.ticks[index];
-								per = reference.options.ticks_positions.length > 0 && reference.options.ticks_positions[index] || reference._toPercentAge(reference.options.ticks[index]);
+								per = reference.options.ticks_positions.length > 0 && reference.options.ticks_positions[index] || reference._toPercentage(reference.options.ticks[index]);
 							} else {
-								per = reference._toPercentAge(val);
+								per = reference._toPercentage(val);
 							}
 
 							tempState.value[0] = val;
-							tempState.percentAge[0] = per;
+							tempState.percentage[0] = per;
 							reference._setToolTipOnMouseOver(tempState);
 							reference._showTooltip();
 						};
@@ -1260,16 +1260,16 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				};
 			},
 			_layout: function _layout() {
-				var positionPercentAges;
+				var positionPercentages;
 				var formattedValue;
 
 				if (this.options.reversed) {
-					positionPercentAges = [100 - this._state.percentAge[0], this.options.range ? 100 - this._state.percentAge[1] : this._state.percentAge[1]];
+					positionPercentages = [100 - this._state.percentage[0], this.options.range ? 100 - this._state.percentage[1] : this._state.percentage[1]];
 				} else {
-					positionPercentAges = [this._state.percentAge[0], this._state.percentAge[1]];
+					positionPercentages = [this._state.percentage[0], this._state.percentage[1]];
 				}
 
-				this.handle1.style[this.stylePos] = positionPercentAges[0] + "%";
+				this.handle1.style[this.stylePos] = positionPercentages[0] + "%";
 				this.handle1.setAttribute('aria-valuenow', this._state.value[0]);
 				formattedValue = this.options.formatter(this._state.value[0]);
 				if (isNaN(formattedValue)) {
@@ -1278,7 +1278,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					this.handle1.removeAttribute('aria-valuetext');
 				}
 
-				this.handle2.style[this.stylePos] = positionPercentAges[1] + "%";
+				this.handle2.style[this.stylePos] = positionPercentages[1] + "%";
 				this.handle2.setAttribute('aria-valuenow', this._state.value[1]);
 				formattedValue = this.options.formatter(this._state.value[1]);
 				if (isNaN(formattedValue)) {
@@ -1290,8 +1290,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				/* Position highlight range elements */
 				if (this.rangeHighlightElements.length > 0 && Array.isArray(this.options.rangeHighlights) && this.options.rangeHighlights.length > 0) {
 					for (var _i = 0; _i < this.options.rangeHighlights.length; _i++) {
-						var startPercent = this._toPercentAge(this.options.rangeHighlights[_i].start);
-						var endPercent = this._toPercentAge(this.options.rangeHighlights[_i].end);
+						var startPercent = this._toPercentage(this.options.rangeHighlights[_i].start);
+						var endPercent = this._toPercentage(this.options.rangeHighlights[_i].end);
 
 						if (this.options.reversed) {
 							var sp = 100 - endPercent;
@@ -1357,23 +1357,23 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					}
 					for (var i = 0; i < this.options.ticks.length; i++) {
 
-						var percentAge = this.options.ticks_positions[i] || this._toPercentAge(this.options.ticks[i]);
+						var percentage = this.options.ticks_positions[i] || this._toPercentage(this.options.ticks[i]);
 
 						if (this.options.reversed) {
-							percentAge = 100 - percentAge;
+							percentage = 100 - percentage;
 						}
 
-						this.ticks[i].style[this.stylePos] = percentAge + "%";
+						this.ticks[i].style[this.stylePos] = percentage + "%";
 
 						/* Set class labels to denote whether ticks are in the selection */
 						this._removeClass(this.ticks[i], 'in-selection');
 						if (!this.options.range) {
-							if (this.options.selection === 'after' && percentAge >= positionPercentAges[0]) {
+							if (this.options.selection === 'after' && percentage >= positionPercentages[0]) {
 								this._addClass(this.ticks[i], 'in-selection');
-							} else if (this.options.selection === 'before' && percentAge <= positionPercentAges[0]) {
+							} else if (this.options.selection === 'before' && percentage <= positionPercentages[0]) {
 								this._addClass(this.ticks[i], 'in-selection');
 							}
-						} else if (percentAge >= positionPercentAges[0] && percentAge <= positionPercentAges[1]) {
+						} else if (percentage >= positionPercentages[0] && percentage <= positionPercentages[1]) {
 							this._addClass(this.ticks[i], 'in-selection');
 						}
 
@@ -1382,7 +1382,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 
 							if (this.options.orientation !== 'vertical' && this.options.ticks_positions[i] !== undefined) {
 								this.tickLabels[i].style.position = 'absolute';
-								this.tickLabels[i].style[this.stylePos] = percentAge + "%";
+								this.tickLabels[i].style[this.stylePos] = percentage + "%";
 								this.tickLabels[i].style[styleMargin] = -labelSize / 2 + 'px';
 							} else if (this.options.orientation === 'vertical') {
 								if (this.options.rtl) {
@@ -1396,17 +1396,17 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 							/* Set class labels to indicate tick labels are in the selection or selected */
 							this._removeClass(this.tickLabels[i], 'label-in-selection label-is-selection');
 							if (!this.options.range) {
-								if (this.options.selection === 'after' && percentAge >= positionPercentAges[0]) {
+								if (this.options.selection === 'after' && percentage >= positionPercentages[0]) {
 									this._addClass(this.tickLabels[i], 'label-in-selection');
-								} else if (this.options.selection === 'before' && percentAge <= positionPercentAges[0]) {
+								} else if (this.options.selection === 'before' && percentage <= positionPercentages[0]) {
 									this._addClass(this.tickLabels[i], 'label-in-selection');
 								}
-								if (percentAge === positionPercentAges[0]) {
+								if (percentage === positionPercentages[0]) {
 									this._addClass(this.tickLabels[i], 'label-is-selection');
 								}
-							} else if (percentAge >= positionPercentAges[0] && percentAge <= positionPercentAges[1]) {
+							} else if (percentage >= positionPercentages[0] && percentage <= positionPercentages[1]) {
 								this._addClass(this.tickLabels[i], 'label-in-selection');
-								if (percentAge === positionPercentAges[0] || positionPercentAges[1]) {
+								if (percentage === positionPercentages[0] || positionPercentages[1]) {
 									this._addClass(this.tickLabels[i], 'label-is-selection');
 								}
 							}
@@ -1419,7 +1419,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				if (this.options.range) {
 					formattedTooltipVal = this.options.formatter(this._state.value);
 					this._setText(this.tooltipInner, formattedTooltipVal);
-					this.tooltip.style[this.stylePos] = (positionPercentAges[1] + positionPercentAges[0]) / 2 + "%";
+					this.tooltip.style[this.stylePos] = (positionPercentages[1] + positionPercentages[0]) / 2 + "%";
 
 					var innerTooltipMinText = this.options.formatter(this._state.value[0]);
 					this._setText(this.tooltipInner_min, innerTooltipMinText);
@@ -1427,46 +1427,46 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					var innerTooltipMaxText = this.options.formatter(this._state.value[1]);
 					this._setText(this.tooltipInner_max, innerTooltipMaxText);
 
-					this.tooltip_min.style[this.stylePos] = positionPercentAges[0] + "%";
+					this.tooltip_min.style[this.stylePos] = positionPercentages[0] + "%";
 
-					this.tooltip_max.style[this.stylePos] = positionPercentAges[1] + "%";
+					this.tooltip_max.style[this.stylePos] = positionPercentages[1] + "%";
 				} else {
 					formattedTooltipVal = this.options.formatter(this._state.value[0]);
 					this._setText(this.tooltipInner, formattedTooltipVal);
 
-					this.tooltip.style[this.stylePos] = positionPercentAges[0] + "%";
+					this.tooltip.style[this.stylePos] = positionPercentages[0] + "%";
 				}
 
 				if (this.options.orientation === 'vertical') {
 					this.trackLow.style.top = '0';
-					this.trackLow.style.height = Math.min(positionPercentAges[0], positionPercentAges[1]) + '%';
+					this.trackLow.style.height = Math.min(positionPercentages[0], positionPercentages[1]) + '%';
 
-					this.trackSelection.style.top = Math.min(positionPercentAges[0], positionPercentAges[1]) + '%';
-					this.trackSelection.style.height = Math.abs(positionPercentAges[0] - positionPercentAges[1]) + '%';
+					this.trackSelection.style.top = Math.min(positionPercentages[0], positionPercentages[1]) + '%';
+					this.trackSelection.style.height = Math.abs(positionPercentages[0] - positionPercentages[1]) + '%';
 
 					this.trackHigh.style.bottom = '0';
-					this.trackHigh.style.height = 100 - Math.min(positionPercentAges[0], positionPercentAges[1]) - Math.abs(positionPercentAges[0] - positionPercentAges[1]) + '%';
+					this.trackHigh.style.height = 100 - Math.min(positionPercentages[0], positionPercentages[1]) - Math.abs(positionPercentages[0] - positionPercentages[1]) + '%';
 				} else {
 					if (this.stylePos === 'right') {
 						this.trackLow.style.right = '0';
 					} else {
 						this.trackLow.style.left = '0';
 					}
-					this.trackLow.style.width = Math.min(positionPercentAges[0], positionPercentAges[1]) + '%';
+					this.trackLow.style.width = Math.min(positionPercentages[0], positionPercentages[1]) + '%';
 
 					if (this.stylePos === 'right') {
-						this.trackSelection.style.right = Math.min(positionPercentAges[0], positionPercentAges[1]) + '%';
+						this.trackSelection.style.right = Math.min(positionPercentages[0], positionPercentages[1]) + '%';
 					} else {
-						this.trackSelection.style.left = Math.min(positionPercentAges[0], positionPercentAges[1]) + '%';
+						this.trackSelection.style.left = Math.min(positionPercentages[0], positionPercentages[1]) + '%';
 					}
-					this.trackSelection.style.width = Math.abs(positionPercentAges[0] - positionPercentAges[1]) + '%';
+					this.trackSelection.style.width = Math.abs(positionPercentages[0] - positionPercentages[1]) + '%';
 
 					if (this.stylePos === 'right') {
 						this.trackHigh.style.left = '0';
 					} else {
 						this.trackHigh.style.right = '0';
 					}
-					this.trackHigh.style.width = 100 - Math.min(positionPercentAges[0], positionPercentAges[1]) - Math.abs(positionPercentAges[0] - positionPercentAges[1]) + '%';
+					this.trackHigh.style.width = 100 - Math.min(positionPercentages[0], positionPercentages[1]) - Math.abs(positionPercentages[0] - positionPercentages[1]) + '%';
 
 					var offset_min = this.tooltip_min.getBoundingClientRect();
 					var offset_max = this.tooltip_max.getBoundingClientRect();
@@ -1537,18 +1537,18 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				this._state.offset = this._offset(this.sliderElem);
 				this._state.size = this.sliderElem[this.sizePos];
 
-				var percentAge = this._getPercentAge(ev);
+				var percentage = this._getPercentage(ev);
 
 				if (this.options.range) {
-					var diff1 = Math.abs(this._state.percentAge[0] - percentAge);
-					var diff2 = Math.abs(this._state.percentAge[1] - percentAge);
+					var diff1 = Math.abs(this._state.percentage[0] - percentage);
+					var diff2 = Math.abs(this._state.percentage[1] - percentage);
 					this._state.dragged = diff1 < diff2 ? 0 : 1;
-					this._adjustPercentAgeForRangeSliders(percentAge);
+					this._adjustPercentageForRangeSliders(percentage);
 				} else {
 					this._state.dragged = 0;
 				}
 
-				this._state.percentAge[this._state.dragged] = percentAge;
+				this._state.percentage[this._state.dragged] = percentage;
 
 				if (this.touchCapable) {
 					document.removeEventListener("touchmove", this.mousemove, false);
@@ -1662,10 +1662,10 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				} else {
 					val = this._state.value[handleIdx] + dir * this.options.step;
 				}
-				var percentAge = this._toPercentAge(val);
+				var percentage = this._toPercentage(val);
 				this._state.keyCtrl = handleIdx;
 				if (this.options.range) {
-					this._adjustPercentAgeForRangeSliders(percentAge);
+					this._adjustPercentageForRangeSliders(percentage);
 					var val1 = !this._state.keyCtrl ? val : this._state.value[0];
 					var val2 = this._state.keyCtrl ? val : this._state.value[1];
 					// Restrict values within limits
@@ -1700,9 +1700,9 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					return false;
 				}
 
-				var percentAge = this._getPercentAge(ev);
-				this._adjustPercentAgeForRangeSliders(percentAge);
-				this._state.percentAge[this._state.dragged] = percentAge;
+				var percentage = this._getPercentage(ev);
+				this._adjustPercentageForRangeSliders(percentage);
+				this._state.percentage[this._state.dragged] = percentage;
 
 				var val = this._calculateValue(true);
 				this.setValue(val, true, true);
@@ -1714,28 +1714,28 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					return;
 				}
 
-				// Prevent pAge from scrolling and only drag the slider
+				// Prevent page from scrolling and only drag the slider
 				if (ev.preventDefault) {
 					ev.preventDefault();
 				}
 			},
-			_adjustPercentAgeForRangeSliders: function _adjustPercentAgeForRangeSliders(percentAge) {
+			_adjustPercentageForRangeSliders: function _adjustPercentageForRangeSliders(percentage) {
 				if (this.options.range) {
-					var precision = this._getNumDigitsAfterDecimalPlace(percentAge);
+					var precision = this._getNumDigitsAfterDecimalPlace(percentage);
 					precision = precision ? precision - 1 : 0;
-					var percentAgeWithAdjustedPrecision = this._applyToFixedAndParseFloat(percentAge, precision);
-					if (this._state.dragged === 0 && this._applyToFixedAndParseFloat(this._state.percentAge[1], precision) < percentAgeWithAdjustedPrecision) {
-						this._state.percentAge[0] = this._state.percentAge[1];
+					var percentageWithAdjustedPrecision = this._applyToFixedAndParseFloat(percentage, precision);
+					if (this._state.dragged === 0 && this._applyToFixedAndParseFloat(this._state.percentage[1], precision) < percentageWithAdjustedPrecision) {
+						this._state.percentage[0] = this._state.percentage[1];
 						this._state.dragged = 1;
-					} else if (this._state.dragged === 1 && this._applyToFixedAndParseFloat(this._state.percentAge[0], precision) > percentAgeWithAdjustedPrecision) {
-						this._state.percentAge[1] = this._state.percentAge[0];
+					} else if (this._state.dragged === 1 && this._applyToFixedAndParseFloat(this._state.percentage[0], precision) > percentageWithAdjustedPrecision) {
+						this._state.percentage[1] = this._state.percentage[0];
 						this._state.dragged = 0;
-					} else if (this._state.keyCtrl === 0 && this._toPercentAge(this._state.value[1]) < percentAge) {
-						this._state.percentAge[0] = this._state.percentAge[1];
+					} else if (this._state.keyCtrl === 0 && this._toPercentage(this._state.value[1]) < percentage) {
+						this._state.percentage[0] = this._state.percentage[1];
 						this._state.keyCtrl = 1;
 						this.handle2.focus();
-					} else if (this._state.keyCtrl === 1 && this._toPercentAge(this._state.value[0]) > percentAge) {
-						this._state.percentAge[1] = this._state.percentAge[0];
+					} else if (this._state.keyCtrl === 1 && this._toPercentage(this._state.value[0]) > percentage) {
+						this._state.percentage[1] = this._state.percentage[0];
 						this._state.keyCtrl = 0;
 						this.handle1.focus();
 					}
@@ -1746,9 +1746,9 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					return false;
 				}
 
-				var percentAge = this._getPercentAge(ev);
-				this._adjustPercentAgeForRangeSliders(percentAge);
-				this._state.percentAge[this._state.dragged] = percentAge;
+				var percentage = this._getPercentage(ev);
+				this._adjustPercentageForRangeSliders(percentage);
+				this._state.percentage[this._state.dragged] = percentage;
 
 				if (this.touchCapable) {
 					// Touch: Unbind touch event handlers:
@@ -1775,8 +1775,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			},
 			_setValues: function _setValues(index, val) {
 				var comp = 0 === index ? 0 : 100;
-				if (this._state.percentAge[index] !== comp) {
-					val.data[index] = this._toValue(this._state.percentAge[index]);
+				if (this._state.percentage[index] !== comp) {
+					val.data[index] = this._toValue(this._state.percentage[index]);
 					val.data[index] = this._applyPrecision(val.data[index]);
 				}
 			},
@@ -1791,7 +1791,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 						val.data[1] = this._snapToClosestTick(val.data[1]);
 					}
 				} else {
-					val.data = this._toValue(this._state.percentAge[0]);
+					val.data = this._toValue(this._state.percentage[0]);
 					val.data = parseFloat(val.data);
 					val.data = this._applyPrecision(val.data);
 					if (snapToClosestTick) {
@@ -1834,7 +1834,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
    	Credits to Mike Samuel for the following method!
    	Source: http://stackoverflow.com/questions/10454518/javascript-how-to-retrieve-the-number-of-decimals-of-a-string-number
    */
-			_getPercentAge: function _getPercentAge(ev) {
+			_getPercentage: function _getPercentage(ev) {
 				if (this.touchCapable && (ev.type === 'touchstart' || ev.type === 'touchmove' || ev.type === 'touchend')) {
 					ev = ev.changedTouches[0];
 				}
@@ -1846,16 +1846,16 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					distanceToSlide = -distanceToSlide;
 				}
 				// Calculate what percent of the length the slider handle has slid
-				var percentAge = distanceToSlide / this._state.size * 100;
-				percentAge = Math.round(percentAge / this._state.percentAge[2]) * this._state.percentAge[2];
+				var percentage = distanceToSlide / this._state.size * 100;
+				percentage = Math.round(percentage / this._state.percentage[2]) * this._state.percentage[2];
 				if (this.options.reversed) {
-					percentAge = 100 - percentAge;
+					percentage = 100 - percentage;
 				}
 
 				// Make sure the percent is within the bounds of the slider.
 				// 0% corresponds to the 'min' value of the slide
 				// 100% corresponds to the 'max' value of the slide
-				return Math.max(0, Math.min(100, percentAge));
+				return Math.max(0, Math.min(100, percentage));
 			},
 			_validateInputValue: function _validateInputValue(val) {
 				if (!isNaN(+val)) {
@@ -1976,11 +1976,11 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					elementRef.style[style] = value;
 				}
 			},
-			_toValue: function _toValue(percentAge) {
-				return this.options.scale.toValue.apply(this, [percentAge]);
+			_toValue: function _toValue(percentage) {
+				return this.options.scale.toValue.apply(this, [percentage]);
 			},
-			_toPercentAge: function _toPercentAge(value) {
-				return this.options.scale.toPercentAge.apply(this, [value]);
+			_toPercentage: function _toPercentage(value) {
+				return this.options.scale.toPercentage.apply(this, [value]);
 			},
 			_setTooltipPosition: function _setTooltipPosition() {
 				var tooltips = [this.tooltip, this.tooltip_min, this.tooltip_max];

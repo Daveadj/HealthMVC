@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: RO (Romanian, limba română)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "Acest câmp este obligatoriu.",
 	remote: "Te rugăm să completezi acest câmp.",
 	email: "Te rugăm să introduci o adresă de email validă",

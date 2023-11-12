@@ -1,6 +1,6 @@
 /*!
  * Bootstrap Colorpicker - Bootstrap Colorpicker is a modular color picker plugin for Bootstrap 4.
- * @packAge bootstrap-colorpicker
+ * @package bootstrap-colorpicker
  * @version v3.4.0
  * @license MIT
  * @link https://itsjavi.com/bootstrap-colorpicker/
@@ -1642,7 +1642,7 @@ module.exports = {
 	"darkgreen": [0, 100, 0],
 	"darkgrey": [169, 169, 169],
 	"darkkhaki": [189, 183, 107],
-	"darkmAgenta": [139, 0, 139],
+	"darkmagenta": [139, 0, 139],
 	"darkolivegreen": [85, 107, 47],
 	"darkorange": [255, 140, 0],
 	"darkorchid": [153, 50, 204],
@@ -1699,7 +1699,7 @@ module.exports = {
 	"lime": [0, 255, 0],
 	"limegreen": [50, 205, 50],
 	"linen": [250, 240, 230],
-	"mAgenta": [255, 0, 255],
+	"magenta": [255, 0, 255],
 	"maroon": [128, 0, 0],
 	"mediumaquamarine": [102, 205, 170],
 	"mediumblue": [0, 0, 205],
@@ -3391,9 +3391,9 @@ var Debugger = function (_Extension) {
 
       this.eventCounter += 1;
 
-      var logMessAge = '#' + this.eventCounter + ': Colorpicker#' + this.colorpicker.id + ' [' + eventName + ']';
+      var logMessage = '#' + this.eventCounter + ': Colorpicker#' + this.colorpicker.id + ' [' + eventName + ']';
 
-      (_console = console).debug.apply(_console, [logMessAge].concat(args));
+      (_console = console).debug.apply(_console, [logMessage].concat(args));
 
       /**
        * Whenever the debugger logs an event, this other event is emitted.
@@ -3402,7 +3402,7 @@ var Debugger = function (_Extension) {
        * @type {object} The event object
        * @property {Colorpicker} colorpicker The Colorpicker instance
        * @property {ColorItem} color The color instance
-       * @property {{debugger: DebuggerExtension, eventName: String, logArgs: Array, logMessAge: String}} debug
+       * @property {{debugger: DebuggerExtension, eventName: String, logArgs: Array, logMessage: String}} debug
        *  The debug info
        */
       this.colorpicker.element.trigger({
@@ -3414,7 +3414,7 @@ var Debugger = function (_Extension) {
           debugger: this,
           eventName: eventName,
           logArgs: args,
-          logMessAge: logMessAge
+          logMessage: logMessage
         }
       });
     }
@@ -3847,9 +3847,9 @@ var SliderHandler = function () {
       this.colorpicker.lastEvent.alias = 'pressed';
       this.colorpicker.lastEvent.e = e;
 
-      if (!e.pAgeX && !e.pAgeY && e.originalEvent && e.originalEvent.touches) {
-        e.pAgeX = e.originalEvent.touches[0].pAgeX;
-        e.pAgeY = e.originalEvent.touches[0].pAgeY;
+      if (!e.pageX && !e.pageY && e.originalEvent && e.originalEvent.touches) {
+        e.pageX = e.originalEvent.touches[0].pageX;
+        e.pageY = e.originalEvent.touches[0].pageY;
       }
       // e.stopPropagation();
       // e.preventDefault();
@@ -3894,11 +3894,11 @@ var SliderHandler = function () {
 
       // reference to guide's style
       this.currentSlider.guideStyle = guide.style;
-      this.currentSlider.left = e.pAgeX - offset.left;
-      this.currentSlider.top = e.pAgeY - offset.top;
+      this.currentSlider.left = e.pageX - offset.left;
+      this.currentSlider.top = e.pageY - offset.top;
       this.mousePointer = {
-        left: e.pAgeX,
-        top: e.pAgeY
+        left: e.pageX,
+        top: e.pageY
       };
 
       // TODO: fix moving outside the picker makes the guides to keep moving. The event needs to be bound to the window.
@@ -3929,17 +3929,17 @@ var SliderHandler = function () {
       this.colorpicker.lastEvent.alias = 'moved';
       this.colorpicker.lastEvent.e = e;
 
-      if (!e.pAgeX && !e.pAgeY && e.originalEvent && e.originalEvent.touches) {
-        e.pAgeX = e.originalEvent.touches[0].pAgeX;
-        e.pAgeY = e.originalEvent.touches[0].pAgeY;
+      if (!e.pageX && !e.pageY && e.originalEvent && e.originalEvent.touches) {
+        e.pageX = e.originalEvent.touches[0].pageX;
+        e.pageY = e.originalEvent.touches[0].pageY;
       }
 
       // e.stopPropagation();
       e.preventDefault(); // prevents scrolling on mobile
 
-      var left = Math.max(0, Math.min(this.currentSlider.maxLeft, this.currentSlider.left + ((e.pAgeX || this.mousePointer.left) - this.mousePointer.left)));
+      var left = Math.max(0, Math.min(this.currentSlider.maxLeft, this.currentSlider.left + ((e.pageX || this.mousePointer.left) - this.mousePointer.left)));
 
-      var top = Math.max(0, Math.min(this.currentSlider.maxTop, this.currentSlider.top + ((e.pAgeY || this.mousePointer.top) - this.mousePointer.top)));
+      var top = Math.max(0, Math.min(this.currentSlider.maxTop, this.currentSlider.top + ((e.pageY || this.mousePointer.top) - this.mousePointer.top)));
 
       this.onMove(top, left);
     }
@@ -4993,7 +4993,7 @@ Color.prototype = {
 	wblack: getset('hwb', 2, maxfn(100)),
 
 	cyan: getset('cmyk', 0, maxfn(100)),
-	mAgenta: getset('cmyk', 1, maxfn(100)),
+	magenta: getset('cmyk', 1, maxfn(100)),
 	yellow: getset('cmyk', 2, maxfn(100)),
 	black: getset('cmyk', 3, maxfn(100)),
 

@@ -2,7 +2,7 @@
   * bootstrap-switch - Turn checkboxes and radio buttons into toggle switches.
   *
   * @version v3.3.4
-  * @homepAge https://bttstrp.github.io/bootstrap-switch
+  * @homepage https://bttstrp.github.io/bootstrap-switch
   * @author Mattia Larentis <mattia@larentis.eu> (http://larentis.eu)
   * @license Apache-2.0
   */
@@ -647,7 +647,7 @@
             }
             event.preventDefault();
             event.stopPropagation();
-            _this7._dragStart = (event.pAgeX || event.originalEvent.touches[0].pAgeX) - parseInt(_this7.$container.css('margin-left'), 10);
+            _this7._dragStart = (event.pageX || event.originalEvent.touches[0].pageX) - parseInt(_this7.$container.css('margin-left'), 10);
             if (_this7.options.animate) {
               _this7.$wrapper.removeClass(_this7._getClass('animate'));
             }
@@ -658,13 +658,13 @@
             if (_this7._dragStart == null) {
               return;
             }
-            var difference = (event.pAgeX || event.originalEvent.touches[0].pAgeX) - _this7._dragStart;
+            var difference = (event.pageX || event.originalEvent.touches[0].pageX) - _this7._dragStart;
             event.preventDefault();
             if (difference < -_this7._handleWidth || difference > 0) {
               return;
             }
-            _this7._drAgend = difference;
-            _this7.$container.css('margin-left', _this7._drAgend + 'px');
+            _this7._dragEnd = difference;
+            _this7.$container.css('margin-left', _this7._dragEnd + 'px');
           },
 
           'mouseup.bootstrapSwitch touchend.bootstrapSwitch': function mouseupBootstrapSwitchTouchendBootstrapSwitch(event) {
@@ -675,9 +675,9 @@
             if (_this7.options.animate) {
               _this7.$wrapper.addClass(_this7._getClass('animate'));
             }
-            if (_this7._drAgend) {
-              var state = _this7._drAgend > -(_this7._handleWidth / 2);
-              _this7._drAgend = false;
+            if (_this7._dragEnd) {
+              var state = _this7._dragEnd > -(_this7._handleWidth / 2);
+              _this7._dragEnd = false;
               _this7.state(_this7.options.inverse ? !state : state);
             } else {
               _this7.state(!_this7.options.state);

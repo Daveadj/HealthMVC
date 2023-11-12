@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Hochgestellt',
         size: 'Schriftgrösse'
       },
-      imAge: {
-        imAge: 'Bild',
+      image: {
+        image: 'Bild',
         insert: 'Bild einfügen',
         resizeFull: 'Originalgrösse',
         resizeHalf: '1/2 Grösse',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Kreisförmig',
         shapeThumbnail: '"Vorschaubild"',
         shapeNone: 'Kein Rahmen',
-        dragImAgeHere: 'Bild hierher ziehen',
-        dropImAge: 'Bild oder Text nehmen',
+        dragImageHere: 'Bild hierher ziehen',
+        dropImage: 'Bild oder Text nehmen',
         selectFromFiles: 'Datei auswählen',
         maximumFileSize: 'Maximale Dateigrösse',
         maximumFileSizeError: 'Maximale Dateigrösse überschritten',

@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: FA (Persian; فارسی)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "تکمیل این فیلد اجباری است.",
 	remote: "لطفا این فیلد را تصحیح کنید.",
 	email: "لطفا یک ایمیل صحیح وارد کنید.",

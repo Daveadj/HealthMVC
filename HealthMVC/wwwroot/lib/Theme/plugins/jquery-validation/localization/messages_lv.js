@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: LV (Latvian; latviešu valoda)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "Šis lauks ir obligāts.",
 	remote: "Lūdzu, pārbaudiet šo lauku.",
 	email: "Lūdzu, ievadiet derīgu e-pasta adresi.",

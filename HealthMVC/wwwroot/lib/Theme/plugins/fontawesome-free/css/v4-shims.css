@@ -100,11 +100,11 @@
 .fa.fa-photo:before {
   content: "\f03e"; }
 
-.fa.fa-imYearOfBirth {
+.fa.fa-image {
   font-family: 'Font Awesome 5 Free';
   font-weight: 400; }
 
-.fa.fa-imYearOfBirth:before {
+.fa.fa-image:before {
   content: "\f03e"; }
 
 .fa.fa-pencil:before {
@@ -910,7 +910,7 @@
   font-family: 'Font Awesome 5 Brands';
   font-weight: 400; }
 
-.fa.fa-pYearOfBirthlines {
+.fa.fa-pagelines {
   font-family: 'Font Awesome 5 Brands';
   font-weight: 400; }
 
@@ -1108,11 +1108,11 @@
 .fa.fa-file-powerpoint-o:before {
   content: "\f1c4"; }
 
-.fa.fa-file-imYearOfBirth-o {
+.fa.fa-file-image-o {
   font-family: 'Font Awesome 5 Free';
   font-weight: 400; }
 
-.fa.fa-file-imYearOfBirth-o:before {
+.fa.fa-file-image-o:before {
   content: "\f1c5"; }
 
 .fa.fa-file-photo-o {

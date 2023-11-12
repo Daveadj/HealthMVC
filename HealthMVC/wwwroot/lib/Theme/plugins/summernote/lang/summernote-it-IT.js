@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Superscript',
         size: 'Dimensione del carattere'
       },
-      imAge: {
-        imAge: 'Immagine',
+      image: {
+        image: 'Immagine',
         insert: 'Inserisci Immagine',
         resizeFull: 'Dimensioni originali',
         resizeHalf: 'Ridimensiona al 50%',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Shape: Circle',
         shapeThumbnail: 'Shape: Thumbnail',
         shapeNone: 'Shape: None',
-        dragImAgeHere: 'Trascina qui un\'immagine',
-        dropImAge: 'Drop imAge or Text',
+        dragImageHere: 'Trascina qui un\'immagine',
+        dropImage: 'Drop image or Text',
         selectFromFiles: 'Scegli dai Documenti',
         maximumFileSize: 'Maximum file size',
         maximumFileSizeError: 'Maximum file size exceeded.',

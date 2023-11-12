@@ -10,10 +10,10 @@
 
 /**
  * @author  @tatocaster <kutaliatato@gmail.com>
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: GE (Georgian; ქართული)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "ეს ველი სავალდებულოა",
 	remote: "გთხოვთ შეასწოროთ.",
 	email: "გთხოვთ შეიყვანოთ სწორი ფორმატით.",

@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: '上标',
         size: '字号'
       },
-      imAge: {
-        imAge: '图片',
+      image: {
+        image: '图片',
         insert: '插入图片',
         resizeFull: '缩放至 100%',
         resizeHalf: '缩放至 50%',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: '形状: 圆',
         shapeThumbnail: '形状: 缩略图',
         shapeNone: '形状: 无',
-        dragImAgeHere: '将图片拖拽至此处',
-        dropImAge: '拖拽图片或文本',
+        dragImageHere: '将图片拖拽至此处',
+        dropImage: '拖拽图片或文本',
         selectFromFiles: '从本地上传',
         maximumFileSize: '文件大小最大值',
         maximumFileSizeError: '文件大小超出最大值。',

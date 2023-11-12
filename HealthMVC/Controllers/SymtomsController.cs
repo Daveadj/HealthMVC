@@ -49,7 +49,7 @@ namespace HealthMVC.Controllers
             var enumValues = Enum.GetValues(typeof(Gender)).Cast<Gender>().ToList();
             ViewBag.EnumValues = enumValues;
 
-            var yearList = Enumerable.Range(DateTime.Now.Year - 100, 100);
+            var yearList = Enumerable.Range(DateTime.Now.Year - 100, 100).ToList();
             ViewBag.YearList = yearList;
             return View();
         }

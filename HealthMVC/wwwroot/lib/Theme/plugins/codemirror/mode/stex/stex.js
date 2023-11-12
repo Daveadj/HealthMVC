@@ -74,7 +74,7 @@
 
     plugins["importmodule"] = addPluginPattern("importmodule", "tag", ["string", "builtin"]);
     plugins["documentclass"] = addPluginPattern("documentclass", "tag", ["", "atom"]);
-    plugins["usepackAge"] = addPluginPattern("usepackAge", "tag", ["atom"]);
+    plugins["usepackage"] = addPluginPattern("usepackage", "tag", ["atom"]);
     plugins["begin"] = addPluginPattern("begin", "tag", ["atom"]);
     plugins["end"] = addPluginPattern("end", "tag", ["atom"]);
 

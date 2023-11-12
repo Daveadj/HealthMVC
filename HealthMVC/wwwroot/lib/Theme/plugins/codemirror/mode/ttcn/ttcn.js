@@ -248,7 +248,7 @@
     " display do else encode enumerated except exception" +
     " execute extends extension external for from function" +
     " goto group if import in infinity inout interleave" +
-    " label languAge length log match messAge mixed mod" +
+    " label language length log match message mixed mod" +
     " modifies module modulepar mtc noblock not not4b nowait" +
     " of on optional or or4b out override param pattern port" +
     " procedure record recursive rem repeat return runs select" +

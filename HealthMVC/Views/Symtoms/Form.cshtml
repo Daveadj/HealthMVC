@@ -1,6 +1,7 @@
 ﻿@model HealthMVC.Dto.PersonVM
 
 @{
+    Layout = "_Layout";
     ViewData["Title"] = "Form";
     var symptomsList = ViewBag.AvailableSymptoms as List<HealthMVC.Dto.symptomsDto>;
    
@@ -30,8 +31,8 @@
                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="YearOfBirth">Select Body Location</label>
-                    <select class="select2bs4" asp-for="YearOfBirth" data-placeholder="Select year" style="width: 100%;">
+                    <label asp-for="YearOfBirth">Year of Birth</label>
+                    <select class="select2bs4" asp-for="YearOfBirth" data-placeholder="Select year" style="width: 100%;" id="myModal">
                         <option value="">Select</option>
                        
 
@@ -55,10 +56,10 @@
 
                 <div class="form-group">
                     <label asp-for="Symptoms"></label>
-                    <select class="select2bs4" name="Symptoms" multiple="multiple" data-placeholder="Select Symptoms"
-                            style="width: 100%;">
+                    <select class="js-example-basic-multiple" name="Symptoms" multiple="multiple" style="width: 100%;">
                         @if (symptomsList != null)
                         {
+
                             @foreach (var symptom in symptomsList)
                             {
                                 <option value="@symptom.Id">@symptom.Name</option>
@@ -90,6 +91,13 @@
         })
 
 
+        $('#myModal').select2()
+
         
+        $('.js-example-basic-multiple').select2();
+       
+
+
+
     </script>
 }

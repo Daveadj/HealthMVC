@@ -38,8 +38,8 @@ var __webpack_exports__ = {};
         size: 'ফন্টের আকার',
         sizeunit: 'ফন্টের আকারের একক'
       },
-      imAge: {
-        imAge: 'ছবি',
+      image: {
+        image: 'ছবি',
         insert: 'ছবি যোগ করুন',
         resizeFull: 'পূর্ণ আকারে নিন',
         resizeHalf: 'অর্ধ আকারে নিন',
@@ -52,8 +52,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'আকৃতি: বৃত্ত',
         shapeThumbnail: 'আকৃতি: থাম্বনেইল',
         shapeNone: 'আকৃতি: কিছু নয়',
-        dragImAgeHere: 'এখানে ছবি বা লেখা টেনে আনুন',
-        dropImAge: 'ছবি বা লেখা ছাড়ুন',
+        dragImageHere: 'এখানে ছবি বা লেখা টেনে আনুন',
+        dropImage: 'ছবি বা লেখা ছাড়ুন',
         selectFromFiles: 'ফাইল থেকে নির্বাচন করুন',
         maximumFileSize: 'সর্বোচ্চ ফাইলের আকার',
         maximumFileSizeError: 'সর্বোচ্চ ফাইলের আকার অতিক্রম করেছে।',

@@ -70,7 +70,7 @@ class PushMenu {
     })
 
     if (this._options.enableRemember) {
-      localStorAge.setItem(`remember${EVENT_KEY}`, CLASS_NAME_OPEN)
+      localStorage.setItem(`remember${EVENT_KEY}`, CLASS_NAME_OPEN)
     }
 
     $(this._element).trigger($.Event(EVENT_SHOWN))
@@ -86,7 +86,7 @@ class PushMenu {
     $bodySelector.addClass(CLASS_NAME_COLLAPSED)
 
     if (this._options.enableRemember) {
-      localStorAge.setItem(`remember${EVENT_KEY}`, CLASS_NAME_COLLAPSED)
+      localStorage.setItem(`remember${EVENT_KEY}`, CLASS_NAME_COLLAPSED)
     }
 
     $(this._element).trigger($.Event(EVENT_COLLAPSED))
@@ -130,7 +130,7 @@ class PushMenu {
     }
 
     const $body = $('body')
-    const toggleState = localStorAge.getItem(`remember${EVENT_KEY}`)
+    const toggleState = localStorage.getItem(`remember${EVENT_KEY}`)
 
     if (toggleState === CLASS_NAME_COLLAPSED) {
       if (this._options.noTransitionAfterReload) {

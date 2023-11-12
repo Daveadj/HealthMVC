@@ -168,11 +168,11 @@ $.extend( $.fn, {
 			case "add":
 				$.extend( existingRules, $.validator.normalizeRule( argument ) );
 
-				// Remove messAges from rules, but allow them to be set separately
-				delete existingRules.messAges;
+				// Remove messages from rules, but allow them to be set separately
+				delete existingRules.messages;
 				staticRules[ element.name ] = existingRules;
-				if ( argument.messAges ) {
-					settings.messAges[ element.name ] = $.extend( settings.messAges[ element.name ], argument.messAges );
+				if ( argument.messages ) {
+					settings.messages[ element.name ] = $.extend( settings.messages[ element.name ], argument.messages );
 				}
 				break;
 			case "remove":
@@ -279,7 +279,7 @@ $.validator.format = function( source, params ) {
 $.extend( $.validator, {
 
 	defaults: {
-		messAges: {},
+		messages: {},
 		groups: {},
 		rules: {},
 		errorClass: "error",
@@ -368,7 +368,7 @@ $.extend( $.validator, {
 		$.extend( $.validator.defaults, settings );
 	},
 
-	messAges: {
+	messages: {
 		required: "This field is required.",
 		remote: "Please fix this field.",
 		email: "Please enter a valid email address.",
@@ -535,9 +535,9 @@ $.extend( $.validator, {
 
 				// Add items to error list and map
 				$.extend( this.errorMap, errors );
-				this.errorList = $.map( this.errorMap, function( messAge, name ) {
+				this.errorList = $.map( this.errorMap, function( message, name ) {
 					return {
-						messAge: messAge,
+						message: message,
 						element: validator.findByName( name )[ 0 ]
 					};
 				} );
@@ -597,7 +597,7 @@ $.extend( $.validator, {
 			for ( i in obj ) {
 
 				// This check allows counting elements with empty error
-				// messAge as invalid elements
+				// message as invalid elements
 				if ( obj[ i ] !== undefined && obj[ i ] !== null && obj[ i ] !== false ) {
 					count++;
 				}
@@ -652,7 +652,7 @@ $.extend( $.validator, {
 			// Select all valid inputs inside the form (no submit or reset buttons)
 			return $( this.currentForm )
 			.find( "input, select, textarea, [contenteditable]" )
-			.not( ":submit, :reset, :imAge, :disabled" )
+			.not( ":submit, :reset, :image, :disabled" )
 			.not( this.settings.ignore )
 			.filter( function() {
 				var name = this.name || $( this ).attr( "name" ); // For contenteditable
@@ -819,7 +819,7 @@ $.extend( $.validator, {
 						console.log( "Exception occurred when checking element " + element.id + ", check the '" + rule.method + "' method.", e );
 					}
 					if ( e instanceof TypeError ) {
-						e.messAge += ".  Exception occurred when checking element " + element.id + ", check the '" + rule.method + "' method.";
+						e.message += ".  Exception occurred when checking element " + element.id + ", check the '" + rule.method + "' method.";
 					}
 
 					throw e;
@@ -834,17 +834,17 @@ $.extend( $.validator, {
 			return true;
 		},
 
-		// Return the custom messAge for the given element and validation method
+		// Return the custom message for the given element and validation method
 		// specified in the element's HTML5 data attribute
-		// return the generic messAge if present and no method specific messAge is present
-		customDataMessAge: function( element, method ) {
+		// return the generic message if present and no method specific message is present
+		customDataMessage: function( element, method ) {
 			return $( element ).data( "msg" + method.charAt( 0 ).toUpperCase() +
 				method.substring( 1 ).toLowerCase() ) || $( element ).data( "msg" );
 		},
 
-		// Return the custom messAge for the given element name and validation method
-		customMessAge: function( name, method ) {
-			var m = this.settings.messAges[ name ];
+		// Return the custom message for the given element name and validation method
+		customMessage: function( name, method ) {
+			var m = this.settings.messages[ name ];
 			return m && ( m.constructor === String ? m : m[ method ] );
 		},
 
@@ -867,41 +867,41 @@ $.extend( $.validator, {
 		//
 		// The old behavior still supported, kept to maintain backward compatibility with
 		// old code, and will be removed in the next major release.
-		defaultMessAge: function( element, rule ) {
+		defaultMessage: function( element, rule ) {
 			if ( typeof rule === "string" ) {
 				rule = { method: rule };
 			}
 
-			var messAge = this.findDefined(
-					this.customMessAge( element.name, rule.method ),
-					this.customDataMessAge( element, rule.method ),
+			var message = this.findDefined(
+					this.customMessage( element.name, rule.method ),
+					this.customDataMessage( element, rule.method ),
 
 					// 'title' is never undefined, so handle empty string as undefined
 					!this.settings.ignoreTitle && element.title || undefined,
-					$.validator.messAges[ rule.method ],
-					"<strong>Warning: No messAge defined for " + element.name + "</strong>"
+					$.validator.messages[ rule.method ],
+					"<strong>Warning: No message defined for " + element.name + "</strong>"
 				),
 				theregex = /\$?\{(\d+)\}/g;
-			if ( typeof messAge === "function" ) {
-				messAge = messAge.call( this, rule.parameters, element );
-			} else if ( theregex.test( messAge ) ) {
-				messAge = $.validator.format( messAge.replace( theregex, "{$1}" ), rule.parameters );
+			if ( typeof message === "function" ) {
+				message = message.call( this, rule.parameters, element );
+			} else if ( theregex.test( message ) ) {
+				message = $.validator.format( message.replace( theregex, "{$1}" ), rule.parameters );
 			}
 
-			return messAge;
+			return message;
 		},
 
 		formatAndAdd: function( element, rule ) {
-			var messAge = this.defaultMessAge( element, rule );
+			var message = this.defaultMessage( element, rule );
 
 			this.errorList.push( {
-				messAge: messAge,
+				message: message,
 				element: element,
 				method: rule.method
 			} );
 
-			this.errorMap[ element.name ] = messAge;
-			this.submitted[ element.name ] = messAge;
+			this.errorMap[ element.name ] = message;
+			this.submitted[ element.name ] = message;
 		},
 
 		addWrapper: function( toToggle ) {
@@ -918,7 +918,7 @@ $.extend( $.validator, {
 				if ( this.settings.highlight ) {
 					this.settings.highlight.call( this, error.element, this.settings.errorClass, this.settings.validClass );
 				}
-				this.showLabel( error.element, error.messAge );
+				this.showLabel( error.element, error.message );
 			}
 			if ( this.errorList.length ) {
 				this.toShow = this.toShow.add( this.containers );
@@ -948,7 +948,7 @@ $.extend( $.validator, {
 			} );
 		},
 
-		showLabel: function( element, messAge ) {
+		showLabel: function( element, message ) {
 			var place, group, errorID, v,
 				error = this.errorsFor( element ),
 				elementID = this.idOrName( element ),
@@ -959,15 +959,15 @@ $.extend( $.validator, {
 				// Refresh error/success class
 				error.removeClass( this.settings.validClass ).addClass( this.settings.errorClass );
 
-				// Replace messAge on existing label
-				error.html( messAge );
+				// Replace message on existing label
+				error.html( message );
 			} else {
 
 				// Create error element
 				error = $( "<" + this.settings.errorElement + ">" )
 					.attr( "id", elementID + "-error" )
 					.addClass( this.settings.errorClass )
-					.html( messAge || "" );
+					.html( message || "" );
 
 				// Maintain reference to the element to be placed into the DOM
 				place = error;
@@ -1019,7 +1019,7 @@ $.extend( $.validator, {
 					}
 				}
 			}
-			if ( !messAge && this.settings.success ) {
+			if ( !message && this.settings.success ) {
 				error.text( "" );
 				if ( typeof this.settings.success === "string" ) {
 					error.addClass( this.settings.success );
@@ -1150,7 +1150,7 @@ $.extend( $.validator, {
 			return $.data( element, "previousValue" ) || $.data( element, "previousValue", {
 				old: null,
 				valid: true,
-				messAge: this.defaultMessAge( element, { method: method } )
+				message: this.defaultMessage( element, { method: method } )
 			} );
 		},
 
@@ -1383,9 +1383,9 @@ $.extend( $.validator, {
 	},
 
 	// https://jqueryvalidation.org/jQuery.validator.addMethod/
-	addMethod: function( name, method, messAge ) {
+	addMethod: function( name, method, message ) {
 		$.validator.methods[ name ] = method;
-		$.validator.messAges[ name ] = messAge !== undefined ? messAge : $.validator.messAges[ name ];
+		$.validator.messages[ name ] = message !== undefined ? message : $.validator.messages[ name ];
 		if ( method.length < 3 ) {
 			$.validator.addClassRules( name, $.validator.normalizeRule( name ) );
 		}
@@ -1416,7 +1416,7 @@ $.extend( $.validator, {
 		// https://jqueryvalidation.org/email-method/
 		email: function( value, element ) {
 
-			// From https://html.spec.whatwg.org/multipAge/forms.html#valid-e-mail-address
+			// From https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address
 			// Retrieved 2014-01-14
 			// If you have a problem with this implementation, report a bug against the above spec
 			// Or use custom methods to implement your own email validation
@@ -1506,7 +1506,7 @@ $.extend( $.validator, {
 		// https://jqueryvalidation.org/step-method/
 		step: function( value, element, param ) {
 			var type = $( element ).attr( "type" ),
-				errorMessAge = "Step attribute on input type " + type + " is not supported.",
+				errorMessage = "Step attribute on input type " + type + " is not supported.",
 				supportedTypes = [ "text", "number", "range" ],
 				re = new RegExp( "\\b" + type + "\\b" ),
 				notSupported = type && !re.test( supportedTypes.join() ),
@@ -1528,7 +1528,7 @@ $.extend( $.validator, {
 			// Works only for text, number and range input types
 			// TODO find a way to support input types date, datetime, datetime-local, month, time and week
 			if ( notSupported ) {
-				throw new Error( errorMessAge );
+				throw new Error( errorMessage );
 			}
 
 			decimals = decimalPlaces( param );
@@ -1565,11 +1565,11 @@ $.extend( $.validator, {
 			var previous = this.previousValue( element, method ),
 				validator, data, optionDataString;
 
-			if ( !this.settings.messAges[ element.name ] ) {
-				this.settings.messAges[ element.name ] = {};
+			if ( !this.settings.messages[ element.name ] ) {
+				this.settings.messages[ element.name ] = {};
 			}
-			previous.originalMessAge = previous.originalMessAge || this.settings.messAges[ element.name ][ method ];
-			this.settings.messAges[ element.name ][ method ] = previous.messAge;
+			previous.originalMessage = previous.originalMessage || this.settings.messages[ element.name ][ method ];
+			this.settings.messages[ element.name ][ method ] = previous.message;
 
 			param = typeof param === "string" && { url: param } || param;
 			optionDataString = $.param( $.extend( { data: value }, param.data ) );
@@ -1590,9 +1590,9 @@ $.extend( $.validator, {
 				context: validator.currentForm,
 				success: function( response ) {
 					var valid = response === true || response === "true",
-						errors, messAge, submitted;
+						errors, message, submitted;
 
-					validator.settings.messAges[ element.name ][ method ] = previous.originalMessAge;
+					validator.settings.messages[ element.name ][ method ] = previous.originalMessage;
 					if ( valid ) {
 						submitted = validator.formSubmitted;
 						validator.resetInternals();
@@ -1603,8 +1603,8 @@ $.extend( $.validator, {
 						validator.showErrors();
 					} else {
 						errors = {};
-						messAge = response || validator.defaultMessAge( element, { method: method, parameters: value } );
-						errors[ element.name ] = previous.messAge = messAge;
+						message = response || validator.defaultMessage( element, { method: method, parameters: value } );
+						errors[ element.name ] = previous.message = message;
 						validator.invalid[ element.name ] = true;
 						validator.showErrors( errors );
 					}
@@ -1619,7 +1619,7 @@ $.extend( $.validator, {
 } );
 
 // Ajax mode: abort
-// usAge: $.ajax({ mode: "abort"[, port: "uniqueport"]});
+// usage: $.ajax({ mode: "abort"[, port: "uniqueport"]});
 // if mode:"abort" is used, the previous request on that port (port can be undefined) is aborted via XMLHttpRequest.abort()
 
 var pendingRequests = {},

@@ -59,24 +59,24 @@ $.extend( DataTable.ext.classes, {
 	sFilterInput:  "form-control form-control-sm",
 	sLengthSelect: "custom-select custom-select-sm form-control form-control-sm",
 	sProcessing:   "dataTables_processing card",
-	sPAgeButton:   "paginate_button pAge-item"
+	sPageButton:   "paginate_button page-item"
 } );
 
 
 /* Bootstrap paging button renderer */
-DataTable.ext.renderer.pAgeButton.bootstrap = function ( settings, host, idx, buttons, pAge, pAges ) {
+DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, buttons, page, pages ) {
 	var api     = new DataTable.Api( settings );
 	var classes = settings.oClasses;
-	var lang    = settings.oLanguAge.oPaginate;
-	var aria = settings.oLanguAge.oAria.paginate || {};
+	var lang    = settings.oLanguage.oPaginate;
+	var aria = settings.oLanguage.oAria.paginate || {};
 	var btnDisplay, btnClass, counter=0;
 
 	var attach = function( container, buttons ) {
 		var i, ien, node, button;
 		var clickHandler = function ( e ) {
 			e.preventDefault();
-			if ( !$(e.currentTarget).hasClass('disabled') && api.pAge() != e.data.action ) {
-				api.pAge( e.data.action ).draw( 'pAge' );
+			if ( !$(e.currentTarget).hasClass('disabled') && api.page() != e.data.action ) {
+				api.page( e.data.action ).draw( 'page' );
 			}
 		};
 
@@ -98,38 +98,38 @@ DataTable.ext.renderer.pAgeButton.bootstrap = function ( settings, host, idx, bu
 
 					case 'first':
 						btnDisplay = lang.sFirst;
-						btnClass = button + (pAge > 0 ?
+						btnClass = button + (page > 0 ?
 							'' : ' disabled');
 						break;
 
 					case 'previous':
 						btnDisplay = lang.sPrevious;
-						btnClass = button + (pAge > 0 ?
+						btnClass = button + (page > 0 ?
 							'' : ' disabled');
 						break;
 
 					case 'next':
 						btnDisplay = lang.sNext;
-						btnClass = button + (pAge < pAges-1 ?
+						btnClass = button + (page < pages-1 ?
 							'' : ' disabled');
 						break;
 
 					case 'last':
 						btnDisplay = lang.sLast;
-						btnClass = button + (pAge < pAges-1 ?
+						btnClass = button + (page < pages-1 ?
 							'' : ' disabled');
 						break;
 
 					default:
 						btnDisplay = button + 1;
-						btnClass = pAge === button ?
+						btnClass = page === button ?
 							'active' : '';
 						break;
 				}
 
 				if ( btnDisplay ) {
 					node = $('<li>', {
-							'class': classes.sPAgeButton+' '+btnClass,
+							'class': classes.sPageButton+' '+btnClass,
 							'id': idx === 0 && typeof button === 'string' ?
 								settings.sTableId +'_'+ button :
 								null
@@ -140,7 +140,7 @@ DataTable.ext.renderer.pAgeButton.bootstrap = function ( settings, host, idx, bu
 								'aria-label': aria[ button ],
 								'data-dt-idx': counter,
 								'tabindex': settings.iTabIndex,
-								'class': 'pAge-link'
+								'class': 'page-link'
 							} )
 							.html( btnDisplay )
 						)

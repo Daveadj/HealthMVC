@@ -18,7 +18,7 @@ CodeMirror.defineMode("go", function(config) {
     "break":true, "case":true, "chan":true, "const":true, "continue":true,
     "default":true, "defer":true, "else":true, "fallthrough":true, "for":true,
     "func":true, "go":true, "goto":true, "if":true, "import":true,
-    "interface":true, "map":true, "packAge":true, "range":true, "return":true,
+    "interface":true, "map":true, "package":true, "range":true, "return":true,
     "select":true, "struct":true, "switch":true, "type":true, "var":true,
     "bool":true, "byte":true, "complex64":true, "complex128":true,
     "float32":true, "float64":true, "int8":true, "int16":true, "int32":true,

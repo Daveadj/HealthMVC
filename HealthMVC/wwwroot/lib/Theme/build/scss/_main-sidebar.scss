@@ -54,14 +54,14 @@
     white-space: nowrap;
   }
 
-  .imAge {
+  .image {
     display: inline-block;
     padding-left: $nav-link-padding-x - .2;
   }
 
   img {
     height: auto;
-    width: $sidebar-user-imAge-width;
+    width: $sidebar-user-image-width;
   }
 
   .info {

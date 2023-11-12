@@ -18,7 +18,7 @@
         compareTypes = parserConfig.compareTypes || {},
         status = parserConfig.status || {},
         tags = parserConfig.tags || {},
-        storAge = parserConfig.storAge || {},
+        storage = parserConfig.storage || {},
         modifier = parserConfig.modifier || {},
         accessTypes = parserConfig.accessTypes|| {},
         multiLineStrings = parserConfig.multiLineStrings,
@@ -58,7 +58,7 @@
       if (compareTypes.propertyIsEnumerable(cur)) return "atom compareTypes";
       if (status.propertyIsEnumerable(cur)) return "comment status";
       if (tags.propertyIsEnumerable(cur)) return "variable-3 tags";
-      if (storAge.propertyIsEnumerable(cur)) return "builtin storAge";
+      if (storage.propertyIsEnumerable(cur)) return "builtin storage";
       if (modifier.propertyIsEnumerable(cur)) return "string-2 modifier";
       if (accessTypes.propertyIsEnumerable(cur)) return "atom accessTypes";
 
@@ -176,7 +176,7 @@
     " ENUMERATED SIZE MODULE END INDEX AUGMENTS EXTENSIBILITY" +
     " IMPLIED EXPORTS"),
     cmipVerbs: words("ACTIONS ADD GET NOTIFICATIONS REPLACE REMOVE"),
-    compareTypes: words("OPTIONAL DEFAULT MANAgeD MODULE-TYPE MODULE_IDENTITY" +
+    compareTypes: words("OPTIONAL DEFAULT MANAGED MODULE-TYPE MODULE_IDENTITY" +
     " MODULE-COMPLIANCE OBJECT-TYPE OBJECT-IDENTITY" +
     " OBJECT-COMPLIANCE MODE CONFIRMED CONDITIONAL" +
     " SUBORDINATE SUPERIOR CLASS TRUE FALSE NULL" +
@@ -184,9 +184,9 @@
     status: words("current deprecated mandatory obsolete"),
     tags: words("APPLICATION AUTOMATIC EXPLICIT IMPLICIT PRIVATE TAGS" +
     " UNIVERSAL"),
-    storAge: words("BOOLEAN INTEGER OBJECT IDENTIFIER BIT OCTET STRING" +
+    storage: words("BOOLEAN INTEGER OBJECT IDENTIFIER BIT OCTET STRING" +
     " UTCTime InterfaceIndex IANAifType CMIP-Attribute" +
-    " REAL PACKAge PACKAgeS IpAddress PhysAddress" +
+    " REAL PACKAGE PACKAGES IpAddress PhysAddress" +
     " NetworkAddress BITS BMPString TimeStamp TimeTicks" +
     " TruthValue RowStatus DisplayString GeneralString" +
     " GraphicString IA5String NumericString" +

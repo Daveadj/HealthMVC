@@ -84,8 +84,8 @@ the tooltip from webcharts).
                 newEvent = new CustomEvent('mouseevent');
 
             //transform from touch event to mouse event format
-            newEvent.pAgeX = e.detail.changedTouches[0].pAgeX;
-            newEvent.pAgeY = e.detail.changedTouches[0].pAgeY;
+            newEvent.pageX = e.detail.changedTouches[0].pageX;
+            newEvent.pageY = e.detail.changedTouches[0].pageY;
             newEvent.clientX = e.detail.changedTouches[0].clientX;
             newEvent.clientY = e.detail.changedTouches[0].clientY;
 
@@ -139,17 +139,17 @@ the tooltip from webcharts).
         function triggerClickHoverEvent(eventname, event, seriesFilter, searchDistance) {
             var options = plot.getOptions(),
                 offset = plot.offset(),
-                pAge = browser.getPAgeXY(event),
-                canvasX = pAge.X - offset.left,
-                canvasY = pAge.Y - offset.top,
+                page = browser.getPageXY(event),
+                canvasX = page.X - offset.left,
+                canvasY = page.Y - offset.top,
                 pos = plot.c2p({
                     left: canvasX,
                     top: canvasY
                 }),
                 distance = searchDistance !== undefined ? searchDistance : options.grid.mouseActiveRadius;
 
-            pos.pAgeX = pAge.X;
-            pos.pAgeY = pAge.Y;
+            pos.pageX = page.X;
+            pos.pageY = page.Y;
 
             var items = plot.findNearbyItems(canvasX, canvasY, seriesFilter, distance);
             var item = items[0];
@@ -163,8 +163,8 @@ the tooltip from webcharts).
 
             if (item) {
                 // fill in mouse pos for any listeners out there
-                item.pAgeX = parseInt(item.series.xaxis.p2c(item.datapoint[0]) + offset.left, 10);
-                item.pAgeY = parseInt(item.series.yaxis.p2c(item.datapoint[1]) + offset.top, 10);
+                item.pageX = parseInt(item.series.xaxis.p2c(item.datapoint[0]) + offset.left, 10);
+                item.pageY = parseInt(item.series.yaxis.p2c(item.datapoint[1]) + offset.top, 10);
             } else {
                 item = null;
             }

@@ -40,7 +40,7 @@
       &:not(:disabled):not(.disabled):active,
       &:not(:disabled):not(.disabled).active,
       .show > &.dropdown-toggle {
-        background-imAge: none !important;
+        background-image: none !important;
       }
 
       &:hover {
@@ -60,7 +60,7 @@
 
       &:disabled,
       &.disabled {
-        background-imAge: none !important;
+        background-image: none !important;
         border-color: $color;
         color: color-yiq($color);
       }

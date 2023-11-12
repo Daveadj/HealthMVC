@@ -4,17 +4,17 @@
         grid: {
             noDataContent: "მონაცემები ცარიელია.",
             deleteConfirm: "ნამდვილად გსურთ ჩანაწერის წაშლა?",
-            pAgerFormat: "გვერდები: {first} {prev} {pAges} {next} {last} &nbsp;&nbsp; {pAgeIndex} - {pAgeCount} დან.",
-            pAgePrevText: "<",
-            pAgeNextText: ">",
-            pAgeFirstText: "<<",
-            pAgeLastText: ">>",
-            loadMessAge: "გთხოვთ დაიცადოთ...",
-            invalidMessAge: "შეყვანილია არასწორი მონაცემები!"
+            pagerFormat: "გვერდები: {first} {prev} {pages} {next} {last} &nbsp;&nbsp; {pageIndex} - {pageCount} დან.",
+            pagePrevText: "<",
+            pageNextText: ">",
+            pageFirstText: "<<",
+            pageLastText: ">>",
+            loadMessage: "გთხოვთ დაიცადოთ...",
+            invalidMessage: "შეყვანილია არასწორი მონაცემები!"
         },
 
         loadIndicator: {
-            messAge: "მიმდინარეობს ჩატვირთვა..."
+            message: "მიმდინარეობს ჩატვირთვა..."
         },
 
         fields: {
@@ -32,14 +32,14 @@
         },
 
         validators: {
-            required: { messAge: "ველი აუცილებელია შესავსებად." },
-            rangeLength: { messAge: "შეყვანილი ჩანაწერის ზომა არ ექვემდებარება დიაპაზონს." },
-            minLength: { messAge: "შეყვანილი ჩანაწერის ზომა საკმაოდ პატარა არის." },
-            maxLength: { messAge: "შეყვანილი ჩანაწერის ზომა საკმაოდ დიდი არის." },
-            pattern: { messAge: "შეყვანილი მნიშვნელობა არ ემთხვევა მითითებულ შაბლონს." },
-            range: { messAge: "შეყვანილი ინფორმაცია არ ჯდება დიაპაზონში." },
-            min: { messAge: "შეყვანილი ინფორმაციის ზომა საკმაოდ პატარა არის." },
-            max: { messAge: "შეყვანილი ინფორმაციის ზომა საკმაოდ დიდი არის." }
+            required: { message: "ველი აუცილებელია შესავსებად." },
+            rangeLength: { message: "შეყვანილი ჩანაწერის ზომა არ ექვემდებარება დიაპაზონს." },
+            minLength: { message: "შეყვანილი ჩანაწერის ზომა საკმაოდ პატარა არის." },
+            maxLength: { message: "შეყვანილი ჩანაწერის ზომა საკმაოდ დიდი არის." },
+            pattern: { message: "შეყვანილი მნიშვნელობა არ ემთხვევა მითითებულ შაბლონს." },
+            range: { message: "შეყვანილი ინფორმაცია არ ჯდება დიაპაზონში." },
+            min: { message: "შეყვანილი ინფორმაციის ზომა საკმაოდ პატარა არის." },
+            max: { message: "შეყვანილი ინფორმაციის ზომა საკმაოდ დიდი არის." }
         }
     };
 

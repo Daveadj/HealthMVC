@@ -624,7 +624,7 @@
             if (self.options.map.zoom.mousewheel) {
                 self.$map.on("mousewheel." + pluginName, function (e) {
                     var zoomLevel = (e.deltaY > 0) ? 1 : -1;
-                    var coord = self.mapPAgePositionToXY(e.pAgeX, e.pAgeY);
+                    var coord = self.mapPagePositionToXY(e.pageX, e.pageY);
 
                     self.$container.trigger("zoom", {
                         "fixedCenter": true,
@@ -641,9 +641,9 @@
             if (self.options.map.zoom.touch) {
                 self.$map.on("touchstart." + pluginName, function (e) {
                     if (e.originalEvent.touches.length === 2) {
-                        self.zoomCenterX = (e.originalEvent.touches[0].pAgeX + e.originalEvent.touches[1].pAgeX) / 2;
-                        self.zoomCenterY = (e.originalEvent.touches[0].pAgeY + e.originalEvent.touches[1].pAgeY) / 2;
-                        self.previousPinchDist = Math.sqrt(Math.pow((e.originalEvent.touches[1].pAgeX - e.originalEvent.touches[0].pAgeX), 2) + Math.pow((e.originalEvent.touches[1].pAgeY - e.originalEvent.touches[0].pAgeY), 2));
+                        self.zoomCenterX = (e.originalEvent.touches[0].pageX + e.originalEvent.touches[1].pageX) / 2;
+                        self.zoomCenterY = (e.originalEvent.touches[0].pageY + e.originalEvent.touches[1].pageY) / 2;
+                        self.previousPinchDist = Math.sqrt(Math.pow((e.originalEvent.touches[1].pageX - e.originalEvent.touches[0].pageX), 2) + Math.pow((e.originalEvent.touches[1].pageY - e.originalEvent.touches[0].pageY), 2));
                     }
                 });
 
@@ -652,10 +652,10 @@
                     var zoomLevel = 0;
 
                     if (e.originalEvent.touches.length === 2) {
-                        pinchDist = Math.sqrt(Math.pow((e.originalEvent.touches[1].pAgeX - e.originalEvent.touches[0].pAgeX), 2) + Math.pow((e.originalEvent.touches[1].pAgeY - e.originalEvent.touches[0].pAgeY), 2));
+                        pinchDist = Math.sqrt(Math.pow((e.originalEvent.touches[1].pageX - e.originalEvent.touches[0].pageX), 2) + Math.pow((e.originalEvent.touches[1].pageY - e.originalEvent.touches[0].pageY), 2));
 
                         if (Math.abs(pinchDist - self.previousPinchDist) > 15) {
-                            var coord = self.mapPAgePositionToXY(self.zoomCenterX, self.zoomCenterY);
+                            var coord = self.mapPagePositionToXY(self.zoomCenterX, self.zoomCenterY);
                             zoomLevel = (pinchDist - self.previousPinchDist) / Math.abs(pinchDist - self.previousPinchDist);
                             self.$container.trigger("zoom", {
                                 "fixedCenter": true,
@@ -690,40 +690,40 @@
             self.$map.on("mousedown." + pluginName + (zoomOptions.touch ? " touchstart." + pluginName : ""), function (e) {
                 clearTimeout(panningMouseUpTO);
                 clearTimeout(panningMouseMoveTO);
-                if (e.pAgeX !== undefined) {
+                if (e.pageX !== undefined) {
                     mousedown = true;
-                    previousX = e.pAgeX;
-                    previousY = e.pAgeY;
+                    previousX = e.pageX;
+                    previousY = e.pageY;
                 } else {
                     if (e.originalEvent.touches.length === 1) {
                         mousedown = true;
-                        previousX = e.originalEvent.touches[0].pAgeX;
-                        previousY = e.originalEvent.touches[0].pAgeY;
+                        previousX = e.originalEvent.touches[0].pageX;
+                        previousY = e.originalEvent.touches[0].pageY;
                     }
                 }
             }).on("mousemove." + pluginName + (zoomOptions.touch ? " touchmove." + pluginName : ""), function (e) {
                 var currentLevel = self.zoomData.zoomLevel;
-                var pAgeX = 0;
-                var pAgeY = 0;
+                var pageX = 0;
+                var pageY = 0;
 
                 clearTimeout(panningMouseUpTO);
                 clearTimeout(panningMouseMoveTO);
 
-                if (e.pAgeX !== undefined) {
-                    pAgeX = e.pAgeX;
-                    pAgeY = e.pAgeY;
+                if (e.pageX !== undefined) {
+                    pageX = e.pageX;
+                    pageY = e.pageY;
                 } else {
                     if (e.originalEvent.touches.length === 1) {
-                        pAgeX = e.originalEvent.touches[0].pAgeX;
-                        pAgeY = e.originalEvent.touches[0].pAgeY;
+                        pageX = e.originalEvent.touches[0].pageX;
+                        pageY = e.originalEvent.touches[0].pageY;
                     } else {
                         mousedown = false;
                     }
                 }
 
                 if (mousedown && currentLevel !== 0) {
-                    var offsetX = (previousX - pAgeX) / (1 + (currentLevel * zoomOptions.step)) * (mapWidth / self.paper.width);
-                    var offsetY = (previousY - pAgeY) / (1 + (currentLevel * zoomOptions.step)) * (mapHeight / self.paper.height);
+                    var offsetX = (previousX - pageX) / (1 + (currentLevel * zoomOptions.step)) * (mapWidth / self.paper.width);
+                    var offsetY = (previousY - pageY) / (1 + (currentLevel * zoomOptions.step)) * (mapHeight / self.paper.height);
                     var panX = Math.min(Math.max(0, self.currentViewBox.x + offsetX), (mapWidth - self.currentViewBox.w));
                     var panY = Math.min(Math.max(0, self.currentViewBox.y + offsetY), (mapHeight - self.currentViewBox.h));
 
@@ -745,8 +745,8 @@
                             });
                         }, self.panningFilteringTO);
 
-                        previousX = pAgeX;
-                        previousY = pAgeY;
+                        previousX = pageX;
+                        previousY = pageY;
                         self.panning = true;
                     }
                     return false;
@@ -757,26 +757,26 @@
         /*
          * Map a mouse position to a map position
          *      Transformation principle:
-         *          ** start with (pAgeX, pAgeY) absolute mouse coordinate
-         *          - Apply translation: take into accounts the map offset in the pAge
+         *          ** start with (pageX, pageY) absolute mouse coordinate
+         *          - Apply translation: take into accounts the map offset in the page
          *          ** from this point, we have relative mouse coordinate
          *          - Apply homothetic transformation: take into accounts initial factor of map sizing (fullWidth / actualWidth)
          *          - Apply homothetic transformation: take into accounts the zoom factor
          *          ** from this point, we have relative map coordinate
          *          - Apply translation: take into accounts the current panning of the map
          *          ** from this point, we have absolute map coordinate
-         * @param pAgeX: mouse client coordinate on X
-         * @param pAgeY: mouse client coordinate on Y
+         * @param pageX: mouse client coordinate on X
+         * @param pageY: mouse client coordinate on Y
          * @return map coordinate {x, y}
          */
-        mapPAgePositionToXY: function(pAgeX, pAgeY) {
+        mapPagePositionToXY: function(pageX, pageY) {
             var self = this;
             var offset = self.$map.offset();
             var initFactor = (self.options.map.width) ? (self.mapConf.width / self.options.map.width) : (self.mapConf.width / self.$map.width());
             var zoomFactor = 1 / (1 + (self.zoomData.zoomLevel * self.options.map.zoom.step));
             return {
-                x: (zoomFactor * initFactor * (pAgeX - offset.left)) + self.zoomData.panX,
-                y: (zoomFactor * initFactor * (pAgeY - offset.top)) + self.zoomData.panY
+                x: (zoomFactor * initFactor * (pageX - offset.left)) + self.zoomData.panX,
+                y: (zoomFactor * initFactor * (pageY - offset.top)) + self.zoomData.panY
             };
         },
 
@@ -1366,7 +1366,7 @@
                 plot.options.attrs.height = plot.options.size;
                 plot.options.attrs.x = plot.coords.x - (plot.options.size / 2);
                 plot.options.attrs.y = plot.coords.y - (plot.options.size / 2);
-            } else if (plot.options.type === "imAge") {
+            } else if (plot.options.type === "image") {
                 plot.options.attrs.src = plot.options.url;
                 plot.options.attrs.width = plot.options.width;
                 plot.options.attrs.height = plot.options.height;
@@ -1553,7 +1553,7 @@
                 // Get mapElem size, and apply an offset to handle future width/height change
                 mapElemBBox = elem.mapElem.getBBox();
                 if (elem.options.size || (elem.options.width && elem.options.height)) {
-                    if (elem.options.type === "imAge" || elem.options.type === "svg") {
+                    if (elem.options.type === "image" || elem.options.type === "svg") {
                         plotOffsetX = (elem.options.width - mapElemBBox.width) / 2;
                         plotOffsetY = (elem.options.height - mapElemBBox.height) / 2;
                     } else {
@@ -1626,8 +1626,8 @@
                     plot.options.attrs.width,
                     plot.options.attrs.height
                 );
-            } else if (plot.options.type === "imAge") {
-                plot.mapElem = self.paper.imAge(
+            } else if (plot.options.type === "image") {
+                plot.mapElem = self.paper.image(
                     plot.options.attrs.src,
                     plot.options.attrs.x,
                     plot.options.attrs.y,
@@ -1732,7 +1732,7 @@
                         sliceOptions[i].attrs.width = sliceOptions[i].size;
                     if (sliceOptions[i].attrs.height === undefined)
                         sliceOptions[i].attrs.height = sliceOptions[i].size;
-                } else if (sliceOptions[i].type === "imAge" || sliceOptions[i].type === "svg") {
+                } else if (sliceOptions[i].type === "image" || sliceOptions[i].type === "svg") {
                     if (sliceOptions[i].attrs.width === undefined)
                         sliceOptions[i].attrs.width = sliceOptions[i].width;
                     if (sliceOptions[i].attrs.height === undefined)
@@ -1761,7 +1761,7 @@
                 width = legendOptions.marginLeft;
             }
 
-            // Draw legend elements (circle, square or imAge in vertical or horizontal mode)
+            // Draw legend elements (circle, square or image in vertical or horizontal mode)
             for (i = 0; i < sliceOptions.length; ++i) {
                 var legendElem = {};
                 var legendElemBBox = {};
@@ -1789,7 +1789,7 @@
 
                         legendElem = legendPaper.rect(x, y, scale * (sliceOptions[i].attrs.width), scale * (sliceOptions[i].attrs.height));
 
-                    } else if (sliceOptions[i].type === "imAge" || sliceOptions[i].type === "svg") {
+                    } else if (sliceOptions[i].type === "image" || sliceOptions[i].type === "svg") {
                         if (legendOptions.mode === "horizontal") {
                             x = width + legendOptions.marginLeft;
                             y = yCenter - (0.5 * scale * sliceOptions[i].attrs.height);
@@ -1798,8 +1798,8 @@
                             y = height;
                         }
 
-                        if (sliceOptions[i].type === "imAge") {
-                            legendElem = legendPaper.imAge(
+                        if (sliceOptions[i].type === "image") {
+                            legendElem = legendPaper.image(
                                 sliceOptions[i].url, x, y, scale * sliceOptions[i].attrs.width, scale * sliceOptions[i].attrs.height);
                         } else {
                             legendElem = legendPaper.path(sliceOptions[i].path);
@@ -1843,7 +1843,7 @@
                     if (legendOptions.mode === "horizontal") {
                         var currentHeight = legendOptions.marginBottom + legendElemBBox.height;
                         width += legendOptions.marginLeft + legendElemBBox.width + legendOptions.marginLeftLabel + legendLabel.getBBox().width;
-                        if (sliceOptions[i].type !== "imAge" && legendType !== "area") {
+                        if (sliceOptions[i].type !== "image" && legendType !== "area") {
                             currentHeight += legendOptions.marginBottomTitle;
                         }
                         // Add title height if it exists
@@ -2090,8 +2090,8 @@
 
             /* Handle tooltip position update */
             if (elem.options.tooltip !== undefined) {
-                var mouseX = event.pAgeX;
-                var mouseY = event.pAgeY;
+                var mouseX = event.pageX;
+                var mouseY = event.pageY;
 
                 var offsetLeft = 10;
                 var offsetTop = 20;

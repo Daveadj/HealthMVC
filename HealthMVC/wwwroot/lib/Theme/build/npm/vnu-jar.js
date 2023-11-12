@@ -33,13 +33,13 @@ childProcess.exec('java -version', (error, stdout, stderr) => {
     vnu,
     '--asciiquotes',
     '--skip-non-html',
-    // Ignore the languAge code warnings
+    // Ignore the language code warnings
     '--no-langdetect',
     '--Werror',
     `--filterpattern "${ignores}"`,
     './*.html',
     'docs_html/',
-    'pAges/'
+    'pages/'
   ]
 
   // For the 32-bit Java we need to pass `-Xss512k`

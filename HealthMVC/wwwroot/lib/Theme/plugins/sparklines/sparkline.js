@@ -60,7 +60,7 @@
     maxLine: false,
     bottomLine: false,
     topLine: false,
-    averAgeLine: false
+    averageLine: false
   };
 
   Sparkline.init = function (element, options) {
@@ -199,7 +199,7 @@
     dot(this.options.minColor, this.options.minLine, minX + (points.length == 1 ? width / 2 : 0), y(points.indexOf(minValue)));
     dot(this.options.maxColor, this.options.maxLine, maxX + (points.length == 1 ? width / 2 : 0), y(points.indexOf(maxValue)));
 
-    //line(this.options.averAgeLine, )
+    //line(this.options.averageLine, )
   }
 
   function minmax(a, b, c) {

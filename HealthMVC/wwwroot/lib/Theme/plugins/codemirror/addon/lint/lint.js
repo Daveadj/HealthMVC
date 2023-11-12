@@ -140,11 +140,11 @@
     var severity = ann.severity;
     if (!severity) severity = "error";
     var tip = document.createElement("div");
-    tip.className = "CodeMirror-lint-messAge CodeMirror-lint-messAge-" + severity;
-    if (typeof ann.messAgeHTML != 'undefined') {
-      tip.innerHTML = ann.messAgeHTML;
+    tip.className = "CodeMirror-lint-message CodeMirror-lint-message-" + severity;
+    if (typeof ann.messageHTML != 'undefined') {
+      tip.innerHTML = ann.messageHTML;
     } else {
-      tip.appendChild(document.createTextNode(ann.messAge));
+      tip.appendChild(document.createTextNode(ann.message));
     }
     return tip;
   }
@@ -199,9 +199,9 @@
       var anns = annotations[line];
       if (!anns) continue;
 
-      // filter out duplicate messAges
-      var messAge = [];
-      anns = anns.filter(function(item) { return messAge.indexOf(item.messAge) > -1 ? false : messAge.push(item.messAge) });
+      // filter out duplicate messages
+      var message = [];
+      anns = anns.filter(function(item) { return message.indexOf(item.message) > -1 ? false : message.push(item.message) });
 
       var maxSeverity = null;
       var tipLabel = state.hasGutter && document.createDocumentFragment();
@@ -220,7 +220,7 @@
           __annotation: ann
         }));
       }
-      // use original annotations[line] to show multiple messAges
+      // use original annotations[line] to show multiple messages
       if (state.hasGutter)
         cm.setGutterMarker(line, GUTTER_ID, makeMarker(cm, tipLabel, maxSeverity, annotations[line].length > 1,
                                                        options.tooltips));

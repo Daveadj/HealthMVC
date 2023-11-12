@@ -74,7 +74,7 @@ CodeMirror.defineMode("erlang", function(cmCfg) {
     "byte_size","check_process_code","contact_binary","crc32",
     "crc32_combine","date","decode_packet","delete_module",
     "disconnect_node","element","erase","exit","float","float_to_list",
-    "garbAge_collect","get","get_keys","group_leader","halt","hd",
+    "garbage_collect","get","get_keys","group_leader","halt","hd",
     "integer_to_list","internal_bif","iolist_size","iolist_to_binary",
     "is_alive","is_atom","is_binary","is_bitstring","is_boolean",
     "is_float","is_function","is_integer","is_list","is_number","is_pid",

@@ -9,12 +9,12 @@
   position: absolute;
   visibility: visible;
 
-  &.brand-imAge-xs {
+  &.brand-image-xs {
     left: 18px;
     top: 12px;
   }
 
-  &.brand-imAge-xl {
+  &.brand-image-xl {
     left: 12px;
     top: 6px;
   }
@@ -24,7 +24,7 @@
   opacity: 0;
   visibility: hidden;
 
-  &.brand-imAge-xl {
+  &.brand-image-xl {
     left: 16px;
     top: 8px;
   }
@@ -431,7 +431,7 @@
         width: $sidebar-mini-width !important;
       }
 
-      .user-panel .imAge {
+      .user-panel .image {
         float: none !important;
       }
 

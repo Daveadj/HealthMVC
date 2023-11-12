@@ -331,7 +331,7 @@ $.extend( KeyTable.prototype, {
 
 			if ( lastFocus ) {
 				var relative = that.s.lastFocus.relative;
-				var info = dt.pAge.info();
+				var info = dt.page.info();
 				var row = relative.row + info.start;
 
 				if ( info.recordsDisplay === 0 ) {
@@ -684,7 +684,7 @@ $.extend( KeyTable.prototype, {
 	{
 		var that = this;
 		var dt = this.s.dt;
-		var pAgeInfo = dt.pAge.info();
+		var pageInfo = dt.page.info();
 		var lastFocus = this.s.lastFocus;
 
 		if ( ! originalEvent) {
@@ -717,14 +717,14 @@ $.extend( KeyTable.prototype, {
 			// For server-side processing normalise the row by adding the start
 			// point, since `rows().indexes()` includes only rows that are
 			// available at the client-side
-			if ( pAgeInfo.serverSide ) {
-				row += pAgeInfo.start;
+			if ( pageInfo.serverSide ) {
+				row += pageInfo.start;
 			}
 		}
 
-		// Is the row on the current pAge? If not, we need to redraw to show the
-		// pAge
-		if ( pAgeInfo.length !== -1 && (row < pAgeInfo.start || row >= pAgeInfo.start+pAgeInfo.length) ) {
+		// Is the row on the current page? If not, we need to redraw to show the
+		// page
+		if ( pageInfo.length !== -1 && (row < pageInfo.start || row >= pageInfo.start+pageInfo.length) ) {
 			this.s.focusDraw = true;
 			this.s.waitingForDraw = true;
 
@@ -734,7 +734,7 @@ $.extend( KeyTable.prototype, {
 					that.s.waitingForDraw = false;
 					that._focus( row, column, undefined, originalEvent );
 				} )
-				.pAge( Math.floor( row / pAgeInfo.length ) )
+				.page( Math.floor( row / pageInfo.length ) )
 				.draw( false );
 
 			return;
@@ -747,8 +747,8 @@ $.extend( KeyTable.prototype, {
 
 		// De-normalise the server-side processing row, so we select the row
 		// in its displayed position
-		if ( pAgeInfo.serverSide ) {
-			row -= pAgeInfo.start;
+		if ( pageInfo.serverSide ) {
+			row -= pageInfo.start;
 		}
 
 		// Get the cell from the current position - ignoring any cells which might
@@ -775,7 +775,7 @@ $.extend( KeyTable.prototype, {
 
 		this._updateFixedColumns(column);
 
-		// Shift viewpoint and pAge to make cell visible
+		// Shift viewpoint and page to make cell visible
 		if ( shift === undefined || shift === true ) {
 			this._scroll( $(window), $(document.body), node, 'offset' );
 
@@ -792,7 +792,7 @@ $.extend( KeyTable.prototype, {
 			cell: cell,
 			node: cell.node(),
 			relative: {
-				row: dt.rows( { pAge: 'current' } ).indexes().indexOf( cell.index().row ),
+				row: dt.rows( { page: 'current' } ).indexes().indexOf( cell.index().row ),
 				column: cell.index().column
 			}
 		};
@@ -864,22 +864,22 @@ $.extend( KeyTable.prototype, {
 				}
 				break;
 
-			case 33: // pAge up (previous pAge)
-			case 34: // pAge down (next pAge)
+			case 33: // page up (previous page)
+			case 34: // page down (next page)
 				if ( navEnable && !scrolling ) {
 					e.preventDefault();
 
 					dt
-						.pAge( e.keyCode === 33 ? 'previous' : 'next' )
+						.page( e.keyCode === 33 ? 'previous' : 'next' )
 						.draw( false );
 				}
 				break;
 
-			case 35: // end (end of current pAge)
-			case 36: // home (start of current pAge)
+			case 35: // end (end of current page)
+			case 36: // home (start of current page)
 				if ( navEnable ) {
 					e.preventDefault();
-					var indexes = dt.cells( {pAge: 'current'} ).indexes();
+					var indexes = dt.cells( {page: 'current'} ).indexes();
 					var colIndexes = this._columns();
 
 					this._focus( dt.cell(
@@ -1007,8 +1007,8 @@ $.extend( KeyTable.prototype, {
 	{
 		var that      = this;
 		var dt        = this.s.dt;
-		var pAgeInfo  = dt.pAge.info();
-		var rows      = pAgeInfo.recordsDisplay;
+		var pageInfo  = dt.page.info();
+		var rows      = pageInfo.recordsDisplay;
 		var columns   = this._columns();
 		var last      = this.s.lastFocus;
 		if ( ! last ) {
@@ -1028,8 +1028,8 @@ $.extend( KeyTable.prototype, {
 		// When server-side processing, `rows().indexes()` only gives the rows
 		// that are available at the client-side, so we need to normalise the
 		// row's current position by the display start point
-		if ( pAgeInfo.serverSide ) {
-			currRow += pAgeInfo.start;
+		if ( pageInfo.serverSide ) {
+			currRow += pageInfo.start;
 		}
 
 		var currCol = dt
@@ -1125,7 +1125,7 @@ $.extend( KeyTable.prototype, {
 				} );
 
 			div.children().on( 'focus', function (e) {
-				var cell = dt.cell(':eq(0)', that._columns(), {pAge: 'current'});
+				var cell = dt.cell(':eq(0)', that._columns(), {page: 'current'});
 	
 				if ( cell.any() ) {
 					that._focus( cell, null, true, e );
@@ -1136,7 +1136,7 @@ $.extend( KeyTable.prototype, {
 		}
 
 		// Insert the input element into the first cell in the table's body
-		var cell = this.s.dt.cell(':eq(0)', '0:visible', {pAge: 'current', order: 'current'}).node();
+		var cell = this.s.dt.cell(':eq(0)', '0:visible', {page: 'current', order: 'current'}).node();
 		if (cell) {
 			$(cell).prepend(this.s.tabInput);
 		}

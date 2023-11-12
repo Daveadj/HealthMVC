@@ -154,7 +154,7 @@
         height: null, list: null, max: null, maxlength: null, min: null,
         name: null, pattern: null, placeholder: null, size: null, src: null,
         step: null, value: null, width: null,
-        accept: ["audio/*", "video/*", "imAge/*"],
+        accept: ["audio/*", "video/*", "image/*"],
         autocomplete: ["on", "off"],
         autofocus: ["", "autofocus"],
         checked: ["", "checked"],
@@ -168,7 +168,7 @@
         required: ["", "required"],
         type: ["hidden", "text", "search", "tel", "url", "email", "password", "datetime", "date", "month",
                "week", "time", "datetime-local", "number", "range", "color", "checkbox", "radio",
-               "file", "submit", "imAge", "reset", "button"]
+               "file", "submit", "image", "reset", "button"]
       }
     },
     ins: { attrs: { cite: null, datetime: null } },
@@ -200,7 +200,7 @@
         content: null,
         charset: charsets,
         name: ["viewport", "application-name", "author", "description", "generator", "keywords"],
-        "http-equiv": ["content-languAge", "content-type", "default-style", "refresh"]
+        "http-equiv": ["content-language", "content-type", "default-style", "refresh"]
       }
     },
     meter: { attrs: { value: null, min: null, low: null, high: null, max: null, optimum: null } },

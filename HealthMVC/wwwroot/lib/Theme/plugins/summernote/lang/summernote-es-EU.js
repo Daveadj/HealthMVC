@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Superscript',
         size: 'Letren neurria'
       },
-      imAge: {
-        imAge: 'Irudia',
+      image: {
+        image: 'Irudia',
         insert: 'Irudi bat txertatu',
         resizeFull: 'Jatorrizko neurrira aldatu',
         resizeHalf: 'Neurria erdira aldatu',
@@ -50,13 +50,13 @@ var __webpack_exports__ = {};
         shapeCircle: 'Shape: Circle',
         shapeThumbnail: 'Shape: Thumbnail',
         shapeNone: 'Shape: None',
-        dragImAgeHere: 'Irudi bat ezarri hemen',
-        dropImAge: 'Drop imAge or Text',
+        dragImageHere: 'Irudi bat ezarri hemen',
+        dropImage: 'Drop image or Text',
         selectFromFiles: 'Zure fitxategi bat aukeratu',
         maximumFileSize: 'Maximum file size',
         maximumFileSizeError: 'Maximum file size exceeded.',
         url: 'Irudiaren URL helbidea',
-        remove: 'Remove ImAge',
+        remove: 'Remove Image',
         original: 'Original'
       },
       video: {

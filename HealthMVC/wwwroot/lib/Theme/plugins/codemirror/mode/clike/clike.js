@@ -281,7 +281,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
   var objCKeywords = "bycopy byref in inout oneway out self super atomic nonatomic retain copy " +
   "readwrite readonly strong weak assign typeof nullable nonnull null_resettable _cmd " +
   "@interface @implementation @end @protocol @encode @property @synthesize @dynamic @class " +
-  "@public @packAge @private @protected @required @optional @try @catch @finally @import " +
+  "@public @package @private @protected @required @optional @try @catch @finally @import " +
   "@selector @encode @defs @synchronized @autoreleasepool @compatibility_alias @available";
 
   var objCBuiltins = "FOUNDATION_EXPORT FOUNDATION_EXTERN NS_INLINE NS_FORMAT_FUNCTION " +
@@ -481,7 +481,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
     name: "clike",
     keywords: words("abstract assert break case catch class const continue default " +
                     "do else enum extends final finally for goto if implements import " +
-                    "instanceof interface native new packAge private protected public " +
+                    "instanceof interface native new package private protected public " +
                     "return static strictfp super switch synchronized this throw throws transient " +
                     "try volatile while @interface"),
     types: words("var byte short int long float double boolean char void Boolean Byte Character Double Float " +
@@ -570,10 +570,10 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
     keywords: words(
       /* scala */
       "abstract case catch class def do else extends final finally for forSome if " +
-      "implicit import lazy match new null object override packAge private protected return " +
+      "implicit import lazy match new null object override package private protected return " +
       "sealed super this throw trait try type val var while with yield _ " +
 
-      /* packAge scala */
+      /* package scala */
       "assert assume require print println printf readLine readBoolean readByte readShort " +
       "readChar readInt readLong readFloat readDouble"
     ),
@@ -584,15 +584,15 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
       "Product Proxy Range Responder Seq Serializable Set Specializable Stream StringBuilder " +
       "StringContext Symbol Throwable Traversable TraversableOnce Tuple Unit Vector " +
 
-      /* packAge java.lang */
+      /* package java.lang */
       "Boolean Byte Character CharSequence Class ClassLoader Cloneable Comparable " +
-      "Compiler Double Exception Float Integer Long Math Number Object PackAge Pair Process " +
-      "Runtime Runnable SecurityManAger Short StackTraceElement StrictMath String " +
+      "Compiler Double Exception Float Integer Long Math Number Object Package Pair Process " +
+      "Runtime Runnable SecurityManager Short StackTraceElement StrictMath String " +
       "StringBuffer System Thread ThreadGroup ThreadLocal Throwable Triple Void"
     ),
     multiLineStrings: true,
     blockKeywords: words("catch class enum do else finally for forSome if match switch try while"),
-    defKeywords: words("class enum def object packAge trait type val var"),
+    defKeywords: words("class enum def object package trait type val var"),
     atoms: words("true false null"),
     indentStatements: false,
     indentSwitch: false,
@@ -651,7 +651,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
     name: "clike",
     keywords: words(
       /*keywords*/
-      "packAge as typealias class interface this super val operator " +
+      "package as typealias class interface this super val operator " +
       "var fun for is in This throw return annotation " +
       "break continue object if else while do try when !in !is as? " +
 
@@ -662,10 +662,10 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
       "external annotation crossinline const operator infix suspend actual expect setparam value"
     ),
     types: words(
-      /* packAge java.lang */
+      /* package java.lang */
       "Boolean Byte Character CharSequence Class ClassLoader Cloneable Comparable " +
-      "Compiler Double Exception Float Integer Long Math Number Object PackAge Pair Process " +
-      "Runtime Runnable SecurityManAger Short StackTraceElement StrictMath String " +
+      "Compiler Double Exception Float Integer Long Math Number Object Package Pair Process " +
+      "Runtime Runnable SecurityManager Short StackTraceElement StrictMath String " +
       "StringBuffer System Thread ThreadGroup ThreadLocal Throwable Triple Void Annotation Any BooleanArray " +
       "ByteArray Char CharArray DeprecationLevel DoubleArray Enum FloatArray Function Int IntArray Lazy " +
       "LazyThreadSafetyMode LongArray Nothing ShortArray Unit"
@@ -760,8 +760,8 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
                 "gl_FogParameters " +
                 "gl_MaxLights gl_MaxClipPlanes gl_MaxTextureUnits gl_MaxTextureCoords " +
                 "gl_MaxVertexAttribs gl_MaxVertexUniformComponents gl_MaxVaryingFloats " +
-                "gl_MaxVertexTextureImAgeUnits gl_MaxTextureImAgeUnits " +
-                "gl_MaxFragmentUniformComponents gl_MaxCombineTextureImAgeUnits " +
+                "gl_MaxVertexTextureImageUnits gl_MaxTextureImageUnits " +
+                "gl_MaxFragmentUniformComponents gl_MaxCombineTextureImageUnits " +
                 "gl_MaxDrawBuffers"),
     indentSwitch: false,
     hooks: {"#": cppHook},
@@ -880,7 +880,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
     name: "clike",
     keywords: words("abstracts alias assembly assert assign break case catch class continue dynamic else" +
                     " exists extends finally for function given if import in interface is let module new" +
-                    " nonempty object of out outer packAge return satisfies super switch then this throw" +
+                    " nonempty object of out outer package return satisfies super switch then this throw" +
                     " try value void while"),
     types: function(word) {
         // In Ceylon all identifiers that start with an uppercase are types
@@ -888,7 +888,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
         return (first === first.toUpperCase() && first !== first.toLowerCase());
     },
     blockKeywords: words("case catch class dynamic else finally for function if interface module new object switch try while"),
-    defKeywords: words("class dynamic function interface module object packAge value"),
+    defKeywords: words("class dynamic function interface module object package value"),
     builtin: words("abstract actual aliased annotation by default deprecated doc final formal late license" +
                    " native optional sealed see serializable shared suppressWarnings tagged throws variable"),
     isPunctuationChar: /[\[\]{}\(\),;\:\.`]/,

@@ -49,7 +49,7 @@ class Publish {
       }
     })
 
-    const insertText = '---\r\nlayout: pAge\r\ntitle: \r\n---\r\n'
+    const insertText = '---\r\nlayout: page\r\ntitle: \r\n---\r\n'
 
     fs.writeFileSync('docs/how-to-contribute.md', insertText + fs.readFileSync('.github/CONTRIBUTING.md', 'utf8'))
   }

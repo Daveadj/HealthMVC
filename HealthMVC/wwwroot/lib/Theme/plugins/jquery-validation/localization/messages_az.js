@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: Az (Azeri; azərbaycan dili)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "Bu xana mütləq doldurulmalıdır.",
 	remote: "Zəhmət olmasa, düzgün məna daxil edin.",
 	email: "Zəhmət olmasa, düzgün elektron poçt daxil edin.",

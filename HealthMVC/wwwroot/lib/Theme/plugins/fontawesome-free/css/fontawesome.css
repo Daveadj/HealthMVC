@@ -125,32 +125,32 @@
             transform: rotate(360deg); } }
 
 .fa-rotate-90 {
-  -ms-filter: "progid:DXImAgeTransform.Microsoft.BasicImAge(rotation=1)";
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg); }
 
 .fa-rotate-180 {
-  -ms-filter: "progid:DXImAgeTransform.Microsoft.BasicImAge(rotation=2)";
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg); }
 
 .fa-rotate-270 {
-  -ms-filter: "progid:DXImAgeTransform.Microsoft.BasicImAge(rotation=3)";
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
   -webkit-transform: rotate(270deg);
           transform: rotate(270deg); }
 
 .fa-flip-horizontal {
-  -ms-filter: "progid:DXImAgeTransform.Microsoft.BasicImAge(rotation=0, mirror=1)";
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
   -webkit-transform: scale(-1, 1);
           transform: scale(-1, 1); }
 
 .fa-flip-vertical {
-  -ms-filter: "progid:DXImAgeTransform.Microsoft.BasicImAge(rotation=2, mirror=1)";
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
   -webkit-transform: scale(1, -1);
           transform: scale(1, -1); }
 
 .fa-flip-both, .fa-flip-horizontal.fa-flip-vertical {
-  -ms-filter: "progid:DXImAgeTransform.Microsoft.BasicImAge(rotation=2, mirror=1)";
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
   -webkit-transform: scale(-1, -1);
           transform: scale(-1, -1); }
 
@@ -258,7 +258,7 @@ readers do not read off random characters that represent icons */
 .fa-ambulance:before {
   content: "\f0f9"; }
 
-.fa-american-sign-languAge-interpreting:before {
+.fa-american-sign-language-interpreting:before {
   content: "\f2a3"; }
 
 .fa-amilia:before {
@@ -426,7 +426,7 @@ readers do not read off random characters that represent icons */
 .fa-baby:before {
   content: "\f77c"; }
 
-.fa-baby-carriAge:before {
+.fa-baby-carriage:before {
   content: "\f77d"; }
 
 .fa-backspace:before {
@@ -1599,7 +1599,7 @@ readers do not read off random characters that represent icons */
 .fa-file-export:before {
   content: "\f56e"; }
 
-.fa-file-imAge:before {
+.fa-file-image:before {
   content: "\f1c5"; }
 
 .fa-file-import:before {
@@ -2238,7 +2238,7 @@ readers do not read off random characters that represent icons */
 .fa-hourglass-start:before {
   content: "\f251"; }
 
-.fa-house-damAge:before {
+.fa-house-damage:before {
   content: "\f6f1"; }
 
 .fa-house-user:before {
@@ -2283,10 +2283,10 @@ readers do not read off random characters that represent icons */
 .fa-igloo:before {
   content: "\f7ae"; }
 
-.fa-imAge:before {
+.fa-image:before {
   content: "\f03e"; }
 
-.fa-imAges:before {
+.fa-images:before {
   content: "\f302"; }
 
 .fa-imdb:before {
@@ -2427,7 +2427,7 @@ readers do not read off random characters that represent icons */
 .fa-landmark:before {
   content: "\f66f"; }
 
-.fa-languAge:before {
+.fa-language:before {
   content: "\f1ab"; }
 
 .fa-laptop:before {
@@ -2553,7 +2553,7 @@ readers do not read off random characters that represent icons */
 .fa-low-vision:before {
   content: "\f2a8"; }
 
-.fa-luggAge-cart:before {
+.fa-luggage-cart:before {
   content: "\f59d"; }
 
 .fa-lungs:before {
@@ -2565,7 +2565,7 @@ readers do not read off random characters that represent icons */
 .fa-lyft:before {
   content: "\f3c3"; }
 
-.fa-mAgento:before {
+.fa-magento:before {
   content: "\f3c4"; }
 
 .fa-magic:before {
@@ -2883,13 +2883,13 @@ readers do not read off random characters that represent icons */
 .fa-outdent:before {
   content: "\f03b"; }
 
-.fa-pAge4:before {
+.fa-page4:before {
   content: "\f3d7"; }
 
-.fa-pAgelines:before {
+.fa-pagelines:before {
   content: "\f18c"; }
 
-.fa-pAger:before {
+.fa-pager:before {
   content: "\f815"; }
 
 .fa-paint-brush:before {
@@ -2988,7 +2988,7 @@ readers do not read off random characters that represent icons */
 .fa-percent:before {
   content: "\f295"; }
 
-.fa-percentAge:before {
+.fa-percentage:before {
   content: "\f541"; }
 
 .fa-periscope:before {
@@ -3489,7 +3489,7 @@ readers do not read off random characters that represent icons */
 .fa-sign-in-alt:before {
   content: "\f2f6"; }
 
-.fa-sign-languAge:before {
+.fa-sign-language:before {
   content: "\f2a7"; }
 
 .fa-sign-out-alt:before {

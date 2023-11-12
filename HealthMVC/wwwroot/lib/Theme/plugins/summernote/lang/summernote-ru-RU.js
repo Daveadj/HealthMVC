@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Верхний индекс',
         size: 'Размер шрифта'
       },
-      imAge: {
-        imAge: 'Картинка',
+      image: {
+        image: 'Картинка',
         insert: 'Вставить картинку',
         resizeFull: 'Восстановить размер',
         resizeHalf: 'Уменьшить до 50%',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Форма: Круг',
         shapeThumbnail: 'Форма: Миниатюра',
         shapeNone: 'Форма: Нет',
-        dragImAgeHere: 'Перетащите сюда картинку',
-        dropImAge: 'Перетащите картинку',
+        dragImageHere: 'Перетащите сюда картинку',
+        dropImage: 'Перетащите картинку',
         selectFromFiles: 'Выбрать из файлов',
         maximumFileSize: 'Максимальный размер файла',
         maximumFileSizeError: 'Превышен максимальный размер файла',

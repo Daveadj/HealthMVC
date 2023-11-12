@@ -33,7 +33,7 @@ CodeMirror.registerHelper("lint", "yaml", function(text) {
           // foo:bar
           from = loc ? CodeMirror.Pos(loc.line, loc.column) : CodeMirror.Pos(0, 0),
           to = from;
-      found.push({ from: from, to: to, messAge: e.messAge });
+      found.push({ from: from, to: to, message: e.message });
   }
   return found;
 });

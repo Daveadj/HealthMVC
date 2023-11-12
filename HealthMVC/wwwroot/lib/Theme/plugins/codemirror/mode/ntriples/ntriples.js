@@ -78,7 +78,7 @@ CodeMirror.defineMode("ntriples", function() {
     else if(currLocation == Location.WRITING_LIT_LANG && c == ' ') ret = Location.POST_OBJ;
     else if(currLocation == Location.WRITING_LIT_TYPE && c == '>') ret = Location.POST_OBJ;
 
-    // Closing typed and languAge literal.
+    // Closing typed and language literal.
     else if(currLocation == Location.WRITING_OBJ_LITERAL && c == '@') ret = Location.WRITING_LIT_LANG;
     else if(currLocation == Location.WRITING_OBJ_LITERAL && c == '^') ret = Location.WRITING_LIT_TYPE;
 

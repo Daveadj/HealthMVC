@@ -115,7 +115,7 @@
   }
 }
 
-// ImAge sizes
+// Image sizes
 .img-sm,
 .img-md,
 .img-lg {
@@ -149,7 +149,7 @@
   }
 }
 
-// ImAge bordered
+// Image bordered
 .img-bordered {
   border: 3px solid $gray-500;
   padding: 3px;
@@ -160,7 +160,7 @@
   padding: 2px;
 }
 
-// Rounded and Circle ImAges
+// Rounded and Circle Images
 .img-rounded {
   @include border-radius($border-radius);
 }
@@ -169,7 +169,7 @@
   @include border-radius(50%);
 }
 
-// ImAge sizes
+// Image sizes
 .img-size-64,
 .img-size-50,
 .img-size-32 {

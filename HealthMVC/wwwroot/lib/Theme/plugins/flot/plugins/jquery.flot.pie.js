@@ -6,8 +6,8 @@ Licensed under the MIT license.
 The plugin assumes that each series has a single data value, and that each
 value is a positive integer or zero.  Negative numbers don't make sense for a
 pie chart, and have unpredictable results.  The values do NOT need to be
-passed in as percentAges; the plugin will calculate the total and per-slice
-percentAges internally.
+passed in as percentages; the plugin will calculate the total and per-slice
+percentages internally.
 
 * Created by Brian Medendorp
 
@@ -18,10 +18,10 @@ The plugin supports these options:
     series: {
         pie: {
             show: true/false
-            radius: 0-1 for percentAge of fullsize, or a specified pixel length, or 'auto'
-            innerRadius: 0-1 for percentAge of fullsize or a specified pixel length, for creating a donut effect
+            radius: 0-1 for percentage of fullsize, or a specified pixel length, or 'auto'
+            innerRadius: 0-1 for percentage of fullsize or a specified pixel length, for creating a donut effect
             startAngle: 0-2 factor of PI used for starting angle (in radians) i.e 3/2 starts at the top, 0 and 2 have the same result
-            tilt: 0-1 for percentAge to tilt the pie, where 1 is no tilt, and 0 is completely flat (nothing will show)
+            tilt: 0-1 for percentage to tilt the pie, where 1 is no tilt, and 0 is completely flat (nothing will show)
             offset: {
                 top: integer value to move the pie up or down
                 left: integer value to move the pie left or right, or 'auto'
@@ -33,15 +33,15 @@ The plugin supports these options:
             label: {
                 show: true/false, or 'auto'
                 formatter:  a user-defined function that modifies the text/style of the label text
-                radius: 0-1 for percentAge of fullsize, or a specified pixel length
+                radius: 0-1 for percentage of fullsize, or a specified pixel length
                 background: {
                     color: any hexidecimal color value (other formats may or may not work, so best to stick with something like '#000')
                     opacity: 0-1
                 },
-                threshold: 0-1 for the percentAge value at which to hide labels (if they're too small)
+                threshold: 0-1 for the percentage value at which to hide labels (if they're too small)
             },
             combine: {
-                threshold: 0-1 for the percentAge value at which to combine slices (if they're too small)
+                threshold: 0-1 for the percentage value at which to combine slices (if they're too small)
                 color: any hexidecimal color value (other formats may or may not work, so best to stick with something like '#CCC'), if null, the plugin will automatically use the color of the first slice to be combined
                 label: any text value of what the combined slice should be labeled
             }
@@ -206,13 +206,13 @@ More detail and specific examples can be found in the included HTML file.
                 data[i].data = [value];
             }
 
-            // Sum up all the slices, so we can calculate percentAges for each
+            // Sum up all the slices, so we can calculate percentages for each
 
             for (i = 0; i < data.length; ++i) {
                 total += data[i].data[0][1];
             }
 
-            // Count the number of slices with percentAges below the combine
+            // Count the number of slices with percentages below the combine
             // threshold; if it turns out to be just one, we won't combine.
 
             for (i = 0; i < data.length; ++i) {
@@ -634,8 +634,8 @@ More detail and specific examples can be found in the included HTML file.
 
         function triggerClickHoverEvent(eventname, e) {
             var offset = plot.offset();
-            var canvasX = parseInt(e.pAgeX - offset.left);
-            var canvasY = parseInt(e.pAgeY - offset.top);
+            var canvasX = parseInt(e.pageX - offset.left);
+            var canvasY = parseInt(e.pageY - offset.top);
             var item = findNearbySlice(canvasX, canvasY);
 
             if (options.grid.autoHighlight) {
@@ -656,7 +656,7 @@ More detail and specific examples can be found in the included HTML file.
 
             // trigger any hover bind events
 
-            var pos = { pAgeX: e.pAgeX, pAgeY: e.pAgeY };
+            var pos = { pageX: e.pageX, pageY: e.pageY };
             target.trigger(eventname, [pos, item]);
         }
 
@@ -770,10 +770,10 @@ More detail and specific examples can be found in the included HTML file.
                         color: null,
                         opacity: 0
                     },
-                    threshold: 0    // percentAge at which to hide the label (i.e. the slice is too narrow)
+                    threshold: 0    // percentage at which to hide the label (i.e. the slice is too narrow)
                 },
                 combine: {
-                    threshold: -1,    // percentAge at which to combine little slices into one larger slice
+                    threshold: -1,    // percentage at which to combine little slices into one larger slice
                     color: null,    // color to give the new slice (auto-generated if null)
                     label: "Other"    // label to give the new slice
                 },

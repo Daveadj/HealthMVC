@@ -9,11 +9,11 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: PT (Portuguese; português)
  * Region: PT (Portugal)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "Campo de preenchimento obrigat&oacute;rio.",
 	remote: "Por favor, corrija este campo.",
 	email: "Por favor, introduza um endere&ccedil;o eletr&oacute;nico v&aacute;lido.",

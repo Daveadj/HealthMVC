@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'ตัวยก',
         size: 'ขนาดตัวอักษร'
       },
-      imAge: {
-        imAge: 'รูปภาพ',
+      image: {
+        image: 'รูปภาพ',
         insert: 'แทรกรูปภาพ',
         resizeFull: 'ปรับขนาดเท่าจริง',
         resizeHalf: 'ปรับขนาดลง 50%',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Shape: Circle',
         shapeThumbnail: 'Shape: Thumbnail',
         shapeNone: 'Shape: None',
-        dragImAgeHere: 'ลากรูปภาพที่ต้องการไว้ที่นี่',
-        dropImAge: 'วางรูปภาพหรือข้อความ',
+        dragImageHere: 'ลากรูปภาพที่ต้องการไว้ที่นี่',
+        dropImage: 'วางรูปภาพหรือข้อความ',
         selectFromFiles: 'เลือกไฟล์รูปภาพ',
         maximumFileSize: 'ขนาดไฟล์ใหญ่สุด',
         maximumFileSizeError: 'ไฟล์เกินขนาดที่กำหนด',

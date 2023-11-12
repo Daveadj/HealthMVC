@@ -374,16 +374,16 @@
 
     function slimTag(stream, state) {
       if (stream.eat('*')) {
-        state.tokenize = startRubySplat(slimTAgextras);
+        state.tokenize = startRubySplat(slimTagExtras);
         return null;
       }
       if (stream.match(nameRegexp)) {
-        state.tokenize = slimTAgextras;
+        state.tokenize = slimTagExtras;
         return "slimTag";
       }
       return slimClass(stream, state);
     }
-    function slimTAgextras(stream, state) {
+    function slimTagExtras(stream, state) {
       if (stream.match(/^(<>?|><?)/)) {
         state.tokenize = slimClass;
         return null;

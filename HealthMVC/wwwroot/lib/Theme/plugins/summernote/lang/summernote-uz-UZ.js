@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Юқори индекс',
         size: 'ҳарф ҳажми'
       },
-      imAge: {
-        imAge: 'Расм',
+      image: {
+        image: 'Расм',
         insert: 'расмни қўйиш',
         resizeFull: 'Ҳажмни тиклаш',
         resizeHalf: '50% гача кичрайтириш',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Шакли: Доира',
         shapeThumbnail: 'Шакли: Миниатюра',
         shapeNone: 'Шакли: Йўқ',
-        dragImAgeHere: 'Суратни кўчириб ўтинг',
-        dropImAge: 'Суратни кўчириб ўтинг',
+        dragImageHere: 'Суратни кўчириб ўтинг',
+        dropImage: 'Суратни кўчириб ўтинг',
         selectFromFiles: 'Файллардан бирини танлаш',
         url: 'суратлар URL и',
         remove: 'Суратни ўчириш'

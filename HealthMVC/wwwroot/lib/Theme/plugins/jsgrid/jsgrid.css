@@ -108,19 +108,19 @@
     cursor: pointer;
 }
 
-.jsgrid-pAger {
+.jsgrid-pager {
     padding: .5em 0;
 }
 
-.jsgrid-pAger-nav-button {
+.jsgrid-pager-nav-button {
     padding: .2em .6em;
 }
 
-.jsgrid-pAger-nav-inactive-button {
+.jsgrid-pager-nav-inactive-button {
     display: none;
     pointer-events: none;
 }
 
-.jsgrid-pAger-pAge {
+.jsgrid-pager-page {
     padding: .2em .6em;
 }

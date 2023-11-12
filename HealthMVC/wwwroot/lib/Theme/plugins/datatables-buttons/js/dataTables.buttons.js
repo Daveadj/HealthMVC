@@ -1379,7 +1379,7 @@ $.extend( Buttons.prototype, {
 			}
 
 			if (containerPosition.top + top < $(window).scrollTop()) {
-				// Correction for when the top is beyond the top of the pAge
+				// Correction for when the top is beyond the top of the page
 				top = buttonPosition.top + hostNode.outerHeight();
 			}
 
@@ -1868,15 +1868,15 @@ $.extend( _dtButtons, {
 			return 'pdfHtml5';
 		}
 	},
-	pAgeLength: function ( dt ) {
+	pageLength: function ( dt ) {
 		var lengthMenu = dt.settings()[0].aLengthMenu;
 		var vals = [];
 		var lang = [];
 		var text = function ( dt ) {
-			return dt.i18n( 'buttons.pAgeLength', {
+			return dt.i18n( 'buttons.pageLength', {
 				"-1": 'Show all rows',
 				_:    'Show %d rows'
-			}, dt.pAge.len() );
+			}, dt.page.len() );
 		};
 
 		// Support for DataTables 1.x 2D array
@@ -1903,19 +1903,19 @@ $.extend( _dtButtons, {
 		return {
 			extend: 'collection',
 			text: text,
-			className: 'buttons-pAge-length',
+			className: 'buttons-page-length',
 			autoClose: true,
 			buttons: $.map( vals, function ( val, i ) {
 				return {
 					text: lang[i],
-					className: 'button-pAge-length',
+					className: 'button-page-length',
 					action: function ( e, dt ) {
-						dt.pAge.len( val ).draw();
+						dt.page.len( val ).draw();
 					},
 					init: function ( dt, node, conf ) {
 						var that = this;
 						var fn = function () {
-							that.active( dt.pAge.len() === val );
+							that.active( dt.page.len() === val );
 						};
 
 						dt.on( 'length.dt'+conf.namespace, fn );
@@ -2169,7 +2169,7 @@ DataTable.Api.registerPlural( 'buttons().remove()', 'buttons().remove()', functi
 
 // Information box that can be used by buttons
 var _infoTimer;
-DataTable.Api.register( 'buttons.info()', function ( title, messAge, time ) {
+DataTable.Api.register( 'buttons.info()', function ( title, message, time ) {
 	var that = this;
 
 	if ( title === false ) {
@@ -2200,7 +2200,7 @@ DataTable.Api.register( 'buttons.info()', function ( title, messAge, time ) {
 	_fadeIn(
 		$('<div id="datatables_buttons_info" class="dt-button-info"/>')
 			.html( title )
-			.append( $('<div/>')[ typeof messAge === 'string' ? 'html' : 'append' ]( messAge ) )
+			.append( $('<div/>')[ typeof message === 'string' ? 'html' : 'append' ]( message ) )
 			.css( 'display', 'none' )
 			.appendTo( 'body' )
 	);
@@ -2236,8 +2236,8 @@ DataTable.Api.register( 'buttons.exportInfo()', function ( conf ) {
 	return {
 		filename: _filename( conf ),
 		title: _title( conf ),
-		messAgeTop: _messAge(this, conf.messAge || conf.messAgeTop, 'top'),
-		messAgeBottom: _messAge(this, conf.messAgeBottom, 'bottom')
+		messageTop: _message(this, conf.message || conf.messageTop, 'top'),
+		messageBottom: _message(this, conf.messageBottom, 'bottom')
 	};
 } );
 
@@ -2311,15 +2311,15 @@ var _title = function ( config )
 			title;
 };
 
-var _messAge = function ( dt, option, position )
+var _message = function ( dt, option, position )
 {
-	var messAge = _stringOrFunction( option );
-	if ( messAge === null ) {
+	var message = _stringOrFunction( option );
+	if ( message === null ) {
 		return null;
 	}
 
 	var caption = $('caption', dt.table().container()).eq(0);
-	if ( messAge === '*' ) {
+	if ( message === '*' ) {
 		var side = caption.css( 'caption-side' );
 		if ( side !== position ) {
 			return null;
@@ -2330,7 +2330,7 @@ var _messAge = function ( dt, option, position )
 			'';
 	}
 
-	return messAge;
+	return message;
 };
 
 

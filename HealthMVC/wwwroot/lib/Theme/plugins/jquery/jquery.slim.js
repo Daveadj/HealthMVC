@@ -328,7 +328,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 
 jQuery.extend( {
 
-	// Unique for each copy of jQuery on the pAge
+	// Unique for each copy of jQuery on the page
 	expando: "jQuery" + ( version + Math.random() ).replace( /\D/g, "" ),
 
 	// Assume jQuery is ready without the ready module
@@ -397,7 +397,7 @@ jQuery.extend( {
 		return obj;
 	},
 
-	// results is for internal usAge only
+	// results is for internal usage only
 	makeArray: function( arr, results ) {
 		var ret = results || [];
 
@@ -454,7 +454,7 @@ jQuery.extend( {
 		return matches;
 	},
 
-	// arg is for internal usAge only
+	// arg is for internal usage only
 	map: function( elems, callback, arg ) {
 		var length, value,
 			i = 0,
@@ -738,7 +738,7 @@ try {
 } catch ( e ) {
 	push = { apply: arr.length ?
 
-		// LeverAge slice if possible
+		// Leverage slice if possible
 		function( target, els ) {
 			pushNative.apply( target, slice.call( els ) );
 		} :
@@ -830,7 +830,7 @@ function Sizzle( selector, context, results, seed ) {
 				}
 			}
 
-			// Take advantAge of querySelectorAll
+			// Take advantage of querySelectorAll
 			if ( support.qsa &&
 				!nonnativeSelectorCache[ selector + " " ] &&
 				( !rbuggyQSA || !rbuggyQSA.test( selector ) ) &&
@@ -1026,16 +1026,16 @@ function createDisabledPseudo( disabled ) {
 	return function( elem ) {
 
 		// Only certain elements can match :enabled or :disabled
-		// https://html.spec.whatwg.org/multipAge/scripting.html#selector-enabled
-		// https://html.spec.whatwg.org/multipAge/scripting.html#selector-disabled
+		// https://html.spec.whatwg.org/multipage/scripting.html#selector-enabled
+		// https://html.spec.whatwg.org/multipage/scripting.html#selector-disabled
 		if ( "form" in elem ) {
 
 			// Check for inherited disabledness on relevant non-disabled elements:
 			// * listed form-associated elements in a disabled fieldset
-			//   https://html.spec.whatwg.org/multipAge/forms.html#category-listed
-			//   https://html.spec.whatwg.org/multipAge/forms.html#concept-fe-disabled
+			//   https://html.spec.whatwg.org/multipage/forms.html#category-listed
+			//   https://html.spec.whatwg.org/multipage/forms.html#concept-fe-disabled
 			// * option elements in a disabled optgroup
-			//   https://html.spec.whatwg.org/multipAge/forms.html#concept-option-disabled
+			//   https://html.spec.whatwg.org/multipage/forms.html#concept-option-disabled
 			// All such elements have a "form" property.
 			if ( elem.parentNode && elem.disabled === false ) {
 
@@ -1374,7 +1374,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 
 			// Support: Safari 8+, iOS 8+
 			// https://bugs.webkit.org/show_bug.cgi?id=136851
-			// In-pAge `selector#id sibling-combinator selector` fails
+			// In-page `selector#id sibling-combinator selector` fails
 			if ( !el.querySelectorAll( "a#" + expando + "+*" ).length ) {
 				rbuggyQSA.push( ".#.+[+~]" );
 			}
@@ -1735,7 +1735,7 @@ getText = Sizzle.getText = function( elem ) {
 	} else if ( nodeType === 1 || nodeType === 9 || nodeType === 11 ) {
 
 		// Use textContent for elements
-		// innerText usAge removed for consistency of new lines (jQuery #11153)
+		// innerText usage removed for consistency of new lines (jQuery #11153)
 		if ( typeof elem.textContent === "string" ) {
 			return elem.textContent;
 		} else {
@@ -2135,11 +2135,11 @@ Expr = Sizzle.selectors = {
 		} ),
 
 		// "Whether an element is represented by a :lang() selector
-		// is based solely on the element's languAge value
+		// is based solely on the element's language value
 		// being equal to the identifier C,
 		// or beginning with the identifier C immediately followed by "-".
-		// The matching of C against the element's languAge value is performed case-insensitively.
-		// The identifier C does not have to be a valid languAge name."
+		// The matching of C against the element's language value is performed case-insensitively.
+		// The identifier C does not have to be a valid language name."
 		// http://www.w3.org/TR/selectors/#lang-pseudo
 		"lang": markFunction( function( lang ) {
 
@@ -2302,7 +2302,7 @@ Expr = Sizzle.selectors = {
 Expr.pseudos[ "nth" ] = Expr.pseudos[ "eq" ];
 
 // Add button/input type pseudos
-for ( i in { radio: true, checkbox: true, file: true, password: true, imAge: true } ) {
+for ( i in { radio: true, checkbox: true, file: true, password: true, image: true } ) {
 	Expr.pseudos[ i ] = createInputPseudo( i );
 }
 for ( i in { submit: true, reset: true } ) {
@@ -4047,7 +4047,7 @@ jQuery.Deferred.exceptionHook = function( error, stack ) {
 	// Support: IE 8 - 9 only
 	// Console exists when dev tools are open, which can happen at any time
 	if ( window.console && window.console.warn && error && rerrorNames.test( error.name ) ) {
-		window.console.warn( "jQuery.Deferred exception: " + error.messAge, error.stack, stack );
+		window.console.warn( "jQuery.Deferred exception: " + error.message, error.stack, stack );
 	}
 };
 
@@ -4392,7 +4392,7 @@ var dataUser = new Data();
 //	Implementation Summary
 //
 //	1. Enforce API surface and semantic compatibility with 1.9.x branch
-//	2. Improve the module's maintainability by reducing the storAge
+//	2. Improve the module's maintainability by reducing the storage
 //		paths to a single mechanism.
 //	3. Use the same single mechanism to support "private" and "user" data.
 //	4. _Never_ expose "private" data to user code (TODO: Drop _data, _removeData)
@@ -5229,7 +5229,7 @@ jQuery.event = {
 			eventHandle = elemData.handle = function( e ) {
 
 				// Discard the second event of a jQuery.event.trigger() and
-				// when an event is called after a pAge has unloaded
+				// when an event is called after a page has unloaded
 				return typeof jQuery !== "undefined" && jQuery.event.triggered !== e.type ?
 					jQuery.event.dispatch.apply( elem, arguments ) : undefined;
 			};
@@ -5542,7 +5542,7 @@ jQuery.event = {
 	special: {
 		load: {
 
-			// Prevent triggered imAge.load events from bubbling to window.load
+			// Prevent triggered image.load events from bubbling to window.load
 			noBubble: true
 		},
 		click: {
@@ -5559,7 +5559,7 @@ jQuery.event = {
 					el.click && nodeName( el, "input" ) ) {
 
 					// dataPriv.set( el, "click", ... )
-					leverAgeNative( el, "click", returnTrue );
+					leverageNative( el, "click", returnTrue );
 				}
 
 				// Return false to allow normal processing in the caller
@@ -5575,7 +5575,7 @@ jQuery.event = {
 				if ( rcheckableType.test( el.type ) &&
 					el.click && nodeName( el, "input" ) ) {
 
-					leverAgeNative( el, "click" );
+					leverageNative( el, "click" );
 				}
 
 				// Return non-false to allow normal event-path propagation
@@ -5583,7 +5583,7 @@ jQuery.event = {
 			},
 
 			// For cross-browser consistency, suppress native .click() on links
-			// Also prevent it if we're currently inside a leverAged native-event stack
+			// Also prevent it if we're currently inside a leveraged native-event stack
 			_default: function( event ) {
 				var target = event.target;
 				return rcheckableType.test( target.type ) &&
@@ -5610,7 +5610,7 @@ jQuery.event = {
 // synthetic events by interrupting progress until reinvoked in response to
 // *native* events that it fires directly, ensuring that state changes have
 // already occurred before other listeners are invoked.
-function leverAgeNative( el, type, expectSync ) {
+function leverageNative( el, type, expectSync ) {
 
 	// Missing expectSync indicates a trigger call, which must force setup through jQuery.event.add
 	if ( !expectSync ) {
@@ -5756,7 +5756,7 @@ jQuery.Event = function( src, props ) {
 	this[ jQuery.expando ] = true;
 };
 
-// jQuery.Event is based on DOM3 Events as specified by the ECMAScript LanguAge Binding
+// jQuery.Event is based on DOM3 Events as specified by the ECMAScript Language Binding
 // https://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
 jQuery.Event.prototype = {
 	constructor: jQuery.Event,
@@ -5806,8 +5806,8 @@ jQuery.each( {
 	detail: true,
 	eventPhase: true,
 	metaKey: true,
-	pAgeX: true,
-	pAgeY: true,
+	pageX: true,
+	pageY: true,
 	shiftKey: true,
 	view: true,
 	"char": true,
@@ -5840,7 +5840,7 @@ jQuery.each( { focus: "focusin", blur: "focusout" }, function( type, delegateTyp
 			// Claim the first handler
 			// dataPriv.set( this, "focus", ... )
 			// dataPriv.set( this, "blur", ... )
-			leverAgeNative( this, type, expectSync );
+			leverageNative( this, type, expectSync );
 
 			// Return false to allow normal processing in the caller
 			return false;
@@ -5848,14 +5848,14 @@ jQuery.each( { focus: "focusin", blur: "focusout" }, function( type, delegateTyp
 		trigger: function() {
 
 			// Force setup before trigger
-			leverAgeNative( this, type );
+			leverageNative( this, type );
 
 			// Return non-false to allow normal event-path propagation
 			return true;
 		},
 
 		// Suppress native focus or blur as it's already being fired
-		// in leverAgeNative.
+		// in leverageNative.
 		_default: function() {
 			return true;
 		},
@@ -6151,7 +6151,7 @@ jQuery.extend( {
 	clone: function( elem, dataAndEvents, deepDataAndEvents ) {
 		var i, l, srcElements, destElements,
 			clone = elem.cloneNode( true ),
-			inPAge = isAttached( elem );
+			inPage = isAttached( elem );
 
 		// Fix IE cloning issues
 		if ( !support.noCloneChecked && ( elem.nodeType === 1 || elem.nodeType === 11 ) &&
@@ -6183,7 +6183,7 @@ jQuery.extend( {
 		// Preserve script evaluation history
 		destElements = getAll( clone, "script" );
 		if ( destElements.length > 0 ) {
-			setGlobalEval( destElements, !inPAge && getAll( elem, "script" ) );
+			setGlobalEval( destElements, !inPage && getAll( elem, "script" ) );
 		}
 
 		// Return the cloned set
@@ -6458,7 +6458,7 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 		reliableMarginLeftVal = roundPixelMeasures( divStyle.marginLeft ) === 12;
 
 		// Support: Android 4.0 - 4.3 only, Safari <=9.1 - 10.1, iOS <=7.0 - 9.3
-		// Some styles come back with percentAge values, even though they shouldn't
+		// Some styles come back with percentage values, even though they shouldn't
 		div.style.right = "60%";
 		pixelBoxStylesVal = roundPixelMeasures( divStyle.right ) === 36;
 
@@ -6595,7 +6595,7 @@ function curCSS( elem, name, computed ) {
 		}
 
 		// A tribute to the "awesome hack by Dean Edwards"
-		// Android Browser returns percentAge for some values,
+		// Android Browser returns percentage for some values,
 		// but width seems to be reliably pixels.
 		// This is against the CSSOM draft spec:
 		// https://drafts.csswg.org/cssom/#resolved-values
@@ -7270,7 +7270,7 @@ jQuery.extend( {
 			i = 0,
 
 			// Attribute names can contain non-HTML whitespace characters
-			// https://html.spec.whatwg.org/multipAge/syntax.html#attributes-2
+			// https://html.spec.whatwg.org/multipage/syntax.html#attributes-2
 			attrNames = value && value.match( rnothtmlwhite );
 
 		if ( attrNames && elem.nodeType === 1 ) {
@@ -8088,7 +8088,7 @@ jQuery.parseXML = function( data ) {
 var
 	rbracket = /\[\]$/,
 	rCRLF = /\r?\n/g,
-	rsubmitterTypes = /^(?:submit|button|imAge|reset|file)$/i,
+	rsubmitterTypes = /^(?:submit|button|image|reset|file)$/i,
 	rsubmittable = /^(?:input|select|textarea|keygen)/i;
 
 function buildParams( prefix, obj, traditional, add ) {
@@ -8431,8 +8431,8 @@ jQuery.fn.extend( {
 		rect = elem.getBoundingClientRect();
 		win = elem.ownerDocument.defaultView;
 		return {
-			top: rect.top + win.pAgeYOffset,
-			left: rect.left + win.pAgeXOffset
+			top: rect.top + win.pageYOffset,
+			left: rect.left + win.pageXOffset
 		};
 	},
 
@@ -8506,8 +8506,8 @@ jQuery.fn.extend( {
 } );
 
 // Create scrollLeft and scrollTop methods
-jQuery.each( { scrollLeft: "pAgeXOffset", scrollTop: "pAgeYOffset" }, function( method, prop ) {
-	var top = "pAgeYOffset" === prop;
+jQuery.each( { scrollLeft: "pageXOffset", scrollTop: "pageYOffset" }, function( method, prop ) {
+	var top = "pageYOffset" === prop;
 
 	jQuery.fn[ method ] = function( val ) {
 		return access( this, function( elem, method, val ) {
@@ -8526,8 +8526,8 @@ jQuery.each( { scrollLeft: "pAgeXOffset", scrollTop: "pAgeYOffset" }, function( 
 
 			if ( win ) {
 				win.scrollTo(
-					!top ? val : win.pAgeXOffset,
-					top ? val : win.pAgeYOffset
+					!top ? val : win.pageXOffset,
+					top ? val : win.pageYOffset
 				);
 
 			} else {
@@ -8549,7 +8549,7 @@ jQuery.each( [ "top", "left" ], function( _i, prop ) {
 			if ( computed ) {
 				computed = curCSS( elem, prop );
 
-				// If curCSS returns percentAge, fallback to offset
+				// If curCSS returns percentage, fallback to offset
 				return rnumnonpx.test( computed ) ?
 					jQuery( elem ).position()[ prop ] + "px" :
 					computed;

@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: KA (Georgian; ქართული)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "ამ ველის შევსება აუცილებელია.",
 	remote: "გთხოვთ მიუთითოთ სწორი მნიშვნელობა.",
 	email: "გთხოვთ მიუთითოთ ელ-ფოსტის კორექტული მისამართი.",

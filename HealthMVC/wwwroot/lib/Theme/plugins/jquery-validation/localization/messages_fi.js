@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: FI (Finnish; suomi, suomen kieli)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "T&auml;m&auml; kentt&auml; on pakollinen.",
 	email: "Sy&ouml;t&auml; oikea s&auml;hk&ouml;postiosoite.",
 	url: "Sy&ouml;t&auml; oikea URL-osoite.",

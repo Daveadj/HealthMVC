@@ -349,7 +349,7 @@
       list: 'Agenda',
     },
     weekText: 'Uge',
-    allDayText: 'Hele dAgen',
+    allDayText: 'Hele dagen',
     moreLinkText: 'flere',
     noEventsText: 'Ingen arrangementer at vise',
   };
@@ -398,7 +398,7 @@
       },
     },
     viewHint(buttonText) {
-      // → TAgesansicht, Wochenansicht, Monatsansicht, Jahresansicht
+      // → Tagesansicht, Wochenansicht, Monatsansicht, Jahresansicht
       const glue = buttonText === 'Woche' ? 'n' : buttonText === 'Monat' ? 's' : 'es';
       return buttonText + glue + 'ansicht'
     },
@@ -457,7 +457,7 @@
       },
     },
     viewHint(buttonText) {
-      // → TAgesansicht, Wochenansicht, Monatsansicht, Jahresansicht
+      // → Tagesansicht, Wochenansicht, Monatsansicht, Jahresansicht
       const glue = buttonText === 'Woche' ? 'n' : buttonText === 'Monat' ? 's' : 'es';
       return buttonText + glue + 'ansicht'
     },
@@ -1224,7 +1224,7 @@
     },
     weekText: 'Uke',
     weekTextLong: 'Uke',
-    allDayText: 'Hele dAgen',
+    allDayText: 'Hele dagen',
     moreLinkText: 'til',
     noEventsText: 'Ingen hendelser å vise',
     buttonHints: {
@@ -1297,7 +1297,7 @@
       list: 'Agenda',
     },
     weekText: 'Veke',
-    allDayText: 'Heile dAgen',
+    allDayText: 'Heile dagen',
     moreLinkText: 'til',
     noEventsText: 'Ingen hendelser å vise',
   };

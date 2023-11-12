@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'மேல் ஒட்டு',
         subscript: 'கீழ் ஒட்டு'
       },
-      imAge: {
-        imAge: 'படம்',
+      image: {
+        image: 'படம்',
         insert: 'படத்தை செருகு',
         resizeFull: 'முழு அளவை',
         resizeHalf: 'அரை அளவை',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'வட்ட வடிவம்',
         shapeThumbnail: 'சிறு வடிவம்',
         shapeNone: 'வடிவத்தை நீக்கு',
-        dragImAgeHere: 'படத்தை இங்கே இழுத்துவை',
-        dropImAge: 'படத்தை விடு',
+        dragImageHere: 'படத்தை இங்கே இழுத்துவை',
+        dropImage: 'படத்தை விடு',
         selectFromFiles: 'கோப்புகளை தேர்வு செய்',
         maximumFileSize: 'அதிகபட்ச கோப்பு அளவு',
         maximumFileSizeError: 'கோப்பு அதிகபட்ச அளவை மீறிவிட்டது',

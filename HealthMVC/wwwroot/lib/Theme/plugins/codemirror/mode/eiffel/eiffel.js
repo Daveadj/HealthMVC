@@ -59,7 +59,7 @@ CodeMirror.defineMode("eiffel", function() {
     'create',
     'check',
     'alias',
-    'Agent',
+    'agent',
     'separate',
     'invariant',
     'inherit',

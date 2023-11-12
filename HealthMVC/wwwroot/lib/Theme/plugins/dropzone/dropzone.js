@@ -4094,7 +4094,7 @@ $({ target: 'Array', proto: true, forced: !HAS_SPECIES_SUPPORT }, {
     var length = toLength(O.length);
     var k = toAbsoluteIndex(start, length);
     var fin = toAbsoluteIndex(end === undefined ? length : end, length);
-    // inline `ArraySpeciesCreate` for usAge native `Array#slice` where it's possible
+    // inline `ArraySpeciesCreate` for usage native `Array#slice` where it's possible
     var Constructor, result, n;
     if (isArray(O)) {
       Constructor = O.constructor;
@@ -6990,7 +6990,7 @@ var Emitter = /*#__PURE__*/function () {
 
 ;// CONCATENATED MODULE: ./src/preview-template.html
 // Module
-var code = "<div class=\"dz-preview dz-file-preview\"> <div class=\"dz-imAge\"><img data-dz-thumbnail/></div> <div class=\"dz-details\"> <div class=\"dz-size\"><span data-dz-size></span></div> <div class=\"dz-filename\"><span data-dz-name></span></div> </div> <div class=\"dz-progress\"> <span class=\"dz-upload\" data-dz-uploadprogress></span> </div> <div class=\"dz-error-messAge\"><span data-dz-errormessAge></span></div> <div class=\"dz-success-mark\"> <svg width=\"54px\" height=\"54px\" viewBox=\"0 0 54 54\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"> <title>Check</title> <g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\"> <path d=\"M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z\" stroke-opacity=\"0.198794158\" stroke=\"#747474\" fill-opacity=\"0.816519475\" fill=\"#FFFFFF\"></path> </g> </svg> </div> <div class=\"dz-error-mark\"> <svg width=\"54px\" height=\"54px\" viewBox=\"0 0 54 54\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"> <title>Error</title> <g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\"> <g stroke=\"#747474\" stroke-opacity=\"0.198794158\" fill=\"#FFFFFF\" fill-opacity=\"0.816519475\"> <path d=\"M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z\"></path> </g> </g> </svg> </div> </div> ";
+var code = "<div class=\"dz-preview dz-file-preview\"> <div class=\"dz-image\"><img data-dz-thumbnail/></div> <div class=\"dz-details\"> <div class=\"dz-size\"><span data-dz-size></span></div> <div class=\"dz-filename\"><span data-dz-name></span></div> </div> <div class=\"dz-progress\"> <span class=\"dz-upload\" data-dz-uploadprogress></span> </div> <div class=\"dz-error-message\"><span data-dz-errormessage></span></div> <div class=\"dz-success-mark\"> <svg width=\"54px\" height=\"54px\" viewBox=\"0 0 54 54\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"> <title>Check</title> <g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\"> <path d=\"M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z\" stroke-opacity=\"0.198794158\" stroke=\"#747474\" fill-opacity=\"0.816519475\" fill=\"#FFFFFF\"></path> </g> </svg> </div> <div class=\"dz-error-mark\"> <svg width=\"54px\" height=\"54px\" viewBox=\"0 0 54 54\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"> <title>Error</title> <g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\"> <g stroke=\"#747474\" stroke-opacity=\"0.198794158\" fill=\"#FFFFFF\" fill-opacity=\"0.816519475\"> <path d=\"M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z\"></path> </g> </g> </svg> </div> </div> ";
 // Exports
 /* harmony default export */ var preview_template = (code);
 ;// CONCATENATED MODULE: ./src/options.js
@@ -7096,9 +7096,9 @@ var defaultOptions = {
   paramName: "file",
 
   /**
-   * Whether thumbnails for imAges should be generated
+   * Whether thumbnails for images should be generated
    */
-  createImAgeThumbnails: true,
+  createImageThumbnails: true,
 
   /**
    * In MB. When the filename exceeds this limit, the thumbnail will not be generated.
@@ -7106,23 +7106,23 @@ var defaultOptions = {
   maxThumbnailFilesize: 10,
 
   /**
-   * If `null`, the ratio of the imAge will be used to calculate it.
+   * If `null`, the ratio of the image will be used to calculate it.
    */
   thumbnailWidth: 120,
 
   /**
-   * The same as `thumbnailWidth`. If both are null, imAges will not be resized.
+   * The same as `thumbnailWidth`. If both are null, images will not be resized.
    */
   thumbnailHeight: 120,
 
   /**
-   * How the imAges should be scaled down in case both, `thumbnailWidth` and `thumbnailHeight` are provided.
+   * How the images should be scaled down in case both, `thumbnailWidth` and `thumbnailHeight` are provided.
    * Can be either `contain` or `crop`.
    */
   thumbnailMethod: "crop",
 
   /**
-   * If set, imAges will be resized to these dimensions before being **uploaded**.
+   * If set, images will be resized to these dimensions before being **uploaded**.
    * If only one, `resizeWidth` **or** `resizeHeight` is provided, the original aspect
    * ratio of the file will be preserved.
    *
@@ -7137,19 +7137,19 @@ var defaultOptions = {
   resizeHeight: null,
 
   /**
-   * The mime type of the resized imAge (before it gets uploaded to the server).
-   * If `null` the original mime type will be used. To force jpeg, for example, use `imAge/jpeg`.
+   * The mime type of the resized image (before it gets uploaded to the server).
+   * If `null` the original mime type will be used. To force jpeg, for example, use `image/jpeg`.
    * See `resizeWidth` for more information.
    */
   resizeMimeType: null,
 
   /**
-   * The quality of the resized imAges. See `resizeWidth`.
+   * The quality of the resized images. See `resizeWidth`.
    */
   resizeQuality: 0.8,
 
   /**
-   * How the imAges should be scaled down in case both, `resizeWidth` and `resizeHeight` are provided.
+   * How the images should be scaled down in case both, `resizeWidth` and `resizeHeight` are provided.
    * Can be either `contain` or `crop`.
    */
   resizeMethod: "contain",
@@ -7197,7 +7197,7 @@ var defaultOptions = {
    * extension against this list. This is a comma separated list of mime
    * types or file extensions.
    *
-   * Eg.: `imAge/*,application/pdf,.psd`
+   * Eg.: `image/*,application/pdf,.psd`
    *
    * If the Dropzone is `clickable` this option will also be used as
    * [`accept`](https://developer.mozilla.org/en-US/docs/HTML/Element/input#attr-accept)
@@ -7252,7 +7252,7 @@ var defaultOptions = {
   /**
    * This is the element the hidden input field (which is used when clicking on the
    * dropzone to trigger file selection) will be appended to. This might
-   * be important in case you use frameworks to switch the content of your pAge.
+   * be important in case you use frameworks to switch the content of your page.
    *
    * Can be a selector string, or an element directly.
    */
@@ -7264,7 +7264,7 @@ var defaultOptions = {
    * If microphone, mobile devices will skip the file selection and choose the microphone
    * If camcorder, mobile devices will skip the file selection and choose the camera in video mode
    * On apple devices multiple must be set to false.  AcceptedFiles may need to
-   * be set to an appropriate mime type (e.g. "imAge/*", "audio/*", or "video/*").
+   * be set to an appropriate mime type (e.g. "image/*", "audio/*", or "video/*").
    */
   capture: null,
 
@@ -7291,12 +7291,12 @@ var defaultOptions = {
   /**
    * The text used before any files are dropped.
    */
-  dictDefaultMessAge: "Drop files here to upload",
+  dictDefaultMessage: "Drop files here to upload",
 
   /**
-   * The text that replaces the default messAge text it the browser is not supported.
+   * The text that replaces the default message text it the browser is not supported.
    */
-  dictFallbackMessAge: "Your browser does not support drag'n'drop file uploads.",
+  dictFallbackMessage: "Your browser does not support drag'n'drop file uploads.",
 
   /**
    * The text that will be added before the fallback form.
@@ -7399,8 +7399,8 @@ var defaultOptions = {
    * and a `done` function as parameters.
    *
    * If the done function is invoked without arguments, the file is "accepted" and will
-   * be processed. If you pass an error messAge, the file is rejected, and the error
-   * messAge will be displayed.
+   * be processed. If you pass an error message, the file is rejected, and the error
+   * message will be displayed.
    * This function will not be called if the file is too big or doesn't match the mime types.
    */
   accept: function accept(file, done) {
@@ -7424,7 +7424,7 @@ var defaultOptions = {
    */
   fallback: function fallback() {
     // This code should pass in IE7... :(
-    var messAgeElement;
+    var messageElement;
     this.element.className = "".concat(this.element.className, " dz-browser-not-supported");
 
     var _iterator = options_createForOfIteratorHelper(this.element.getElementsByTagName("div"), true),
@@ -7434,9 +7434,9 @@ var defaultOptions = {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var child = _step.value;
 
-        if (/(^| )dz-messAge($| )/.test(child.className)) {
-          messAgeElement = child;
-          child.className = "dz-messAge"; // Removes the 'dz-default' class
+        if (/(^| )dz-message($| )/.test(child.className)) {
+          messageElement = child;
+          child.className = "dz-message"; // Removes the 'dz-default' class
 
           break;
         }
@@ -7447,18 +7447,18 @@ var defaultOptions = {
       _iterator.f();
     }
 
-    if (!messAgeElement) {
-      messAgeElement = Dropzone.createElement('<div class="dz-messAge"><span></span></div>');
-      this.element.appendChild(messAgeElement);
+    if (!messageElement) {
+      messageElement = Dropzone.createElement('<div class="dz-message"><span></span></div>');
+      this.element.appendChild(messageElement);
     }
 
-    var span = messAgeElement.getElementsByTagName("span")[0];
+    var span = messageElement.getElementsByTagName("span")[0];
 
     if (span) {
       if (span.textContent != null) {
-        span.textContent = this.options.dictFallbackMessAge;
+        span.textContent = this.options.dictFallbackMessage;
       } else if (span.innerText != null) {
-        span.innerText = this.options.dictFallbackMessAge;
+        span.innerText = this.options.dictFallbackMessage;
       }
     }
 
@@ -7475,7 +7475,7 @@ var defaultOptions = {
    *  - `srcX` & `srcY` (optional, default `0`)
    *  - `trgX` & `trgY` (optional, default `0`)
    *
-   * Those values are going to be used by `ctx.drawImAge()`.
+   * Those values are going to be used by `ctx.drawImage()`.
    */
   resize: function resize(file, width, height, resizeMethod) {
     var info = {
@@ -7493,7 +7493,7 @@ var defaultOptions = {
       width = height * srcRatio;
     } else if (height == null) {
       height = width / srcRatio;
-    } // Make sure imAges aren't upscaled
+    } // Make sure images aren't upscaled
 
 
     width = Math.min(width, info.srcWidth);
@@ -7501,7 +7501,7 @@ var defaultOptions = {
     var trgRatio = width / height;
 
     if (info.srcWidth > width || info.srcHeight > height) {
-      // ImAge is bigger and needs rescaling
+      // Image is bigger and needs rescaling
       if (resizeMethod === "crop") {
         if (srcRatio > trgRatio) {
           info.srcHeight = file.height;
@@ -7530,17 +7530,17 @@ var defaultOptions = {
   },
 
   /**
-   * Can be used to transform the file (for example, resize an imAge if necessary).
+   * Can be used to transform the file (for example, resize an image if necessary).
    *
    * The default implementation uses `resizeWidth` and `resizeHeight` (if provided) and resizes
-   * imAges according to those dimensions.
+   * images according to those dimensions.
    *
    * Gets the `file` as the first parameter, and a `done()` function as the second, that needs
    * to be invoked with the file when the transformation is done.
    */
   transformFile: function transformFile(file, done) {
-    if ((this.options.resizeWidth || this.options.resizeHeight) && file.type.match(/imAge.*/)) {
-      return this.resizeImAge(file, this.options.resizeWidth, this.options.resizeHeight, this.options.resizeMethod, done);
+    if ((this.options.resizeWidth || this.options.resizeHeight) && file.type.match(/image.*/)) {
+      return this.resizeImage(file, this.options.resizeWidth, this.options.resizeHeight, this.options.resizeMethod, done);
     } else {
       return done(file);
     }
@@ -7575,10 +7575,10 @@ var defaultOptions = {
     return this.element.classList.remove("dz-drag-hover");
   },
   dragstart: function dragstart(e) {},
-  drAgend: function drAgend(e) {
+  dragend: function dragend(e) {
     return this.element.classList.remove("dz-drag-hover");
   },
-  drAgenter: function drAgenter(e) {
+  dragenter: function dragenter(e) {
     return this.element.classList.add("dz-drag-hover");
   },
   dragover: function dragover(e) {
@@ -7705,27 +7705,27 @@ var defaultOptions = {
       }
 
       return setTimeout(function () {
-        return file.previewElement.classList.add("dz-imAge-preview");
+        return file.previewElement.classList.add("dz-image-preview");
       }, 1);
     }
   },
   // Called whenever an error occurs
-  // Receives `file` and `messAge`
-  error: function error(file, messAge) {
+  // Receives `file` and `message`
+  error: function error(file, message) {
     if (file.previewElement) {
       file.previewElement.classList.add("dz-error");
 
-      if (typeof messAge !== "string" && messAge.error) {
-        messAge = messAge.error;
+      if (typeof message !== "string" && message.error) {
+        message = message.error;
       }
 
-      var _iterator6 = options_createForOfIteratorHelper(file.previewElement.querySelectorAll("[data-dz-errormessAge]"), true),
+      var _iterator6 = options_createForOfIteratorHelper(file.previewElement.querySelectorAll("[data-dz-errormessage]"), true),
           _step6;
 
       try {
         for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
           var node = _step6.value;
-          node.textContent = messAge;
+          node.textContent = message;
         }
       } catch (err) {
         _iterator6.e(err);
@@ -7749,7 +7749,7 @@ var defaultOptions = {
   },
   processingmultiple: function processingmultiple() {},
   // Called whenever the upload progress gets updated.
-  // Receives `file`, `progress` (percentAge 0-100) and `bytesSent`.
+  // Receives `file`, `progress` (percentage 0-100) and `bytesSent`.
   // To get the total number of bytes of the file, use `file.size`
   uploadprogress: function uploadprogress(file, progress, bytesSent) {
     if (file.previewElement) {
@@ -8058,8 +8058,8 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
         this.element.setAttribute("enctype", "multipart/form-data");
       }
 
-      if (this.element.classList.contains("dropzone") && !this.element.querySelector(".dz-messAge")) {
-        this.element.appendChild(Dropzone.createElement("<div class=\"dz-default dz-messAge\"><button class=\"dz-button\" type=\"button\">".concat(this.options.dictDefaultMessAge, "</button></div>")));
+      if (this.element.classList.contains("dropzone") && !this.element.querySelector(".dz-message")) {
+        this.element.appendChild(Dropzone.createElement("<div class=\"dz-default dz-message\"><button class=\"dz-button\" type=\"button\">".concat(this.options.dictDefaultMessage, "</button></div>")));
       }
 
       if (this.clickableElements.length) {
@@ -8199,9 +8199,9 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
           dragstart: function dragstart(e) {
             return _this2.emit("dragstart", e);
           },
-          drAgenter: function drAgenter(e) {
+          dragenter: function dragenter(e) {
             noPropagation(e);
-            return _this2.emit("drAgenter", e);
+            return _this2.emit("dragenter", e);
           },
           dragover: function dragover(e) {
             // Makes it possible to drag files from chrome's download bar
@@ -8224,8 +8224,8 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
             noPropagation(e);
             return _this2.drop(e);
           },
-          drAgend: function drAgend(e) {
-            return _this2.emit("drAgend", e);
+          dragend: function dragend(e) {
+            return _this2.emit("dragend", e);
           }
         } // This is disabled right now, because the browsers don't implement it properly.
         // "paste": (e) =>
@@ -8238,8 +8238,8 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
           element: clickableElement,
           events: {
             click: function click(evt) {
-              // Only the actual dropzone or the messAge element should trigger file selection
-              if (clickableElement !== _this2.element || evt.target === _this2.element || Dropzone.elementInside(evt.target, _this2.element.querySelector(".dz-messAge"))) {
+              // Only the actual dropzone or the message element should trigger file selection
+              if (clickableElement !== _this2.element || evt.target === _this2.element || Dropzone.elementInside(evt.target, _this2.element.querySelector(".dz-message"))) {
                 _this2.hiddenFileInput.click(); // Forward the click
 
               }
@@ -8649,7 +8649,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
 
       return readEntries();
     } // If `done()` is called without argument the file is accepted
-    // If you call it with an error messAge, the file is rejected
+    // If you call it with an error message, the file is rejected
     // (This allows for asynchronous validation)
     //
     // This function checks the filesize, and if the file.type passes the
@@ -8752,7 +8752,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
     value: function _enqueueThumbnail(file) {
       var _this8 = this;
 
-      if (this.options.createImAgeThumbnails && file.type.match(/imAge.*/) && file.size <= this.options.maxThumbnailFilesize * 1024 * 1024) {
+      if (this.options.createImageThumbnails && file.type.match(/image.*/) && file.size <= this.options.maxThumbnailFilesize * 1024 * 1024) {
         this._thumbnailQueue.push(file);
 
         return setTimeout(function () {
@@ -8822,18 +8822,18 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       }
 
       return null;
-    } // Resizes an imAge before it gets sent to the server. This function is the default behavior of
+    } // Resizes an image before it gets sent to the server. This function is the default behavior of
     // `options.transformFile` if `resizeWidth` or `resizeHeight` are set. The callback is invoked with
     // the resized blob.
 
   }, {
-    key: "resizeImAge",
-    value: function resizeImAge(file, width, height, resizeMethod, callback) {
+    key: "resizeImage",
+    value: function resizeImage(file, width, height, resizeMethod, callback) {
       var _this10 = this;
 
       return this.createThumbnail(file, width, height, resizeMethod, true, function (dataUrl, canvas) {
         if (canvas == null) {
-          // The imAge has not been resized
+          // The image has not been resized
           return callback(file);
         } else {
           var resizeMimeType = _this10.options.resizeMimeType;
@@ -8844,7 +8844,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
 
           var resizedDataURL = canvas.toDataURL(resizeMimeType, _this10.options.resizeQuality);
 
-          if (resizeMimeType === "imAge/jpeg" || resizeMimeType === "imAge/jpg") {
+          if (resizeMimeType === "image/jpeg" || resizeMimeType === "image/jpg") {
             // Now add the original EXIF information
             resizedDataURL = ExifRestore.restore(file.dataURL, resizedDataURL);
           }
@@ -8861,9 +8861,9 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       var fileReader = new FileReader();
 
       fileReader.onload = function () {
-        file.dataURL = fileReader.result; // Don't bother creating a thumbnail for SVG imAges since they're vector
+        file.dataURL = fileReader.result; // Don't bother creating a thumbnail for SVG images since they're vector
 
-        if (file.type === "imAge/svg+xml") {
+        if (file.type === "image/svg+xml") {
           if (callback != null) {
             callback(fileReader.result);
           }
@@ -8877,14 +8877,14 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       fileReader.readAsDataURL(file);
     } // `mockFile` needs to have these attributes:
     //
-    //     { name: 'name', size: 12345, imAgeUrl: '' }
+    //     { name: 'name', size: 12345, imageUrl: '' }
     //
-    // `callback` will be invoked when the imAge has been downloaded and displayed.
+    // `callback` will be invoked when the image has been downloaded and displayed.
     // `crossOrigin` will be added to the `img` tag when accessing the file.
 
   }, {
     key: "displayExistingFile",
-    value: function displayExistingFile(mockFile, imAgeUrl, callback, crossOrigin) {
+    value: function displayExistingFile(mockFile, imageUrl, callback, crossOrigin) {
       var _this12 = this;
 
       var resizeThumbnail = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
@@ -8892,7 +8892,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       this.emit("complete", mockFile);
 
       if (!resizeThumbnail) {
-        this.emit("thumbnail", mockFile, imAgeUrl);
+        this.emit("thumbnail", mockFile, imageUrl);
         if (callback) callback();
       } else {
         var onDone = function onDone(thumbnail) {
@@ -8901,7 +8901,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
           if (callback) callback();
         };
 
-        mockFile.dataURL = imAgeUrl;
+        mockFile.dataURL = imageUrl;
         this.createThumbnailFromUrl(mockFile, this.options.thumbnailWidth, this.options.thumbnailHeight, this.options.thumbnailMethod, this.options.fixOrientation, onDone, crossOrigin);
       }
     }
@@ -8910,16 +8910,16 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
     value: function createThumbnailFromUrl(file, width, height, resizeMethod, fixOrientation, callback, crossOrigin) {
       var _this13 = this;
 
-      // Not using `new ImAge` here because of a bug in latest Chrome versions.
+      // Not using `new Image` here because of a bug in latest Chrome versions.
       // See https://github.com/enyo/dropzone/pull/226
       var img = document.createElement("img");
 
       if (crossOrigin) {
         img.crossOrigin = crossOrigin;
-      } // fixOrientation is not needed anymore with browsers handling imAgeOrientation
+      } // fixOrientation is not needed anymore with browsers handling imageOrientation
 
 
-      fixOrientation = getComputedStyle(document.body)["imAgeOrientation"] == "from-imAge" ? false : fixOrientation;
+      fixOrientation = getComputedStyle(document.body)["imageOrientation"] == "from-image" ? false : fixOrientation;
 
       img.onload = function () {
         var loadExif = function loadExif(callback) {
@@ -8996,8 +8996,8 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
           } // This is a bugfix for iOS' scaling bug.
 
 
-          drawImAgeIOSFix(ctx, img, resizeInfo.srcX != null ? resizeInfo.srcX : 0, resizeInfo.srcY != null ? resizeInfo.srcY : 0, resizeInfo.srcWidth, resizeInfo.srcHeight, resizeInfo.trgX != null ? resizeInfo.trgX : 0, resizeInfo.trgY != null ? resizeInfo.trgY : 0, resizeInfo.trgWidth, resizeInfo.trgHeight);
-          var thumbnail = canvas.toDataURL("imAge/png");
+          drawImageIOSFix(ctx, img, resizeInfo.srcX != null ? resizeInfo.srcX : 0, resizeInfo.srcY != null ? resizeInfo.srcY : 0, resizeInfo.srcWidth, resizeInfo.srcHeight, resizeInfo.trgX != null ? resizeInfo.trgX : 0, resizeInfo.trgY != null ? resizeInfo.trgY : 0, resizeInfo.trgWidth, resizeInfo.trgHeight);
+          var thumbnail = canvas.toDataURL("image/png");
 
           if (callback != null) {
             return callback(thumbnail, canvas);
@@ -9544,7 +9544,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
             _file2.upload.total += _file2.upload.chunks[i].total;
             _file2.upload.bytesSent += _file2.upload.chunks[i].bytesSent;
           }
-        } // Since the process is a percentAge, we need to divide by the amount of
+        } // Since the process is a percentage, we need to divide by the amount of
         // chunks we've used.
 
 
@@ -9655,7 +9655,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
 
   }, {
     key: "_errorProcessing",
-    value: function _errorProcessing(files, messAge, xhr) {
+    value: function _errorProcessing(files, message, xhr) {
       var _iterator19 = dropzone_createForOfIteratorHelper(files, true),
           _step19;
 
@@ -9663,7 +9663,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
         for (_iterator19.s(); !(_step19 = _iterator19.n()).done;) {
           var file = _step19.value;
           file.status = Dropzone.ERROR;
-          this.emit("error", file, messAge, xhr);
+          this.emit("error", file, message, xhr);
           this.emit("complete", file);
         }
       } catch (err) {
@@ -9673,7 +9673,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       }
 
       if (this.options.uploadMultiple) {
-        this.emit("errormultiple", files, messAge, xhr);
+        this.emit("errormultiple", files, message, xhr);
         this.emit("completemultiple", files);
       }
 
@@ -9689,10 +9689,10 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
       /*
        This is a list of all available events you can register on a dropzone object.
         You can register an event handler like this:
-        dropzone.on("drAgenter", function() { });
+        dropzone.on("dragEnter", function() { });
         */
 
-      this.prototype.events = ["drop", "dragstart", "drAgend", "drAgenter", "dragover", "dragleave", "addedfile", "addedfiles", "removedfile", "thumbnail", "error", "errormultiple", "processing", "processingmultiple", "uploadprogress", "totaluploadprogress", "sending", "sendingmultiple", "success", "successmultiple", "canceled", "canceledmultiple", "complete", "completemultiple", "reset", "maxfilesexceeded", "maxfilesreached", "queuecomplete"];
+      this.prototype.events = ["drop", "dragstart", "dragend", "dragenter", "dragover", "dragleave", "addedfile", "addedfiles", "removedfile", "thumbnail", "error", "errormultiple", "processing", "processingmultiple", "uploadprogress", "totaluploadprogress", "sending", "sendingmultiple", "success", "successmultiple", "canceled", "canceledmultiple", "complete", "completemultiple", "reset", "maxfilesexceeded", "maxfilesreached", "queuecomplete"];
       this.prototype._thumbnailQueue = [];
       this.prototype._processingThumbnail = false;
     } // global utility
@@ -10056,7 +10056,7 @@ Dropzone.isValidFile = function (file, acceptedFiles) {
           return true;
         }
       } else if (/\/\*$/.test(validType)) {
-        // This is something like a imAge/* mime type
+        // This is something like a image/* mime type
         if (baseMimeType === validType.replace(/\/.*$/, "")) {
           return true;
         }
@@ -10099,13 +10099,13 @@ Dropzone.SUCCESS = "success";
 /*
 
  Bugfix for iOS 6 and 7
- Source: http://stackoverflow.com/questions/11929099/html5-canvas-drawimAge-ratio-bug-ios
- based on the work of https://github.com/stomita/ios-imAgefile-megapixel
+ Source: http://stackoverflow.com/questions/11929099/html5-canvas-drawimage-ratio-bug-ios
+ based on the work of https://github.com/stomita/ios-imagefile-megapixel
 
  */
-// Detecting vertical squash in loaded imAge.
-// Fixes a bug which squash imAge vertically while drawing into canvas for some imAges.
-// This is a bug in iOS6 devices. This function from https://github.com/stomita/ios-imAgefile-megapixel
+// Detecting vertical squash in loaded image.
+// Fixes a bug which squash image vertically while drawing into canvas for some images.
+// This is a bug in iOS6 devices. This function from https://github.com/stomita/ios-imagefile-megapixel
 
 var detectVerticalSquash = function detectVerticalSquash(img) {
   var iw = img.naturalWidth;
@@ -10114,10 +10114,10 @@ var detectVerticalSquash = function detectVerticalSquash(img) {
   canvas.width = 1;
   canvas.height = ih;
   var ctx = canvas.getContext("2d");
-  ctx.drawImAge(img, 0, 0);
+  ctx.drawImage(img, 0, 0);
 
-  var _ctx$getImAgeData = ctx.getImAgeData(1, 0, 1, ih),
-      data = _ctx$getImAgeData.data; // search imAge edge pixel position in case it is squashed vertically.
+  var _ctx$getImageData = ctx.getImageData(1, 0, 1, ih),
+      data = _ctx$getImageData.data; // search image edge pixel position in case it is squashed vertically.
 
 
   var sy = 0;
@@ -10143,13 +10143,13 @@ var detectVerticalSquash = function detectVerticalSquash(img) {
   } else {
     return ratio;
   }
-}; // A replacement for context.drawImAge
+}; // A replacement for context.drawImage
 // (args are for source and destination).
 
 
-var drawImAgeIOSFix = function drawImAgeIOSFix(ctx, img, sx, sy, sw, sh, dx, dy, dw, dh) {
+var drawImageIOSFix = function drawImageIOSFix(ctx, img, sx, sy, sw, sh, dx, dy, dw, dh) {
   var vertSquashRatio = detectVerticalSquash(img);
-  return ctx.drawImAge(img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
+  return ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
 }; // Based on MinifyJpeg
 // Source: http://www.perry.cz/files/ExifRestorer.js
 // http://elicon.blog57.fc2.com/blog-entry-206.html
@@ -10207,21 +10207,21 @@ var ExifRestore = /*#__PURE__*/function () {
   }, {
     key: "restore",
     value: function restore(origFileBase64, resizedFileBase64) {
-      if (!origFileBase64.match("data:imAge/jpeg;base64,")) {
+      if (!origFileBase64.match("data:image/jpeg;base64,")) {
         return resizedFileBase64;
       }
 
-      var rawImAge = this.decode64(origFileBase64.replace("data:imAge/jpeg;base64,", ""));
-      var segments = this.slice2Segments(rawImAge);
-      var imAge = this.exifManipulation(resizedFileBase64, segments);
-      return "data:imAge/jpeg;base64,".concat(this.encode64(imAge));
+      var rawImage = this.decode64(origFileBase64.replace("data:image/jpeg;base64,", ""));
+      var segments = this.slice2Segments(rawImage);
+      var image = this.exifManipulation(resizedFileBase64, segments);
+      return "data:image/jpeg;base64,".concat(this.encode64(image));
     }
   }, {
     key: "exifManipulation",
     value: function exifManipulation(resizedFileBase64, segments) {
       var exifArray = this.getExifArray(segments);
-      var newImAgeArray = this.insertExif(resizedFileBase64, exifArray);
-      var aBuffer = new Uint8Array(newImAgeArray);
+      var newImageArray = this.insertExif(resizedFileBase64, exifArray);
+      var aBuffer = new Uint8Array(newImageArray);
       return aBuffer;
     }
   }, {
@@ -10245,8 +10245,8 @@ var ExifRestore = /*#__PURE__*/function () {
   }, {
     key: "insertExif",
     value: function insertExif(resizedFileBase64, exifArray) {
-      var imAgeData = resizedFileBase64.replace("data:imAge/jpeg;base64,", "");
-      var buf = this.decode64(imAgeData);
+      var imageData = resizedFileBase64.replace("data:image/jpeg;base64,", "");
+      var buf = this.decode64(imageData);
       var separatePoint = buf.indexOf(255, 3);
       var mae = buf.slice(0, separatePoint);
       var ato = buf.slice(separatePoint);
@@ -10257,28 +10257,28 @@ var ExifRestore = /*#__PURE__*/function () {
     }
   }, {
     key: "slice2Segments",
-    value: function slice2Segments(rawImAgeArray) {
+    value: function slice2Segments(rawImageArray) {
       var head = 0;
       var segments = [];
 
       while (true) {
         var length;
 
-        if (rawImAgeArray[head] === 255 & rawImAgeArray[head + 1] === 218) {
+        if (rawImageArray[head] === 255 & rawImageArray[head + 1] === 218) {
           break;
         }
 
-        if (rawImAgeArray[head] === 255 & rawImAgeArray[head + 1] === 216) {
+        if (rawImageArray[head] === 255 & rawImageArray[head + 1] === 216) {
           head += 2;
         } else {
-          length = rawImAgeArray[head + 2] * 256 + rawImAgeArray[head + 3];
+          length = rawImageArray[head + 2] * 256 + rawImageArray[head + 3];
           var endPoint = head + length + 2;
-          var seg = rawImAgeArray.slice(head, endPoint);
+          var seg = rawImageArray.slice(head, endPoint);
           segments.push(seg);
           head = endPoint;
         }
 
-        if (head > rawImAgeArray.length) {
+        if (head > rawImageArray.length) {
           break;
         }
       }

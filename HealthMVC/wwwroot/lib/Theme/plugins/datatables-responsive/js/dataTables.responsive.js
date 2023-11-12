@@ -592,14 +592,14 @@ $.extend( Responsive.prototype, {
 				function(idx) {
 					return idx !== firstVisible;
 				},
-				{pAge: 'current'}
+				{page: 'current'}
 			)
 				.nodes()
 				.to$()
 				.filter('.dtr-control')
 				.removeClass('dtr-control');
 
-			dt.cells(null, firstVisible, {pAge: 'current'})
+			dt.cells(null, firstVisible, {page: 'current'})
 				.nodes()
 				.to$()
 				.addClass('dtr-control');
@@ -777,7 +777,7 @@ $.extend( Responsive.prototype, {
 		var that = this;
 		var dt = this.s.dt;
 
-		dt.rows( {pAge: 'current'} ).iterator( 'row', function ( settings, idx ) {
+		dt.rows( {page: 'current'} ).iterator( 'row', function ( settings, idx ) {
 			var row = dt.row( idx );
 
 			that._detailsDisplay( dt.row( idx ), true );
@@ -851,7 +851,7 @@ $.extend( Responsive.prototype, {
 			$(dt.table().node()).trigger( 'responsive-resize.dt', [dt, this.s.current] );
 
 			// If no records, update the "No records" display element
-			if ( dt.pAge.info().recordsDisplay === 0 ) {
+			if ( dt.page.info().recordsDisplay === 0 ) {
 				$('td', dt.table().body()).eq(0).attr('colspan', visible);
 			}
 		}
@@ -863,7 +863,7 @@ $.extend( Responsive.prototype, {
 	/**
 	 * Determine the width of each column in the table so the auto column hiding
 	 * has that information to work with. This method is never going to be 100%
-	 * perfect since column widths can change slightly per pAge, but without
+	 * perfect since column widths can change slightly per page, but without
 	 * seriously compromising performance this is quite effective.
 	 *
 	 * @private
@@ -917,7 +917,7 @@ $.extend( Responsive.prototype, {
 		// Body rows - we don't need to take account of DataTables' column
 		// visibility since we implement our own here (hence the `display` set)
 		$(clonedBody)
-			.append( $(dt.rows( { pAge: 'current' } ).nodes()).clone( false ) )
+			.append( $(dt.rows( { page: 'current' } ).nodes()).clone( false ) )
 			.find( 'th, td' ).css( 'display', '' );
 
 		// Footer
@@ -1037,14 +1037,14 @@ $.extend( Responsive.prototype, {
 	_tabIndexes: function ()
 	{
 		var dt = this.s.dt;
-		var cells = dt.cells( { pAge: 'current' } ).nodes().to$();
+		var cells = dt.cells( { page: 'current' } ).nodes().to$();
 		var ctx = dt.settings()[0];
 		var target = this.c.details.target;
 
 		cells.filter( '[data-dtr-keyboard]' ).removeData( '[data-dtr-keyboard]' );
 
 		if ( typeof target === 'number' ) {
-			dt.cells( null, target, { pAge: 'current' } ).nodes().to$()
+			dt.cells( null, target, { page: 'current' } ).nodes().to$()
 				.attr( 'tabIndex', ctx.iTabIndex )
 				.data( 'dtr-keyboard', 1 );
 		}
@@ -1055,7 +1055,7 @@ $.extend( Responsive.prototype, {
 				target = '>td:first-child, >th:first-child';
 			}
 
-			$( target, dt.rows( { pAge: 'current' } ).nodes() )
+			$( target, dt.rows( { page: 'current' } ).nodes() )
 				.attr( 'tabIndex', ctx.iTabIndex )
 				.data( 'dtr-keyboard', 1 );
 		}

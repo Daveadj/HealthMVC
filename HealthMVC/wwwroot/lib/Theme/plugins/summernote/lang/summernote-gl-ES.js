@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         subscript: 'Subíndice',
         size: 'Tamaño da fonte'
       },
-      imAge: {
-        imAge: 'Imaxe',
+      image: {
+        image: 'Imaxe',
         insert: 'Inserir imaxe',
         resizeFull: 'Redimensionar a tamaño completo',
         resizeHalf: 'Redimensionar á metade',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Forma: Círculo',
         shapeThumbnail: 'Forma: Marco',
         shapeNone: 'Forma: Ningunha',
-        dragImAgeHere: 'Arrastrar unha imaxe ou texto aquí',
-        dropImAge: 'Solta a imaxe ou texto',
+        dragImageHere: 'Arrastrar unha imaxe ou texto aquí',
+        dropImage: 'Solta a imaxe ou texto',
         selectFromFiles: 'Seleccionar desde os arquivos',
         maximumFileSize: 'Tamaño máximo do arquivo',
         maximumFileSizeError: 'Superaches o tamaño máximo do arquivo.',

@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         strikethrough: '취소선',
         size: '글자 크기'
       },
-      imAge: {
-        imAge: '그림',
+      image: {
+        image: '그림',
         insert: '그림 삽입',
         resizeFull: '100% 크기로 변경',
         resizeHalf: '50% 크기로 변경',
@@ -51,8 +51,8 @@ var __webpack_exports__ = {};
         shapeCircle: '스타일: 원형',
         shapeThumbnail: '스타일: 액자',
         shapeNone: '스타일: 없음',
-        dragImAgeHere: '텍스트 혹은 사진을 이곳으로 끌어오세요',
-        dropImAge: '텍스트 혹은 사진을 내려놓으세요',
+        dragImageHere: '텍스트 혹은 사진을 이곳으로 끌어오세요',
+        dropImage: '텍스트 혹은 사진을 내려놓으세요',
         selectFromFiles: '파일 선택',
         maximumFileSize: '최대 파일 크기',
         maximumFileSizeError: '최대 파일 크기를 초과했습니다.',

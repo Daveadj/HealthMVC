@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: EL (Greek; ελληνικά)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "Αυτό το πεδίο είναι υποχρεωτικό.",
 	remote: "Παρακαλώ διορθώστε αυτό το πεδίο.",
 	email: "Παρακαλώ εισάγετε μια έγκυρη διεύθυνση email.",

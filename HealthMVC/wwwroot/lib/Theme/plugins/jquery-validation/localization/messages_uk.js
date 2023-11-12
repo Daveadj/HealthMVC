@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: UK (Ukrainian; українська мова)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "Це поле необхідно заповнити.",
 	remote: "Будь ласка, введіть правильне значення.",
 	email: "Будь ласка, введіть коректну адресу електронної пошти.",

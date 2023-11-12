@@ -52,7 +52,7 @@
 
         // Convert to format expected by validation service
         var hint = {
-          messAge: error.reason,
+          message: error.reason,
           severity: error.code ? (error.code.startsWith('W') ? "warning" : "error") : "error",
           from: CodeMirror.Pos(error.line - 1, start),
           to: CodeMirror.Pos(error.line - 1, end)

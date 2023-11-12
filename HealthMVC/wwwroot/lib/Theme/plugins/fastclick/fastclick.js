@@ -174,7 +174,7 @@
 	}
 
 	/**
-	* Windows Phone 8.1 fakes user Agent string to look like Android and iPhone.
+	* Windows Phone 8.1 fakes user agent string to look like Android and iPhone.
 	*
 	* @type boolean
 	*/
@@ -271,7 +271,7 @@
 			case 'button':
 			case 'checkbox':
 			case 'file':
-			case 'imAge':
+			case 'image':
 			case 'radio':
 			case 'submit':
 				return false;
@@ -410,7 +410,7 @@
 			if (!deviceIsIOS4) {
 
 				// Weird things happen on iOS when an alert or confirm dialog is opened from a click event callback (issue #23):
-				// when the user next taps anywhere else on the pAge, new touchstart and touchend events are dispatched
+				// when the user next taps anywhere else on the page, new touchstart and touchend events are dispatched
 				// with the same identifier as the touch event that previously triggered the click that triggered the alert.
 				// Sadly, there is an issue on iOS 4 that causes some normal touch events to have the same identifier as an
 				// immediately preceeding touch event (issue #52), so this fix is unavailable on that platform.
@@ -438,8 +438,8 @@
 		this.trackingClickStart = event.timeStamp;
 		this.targetElement = targetElement;
 
-		this.touchStartX = touch.pAgeX;
-		this.touchStartY = touch.pAgeY;
+		this.touchStartX = touch.pageX;
+		this.touchStartY = touch.pageY;
 
 		// Prevent phantom clicks on fast double-tap (issue #36)
 		if ((event.timeStamp - this.lastClickTime) < this.tapDelay) {
@@ -459,7 +459,7 @@
 	FastClick.prototype.touchHasMoved = function(event) {
 		var touch = event.changedTouches[0], boundary = this.touchBoundary;
 
-		if (Math.abs(touch.pAgeX - this.touchStartX) > boundary || Math.abs(touch.pAgeY - this.touchStartY) > boundary) {
+		if (Math.abs(touch.pageX - this.touchStartX) > boundary || Math.abs(touch.pageY - this.touchStartY) > boundary) {
 			return true;
 		}
 
@@ -552,7 +552,7 @@
 			touch = event.changedTouches[0];
 
 			// In certain cases arguments of elementFromPoint can be negative, so prevent setting targetElement to null
-			targetElement = document.elementFromPoint(touch.pAgeX - window.pAgeXOffset, touch.pAgeY - window.pAgeYOffset) || targetElement;
+			targetElement = document.elementFromPoint(touch.pageX - window.pageXOffset, touch.pageY - window.pageYOffset) || targetElement;
 			targetElement.fastClickScrollParent = this.targetElement.fastClickScrollParent;
 		}
 

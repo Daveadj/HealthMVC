@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: SV (Swedish; Svenska)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "Detta f&auml;lt &auml;r obligatoriskt.",
 	remote: "Var snäll och åtgärda detta fält.",
 	maxlength: $.validator.format( "Du f&aring;r ange h&ouml;gst {0} tecken." ),

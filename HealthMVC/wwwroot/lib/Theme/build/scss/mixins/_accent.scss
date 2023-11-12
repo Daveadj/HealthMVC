@@ -11,7 +11,7 @@
     $pagination-active-border-color: $color;
 
     .btn-link,
-    a:not(.dropdown-item):not(.btn-app):not(.nav-link):not(.brand-link):not(.pAge-link):not(.badge):not(.btn),
+    a:not(.dropdown-item):not(.btn-app):not(.nav-link):not(.brand-link):not(.page-link):not(.badge):not(.btn),
     .nav-tabs .nav-link {
       color: $link-color;
 
@@ -36,7 +36,7 @@
 
       &::after {
         $new-color: color-yiq($color);
-        background-imAge: str-replace($custom-checkbox-indicator-icon-checked, str-replace(#{$custom-control-indicator-checked-color}, "#", "%23"), str-replace(#{$new-color}, "#", "%23"));
+        background-image: str-replace($custom-checkbox-indicator-icon-checked, str-replace(#{$custom-control-indicator-checked-color}, "#", "%23"), str-replace(#{$new-color}, "#", "%23"));
       }
     }
 
@@ -47,20 +47,20 @@
       border-color: lighten($color, 25%);
     }
 
-    .pAge-item {
-      .pAge-link {
+    .page-item {
+      .page-link {
         color: $link-color;
       }
 
       &.active a,
-      &.active .pAge-link {
+      &.active .page-link {
         background-color: $pagination-active-bg;
         border-color: $pagination-active-border-color;
         color: $pagination-active-color;
       }
 
       &.disabled a,
-      &.disabled .pAge-link {
+      &.disabled .page-link {
         background-color: $pagination-disabled-bg;
         border-color: $pagination-disabled-border-color;
         color: $pagination-disabled-color;
@@ -93,8 +93,8 @@
   }
   @include dark-mode () {
     &.accent-#{$name} {
-      .pAge-item {
-        .pAge-link {
+      .page-item {
+        .page-link {
           &:hover,
           &:focus {
             color: lighten($link-color, 5%);

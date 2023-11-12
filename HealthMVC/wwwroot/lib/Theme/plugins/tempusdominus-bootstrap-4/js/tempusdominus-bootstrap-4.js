@@ -106,10 +106,10 @@ var DateTimePicker = function ($, moment) {
     27: 'escape',
     'enter': 13,
     13: 'enter',
-    'pAgeUp': 33,
-    33: 'pAgeUp',
-    'pAgeDown': 34,
-    34: 'pAgeDown',
+    'pageUp': 33,
+    33: 'pageUp',
+    'pageDown': 34,
+    34: 'pageDown',
     'shift': 16,
     16: 'shift',
     'control': 17,
@@ -362,7 +362,7 @@ var DateTimePicker = function ($, moment) {
 
         return true;
       },
-      pAgeUp: function pAgeUp() {
+      pageUp: function pageUp() {
         if (!this.widget) {
           return false;
         }
@@ -375,7 +375,7 @@ var DateTimePicker = function ($, moment) {
 
         return true;
       },
-      pAgeDown: function pAgeDown() {
+      pageDown: function pageDown() {
         if (!this.widget) {
           return false;
         }

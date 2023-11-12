@@ -3,7 +3,7 @@
 
 // Factor syntax highlight - simple mode
 //
-// by DimAge Sapelkin (https://github.com/kerabromsmu)
+// by Dimage Sapelkin (https://github.com/kerabromsmu)
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS

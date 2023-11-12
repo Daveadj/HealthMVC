@@ -205,7 +205,7 @@ $.extend( RowGroup.prototype, {
 	_draw: function ()
 	{
 		var dt = this.s.dt;
-		var groupedRows = this._group( 0, dt.rows( { pAge: 'current' } ).indexes() );
+		var groupedRows = this._group( 0, dt.rows( { page: 'current' } ).indexes() );
 
 		this._groupDisplay( 0, groupedRows );
 	},

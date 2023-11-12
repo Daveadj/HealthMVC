@@ -29,7 +29,7 @@
     mod(CodeMirror);
   }
 })(function (CodeMirror) {
-  var tagLanguAges = {
+  var tagLanguages = {
     script: [
       ["lang", /coffee(script)?/, "coffeescript"],
       ["type", /^(?:text|application)\/(?:x-)?coffee(?:script)?$/, "coffeescript"],
@@ -69,7 +69,7 @@
   });
 
   CodeMirror.defineMode("vue", function (config) {
-    return CodeMirror.getMode(config, {name: "htmlmixed", tags: tagLanguAges});
+    return CodeMirror.getMode(config, {name: "htmlmixed", tags: tagLanguages});
   }, "htmlmixed", "xml", "javascript", "coffeescript", "css", "sass", "stylus", "pug", "handlebars");
 
   CodeMirror.defineMIME("script/x-vue", "vue");

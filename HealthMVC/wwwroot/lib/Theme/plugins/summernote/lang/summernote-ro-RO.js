@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Exponent',
         size: 'Dimensiune font'
       },
-      imAge: {
-        imAge: 'Imagine',
+      image: {
+        image: 'Imagine',
         insert: 'Inserează imagine',
         resizeFull: 'Redimensionează complet',
         resizeHalf: 'Redimensionează 1/2',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Formă: Cerc',
         shapeThumbnail: 'Formă: Pictogramă',
         shapeNone: 'Formă: Nici una',
-        dragImAgeHere: 'TrAge o imagine sau un text aici',
-        dropImAge: 'Eliberează imaginea sau textul',
+        dragImageHere: 'Trage o imagine sau un text aici',
+        dropImage: 'Eliberează imaginea sau textul',
         selectFromFiles: 'Alege din fişiere',
         maximumFileSize: 'Dimensiune maximă fișier',
         maximumFileSizeError: 'Dimensiune maximă fișier depășită.',

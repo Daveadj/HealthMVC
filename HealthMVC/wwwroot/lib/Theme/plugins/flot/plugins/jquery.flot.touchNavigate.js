@@ -89,8 +89,8 @@
                 if (useSmartPan) {
                     var point = getPoint(e, 'pan');
                     plot.smartPan({
-                        x: navigationState.initialState.startPAgeX - point.x,
-                        y: navigationState.initialState.startPAgeY - point.y
+                        x: navigationState.initialState.startPageX - point.x,
+                        y: navigationState.initialState.startPageY - point.y
                     }, navigationState.initialState, navigationState.touchedAxis, false, smartPanLock);
                 } else if (useManualPan) {
                     plot.pan({
@@ -257,17 +257,17 @@
 
     function getAxis(plot, e, gesture, navigationState) {
         if (e.type === 'pinchstart') {
-            var axisTouch1 = plot.getTouchedAxis(e.detail.touches[0].pAgeX, e.detail.touches[0].pAgeY);
-            var axisTouch2 = plot.getTouchedAxis(e.detail.touches[1].pAgeX, e.detail.touches[1].pAgeY);
+            var axisTouch1 = plot.getTouchedAxis(e.detail.touches[0].pageX, e.detail.touches[0].pageY);
+            var axisTouch2 = plot.getTouchedAxis(e.detail.touches[1].pageX, e.detail.touches[1].pageY);
 
             if (axisTouch1.length === axisTouch2.length && axisTouch1.toString() === axisTouch2.toString()) {
                 return axisTouch1;
             }
         } else if (e.type === 'panstart') {
-            return plot.getTouchedAxis(e.detail.touches[0].pAgeX, e.detail.touches[0].pAgeY);
+            return plot.getTouchedAxis(e.detail.touches[0].pageX, e.detail.touches[0].pageY);
         } else if (e.type === 'pinchend') {
             //update axis since instead on pinch, a pan event is made
-            return plot.getTouchedAxis(e.detail.touches[0].pAgeX, e.detail.touches[0].pAgeY);
+            return plot.getTouchedAxis(e.detail.touches[0].pageX, e.detail.touches[0].pageY);
         } else {
             return navigationState.touchedAxis;
         }
@@ -315,7 +315,7 @@
     function pinchDistance(e) {
         var t1 = e.detail.touches[0],
             t2 = e.detail.touches[1];
-        return distance(t1.pAgeX, t1.pAgeY, t2.pAgeX, t2.pAgeY);
+        return distance(t1.pageX, t1.pageY, t2.pageX, t2.pageY);
     }
 
     function updatePrevPanPosition(e, gesture, gestureState, navigationState) {
@@ -347,13 +347,13 @@
     function getPoint(e, gesture) {
         if (gesture === 'pinch') {
             return {
-                x: (e.detail.touches[0].pAgeX + e.detail.touches[1].pAgeX) / 2,
-                y: (e.detail.touches[0].pAgeY + e.detail.touches[1].pAgeY) / 2
+                x: (e.detail.touches[0].pageX + e.detail.touches[1].pageX) / 2,
+                y: (e.detail.touches[0].pageY + e.detail.touches[1].pageY) / 2
             }
         } else {
             return {
-                x: e.detail.touches[0].pAgeX,
-                y: e.detail.touches[0].pAgeY
+                x: e.detail.touches[0].pageX,
+                y: e.detail.touches[0].pageY
             }
         }
     }

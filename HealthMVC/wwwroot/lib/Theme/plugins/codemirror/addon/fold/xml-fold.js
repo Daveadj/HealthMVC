@@ -43,7 +43,7 @@
     return true;
   }
 
-  function toTAgend(iter) {
+  function toTagEnd(iter) {
     for (;;) {
       var gt = iter.text.indexOf(">", iter.ch);
       if (gt == -1) { if (nextLine(iter)) continue; else return; }
@@ -92,7 +92,7 @@
     var stack = [];
     for (;;) {
       var next = toNextTag(iter), end, startLine = iter.line, startCh = iter.ch - (next ? next[0].length : 0);
-      if (!next || !(end = toTAgend(iter))) return;
+      if (!next || !(end = toTagEnd(iter))) return;
       if (end == "selfClose") continue;
       if (next[1]) { // closing tag
         for (var i = stack.length - 1; i >= 0; --i) if (stack[i] == next[2]) {
@@ -139,7 +139,7 @@
     for (;;) {
       var openTag = toNextTag(iter)
       if (!openTag || iter.line != start.line) return
-      var end = toTAgend(iter)
+      var end = toTagEnd(iter)
       if (!end) return
       if (!openTag[1] && end != "selfClose") {
         var startPos = Pos(iter.line, iter.ch);
@@ -151,7 +151,7 @@
   CodeMirror.findMatchingTag = function(cm, pos, range) {
     var iter = new Iter(cm, pos.line, pos.ch, range);
     if (iter.text.indexOf(">") == -1 && iter.text.indexOf("<") == -1) return;
-    var end = toTAgend(iter), to = end && Pos(iter.line, iter.ch);
+    var end = toTagEnd(iter), to = end && Pos(iter.line, iter.ch);
     var start = end && toTagStart(iter);
     if (!end || !start || cmp(iter, pos) > 0) return;
     var here = {from: Pos(iter.line, iter.ch), to: to, tag: start[2]};

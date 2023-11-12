@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: ID (Indonesia; Indonesian)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "Kolom ini diperlukan.",
 	remote: "Harap benarkan kolom ini.",
 	email: "Silakan masukkan format email yang benar.",

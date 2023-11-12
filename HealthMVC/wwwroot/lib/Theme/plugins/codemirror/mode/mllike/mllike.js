@@ -283,7 +283,7 @@ CodeMirror.defineMIME('text/x-fsharp', {
     'constraint': 'keyword',
     'constructor': 'keyword',
     'continue': 'keyword',
-    'eAger': 'keyword',
+    'eager': 'keyword',
     'event': 'keyword',
     'external': 'keyword',
     'fixed': 'keyword',

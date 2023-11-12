@@ -4,17 +4,17 @@
         grid: {
             noDataContent: "暂无数据",
             deleteConfirm: "确认删除？",
-            pAgerFormat: "页码: {first} {prev} {pAges} {next} {last} &nbsp;&nbsp; {pAgeIndex} / {pAgeCount}",
-            pAgePrevText: "上一页",
-            pAgeNextText: "下一页",
-            pAgeFirstText: "第一页",
-            pAgeLastText: "最后页",
-            loadMessAge: "请稍后...",
-            invalidMessAge: "数据有误！"
+            pagerFormat: "页码: {first} {prev} {pages} {next} {last} &nbsp;&nbsp; {pageIndex} / {pageCount}",
+            pagePrevText: "上一页",
+            pageNextText: "下一页",
+            pageFirstText: "第一页",
+            pageLastText: "最后页",
+            loadMessage: "请稍后...",
+            invalidMessage: "数据有误！"
         },
 
         loadIndicator: {
-            messAge: "载入中..."
+            message: "载入中..."
         },
 
         fields: {
@@ -32,14 +32,14 @@
         },
 
         validators: {
-            required: { messAge: "字段必填" },
-            rangeLength: { messAge: "字段值长度超过定义范围" },
-            minLength: { messAge: "字段长度过短" },
-            maxLength: { messAge: "字段长度过长" },
-            pattern: { messAge: "字段值不符合定义规则" },
-            range: { messAge: "字段值超过定义范围" },
-            min: { messAge: "字段值太小" },
-            max: { messAge: "字段值太大" }
+            required: { message: "字段必填" },
+            rangeLength: { message: "字段值长度超过定义范围" },
+            minLength: { message: "字段长度过短" },
+            maxLength: { message: "字段长度过长" },
+            pattern: { message: "字段值不符合定义规则" },
+            range: { message: "字段值超过定义范围" },
+            min: { message: "字段值太小" },
+            max: { message: "字段值太大" }
         }
     };
 

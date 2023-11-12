@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: NO (Norwegian; Norsk)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "Angi en verdi.",
 	remote: "Ugyldig verdi.",
 	email: "Angi en gyldig epostadresse.",

@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Superscript',
         size: 'Ukuran font'
       },
-      imAge: {
-        imAge: 'Gambar',
+      image: {
+        image: 'Gambar',
         insert: 'Sisipkan gambar',
         resizeFull: 'Ukuran penuh',
         resizeHalf: 'Ukuran 50%',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Bentuk: Bundar',
         shapeThumbnail: 'Bentuk: Thumbnail',
         shapeNone: 'Bentuk: Tidak ada',
-        dragImAgeHere: 'Tarik gambar ke area ini',
-        dropImAge: 'Letakkan gambar atau teks',
+        dragImageHere: 'Tarik gambar ke area ini',
+        dropImage: 'Letakkan gambar atau teks',
         selectFromFiles: 'Pilih gambar dari berkas',
         maximumFileSize: 'Ukuran maksimal berkas',
         maximumFileSizeError: 'Ukuran maksimal berkas terlampaui.',

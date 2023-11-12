@@ -4,17 +4,17 @@
         grid: {
             noDataContent: "No encontrado",
             deleteConfirm: "¿Está seguro?",
-            pAgerFormat: "Paginas: {first} {prev} {pAges} {next} {last} &nbsp;&nbsp; {pAgeIndex} de {pAgeCount}",
-            pAgePrevText: "Anterior",
-            pAgeNextText: "Siguiente",
-            pAgeFirstText: "Primero",
-            pAgeLastText: "Ultimo",
-            loadMessAge: "Por favor, espere...",
-            invalidMessAge: "¡Datos no válidos!"
+            pagerFormat: "Paginas: {first} {prev} {pages} {next} {last} &nbsp;&nbsp; {pageIndex} de {pageCount}",
+            pagePrevText: "Anterior",
+            pageNextText: "Siguiente",
+            pageFirstText: "Primero",
+            pageLastText: "Ultimo",
+            loadMessage: "Por favor, espere...",
+            invalidMessage: "¡Datos no válidos!"
         },
 
         loadIndicator: {
-            messAge: "Cargando..."
+            message: "Cargando..."
         },
 
         fields: {
@@ -32,14 +32,14 @@
         },
 
         validators: {
-            required: { messAge: "Campo requerido" },
-            rangeLength: { messAge: "La longitud del valor está fuera del intervalo definido" },
-            minLength: { messAge: "La longitud del valor es demasiado corta" },
-            maxLength: { messAge: "La longitud del valor es demasiado larga" },
-            pattern: { messAge: "El valor no se ajusta al patrón definido" },
-            range: { messAge: "Valor fuera del rango definido" },
-            min: { messAge: "Valor demasiado bajo" },
-            max: { messAge: "Valor demasiado alto" }
+            required: { message: "Campo requerido" },
+            rangeLength: { message: "La longitud del valor está fuera del intervalo definido" },
+            minLength: { message: "La longitud del valor es demasiado corta" },
+            maxLength: { message: "La longitud del valor es demasiado larga" },
+            pattern: { message: "El valor no se ajusta al patrón definido" },
+            range: { message: "Valor fuera del rango definido" },
+            min: { message: "Valor demasiado bajo" },
+            max: { message: "Valor demasiado alto" }
         }
     };
 

@@ -38,8 +38,8 @@ var __webpack_exports__ = {};
         strikethrough: 'Дарах',
         size: 'Хэмжээ'
       },
-      imAge: {
-        imAge: 'Зураг',
+      image: {
+        image: 'Зураг',
         insert: 'Оруулах',
         resizeFull: 'Хэмжээ бүтэн',
         resizeHalf: 'Хэмжээ 1/2',
@@ -51,8 +51,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Хүрээ: Тойрог',
         shapeThumbnail: 'Хүрээ: Хураангуй',
         shapeNone: 'Хүрээгүй',
-        dragImAgeHere: 'Зургийг энд чирч авчирна уу',
-        dropImAge: 'Drop imAge or Text',
+        dragImageHere: 'Зургийг энд чирч авчирна уу',
+        dropImage: 'Drop image or Text',
         selectFromFiles: 'Файлуудаас сонгоно уу',
         maximumFileSize: 'Файлын дээд хэмжээ',
         maximumFileSizeError: 'Файлын дээд хэмжээ хэтэрсэн',

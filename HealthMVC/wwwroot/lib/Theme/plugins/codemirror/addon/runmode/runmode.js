@@ -24,7 +24,7 @@ CodeMirror.runMode = function(string, modespec, callback, options) {
     callback = function(text, style) {
       if (text == "\n") {
         // Emitting LF or CRLF on IE8 or earlier results in an incorrect display.
-        // Emitting a carriAge return makes everything ok.
+        // Emitting a carriage return makes everything ok.
         node.appendChild(document.createTextNode(ie_lt9 ? '\r' : text));
         col = 0;
         return;

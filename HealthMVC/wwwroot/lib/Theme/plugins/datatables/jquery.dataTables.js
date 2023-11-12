@@ -22,7 +22,7 @@
  */
 
 /*jslint evil: true, undef: true, browser: true */
-/*globals $,require,jQuery,define,_selector_run,_selector_opts,_selector_first,_selector_row_indexes,_ext,_Api,_api_register,_api_registerPlural,_re_new_lines,_re_html,_re_formatted_numeric,_re_escape_regex,_empty,_intVal,_numToDecimal,_isNumber,_isHtml,_htmlNumeric,_pluck,_pluck_order,_range,_stripHtml,_unique,_fnBuildAjax,_fnAjaxUpdate,_fnAjaxParameters,_fnAjaxUpdateDraw,_fnAjaxDataSrc,_fnAddColumn,_fnColumnOptions,_fnAdjustColumnSizing,_fnVisibleToColumnIndex,_fnColumnIndexToVisible,_fnVisbleColumns,_fnGetColumns,_fnColumnTypes,_fnApplyColumnDefs,_fnHungarianMap,_fnCamelToHungarian,_fnLanguAgeCompat,_fnBrowserDetect,_fnAddData,_fnAddTr,_fnNodeToDataIndex,_fnNodeToColumnIndex,_fnGetCellData,_fnSetCellData,_fnSplitObjNotation,_fnGetObjectDataFn,_fnSetObjectDataFn,_fnGetDataMaster,_fnClearTable,_fnDeleteIndex,_fnInvalidate,_fnGetRowElements,_fnCreateTr,_fnBuildHead,_fnDrawHead,_fnDraw,_fnReDraw,_fnAddOptionsHtml,_fnDetectHeader,_fnGetUniqueThs,_fnFeatureHtmlFilter,_fnFilterComplete,_fnFilterCustom,_fnFilterColumn,_fnFilter,_fnFilterCreateSearch,_fnEscapeRegex,_fnFilterData,_fnFeatureHtmlInfo,_fnUpdateInfo,_fnInfoMacros,_fnInitialise,_fnInitComplete,_fnLengthChange,_fnFeatureHtmlLength,_fnFeatureHtmlPaginate,_fnPAgeChange,_fnFeatureHtmlProcessing,_fnProcessingDisplay,_fnFeatureHtmlTable,_fnScrollDraw,_fnApplyToChildren,_fnCalculateColumnWidths,_fnThrottle,_fnConvertToWidth,_fnGetWidestNode,_fnGetMaxLenString,_fnStringToCss,_fnSortFlatten,_fnSort,_fnSortAria,_fnSortListener,_fnSortAttachListener,_fnSortingClasses,_fnSortData,_fnSaveState,_fnLoadState,_fnSettingsFromNode,_fnLog,_fnMap,_fnBindAction,_fnCallbackReg,_fnCallbackFire,_fnLengthOverflow,_fnRenderer,_fnDataSource,_fnRowAttributes*/
+/*globals $,require,jQuery,define,_selector_run,_selector_opts,_selector_first,_selector_row_indexes,_ext,_Api,_api_register,_api_registerPlural,_re_new_lines,_re_html,_re_formatted_numeric,_re_escape_regex,_empty,_intVal,_numToDecimal,_isNumber,_isHtml,_htmlNumeric,_pluck,_pluck_order,_range,_stripHtml,_unique,_fnBuildAjax,_fnAjaxUpdate,_fnAjaxParameters,_fnAjaxUpdateDraw,_fnAjaxDataSrc,_fnAddColumn,_fnColumnOptions,_fnAdjustColumnSizing,_fnVisibleToColumnIndex,_fnColumnIndexToVisible,_fnVisbleColumns,_fnGetColumns,_fnColumnTypes,_fnApplyColumnDefs,_fnHungarianMap,_fnCamelToHungarian,_fnLanguageCompat,_fnBrowserDetect,_fnAddData,_fnAddTr,_fnNodeToDataIndex,_fnNodeToColumnIndex,_fnGetCellData,_fnSetCellData,_fnSplitObjNotation,_fnGetObjectDataFn,_fnSetObjectDataFn,_fnGetDataMaster,_fnClearTable,_fnDeleteIndex,_fnInvalidate,_fnGetRowElements,_fnCreateTr,_fnBuildHead,_fnDrawHead,_fnDraw,_fnReDraw,_fnAddOptionsHtml,_fnDetectHeader,_fnGetUniqueThs,_fnFeatureHtmlFilter,_fnFilterComplete,_fnFilterCustom,_fnFilterColumn,_fnFilter,_fnFilterCreateSearch,_fnEscapeRegex,_fnFilterData,_fnFeatureHtmlInfo,_fnUpdateInfo,_fnInfoMacros,_fnInitialise,_fnInitComplete,_fnLengthChange,_fnFeatureHtmlLength,_fnFeatureHtmlPaginate,_fnPageChange,_fnFeatureHtmlProcessing,_fnProcessingDisplay,_fnFeatureHtmlTable,_fnScrollDraw,_fnApplyToChildren,_fnCalculateColumnWidths,_fnThrottle,_fnConvertToWidth,_fnGetWidestNode,_fnGetMaxLenString,_fnStringToCss,_fnSortFlatten,_fnSort,_fnSortAria,_fnSortListener,_fnSortAttachListener,_fnSortingClasses,_fnSortData,_fnSaveState,_fnLoadState,_fnSettingsFromNode,_fnLog,_fnMap,_fnBindAction,_fnCallbackReg,_fnCallbackFire,_fnLengthOverflow,_fnRenderer,_fnDataSource,_fnRowAttributes*/
 
 (function( factory ) {
 	"use strict";
@@ -112,7 +112,7 @@
 		 *  @param {string} [oOpts.order=current] Order of the TR elements in the processed array.
 		 *    Can be either 'current', whereby the current sorting of the table is used, or
 		 *    'original' whereby the original order the data was read into the table is used.
-		 *  @param {string} [oOpts.pAge=all] Limit the selection to the currently displayed pAge
+		 *  @param {string} [oOpts.page=all] Limit the selection to the currently displayed page
 		 *    ("current") or not ("all"). If 'current' is given, then order is assumed to be
 		 *    'current' and filter is 'applied', regardless of what they might be given as.
 		 *  @returns {object} jQuery object, filtered by the given selector.
@@ -160,7 +160,7 @@
 		 *  @param {string} [oOpts.order=current] Order of the data in the processed array.
 		 *    Can be either 'current', whereby the current sorting of the table is used, or
 		 *    'original' whereby the original order the data was read into the table is used.
-		 *  @param {string} [oOpts.pAge=all] Limit the selection to the currently displayed pAge
+		 *  @param {string} [oOpts.page=all] Limit the selection to the currently displayed page
 		 *    ("current") or not ("all"). If 'current' is given, then order is assumed to be
 		 *    'current' and filter is 'applied', regardless of what they might be given as.
 		 *  @returns {array} Data for the matched elements. If any elements, as a result of the
@@ -639,7 +639,7 @@
 		
 		/**
 		 * This function will place a new row directly after a row which is currently
-		 * on display on the pAge, with the HTML contents that is passed into the
+		 * on display on the page, with the HTML contents that is passed into the
 		 * function. This can be used, for example, to ask for confirmation that a
 		 * particular record should be deleted.
 		 *  @param {node} nTr The table row to 'open'
@@ -680,9 +680,9 @@
 		/**
 		 * Change the pagination - provides the internal logic for pagination in a simple API
 		 * function. With this function you can have a DataTables table go to the next,
-		 * previous, first or last pAges.
+		 * previous, first or last pages.
 		 *  @param {string|int} mAction Paging action to take: "first", "previous", "next" or "last"
-		 *    or pAge number to jump to (integer), note that pAge 0 is the first pAge.
+		 *    or page number to jump to (integer), note that page 0 is the first page.
 		 *  @param {bool} [bRedraw=true] Redraw the table or not
 		 *  @dtopt API
 		 *  @deprecated Since v1.10
@@ -690,12 +690,12 @@
 		 *  @example
 		 *    $(document).ready(function() {
 		 *      var oTable = $('#example').dataTable();
-		 *      oTable.fnPAgeChange( 'next' );
+		 *      oTable.fnPageChange( 'next' );
 		 *    } );
 		 */
-		this.fnPAgeChange = function ( mAction, bRedraw )
+		this.fnPageChange = function ( mAction, bRedraw )
 		{
-			var api = this.api( true ).pAge( mAction );
+			var api = this.api( true ).page( mAction );
 		
 			if ( bRedraw === undefined || bRedraw ) {
 				api.draw(false);
@@ -979,7 +979,7 @@
 			
 			// Backwards compatibility, before we apply all the defaults
 			_fnCompatOpts( oInit );
-			_fnLanguAgeCompat( oInit.oLanguAge );
+			_fnLanguageCompat( oInit.oLanguage );
 			
 			// If the length menu is given, but the init display length is not, use the length menu
 			if ( oInit.aLengthMenu && ! oInit.iDisplayLength )
@@ -1039,7 +1039,7 @@
 				[ "sScrollY", "sY" ],
 				[ "bScrollCollapse", "bCollapse" ]
 			] );
-			_fnMap( oSettings.oLanguAge, oInit, "fnInfoCallback" );
+			_fnMap( oSettings.oLanguage, oInit, "fnInfoCallback" );
 			
 			/* Callback functions which are array driven */
 			_fnCallbackReg( oSettings, 'aoDrawCallback',       oInit.fnDrawCallback,      'user' );
@@ -1080,29 +1080,29 @@
 				oSettings._iRecordsTotal = tmp ? oInit.iDeferLoading[1] : oInit.iDeferLoading;
 			}
 			
-			/* LanguAge definitions */
-			var oLanguAge = oSettings.oLanguAge;
-			$.extend( true, oLanguAge, oInit.oLanguAge );
+			/* Language definitions */
+			var oLanguage = oSettings.oLanguage;
+			$.extend( true, oLanguage, oInit.oLanguage );
 			
-			if ( oLanguAge.sUrl )
+			if ( oLanguage.sUrl )
 			{
-				/* Get the languAge definitions from a file - because this Ajax call makes the languAge
+				/* Get the language definitions from a file - because this Ajax call makes the language
 				 * get async to the remainder of this function we use bInitHandedOff to indicate that
 				 * _fnInitialise will be fired by the returned Ajax handler, rather than the constructor
 				 */
 				$.ajax( {
 					dataType: 'json',
-					url: oLanguAge.sUrl,
+					url: oLanguage.sUrl,
 					success: function ( json ) {
-						_fnCamelToHungarian( defaults.oLanguAge, json );
-						_fnLanguAgeCompat( json );
-						$.extend( true, oLanguAge, json );
+						_fnCamelToHungarian( defaults.oLanguage, json );
+						_fnLanguageCompat( json );
+						$.extend( true, oLanguage, json );
 			
 						_fnCallbackFire( oSettings, null, 'i18n', [oSettings]);
 						_fnInitialise( oSettings );
 					},
 					error: function () {
-						// Error occurred loading languAge file, continue on as best we can
+						// Error occurred loading language file, continue on as best we can
 						_fnInitialise( oSettings );
 					}
 				} );
@@ -1288,7 +1288,7 @@
 					}
 				}
 				else if ( oSettings.bDeferLoading || _fnDataSource( oSettings ) == 'dom' ) {
-					/* Grab the data from the pAge - only do this when deferred loading or no Ajax
+					/* Grab the data from the page - only do this when deferred loading or no Ajax
 					 * source since there is no point in reading the DOM data if we are then going
 					 * to replace it with Ajax data
 					 */
@@ -1302,7 +1302,7 @@
 				oSettings.bInitialised = true;
 			
 				/* Check if we need to initialise the table (it might not have been handed off to the
-				 * languAge processor)
+				 * language processor)
 				 */
 				if ( bInitHandedOff === false ) {
 					_fnInitialise( oSettings );
@@ -2005,17 +2005,17 @@
 	
 	
 	/**
-	 * LanguAge compatibility - when certain options are given, and others aren't, we
+	 * Language compatibility - when certain options are given, and others aren't, we
 	 * need to duplicate the values over, in order to provide backwards compatibility
-	 * with older languAge files.
+	 * with older language files.
 	 *  @param {object} oSettings dataTables settings object
 	 *  @memberof DataTable#oApi
 	 */
-	function _fnLanguAgeCompat( lang )
+	function _fnLanguageCompat( lang )
 	{
 		// Note the use of the Hungarian notation for the parameters in this method as
 		// this is called after the mapping of camelCase to Hungarian
-		var defaults = DataTable.defaults.oLanguAge;
+		var defaults = DataTable.defaults.oLanguage;
 	
 		// Default mapping
 		var defaultDecimal = defaults.sDecimal;
@@ -2083,7 +2083,7 @@
 		_fnCompatMap( init, 'orderFixed',    'aaSortingFixed' );
 		_fnCompatMap( init, 'paging',        'bPaginate' );
 		_fnCompatMap( init, 'pagingType',    'sPaginationType' );
-		_fnCompatMap( init, 'pAgeLength',    'iDisplayLength' );
+		_fnCompatMap( init, 'pageLength',    'iDisplayLength' );
 		_fnCompatMap( init, 'searching',     'bFilter' );
 	
 		// Boolean initialisation of x-scrolling
@@ -3465,7 +3465,7 @@
 		var iRowCount = 0;
 		var asStripeClasses = oSettings.asStripeClasses;
 		var iStripes = asStripeClasses.length;
-		var oLang = oSettings.oLanguAge;
+		var oLang = oSettings.oLanguage;
 		var bServerSide = _fnDataSource( oSettings ) == 'ssp';
 		var aiDisplay = oSettings.aiDisplay;
 		var iDisplayStart = oSettings._iDisplayStart;
@@ -3529,7 +3529,7 @@
 		}
 		else
 		{
-			/* Table is empty - create a row with an empty messAge in it */
+			/* Table is empty - create a row with an empty message in it */
 			var sZero = oLang.sZeroRecords;
 			if ( oSettings.iDraw == 1 &&  _fnDataSource( oSettings ) == 'ajax' )
 			{
@@ -3574,7 +3574,7 @@
 	 * Redraw the table - taking account of the various features which are enabled
 	 *  @param {object} oSettings dataTables settings object
 	 *  @param {boolean} [holdPosition] Keep the current paging position. By default
-	 *    the paging is reset to the first pAge
+	 *    the paging is reset to the first page
 	 *  @memberof DataTable#oApi
 	 */
 	function _fnReDraw( settings, holdPosition )
@@ -3611,7 +3611,7 @@
 	
 	
 	/**
-	 * Add the options to the pAge HTML for the table
+	 * Add the options to the page HTML for the table
 	 *  @param {object} oSettings dataTables settings object
 	 *  @memberof DataTable#oApi
 	 */
@@ -4176,7 +4176,7 @@
 	 *  @param {string} json.sEcho Tracking flag for DataTables to match requests
 	 *  @param {int} json.iTotalRecords Number of records in the data set, not accounting for filtering
 	 *  @param {int} json.iTotalDisplayRecords Number of records in the data set, accounting for filtering
-	 *  @param {array} json.aaData The data to display on this pAge
+	 *  @param {array} json.aaData The data to display on this page
 	 *  @param {string} [json.sColumns] Column ordering (sName, comma separated)
 	 *  @memberof DataTable#oApi
 	 */
@@ -4265,12 +4265,12 @@
 	{
 		var classes = settings.oClasses;
 		var tableId = settings.sTableId;
-		var languAge = settings.oLanguAge;
+		var language = settings.oLanguage;
 		var previousSearch = settings.oPreviousSearch;
 		var features = settings.aanFeatures;
 		var input = '<input type="search" class="'+classes.sFilterInput+'"/>';
 	
-		var str = languAge.sSearch;
+		var str = language.sSearch;
 		str = str.match(/_INPUT_/) ?
 			str.replace('_INPUT_', input) :
 			str+input;
@@ -4312,7 +4312,7 @@
 	
 		var jqFilter = $('input', filter)
 			.val( previousSearch.sSearch )
-			.attr( 'placeholder', languAge.sSearchPlaceholder )
+			.attr( 'placeholder', language.sSearchPlaceholder )
 			.on(
 				'keyup.DT search.DT input.DT paste.DT cut.DT',
 				searchDelay ?
@@ -4728,7 +4728,7 @@
 		}
 	
 		var
-			lang  = settings.oLanguAge,
+			lang  = settings.oLanguage,
 			start = settings._iDisplayStart+1,
 			end   = settings.fnDisplayEnd(),
 			max   = settings.fnRecordsTotal(),
@@ -4773,8 +4773,8 @@
 			replace(/_END_/g,   formatter.call( settings, settings.fnDisplayEnd() ) ).
 			replace(/_MAX_/g,   formatter.call( settings, settings.fnRecordsTotal() ) ).
 			replace(/_TOTAL_/g, formatter.call( settings, vis ) ).
-			replace(/_PAge_/g,  formatter.call( settings, all ? 1 : Math.ceil( start / len ) ) ).
-			replace(/_PAgeS_/g, formatter.call( settings, all ? 1 : Math.ceil( vis / len ) ) );
+			replace(/_PAGE_/g,  formatter.call( settings, all ? 1 : Math.ceil( start / len ) ) ).
+			replace(/_PAGES_/g, formatter.call( settings, all ? 1 : Math.ceil( vis / len ) ) );
 	}
 	
 	
@@ -4826,7 +4826,7 @@
 		// If there is default sorting required - let's do it. The sort function
 		// will do the drawing for us. Otherwise we draw the table regardless of the
 		// Ajax source - this allows the table to look initialised for Ajax sourcing
-		// data (show 'loading' messAge possibly)
+		// data (show 'loading' message possibly)
 		_fnReDraw( settings );
 	
 		// Server-side processing init complete is done by _fnAjaxUpdateDraw
@@ -4909,7 +4909,7 @@
 			menu     = settings.aLengthMenu,
 			d2       = Array.isArray( menu[0] ),
 			lengths  = d2 ? menu[0] : menu,
-			languAge = d2 ? menu[1] : menu;
+			language = d2 ? menu[1] : menu;
 	
 		var select = $('<select/>', {
 			'name':          tableId+'_length',
@@ -4919,9 +4919,9 @@
 	
 		for ( var i=0, ien=lengths.length ; i<ien ; i++ ) {
 			select[0][ i ] = new Option(
-				typeof languAge[i] === 'number' ?
-					settings.fnFormatNumber( languAge[i] ) :
-					languAge[i],
+				typeof language[i] === 'number' ?
+					settings.fnFormatNumber( language[i] ) :
+					language[i],
 				lengths[i]
 			);
 		}
@@ -4932,7 +4932,7 @@
 		}
 	
 		div.children().append(
-			settings.oLanguAge.sLengthMenu.replace( '_MENU_', select[0].outerHTML )
+			settings.oLanguage.sLengthMenu.replace( '_MENU_', select[0].outerHTML )
 		);
 	
 		// Can't use `select` variable as user might provide their own and the
@@ -4958,7 +4958,7 @@
 	
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 * Note that most of the paging logic is done in
-	 * DataTable.ext.pAger
+	 * DataTable.ext.pager
 	 */
 	
 	/**
@@ -4971,7 +4971,7 @@
 	{
 		var
 			type   = settings.sPaginationType,
-			plugin = DataTable.ext.pAger[ type ],
+			plugin = DataTable.ext.pager[ type ],
 			modern = typeof plugin === 'function',
 			redraw = function( settings ) {
 				_fnDraw( settings );
@@ -4996,14 +4996,14 @@
 							len        = settings._iDisplayLength,
 							visRecords = settings.fnRecordsDisplay(),
 							all        = len === -1,
-							pAge = all ? 0 : Math.ceil( start / len ),
-							pAges = all ? 1 : Math.ceil( visRecords / len ),
-							buttons = plugin(pAge, pAges),
+							page = all ? 0 : Math.ceil( start / len ),
+							pages = all ? 1 : Math.ceil( visRecords / len ),
+							buttons = plugin(page, pages),
 							i, ien;
 	
 						for ( i=0, ien=features.p.length ; i<ien ; i++ ) {
-							_fnRenderer( settings, 'pAgeButton' )(
-								settings, features.p[i], i, buttons, pAge, pAges
+							_fnRenderer( settings, 'pageButton' )(
+								settings, features.p[i], i, buttons, page, pages
 							);
 						}
 					}
@@ -5020,15 +5020,15 @@
 	
 	
 	/**
-	 * Alter the display settings to change the pAge
+	 * Alter the display settings to change the page
 	 *  @param {object} settings DataTables settings object
 	 *  @param {string|int} action Paging action to take: "first", "previous",
-	 *    "next" or "last" or pAge number to jump to (integer)
+	 *    "next" or "last" or page number to jump to (integer)
 	 *  @param [bool] redraw Automatically draw the update or not
-	 *  @returns {bool} true pAge has changed, false - no change
+	 *  @returns {bool} true page has changed, false - no change
 	 *  @memberof DataTable#oApi
 	 */
-	function _fnPAgeChange ( settings, action, redraw )
+	function _fnPageChange ( settings, action, redraw )
 	{
 		var
 			start     = settings._iDisplayStart,
@@ -5083,7 +5083,7 @@
 		settings._iDisplayStart = start;
 	
 		if ( changed ) {
-			_fnCallbackFire( settings, null, 'pAge', [settings] );
+			_fnCallbackFire( settings, null, 'page', [settings] );
 	
 			if ( redraw ) {
 				_fnDraw( settings );
@@ -5107,7 +5107,7 @@
 				'id': ! settings.aanFeatures.r ? settings.sTableId+'_processing' : null,
 				'class': settings.oClasses.sProcessing
 			} )
-			.html( settings.oLanguAge.sProcessing )
+			.html( settings.oLanguage.sProcessing )
 			.insertBefore( settings.nTable )[0];
 	}
 	
@@ -5816,7 +5816,7 @@
 				} ) );
 			};
 	
-			// IE6/7 will crash if we bind a resize event handler on pAge load.
+			// IE6/7 will crash if we bind a resize event handler on page load.
 			// To be removed in 1.11 which drops IE6/7 support
 			if ( ie67 ) {
 				setTimeout( bindResize, 1000 );
@@ -6142,7 +6142,7 @@
 		var nextSort;
 		var columns = settings.aoColumns;
 		var aSort = _fnSortFlatten( settings );
-		var oAria = settings.oLanguAge.oAria;
+		var oAria = settings.oLanguage.oAria;
 	
 		// ARIA attributes - need to loop all columns, to update all (removing old
 		// attributes as needed)
@@ -6498,7 +6498,7 @@
 				settings.iInitDisplayStart = s.start;
 			}
 			else {
-				_fnPAgeChange(settings, s.start/s.length);
+				_fnPageChange(settings, s.start/s.length);
 	
 			}
 		}
@@ -6575,10 +6575,10 @@
 	
 	
 	/**
-	 * Log an error messAge
+	 * Log an error message
 	 *  @param {object} settings dataTables settings object
-	 *  @param {int} level log error messAges, or display them to the user
-	 *  @param {string} msg error messAge
+	 *  @param {int} level log error messages, or display them to the user
+	 *  @param {string} msg error message
 	 *  @param {int} tn Technical note id to get more information about the error.
 	 *  @memberof DataTable#oApi
 	 */
@@ -6727,7 +6727,7 @@
 	 * Register a callback function. Easily allows a callback function to be added to
 	 * an array store of callback functions that can then all be called together.
 	 *  @param {object} oSettings dataTables settings object
-	 *  @param {string} sStore Name of the array storAge for the callbacks in oSettings
+	 *  @param {string} sStore Name of the array storage for the callbacks in oSettings
 	 *  @param {function} fn Function to be called back
 	 *  @param {string} sName Identifying name for the callback (i.e. a label)
 	 *  @memberof DataTable#oApi
@@ -6750,7 +6750,7 @@
 	 * fire off triggers in time sensitive applications (for example cell creation)
 	 * as its slow.
 	 *  @param {object} settings dataTables settings object
-	 *  @param {string} callbackArr Name of the array storAge for the callbacks in
+	 *  @param {string} callbackArr Name of the array storage for the callbacks in
 	 *      oSettings
 	 *  @param {string} eventName Name of the jQuery custom event to trigger. If
 	 *      null no trigger is fired
@@ -6793,7 +6793,7 @@
 			start = end - len;
 		}
 	
-		// Keep the start record on the current pAge
+		// Keep the start record on the current page
 		start -= (start % len);
 	
 		if ( len === -1 || start < 0 )
@@ -6964,7 +6964,7 @@
 	 * The API class is heavily based on jQuery, presenting a chainable interface
 	 * that you can use to interact with tables. Each instance of the API class has
 	 * a "context" - i.e. the tables that it will operate on. This could be a single
-	 * table, all tables on a pAge or a sub-set thereof.
+	 * table, all tables on a page or a sub-set thereof.
 	 *
 	 * Additionally the API is designed to allow you to easily work with the data in
 	 * the tables, retrieving and manipulating it as required. This is done by
@@ -7575,7 +7575,7 @@
 	 */
 	_api_register( 'draw()', function ( paging ) {
 		return this.iterator( 'table', function ( settings ) {
-			if ( paging === 'pAge' ) {
+			if ( paging === 'page' ) {
 				_fnDraw( settings );
 			}
 			else {
@@ -7593,32 +7593,32 @@
 	
 	
 	/**
-	 * Get the current pAge index.
+	 * Get the current page index.
 	 *
-	 * @return {integer} Current pAge index (zero based)
+	 * @return {integer} Current page index (zero based)
 	 *//**
-	 * Set the current pAge.
+	 * Set the current page.
 	 *
-	 * Note that if you attempt to show a pAge which does not exist, DataTables will
+	 * Note that if you attempt to show a page which does not exist, DataTables will
 	 * not throw an error, but rather reset the paging.
 	 *
 	 * @param {integer|string} action The paging action to take. This can be one of:
-	 *  * `integer` - The pAge index to jump to
+	 *  * `integer` - The page index to jump to
 	 *  * `string` - An action to take:
-	 *    * `first` - Jump to first pAge.
-	 *    * `next` - Jump to the next pAge
-	 *    * `previous` - Jump to previous pAge
-	 *    * `last` - Jump to the last pAge.
+	 *    * `first` - Jump to first page.
+	 *    * `next` - Jump to the next page
+	 *    * `previous` - Jump to previous page
+	 *    * `last` - Jump to the last page.
 	 * @returns {DataTables.Api} this
 	 */
-	_api_register( 'pAge()', function ( action ) {
+	_api_register( 'page()', function ( action ) {
 		if ( action === undefined ) {
-			return this.pAge.info().pAge; // not an expensive call
+			return this.page.info().page; // not an expensive call
 		}
 	
 		// else, have an action to take on all tables
 		return this.iterator( 'table', function ( settings ) {
-			_fnPAgeChange( settings, action );
+			_fnPageChange( settings, action );
 		} );
 	} );
 	
@@ -7630,18 +7630,18 @@
 	 * with a suitable selector.
 	 *
 	 * @return {object} Object with the following properties set:
-	 *  * `pAge` - Current pAge index (zero based - i.e. the first pAge is `0`)
-	 *  * `pAges` - Total number of pAges
-	 *  * `start` - Display index for the first record shown on the current pAge
-	 *  * `end` - Display index for the last record shown on the current pAge
+	 *  * `page` - Current page index (zero based - i.e. the first page is `0`)
+	 *  * `pages` - Total number of pages
+	 *  * `start` - Display index for the first record shown on the current page
+	 *  * `end` - Display index for the last record shown on the current page
 	 *  * `length` - Display length (number of records). Note that generally `start
 	 *    + length = end`, but this is not always true, for example if there are
-	 *    only 2 records to show on the final pAge, with a length of 10.
+	 *    only 2 records to show on the final page, with a length of 10.
 	 *  * `recordsTotal` - Full data set length
 	 *  * `recordsDisplay` - Data set length once the current filtering criterion
 	 *    are applied.
 	 */
-	_api_register( 'pAge.info()', function ( action ) {
+	_api_register( 'page.info()', function ( action ) {
 		if ( this.context.length === 0 ) {
 			return undefined;
 		}
@@ -7654,8 +7654,8 @@
 			all        = len === -1;
 	
 		return {
-			"pAge":           all ? 0 : Math.floor( start / len ),
-			"pAges":          all ? 1 : Math.ceil( visRecords / len ),
+			"page":           all ? 0 : Math.floor( start / len ),
+			"pages":          all ? 1 : Math.ceil( visRecords / len ),
 			"start":          start,
 			"end":            settings.fnDisplayEnd(),
 			"length":         len,
@@ -7667,17 +7667,17 @@
 	
 	
 	/**
-	 * Get the current pAge length.
+	 * Get the current page length.
 	 *
-	 * @return {integer} Current pAge length. Note `-1` indicates that all records
+	 * @return {integer} Current page length. Note `-1` indicates that all records
 	 *   are to be shown.
 	 *//**
-	 * Set the current pAge length.
+	 * Set the current page length.
 	 *
-	 * @param {integer} PAge length to set. Use `-1` to show all records.
+	 * @param {integer} Page length to set. Use `-1` to show all records.
 	 * @returns {DataTables.Api} this
 	 */
-	_api_register( 'pAge.len()', function ( len ) {
+	_api_register( 'page.len()', function ( len ) {
 		// Note that we can't call this function 'length()' because `length`
 		// is a Javascript property of functions which defines how many arguments
 		// the function expects.
@@ -7687,7 +7687,7 @@
 				undefined;
 		}
 	
-		// else, set the pAge length
+		// else, set the page length
 		return this.iterator( 'table', function ( settings ) {
 			_fnLengthChange( settings, len );
 		} );
@@ -7900,7 +7900,7 @@
 		return $.extend( {
 			search: 'none',
 			order: 'current',
-			pAge: 'all'
+			page: 'all'
 		}, opts );
 	};
 	
@@ -7937,7 +7937,7 @@
 		var
 			search = opts.search,  // none, applied, removed
 			order  = opts.order,   // applied, current, index (original - compatibility with 1.9)
-			pAge   = opts.pAge;    // all, current
+			page   = opts.page;    // all, current
 	
 		if ( _fnDataSource( settings ) == 'ssp' ) {
 			// In server-side processing mode, most options are irrelevant since
@@ -7948,8 +7948,8 @@
 				[] :
 				_range( 0, displayMaster.length );
 		}
-		else if ( pAge == 'current' ) {
-			// Current pAge implies that order=current and filter=applied, since it is
+		else if ( page == 'current' ) {
+			// Current page implies that order=current and filter=applied, since it is
 			// fairly senseless otherwise, regardless of what order and search actually
 			// are
 			for ( i=settings._iDisplayStart, ien=settings.fnDisplayEnd() ; i<ien ; i++ ) {
@@ -8458,7 +8458,7 @@
 					return;
 				}
 	
-				api.rows( {pAge:'current'} ).eq(0).each( function (idx) {
+				api.rows( {page:'current'} ).eq(0).each( function (idx) {
 					// Internal data grab
 					var row = data[ idx ];
 	
@@ -8986,7 +8986,7 @@
 	
 		// The default built in options need to apply to row and columns
 		var internalOpts = opts ? {
-			pAge: opts.pAge,
+			page: opts.page,
 			order: opts.order,
 			search: opts.search
 		} : {};
@@ -9619,11 +9619,11 @@
 	} );
 	
 	
-	// i18n method for extensions to be able to use the languAge object from the
+	// i18n method for extensions to be able to use the language object from the
 	// DataTable
 	_api_register( 'i18n()', function ( token, def, plural ) {
 		var ctx = this.context[0];
-		var resolved = _fnGetObjectDataFn( token )( ctx.oLanguAge );
+		var resolved = _fnGetObjectDataFn( token )( ctx.oLanguage );
 	
 		if ( resolved === undefined ) {
 			resolved = def;
@@ -9649,7 +9649,7 @@
 
 	/**
 	 * Private data store, containing all of the settings objects that are
-	 * created for the tables on a given pAge.
+	 * created for the tables on a given page.
 	 *
 	 * Note that the `DataTable.settings` object is aliased to
 	 * `jQuery.fn.dataTableExt` through which it may be accessed and
@@ -10257,7 +10257,7 @@
 		 *
 		 * As a function, making the Ajax call is left up to yourself allowing
 		 * complete control of the Ajax request. Indeed, if desired, a method other
-		 * than Ajax could be used to obtain the required data, such as Web storAge
+		 * than Ajax could be used to obtain the required data, such as Web storage
 		 * or an AIR database.
 		 *
 		 * The function is given four parameters and no return is required. The
@@ -10314,7 +10314,7 @@
 		 *       "url": "data.json",
 		 *       "dataSrc": function ( json ) {
 		 *         for ( var i=0, ien=json.length ; i<ien ; i++ ) {
-		 *           json[i][0] = '<a href="/messAge/'+json[i][0]+'>View messAge</a>';
+		 *           json[i][0] = '<a href="/message/'+json[i][0]+'>View message</a>';
 		 *         }
 		 *         return json;
 		 *       }
@@ -10344,12 +10344,12 @@
 		 *   } );
 		 *
 		 * @example
-		 *   // Get the data from localStorAge (could interface with a form for
+		 *   // Get the data from localStorage (could interface with a form for
 		 *   // adding, editing and removing rows).
 		 *   $('#example').dataTable( {
 		 *     "ajax": function (data, callback, settings) {
 		 *       callback(
-		 *         JSON.parse( localStorAge.getItem('dataTablesData') )
+		 *         JSON.parse( localStorage.getItem('dataTablesData') )
 		 *       );
 		 *     }
 		 *   } );
@@ -10363,10 +10363,10 @@
 		 * either a 1D array of options which will be used for both the displayed
 		 * option and the value, or a 2D array which will use the array in the first
 		 * position as the value, and the array in the second position as the
-		 * displayed options (useful for languAge strings such as 'All').
+		 * displayed options (useful for language strings such as 'All').
 		 *
-		 * Note that the `pAgeLength` property will be automatically set to the
-		 * first value given in this array, unless `pAgeLength` is also provided.
+		 * Note that the `pageLength` property will be automatically set to the
+		 * first value given in this array, unless `pageLength` is also provided.
 		 *  @type array
 		 *  @default [ 10, 25, 50, 100 ]
 		 *
@@ -10564,7 +10564,7 @@
 	
 		/**
 		 * Enable or disable the table information display. This shows information
-		 * about the data that is currently visible on the pAge, including information
+		 * about the data that is currently visible on the page, including information
 		 * about filtered data if that action is being performed.
 		 *  @type boolean
 		 *  @default true
@@ -10583,7 +10583,7 @@
 	
 	
 		/**
-		 * Allows the end user to select the size of a formatted pAge from a select
+		 * Allows the end user to select the size of a formatted page from a select
 		 * menu (sizes are 10, 25, 50 and 100). Requires pagination (`paginate`).
 		 *  @type boolean
 		 *  @default true
@@ -10806,14 +10806,14 @@
 	
 	
 		/**
-		 * Enable or disable state saving. When enabled HTML5 `localStorAge` will be
+		 * Enable or disable state saving. When enabled HTML5 `localStorage` will be
 		 * used to save table display information such as pagination information,
 		 * display length, filtering and sorting. As such when the end user reloads
-		 * the pAge the display display will match what thy had previously set up.
+		 * the page the display display will match what thy had previously set up.
 		 *
-		 * Due to the use of `localStorAge` the default state saving is not supported
+		 * Due to the use of `localStorage` the default state saving is not supported
 		 * in IE6 or 7. If state saving is required in those browsers, use
-		 * `stateSaveCallback` to provide a storAge solution such as cookies.
+		 * `stateSaveCallback` to provide a storage solution such as cookies.
 		 *  @type boolean
 		 *  @default false
 		 *
@@ -10923,7 +10923,7 @@
 		 *
 		 *  @example
 		 *    // Format a number using a single quote for the separator (note that
-		 *    // this can also be done with the languAge.thousands option)
+		 *    // this can also be done with the language.thousands option)
 		 *    $(document).ready( function() {
 		 *      $('#example').dataTable( {
 		 *        "formatNumber": function ( toFormat ) {
@@ -10937,7 +10937,7 @@
 		"fnFormatNumber": function ( toFormat ) {
 			return toFormat.toString().replace(
 				/\B(?=(\d{3})+(?!\d))/g,
-				this.oLanguAge.sThousands
+				this.oLanguage.sThousands
 			);
 		},
 	
@@ -11004,7 +11004,7 @@
 		/**
 		 * Called when the table has been initialised. Normally DataTables will
 		 * initialise sequentially and there will be no need for this function,
-		 * however, this does not hold true when using external languAge information
+		 * however, this does not hold true when using external language information
 		 * since that is obtained using an async XHR call.
 		 *  @type function
 		 *  @param {object} settings DataTables settings object
@@ -11095,7 +11095,7 @@
 		 *  @param {array} data A key/value pair object containing the data to send
 		 *    to the server
 		 *  @param {function} callback to be called on completion of the data get
-		 *    process that will draw the data on the pAge.
+		 *    process that will draw the data on the page.
 		 *  @param {object} settings DataTables settings object
 		 *
 		 *  @dtopt Callbacks
@@ -11136,7 +11136,7 @@
 	
 		/**
 		 * Load the table state. With this function you can define from where, and how, the
-		 * state of a table is loaded. By default DataTables will load from `localStorAge`
+		 * state of a table is loaded. By default DataTables will load from `localStorage`
 		 * but you might wish to use a server-side database or cookies.
 		 *  @type function
 		 *  @member
@@ -11167,7 +11167,7 @@
 		"fnStateLoadCallback": function ( settings ) {
 			try {
 				return JSON.parse(
-					(settings.iStateDuration === -1 ? sessionStorAge : localStorAge).getItem(
+					(settings.iStateDuration === -1 ? sessionStorage : localStorage).getItem(
 						'DataTables_'+settings.sInstance+'_'+location.pathname
 					)
 				);
@@ -11241,7 +11241,7 @@
 	
 		/**
 		 * Save the table state. This function allows you to define where and how the state
-		 * information for the table is stored By default DataTables will use `localStorAge`
+		 * information for the table is stored By default DataTables will use `localStorage`
 		 * but you might wish to use a server-side database or cookies.
 		 *  @type function
 		 *  @member
@@ -11270,7 +11270,7 @@
 		 */
 		"fnStateSaveCallback": function ( settings, data ) {
 			try {
-				(settings.iStateDuration === -1 ? sessionStorAge : localStorAge).setItem(
+				(settings.iStateDuration === -1 ? sessionStorage : localStorage).setItem(
 					'DataTables_'+settings.sInstance+'_'+location.pathname,
 					JSON.stringify( data )
 				);
@@ -11327,7 +11327,7 @@
 	
 		/**
 		 * When enabled DataTables will not make a request to the server for the first
-		 * pAge draw - rather it will use the data already on the pAge (no sorting etc
+		 * page draw - rather it will use the data already on the page (no sorting etc
 		 * will be applied to it), thus saving on an XHR at load time. `deferLoading`
 		 * is used to indicate that deferred loading is required, but it is also used
 		 * to tell DataTables how many records there are in the full table (allowing
@@ -11370,19 +11370,19 @@
 	
 	
 		/**
-		 * Number of rows to display on a single pAge when using pagination. If
+		 * Number of rows to display on a single page when using pagination. If
 		 * feature enabled (`lengthChange`) then the end user will be able to override
 		 * this to a custom setting using a pop-up menu.
 		 *  @type int
 		 *  @default 10
 		 *
 		 *  @dtopt Options
-		 *  @name DataTable.defaults.pAgeLength
+		 *  @name DataTable.defaults.pageLength
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
 		 *      $('#example').dataTable( {
-		 *        "pAgeLength": 50
+		 *        "pageLength": 50
 		 *      } );
 		 *    } )
 		 */
@@ -11392,8 +11392,8 @@
 		/**
 		 * Define the starting point for data display when using DataTables with
 		 * pagination. Note that this parameter is the number of records, rather than
-		 * the pAge number, so if you have 10 records per pAge and want to start on
-		 * the third pAge, it should be "20".
+		 * the page number, so if you have 10 records per page and want to start on
+		 * the third page, it should be "20".
 		 *  @type int
 		 *  @default 0
 		 *
@@ -11449,15 +11449,15 @@
 		 * are defined in this object, allowing you to modified them individually or
 		 * completely replace them all as required.
 		 *  @namespace
-		 *  @name DataTable.defaults.languAge
+		 *  @name DataTable.defaults.language
 		 */
-		"oLanguAge": {
+		"oLanguage": {
 			/**
 			 * Strings that are used for WAI-ARIA labels and controls only (these are not
-			 * actually visible on the pAge, but will be read by screenreaders, and thus
+			 * actually visible on the page, but will be read by screenreaders, and thus
 			 * must be internationalised as well).
 			 *  @namespace
-			 *  @name DataTable.defaults.languAge.aria
+			 *  @name DataTable.defaults.language.aria
 			 */
 			"oAria": {
 				/**
@@ -11467,13 +11467,13 @@
 				 *  @type string
 				 *  @default : activate to sort column ascending
 				 *
-				 *  @dtopt LanguAge
-				 *  @name DataTable.defaults.languAge.aria.sortAscending
+				 *  @dtopt Language
+				 *  @name DataTable.defaults.language.aria.sortAscending
 				 *
 				 *  @example
 				 *    $(document).ready( function() {
 				 *      $('#example').dataTable( {
-				 *        "languAge": {
+				 *        "language": {
 				 *          "aria": {
 				 *            "sortAscending": " - click/return to sort ascending"
 				 *          }
@@ -11490,13 +11490,13 @@
 				 *  @type string
 				 *  @default : activate to sort column ascending
 				 *
-				 *  @dtopt LanguAge
-				 *  @name DataTable.defaults.languAge.aria.sortDescending
+				 *  @dtopt Language
+				 *  @name DataTable.defaults.language.aria.sortDescending
 				 *
 				 *  @example
 				 *    $(document).ready( function() {
 				 *      $('#example').dataTable( {
-				 *        "languAge": {
+				 *        "language": {
 				 *          "aria": {
 				 *            "sortDescending": " - click/return to sort descending"
 				 *          }
@@ -11511,24 +11511,24 @@
 			 * Pagination string used by DataTables for the built-in pagination
 			 * control types.
 			 *  @namespace
-			 *  @name DataTable.defaults.languAge.paginate
+			 *  @name DataTable.defaults.language.paginate
 			 */
 			"oPaginate": {
 				/**
 				 * Text to use when using the 'full_numbers' type of pagination for the
-				 * button to take the user to the first pAge.
+				 * button to take the user to the first page.
 				 *  @type string
 				 *  @default First
 				 *
-				 *  @dtopt LanguAge
-				 *  @name DataTable.defaults.languAge.paginate.first
+				 *  @dtopt Language
+				 *  @name DataTable.defaults.language.paginate.first
 				 *
 				 *  @example
 				 *    $(document).ready( function() {
 				 *      $('#example').dataTable( {
-				 *        "languAge": {
+				 *        "language": {
 				 *          "paginate": {
-				 *            "first": "First pAge"
+				 *            "first": "First page"
 				 *          }
 				 *        }
 				 *      } );
@@ -11539,19 +11539,19 @@
 	
 				/**
 				 * Text to use when using the 'full_numbers' type of pagination for the
-				 * button to take the user to the last pAge.
+				 * button to take the user to the last page.
 				 *  @type string
 				 *  @default Last
 				 *
-				 *  @dtopt LanguAge
-				 *  @name DataTable.defaults.languAge.paginate.last
+				 *  @dtopt Language
+				 *  @name DataTable.defaults.language.paginate.last
 				 *
 				 *  @example
 				 *    $(document).ready( function() {
 				 *      $('#example').dataTable( {
-				 *        "languAge": {
+				 *        "language": {
 				 *          "paginate": {
-				 *            "last": "Last pAge"
+				 *            "last": "Last page"
 				 *          }
 				 *        }
 				 *      } );
@@ -11562,19 +11562,19 @@
 	
 				/**
 				 * Text to use for the 'next' pagination button (to take the user to the
-				 * next pAge).
+				 * next page).
 				 *  @type string
 				 *  @default Next
 				 *
-				 *  @dtopt LanguAge
-				 *  @name DataTable.defaults.languAge.paginate.next
+				 *  @dtopt Language
+				 *  @name DataTable.defaults.language.paginate.next
 				 *
 				 *  @example
 				 *    $(document).ready( function() {
 				 *      $('#example').dataTable( {
-				 *        "languAge": {
+				 *        "language": {
 				 *          "paginate": {
-				 *            "next": "Next pAge"
+				 *            "next": "Next page"
 				 *          }
 				 *        }
 				 *      } );
@@ -11585,19 +11585,19 @@
 	
 				/**
 				 * Text to use for the 'previous' pagination button (to take the user to
-				 * the previous pAge).
+				 * the previous page).
 				 *  @type string
 				 *  @default Previous
 				 *
-				 *  @dtopt LanguAge
-				 *  @name DataTable.defaults.languAge.paginate.previous
+				 *  @dtopt Language
+				 *  @name DataTable.defaults.language.paginate.previous
 				 *
 				 *  @example
 				 *    $(document).ready( function() {
 				 *      $('#example').dataTable( {
-				 *        "languAge": {
+				 *        "language": {
 				 *          "paginate": {
-				 *            "previous": "Previous pAge"
+				 *            "previous": "Previous page"
 				 *          }
 				 *        }
 				 *      } );
@@ -11614,13 +11614,13 @@
 			 *  @type string
 			 *  @default No data available in table
 			 *
-			 *  @dtopt LanguAge
-			 *  @name DataTable.defaults.languAge.emptyTable
+			 *  @dtopt Language
+			 *  @name DataTable.defaults.language.emptyTable
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
 			 *      $('#example').dataTable( {
-			 *        "languAge": {
+			 *        "language": {
 			 *          "emptyTable": "No data available in table"
 			 *        }
 			 *      } );
@@ -11631,29 +11631,29 @@
 	
 			/**
 			 * This string gives information to the end user about the information
-			 * that is current on display on the pAge. The following tokens can be
+			 * that is current on display on the page. The following tokens can be
 			 * used in the string and will be dynamically replaced as the table
 			 * display updates. This tokens can be placed anywhere in the string, or
-			 * removed as needed by the languAge requires:
+			 * removed as needed by the language requires:
 			 *
-			 * * `\_START\_` - Display index of the first record on the current pAge
-			 * * `\_END\_` - Display index of the last record on the current pAge
+			 * * `\_START\_` - Display index of the first record on the current page
+			 * * `\_END\_` - Display index of the last record on the current page
 			 * * `\_TOTAL\_` - Number of records in the table after filtering
 			 * * `\_MAX\_` - Number of records in the table without filtering
-			 * * `\_PAge\_` - Current pAge number
-			 * * `\_PAgeS\_` - Total number of pAges of data in the table
+			 * * `\_PAGE\_` - Current page number
+			 * * `\_PAGES\_` - Total number of pages of data in the table
 			 *
 			 *  @type string
 			 *  @default Showing _START_ to _END_ of _TOTAL_ entries
 			 *
-			 *  @dtopt LanguAge
-			 *  @name DataTable.defaults.languAge.info
+			 *  @dtopt Language
+			 *  @name DataTable.defaults.language.info
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
 			 *      $('#example').dataTable( {
-			 *        "languAge": {
-			 *          "info": "Showing pAge _PAge_ of _PAgeS_"
+			 *        "language": {
+			 *          "info": "Showing page _PAGE_ of _PAGES_"
 			 *        }
 			 *      } );
 			 *    } );
@@ -11667,13 +11667,13 @@
 			 *  @type string
 			 *  @default Showing 0 to 0 of 0 entries
 			 *
-			 *  @dtopt LanguAge
-			 *  @name DataTable.defaults.languAge.infoEmpty
+			 *  @dtopt Language
+			 *  @name DataTable.defaults.language.infoEmpty
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
 			 *      $('#example').dataTable( {
-			 *        "languAge": {
+			 *        "language": {
 			 *          "infoEmpty": "No entries to show"
 			 *        }
 			 *      } );
@@ -11689,13 +11689,13 @@
 			 *  @type string
 			 *  @default (filtered from _MAX_ total entries)
 			 *
-			 *  @dtopt LanguAge
-			 *  @name DataTable.defaults.languAge.infoFiltered
+			 *  @dtopt Language
+			 *  @name DataTable.defaults.language.infoFiltered
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
 			 *      $('#example').dataTable( {
-			 *        "languAge": {
+			 *        "language": {
 			 *          "infoFiltered": " - filtering from _MAX_ records"
 			 *        }
 			 *      } );
@@ -11712,13 +11712,13 @@
 			 *  @type string
 			 *  @default <i>Empty string</i>
 			 *
-			 *  @dtopt LanguAge
-			 *  @name DataTable.defaults.languAge.infoPostFix
+			 *  @dtopt Language
+			 *  @name DataTable.defaults.language.infoPostFix
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
 			 *      $('#example').dataTable( {
-			 *        "languAge": {
+			 *        "language": {
 			 *          "infoPostFix": "All records shown are derived from real information."
 			 *        }
 			 *      } );
@@ -11729,7 +11729,7 @@
 	
 			/**
 			 * This decimal place operator is a little different from the other
-			 * languAge options since DataTables doesn't output floating point
+			 * language options since DataTables doesn't output floating point
 			 * numbers, so it won't ever use this for display of a number. Rather,
 			 * what this parameter does is modify the sort methods of the table so
 			 * that numbers which are in a format which has a character other than
@@ -11737,18 +11737,18 @@
 			 *
 			 * Note that numbers with different decimal places cannot be shown in
 			 * the same table and still be sortable, the table must be consistent.
-			 * However, multiple different tables on the pAge can use different
+			 * However, multiple different tables on the page can use different
 			 * decimal place characters.
 			 *  @type string
 			 *  @default 
 			 *
-			 *  @dtopt LanguAge
-			 *  @name DataTable.defaults.languAge.decimal
+			 *  @dtopt Language
+			 *  @name DataTable.defaults.language.decimal
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
 			 *      $('#example').dataTable( {
-			 *        "languAge": {
+			 *        "language": {
 			 *          "decimal": ","
 			 *          "thousands": "."
 			 *        }
@@ -11766,13 +11766,13 @@
 			 *  @type string
 			 *  @default ,
 			 *
-			 *  @dtopt LanguAge
-			 *  @name DataTable.defaults.languAge.thousands
+			 *  @dtopt Language
+			 *  @name DataTable.defaults.language.thousands
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
 			 *      $('#example').dataTable( {
-			 *        "languAge": {
+			 *        "language": {
 			 *          "thousands": "'"
 			 *        }
 			 *      } );
@@ -11789,24 +11789,24 @@
 			 *  @type string
 			 *  @default Show _MENU_ entries
 			 *
-			 *  @dtopt LanguAge
-			 *  @name DataTable.defaults.languAge.lengthMenu
+			 *  @dtopt Language
+			 *  @name DataTable.defaults.language.lengthMenu
 			 *
 			 *  @example
-			 *    // LanguAge change only
+			 *    // Language change only
 			 *    $(document).ready( function() {
 			 *      $('#example').dataTable( {
-			 *        "languAge": {
+			 *        "language": {
 			 *          "lengthMenu": "Display _MENU_ records"
 			 *        }
 			 *      } );
 			 *    } );
 			 *
 			 *  @example
-			 *    // LanguAge and options change
+			 *    // Language and options change
 			 *    $(document).ready( function() {
 			 *      $('#example').dataTable( {
-			 *        "languAge": {
+			 *        "language": {
 			 *          "lengthMenu": 'Display <select>'+
 			 *            '<option value="10">10</option>'+
 			 *            '<option value="20">20</option>'+
@@ -11824,20 +11824,20 @@
 	
 			/**
 			 * When using Ajax sourced data and during the first draw when DataTables is
-			 * gathering the data, this messAge is shown in an empty row in the table to
+			 * gathering the data, this message is shown in an empty row in the table to
 			 * indicate to the end user the the data is being loaded. Note that this
 			 * parameter is not used when loading data by server-side processing, just
 			 * Ajax sourced data with client-side processing.
 			 *  @type string
 			 *  @default Loading...
 			 *
-			 *  @dtopt LanguAge
-			 *  @name DataTable.defaults.languAge.loadingRecords
+			 *  @dtopt Language
+			 *  @name DataTable.defaults.language.loadingRecords
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
 			 *      $('#example').dataTable( {
-			 *        "languAge": {
+			 *        "language": {
 			 *          "loadingRecords": "Please wait - loading..."
 			 *        }
 			 *      } );
@@ -11852,13 +11852,13 @@
 			 *  @type string
 			 *  @default Processing...
 			 *
-			 *  @dtopt LanguAge
-			 *  @name DataTable.defaults.languAge.processing
+			 *  @dtopt Language
+			 *  @name DataTable.defaults.language.processing
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
 			 *      $('#example').dataTable( {
-			 *        "languAge": {
+			 *        "language": {
 			 *          "processing": "DataTables is currently busy"
 			 *        }
 			 *      } );
@@ -11876,14 +11876,14 @@
 			 *  @type string
 			 *  @default Search:
 			 *
-			 *  @dtopt LanguAge
-			 *  @name DataTable.defaults.languAge.search
+			 *  @dtopt Language
+			 *  @name DataTable.defaults.language.search
 			 *
 			 *  @example
 			 *    // Input text box will be appended at the end automatically
 			 *    $(document).ready( function() {
 			 *      $('#example').dataTable( {
-			 *        "languAge": {
+			 *        "language": {
 			 *          "search": "Filter records:"
 			 *        }
 			 *      } );
@@ -11893,7 +11893,7 @@
 			 *    // Specify where the filter should appear
 			 *    $(document).ready( function() {
 			 *      $('#example').dataTable( {
-			 *        "languAge": {
+			 *        "language": {
 			 *          "search": "Apply filter _INPUT_ to table"
 			 *        }
 			 *      } );
@@ -11907,29 +11907,29 @@
 			 *  @type string
 			 *  @default 
 			 *
-			 *  @dtopt LanguAge
-			 *  @name DataTable.defaults.languAge.searchPlaceholder
+			 *  @dtopt Language
+			 *  @name DataTable.defaults.language.searchPlaceholder
 			 */
 			"sSearchPlaceholder": "",
 	
 	
 			/**
-			 * All of the languAge information can be stored in a file on the
+			 * All of the language information can be stored in a file on the
 			 * server-side, which DataTables will look up if this parameter is passed.
-			 * It must store the URL of the languAge file, which is in a JSON format,
-			 * and the object has the same properties as the oLanguAge object in the
+			 * It must store the URL of the language file, which is in a JSON format,
+			 * and the object has the same properties as the oLanguage object in the
 			 * initialiser object (i.e. the above parameters). Please refer to one of
-			 * the example languAge files to see how this works in action.
+			 * the example language files to see how this works in action.
 			 *  @type string
 			 *  @default <i>Empty string - i.e. disabled</i>
 			 *
-			 *  @dtopt LanguAge
-			 *  @name DataTable.defaults.languAge.url
+			 *  @dtopt Language
+			 *  @name DataTable.defaults.language.url
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
 			 *      $('#example').dataTable( {
-			 *        "languAge": {
+			 *        "language": {
 			 *          "url": "http://www.sprymedia.co.uk/dataTables/lang.txt"
 			 *        }
 			 *      } );
@@ -11945,13 +11945,13 @@
 			 *  @type string
 			 *  @default No matching records found
 			 *
-			 *  @dtopt LanguAge
-			 *  @name DataTable.defaults.languAge.zeroRecords
+			 *  @dtopt Language
+			 *  @name DataTable.defaults.language.zeroRecords
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
 			 *      $('#example').dataTable( {
-			 *        "languAge": {
+			 *        "language": {
 			 *          "zeroRecords": "No records to display"
 			 *        }
 			 *      } );
@@ -12027,7 +12027,7 @@
 	
 		/**
 		 * This initialisation variable allows you to specify exactly where in the
-		 * DOM you want DataTables to inject the various controls it adds to the pAge
+		 * DOM you want DataTables to inject the various controls it adds to the page
 		 * (for example you might want the pagination controls at the top of the
 		 * table). DIV elements (with or without a custom class) can also be added to
 		 * aid styling. The follow syntax is used:
@@ -12103,12 +12103,12 @@
 		 * DataTables features six different built-in options for the buttons to
 		 * display for pagination control:
 		 *
-		 * * `numbers` - PAge number buttons only
+		 * * `numbers` - Page number buttons only
 		 * * `simple` - 'Previous' and 'Next' buttons only
-		 * * 'simple_numbers` - 'Previous' and 'Next' buttons, plus pAge numbers
+		 * * 'simple_numbers` - 'Previous' and 'Next' buttons, plus page numbers
 		 * * `full` - 'First', 'Previous', 'Next' and 'Last' buttons
-		 * * `full_numbers` - 'First', 'Previous', 'Next' and 'Last' buttons, plus pAge numbers
-		 * * `first_last_numbers` - 'First' and 'Last' buttons, plus pAge numbers
+		 * * `full_numbers` - 'First', 'Previous', 'Next' and 'Last' buttons, plus page numbers
+		 * * `first_last_numbers` - 'First' and 'Last' buttons, plus page numbers
 		 *  
 		 * Further methods can be added using {@link DataTable.ext.oPagination}.
 		 *  @type string
@@ -13156,7 +13156,7 @@
 	
 			/**
 			 * Delay the creation of TR and TD elements until they are actually
-			 * needed by a driven pAge draw. This can give a significant speed
+			 * needed by a driven page draw. This can give a significant speed
 			 * increase for Ajax source and Javascript source data, but makes no
 			 * difference at all for DOM and server-side processing tables.
 			 * Note that this parameter will be set by the initialisation routine. To
@@ -13185,7 +13185,7 @@
 			"bInfo": null,
 	
 			/**
-			 * Present a user control allowing the end user to change the pAge size
+			 * Present a user control allowing the end user to change the page size
 			 * when pagination is enabled.
 			 * Note that this parameter will be set by the initialisation routine. To
 			 * set a default use {@link DataTable.defaults}.
@@ -13309,11 +13309,11 @@
 		},
 	
 		/**
-		 * LanguAge information for the table.
+		 * Language information for the table.
 		 *  @namespace
-		 *  @extends DataTable.defaults.oLanguAge
+		 *  @extends DataTable.defaults.oLanguage
 		 */
-		"oLanguAge": {
+		"oLanguage": {
 			/**
 			 * Information callback function. See
 			 * {@link DataTable.defaults.fnInfoCallback}
@@ -13338,7 +13338,7 @@
 	
 			/**
 			 * Determine if the vertical scrollbar is on the right or left of the
-			 * scrolling container - needed for rtl languAge layout, although not
+			 * scrolling container - needed for rtl language layout, although not
 			 * all browsers move the scrollbar (Safari).
 			 *  @type boolean
 			 *  @default false
@@ -14253,7 +14253,7 @@
 		 * 
 		 * Each entry in this object is a function and defines which buttons should
 		 * be shown by the pagination rendering method that is used for the table:
-		 * {@link DataTable.ext.renderer.pAgeButton}. The renderer addresses how the
+		 * {@link DataTable.ext.renderer.pageButton}. The renderer addresses how the
 		 * buttons are displayed in the document, while the functions here tell it
 		 * what buttons to display. This is done by returning an array of button
 		 * descriptions (what each button will do).
@@ -14264,17 +14264,17 @@
 		 *
 		 * The functions defined take two parameters:
 		 *
-		 * 1. `{int} pAge` The current pAge index
-		 * 2. `{int} pAges` The number of pAges in the table
+		 * 1. `{int} page` The current page index
+		 * 2. `{int} pages` The number of pages in the table
 		 *
 		 * Each function is expected to return an array where each element of the
 		 * array can be one of:
 		 *
-		 * * `first` - Jump to first pAge when activated
-		 * * `last` - Jump to last pAge when activated
-		 * * `previous` - Show previous pAge when activated
-		 * * `next` - Show next pAge when activated
-		 * * `{int}` - Show pAge of the index given
+		 * * `first` - Jump to first page when activated
+		 * * `last` - Jump to last page when activated
+		 * * `previous` - Show previous page when activated
+		 * * `next` - Show next page when activated
+		 * * `{int}` - Show page of the index given
 		 * * `{array}` - A nested array containing the above elements to add a
 		 *   containing 'DIV' element (might be useful for styling).
 		 *
@@ -14288,16 +14288,16 @@
 		 *  @default {}
 		 *
 		 *  @example
-		 *    // Show previous, next and current pAge buttons only
-		 *    $.fn.dataTableExt.oPagination.current = function ( pAge, pAges ) {
-		 *      return [ 'previous', pAge, 'next' ];
+		 *    // Show previous, next and current page buttons only
+		 *    $.fn.dataTableExt.oPagination.current = function ( page, pages ) {
+		 *      return [ 'previous', page, 'next' ];
 		 *    };
 		 */
-		pAger: {},
+		pager: {},
 	
 	
 		renderer: {
-			pAgeButton: {},
+			pageButton: {},
 			header: {}
 		},
 	
@@ -14368,7 +14368,7 @@
 		     *  1. `{*}` Data from the column cell to be analysed
 		     *  2. `{settings}` DataTables settings object. This can be used to
 		     *     perform context specific type detection - for example detection
-		     *     based on languAge settings such as using a comma for a decimal
+		     *     based on language settings such as using a comma for a decimal
 		     *     place. Generally speaking the options from the settings will not
 		     *     be required
 			 *
@@ -14566,7 +14566,7 @@
 		aoFeatures:   _ext.feature,
 		oApi:         _ext.internal,
 		oStdClasses:  _ext.classes,
-		oPagination:  _ext.pAger
+		oPagination:  _ext.pager
 	} );
 	
 	
@@ -14575,9 +14575,9 @@
 		"sNoFooter": "no-footer",
 	
 		/* Paging buttons */
-		"sPAgeButton": "paginate_button",
-		"sPAgeButtonActive": "current",
-		"sPAgeButtonDisabled": "disabled",
+		"sPageButton": "paginate_button",
+		"sPageButtonActive": "current",
+		"sPageButtonDisabled": "disabled",
 	
 		/* Striping classes */
 		"sStripeOdd": "odd",
@@ -14606,7 +14606,7 @@
 		/* Filtering */
 		"sFilterInput": "",
 	
-		/* PAge length */
+		/* Page length */
 		"sLengthSelect": "",
 	
 		/* Scrolling */
@@ -14634,32 +14634,32 @@
 	} );
 	
 	
-	var extPagination = DataTable.ext.pAger;
+	var extPagination = DataTable.ext.pager;
 	
-	function _numbers ( pAge, pAges ) {
+	function _numbers ( page, pages ) {
 		var
 			numbers = [],
 			buttons = extPagination.numbers_length,
 			half = Math.floor( buttons / 2 ),
 			i = 1;
 	
-		if ( pAges <= buttons ) {
-			numbers = _range( 0, pAges );
+		if ( pages <= buttons ) {
+			numbers = _range( 0, pages );
 		}
-		else if ( pAge <= half ) {
+		else if ( page <= half ) {
 			numbers = _range( 0, buttons-2 );
 			numbers.push( 'ellipsis' );
-			numbers.push( pAges-1 );
+			numbers.push( pages-1 );
 		}
-		else if ( pAge >= pAges - 1 - half ) {
-			numbers = _range( pAges-(buttons-2), pAges );
+		else if ( page >= pages - 1 - half ) {
+			numbers = _range( pages-(buttons-2), pages );
 			numbers.splice( 0, 0, 'ellipsis' ); // no unshift in ie6
 			numbers.splice( 0, 0, 0 );
 		}
 		else {
-			numbers = _range( pAge-half+2, pAge+half-1 );
+			numbers = _range( page-half+2, page+half-1 );
 			numbers.push( 'ellipsis' );
-			numbers.push( pAges-1 );
+			numbers.push( pages-1 );
 			numbers.splice( 0, 0, 'ellipsis' );
 			numbers.splice( 0, 0, 0 );
 		}
@@ -14670,28 +14670,28 @@
 	
 	
 	$.extend( extPagination, {
-		simple: function ( pAge, pAges ) {
+		simple: function ( page, pages ) {
 			return [ 'previous', 'next' ];
 		},
 	
-		full: function ( pAge, pAges ) {
+		full: function ( page, pages ) {
 			return [  'first', 'previous', 'next', 'last' ];
 		},
 	
-		numbers: function ( pAge, pAges ) {
-			return [ _numbers(pAge, pAges) ];
+		numbers: function ( page, pages ) {
+			return [ _numbers(page, pages) ];
 		},
 	
-		simple_numbers: function ( pAge, pAges ) {
-			return [ 'previous', _numbers(pAge, pAges), 'next' ];
+		simple_numbers: function ( page, pages ) {
+			return [ 'previous', _numbers(page, pages), 'next' ];
 		},
 	
-		full_numbers: function ( pAge, pAges ) {
-			return [ 'first', 'previous', _numbers(pAge, pAges), 'next', 'last' ];
+		full_numbers: function ( page, pages ) {
+			return [ 'first', 'previous', _numbers(page, pages), 'next', 'last' ];
 		},
 		
-		first_last_numbers: function (pAge, pAges) {
-	 		return ['first', _numbers(pAge, pAges), 'last'];
+		first_last_numbers: function (page, pages) {
+	 		return ['first', _numbers(page, pages), 'last'];
 	 	},
 	
 		// For testing and plug-ins to use
@@ -14703,18 +14703,18 @@
 	
 	
 	$.extend( true, DataTable.ext.renderer, {
-		pAgeButton: {
-			_: function ( settings, host, idx, buttons, pAge, pAges ) {
+		pageButton: {
+			_: function ( settings, host, idx, buttons, page, pages ) {
 				var classes = settings.oClasses;
-				var lang = settings.oLanguAge.oPaginate;
-				var aria = settings.oLanguAge.oAria.paginate || {};
+				var lang = settings.oLanguage.oPaginate;
+				var aria = settings.oLanguage.oAria.paginate || {};
 				var btnDisplay, btnClass, counter=0;
 	
 				var attach = function( container, buttons ) {
 					var i, ien, node, button, tabIndex;
-					var disabledClass = classes.sPAgeButtonDisabled;
+					var disabledClass = classes.sPageButtonDisabled;
 					var clickHandler = function ( e ) {
-						_fnPAgeChange( settings, e.data.action, true );
+						_fnPageChange( settings, e.data.action, true );
 					};
 	
 					for ( i=0, ien=buttons.length ; i<ien ; i++ ) {
@@ -14738,7 +14738,7 @@
 								case 'first':
 									btnDisplay = lang.sFirst;
 	
-									if ( pAge === 0 ) {
+									if ( page === 0 ) {
 										tabIndex = -1;
 										btnClass += ' ' + disabledClass;
 									}
@@ -14747,7 +14747,7 @@
 								case 'previous':
 									btnDisplay = lang.sPrevious;
 	
-									if ( pAge === 0 ) {
+									if ( page === 0 ) {
 										tabIndex = -1;
 										btnClass += ' ' + disabledClass;
 									}
@@ -14756,7 +14756,7 @@
 								case 'next':
 									btnDisplay = lang.sNext;
 	
-									if ( pAges === 0 || pAge === pAges-1 ) {
+									if ( pages === 0 || page === pages-1 ) {
 										tabIndex = -1;
 										btnClass += ' ' + disabledClass;
 									}
@@ -14765,7 +14765,7 @@
 								case 'last':
 									btnDisplay = lang.sLast;
 	
-									if ( pAges === 0 || pAge === pAges-1 ) {
+									if ( pages === 0 || page === pages-1 ) {
 										tabIndex = -1;
 										btnClass += ' ' + disabledClass;
 									}
@@ -14773,14 +14773,14 @@
 	
 								default:
 									btnDisplay = settings.fnFormatNumber( button + 1 );
-									btnClass = pAge === button ?
-										classes.sPAgeButtonActive : '';
+									btnClass = page === button ?
+										classes.sPageButtonActive : '';
 									break;
 							}
 	
 							if ( btnDisplay !== null ) {
 								node = $('<a>', {
-										'class': classes.sPAgeButton+' '+btnClass,
+										'class': classes.sPageButton+' '+btnClass,
 										'aria-controls': settings.sTableId,
 										'aria-label': aria[ button ],
 										'data-dt-idx': counter,
@@ -14834,7 +14834,7 @@
 		// e.g. Date.parse('55') (but not all, e.g. Date.parse('22')...).
 		function ( d, settings )
 		{
-			var decimal = settings.oLanguAge.sDecimal;
+			var decimal = settings.oLanguage.sDecimal;
 			return _isNumber( d, decimal ) ? 'num'+decimal : null;
 		},
 	
@@ -14854,21 +14854,21 @@
 		// Formatted numbers
 		function ( d, settings )
 		{
-			var decimal = settings.oLanguAge.sDecimal;
+			var decimal = settings.oLanguage.sDecimal;
 			return _isNumber( d, decimal, true ) ? 'num-fmt'+decimal : null;
 		},
 	
 		// HTML numeric
 		function ( d, settings )
 		{
-			var decimal = settings.oLanguAge.sDecimal;
+			var decimal = settings.oLanguage.sDecimal;
 			return _htmlNumeric( d, decimal ) ? 'html-num'+decimal : null;
 		},
 	
 		// HTML numeric, formatted
 		function ( d, settings )
 		{
-			var decimal = settings.oLanguAge.sDecimal;
+			var decimal = settings.oLanguage.sDecimal;
 			return _htmlNumeric( d, decimal, true ) ? 'html-num-fmt'+decimal : null;
 		},
 	
@@ -14939,7 +14939,7 @@
 	
 	
 	// Add the numeric 'deformatting' functions for sorting and search. This is done
-	// in a function to provide an easy ability for the languAge options to add
+	// in a function to provide an easy ability for the language options to add
 	// additional methods if a non-period decimal place is used.
 	function _addNumericSort ( decimalPlace ) {
 		$.each(
@@ -15240,7 +15240,7 @@
 		_fnApplyColumnDefs: _fnApplyColumnDefs,
 		_fnHungarianMap: _fnHungarianMap,
 		_fnCamelToHungarian: _fnCamelToHungarian,
-		_fnLanguAgeCompat: _fnLanguAgeCompat,
+		_fnLanguageCompat: _fnLanguageCompat,
 		_fnBrowserDetect: _fnBrowserDetect,
 		_fnAddData: _fnAddData,
 		_fnAddTr: _fnAddTr,
@@ -15280,7 +15280,7 @@
 		_fnLengthChange: _fnLengthChange,
 		_fnFeatureHtmlLength: _fnFeatureHtmlLength,
 		_fnFeatureHtmlPaginate: _fnFeatureHtmlPaginate,
-		_fnPAgeChange: _fnPAgeChange,
+		_fnPageChange: _fnPageChange,
 		_fnFeatureHtmlProcessing: _fnFeatureHtmlProcessing,
 		_fnProcessingDisplay: _fnProcessingDisplay,
 		_fnFeatureHtmlTable: _fnFeatureHtmlTable,

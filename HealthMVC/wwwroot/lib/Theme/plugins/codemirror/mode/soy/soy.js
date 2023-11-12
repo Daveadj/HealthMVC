@@ -14,7 +14,7 @@
   var paramData = { noEndTag: true, soyState: "param-def" };
   var tags = {
     "alias": { noEndTag: true },
-    "delpackAge": { noEndTag: true },
+    "delpackage": { noEndTag: true },
     "namespace": { noEndTag: true, soyState: "namespace-def" },
     "@attribute": paramData,
     "@attribute?": paramData,
@@ -569,7 +569,7 @@
             state.indent += ((endTag || tag && tag.reduceIndent) && prevTag != "switch" ? 1 : 2) * config.indentUnit;
 
           state.soyState.push("tag");
-          var tAgerror = false;
+          var tagError = false;
           if (tag) {
             if (!endTag) {
               if (tag.soyState) state.soyState.push(tag.soyState);
@@ -581,7 +581,7 @@
             } else if (endTag) {
               var isBalancedForExtern = tagName == 'extern' && (state.context && state.context.tag == 'export');
               if (!state.context || ((state.context.tag != tagName) && !isBalancedForExtern)) {
-                tAgerror = true;
+                tagError = true;
               } else if (state.context) {
                 if (state.context.kind) {
                   state.localStates.pop();
@@ -595,9 +595,9 @@
             }
           } else if (endTag) {
             // Assume all tags with a closing tag are defined in the config.
-            tAgerror = true;
+            tagError = true;
           }
-          return (tAgerror ? "error " : "") + "keyword";
+          return (tagError ? "error " : "") + "keyword";
 
         // Not a tag-keyword; it's an implicit print tag.
         } else if (stream.eat('{')) {

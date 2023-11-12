@@ -15,7 +15,7 @@ var FullCalendar = (function (exports) {
     THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
     REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
     AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-    INDIRECT, OR CONSEQUENTIAL DAMAgeS OR ANY DAMAgeS WHATSOEVER RESULTING FROM
+    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
     LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
     OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
     PERFORMANCE OF THIS SOFTWARE.
@@ -351,7 +351,7 @@ var FullCalendar = (function (exports) {
             onKeyDown: function (ev) {
                 if (ev.key === 'Enter' || ev.key === ' ') {
                     handler(ev);
-                    ev.preventDefault(); // if space, don't scroll down pAge
+                    ev.preventDefault(); // if space, don't scroll down page
                 }
             },
         };
@@ -637,7 +637,7 @@ var FullCalendar = (function (exports) {
     }
     function arrayToUtcDate(a) {
         // according to web standards (and Safari), a month index is required.
-        // massAge if only given a year.
+        // massage if only given a year.
         if (a.length === 1) {
             a = a.concat([0]);
         }
@@ -981,7 +981,7 @@ var FullCalendar = (function (exports) {
         };
     }
     // Conversions
-    // "Rough" because they are based on averAge-case Gregorian months/years
+    // "Rough" because they are based on average-case Gregorian months/years
     function asRoughYears(dur) {
         return asRoughDays(dur) / 365;
     }
@@ -1345,7 +1345,7 @@ var FullCalendar = (function (exports) {
         standardDateProps = __assign({}, standardDateProps); // copy
         extendedSettings = __assign({}, extendedSettings); // copy
         sanitizeSettings(standardDateProps, extendedSettings);
-        standardDateProps.timeZone = 'UTC'; // we leverAge the only guaranteed timeZone for our UTC markers
+        standardDateProps.timeZone = 'UTC'; // we leverage the only guaranteed timeZone for our UTC markers
         var normalFormat = new Intl.DateTimeFormat(context.locale.codes, standardDateProps);
         var zeroFormat; // needed?
         if (extendedSettings.omitZeroMinute) {
@@ -1738,7 +1738,7 @@ var FullCalendar = (function (exports) {
         visibleRange: identity,
         titleFormat: identity,
         eventInteractive: Boolean,
-        // only used by list-view, but languAges define the value, so we need it in base options
+        // only used by list-view, but languages define the value, so we need it in base options
         noEventsText: String,
         viewHint: identity,
         navLinkHint: identity,
@@ -2958,10 +2958,10 @@ var FullCalendar = (function (exports) {
         function CalendarApi() {
         }
         CalendarApi.prototype.getCurrentData = function () {
-            return this.currentDataManAger.getCurrentData();
+            return this.currentDataManager.getCurrentData();
         };
         CalendarApi.prototype.dispatch = function (action) {
-            return this.currentDataManAger.dispatch(action);
+            return this.currentDataManager.dispatch(action);
         };
         Object.defineProperty(CalendarApi.prototype, "view", {
             get: function () { return this.getCurrentData().viewApi; } // for public API
@@ -2985,7 +2985,7 @@ var FullCalendar = (function (exports) {
             });
         };
         CalendarApi.prototype.getOption = function (name) {
-            return this.currentDataManAger.currentCalendarOptionsInput[name];
+            return this.currentDataManager.currentCalendarOptionsInput[name];
         };
         CalendarApi.prototype.getAvailableLocaleCodes = function () {
             return Object.keys(this.getCurrentData().availableRawLocales);
@@ -2993,16 +2993,16 @@ var FullCalendar = (function (exports) {
         // Trigger
         // -----------------------------------------------------------------------------------------------------------------
         CalendarApi.prototype.on = function (handlerName, handler) {
-            var currentDataManAger = this.currentDataManAger;
-            if (currentDataManAger.currentCalendarOptionsRefiners[handlerName]) {
-                currentDataManAger.emitter.on(handlerName, handler);
+            var currentDataManager = this.currentDataManager;
+            if (currentDataManager.currentCalendarOptionsRefiners[handlerName]) {
+                currentDataManager.emitter.on(handlerName, handler);
             }
             else {
                 console.warn("Unknown listener name '" + handlerName + "'");
             }
         };
         CalendarApi.prototype.off = function (handlerName, handler) {
-            this.currentDataManAger.emitter.off(handlerName, handler);
+            this.currentDataManager.emitter.off(handlerName, handler);
         };
         // not meant for public use
         CalendarApi.prototype.trigger = function (handlerName) {
@@ -3011,7 +3011,7 @@ var FullCalendar = (function (exports) {
             for (var _i = 1; _i < arguments.length; _i++) {
                 args[_i - 1] = arguments[_i];
             }
-            (_a = this.currentDataManAger.emitter).trigger.apply(_a, __spreadArray([handlerName], args));
+            (_a = this.currentDataManager.emitter).trigger.apply(_a, __spreadArray([handlerName], args));
         };
         // View
         // -----------------------------------------------------------------------------------------------------------------
@@ -4746,10 +4746,10 @@ var FullCalendar = (function (exports) {
     function computeRect(el) {
         var rect = el.getBoundingClientRect();
         return {
-            left: rect.left + window.pAgeXOffset,
-            top: rect.top + window.pAgeYOffset,
-            right: rect.right + window.pAgeXOffset,
-            bottom: rect.bottom + window.pAgeYOffset,
+            left: rect.left + window.pageXOffset,
+            top: rect.top + window.pageYOffset,
+            right: rect.right + window.pageXOffset,
+            bottom: rect.bottom + window.pageYOffset,
         };
     }
     function computeClippedClientRect(el) {
@@ -5023,16 +5023,16 @@ var FullCalendar = (function (exports) {
             return _super !== null && _super.apply(this, arguments) || this;
         }
         WindowScrollController.prototype.getScrollTop = function () {
-            return window.pAgeYOffset;
+            return window.pageYOffset;
         };
         WindowScrollController.prototype.getScrollLeft = function () {
-            return window.pAgeXOffset;
+            return window.pageXOffset;
         };
         WindowScrollController.prototype.setScrollTop = function (n) {
-            window.scroll(window.pAgeXOffset, n);
+            window.scroll(window.pageXOffset, n);
         };
         WindowScrollController.prototype.setScrollLeft = function (n) {
-            window.scroll(n, window.pAgeYOffset);
+            window.scroll(n, window.pageYOffset);
         };
         WindowScrollController.prototype.getScrollWidth = function () {
             return document.documentElement.scrollWidth;
@@ -5290,7 +5290,7 @@ var FullCalendar = (function (exports) {
             eventDefMemberAdders: input.eventDefMemberAdders || [],
             eventSourceRefiners: input.eventSourceRefiners || {},
             isDraggableTransformers: input.isDraggableTransformers || [],
-            eventDragMutationMassAgers: input.eventDragMutationMassAgers || [],
+            eventDragMutationMassagers: input.eventDragMutationMassagers || [],
             eventDefMutationAppliers: input.eventDefMutationAppliers || [],
             dateSelectionTransformers: input.dateSelectionTransformers || [],
             datePointTransforms: input.datePointTransforms || [],
@@ -5328,7 +5328,7 @@ var FullCalendar = (function (exports) {
             eventDefMemberAdders: [],
             eventSourceRefiners: {},
             isDraggableTransformers: [],
-            eventDragMutationMassAgers: [],
+            eventDragMutationMassagers: [],
             eventDefMutationAppliers: [],
             dateSelectionTransformers: [],
             datePointTransforms: [],
@@ -5393,7 +5393,7 @@ var FullCalendar = (function (exports) {
             eventDefMemberAdders: hooks0.eventDefMemberAdders.concat(hooks1.eventDefMemberAdders),
             eventSourceRefiners: __assign(__assign({}, hooks0.eventSourceRefiners), hooks1.eventSourceRefiners),
             isDraggableTransformers: hooks0.isDraggableTransformers.concat(hooks1.isDraggableTransformers),
-            eventDragMutationMassAgers: hooks0.eventDragMutationMassAgers.concat(hooks1.eventDragMutationMassAgers),
+            eventDragMutationMassagers: hooks0.eventDragMutationMassagers.concat(hooks1.eventDragMutationMassagers),
             eventDefMutationAppliers: hooks0.eventDefMutationAppliers.concat(hooks1.eventDefMutationAppliers),
             dateSelectionTransformers: hooks0.dateSelectionTransformers.concat(hooks1.dateSelectionTransformers),
             datePointTransforms: hooks0.datePointTransforms.concat(hooks1.datePointTransforms),
@@ -6258,7 +6258,7 @@ var FullCalendar = (function (exports) {
                 rawEvents: rawEvents,
             });
         }, function (error) {
-            console.warn(error.messAge, error);
+            console.warn(error.message, error);
             if (options.eventSourceFailure) {
                 options.eventSourceFailure.call(calendarApi, error);
             }
@@ -6691,8 +6691,8 @@ var FullCalendar = (function (exports) {
             var requestParams = buildRequestParams$1(meta, arg.range, arg.context);
             requestJson(meta.method, meta.url, requestParams, function (rawEvents, xhr) {
                 success({ rawEvents: rawEvents, xhr: xhr });
-            }, function (errorMessAge, xhr) {
-                failure({ messAge: errorMessAge, xhr: xhr });
+            }, function (errorMessage, xhr) {
+                failure({ message: errorMessage, xhr: xhr });
             });
         },
     };
@@ -7078,8 +7078,8 @@ var FullCalendar = (function (exports) {
 
     // in future refactor, do the redux-style function(state=initial) for initial-state
     // also, whatever is happening in constructor, have it happen in action queue too
-    var CalendarDataManAger = /** @class */ (function () {
-        function CalendarDataManAger(props) {
+    var CalendarDataManager = /** @class */ (function () {
+        function CalendarDataManager(props) {
             var _this = this;
             this.computeOptionsData = memoize(this._computeOptionsData);
             this.computeCurrentViewData = memoize(this._computeCurrentViewData);
@@ -7116,7 +7116,7 @@ var FullCalendar = (function (exports) {
             var currentViewData = this.computeCurrentViewData(currentViewType, optionsData, props.optionOverrides, dynamicOptionOverrides);
             // wire things up
             // TODO: not DRY
-            props.calendarApi.currentDataManAger = this;
+            props.calendarApi.currentDataManager = this;
             this.emitter.setThisContext(props.calendarApi);
             this.emitter.setOptions(currentViewData.options);
             var currentDate = getInitialDate(optionsData.calendarOptions, optionsData.dateEnv);
@@ -7168,7 +7168,7 @@ var FullCalendar = (function (exports) {
             this.updateData();
             this.actionRunner.resume();
         }
-        CalendarDataManAger.prototype.resetOptions = function (optionOverrides, append) {
+        CalendarDataManager.prototype.resetOptions = function (optionOverrides, append) {
             var props = this.props;
             props.optionOverrides = append
                 ? __assign(__assign({}, props.optionOverrides), optionOverrides) : optionOverrides;
@@ -7176,7 +7176,7 @@ var FullCalendar = (function (exports) {
                 type: 'NOTHING',
             });
         };
-        CalendarDataManAger.prototype._handleAction = function (action) {
+        CalendarDataManager.prototype._handleAction = function (action) {
             var _a = this, props = _a.props, state = _a.state, emitter = _a.emitter;
             var dynamicOptionOverrides = reduceDynamicOptionOverrides(state.dynamicOptionOverrides, action);
             var optionsData = this.computeOptionsData(props.optionOverrides, dynamicOptionOverrides, props.calendarApi);
@@ -7184,7 +7184,7 @@ var FullCalendar = (function (exports) {
             var currentViewData = this.computeCurrentViewData(currentViewType, optionsData, props.optionOverrides, dynamicOptionOverrides);
             // wire things up
             // TODO: not DRY
-            props.calendarApi.currentDataManAger = this;
+            props.calendarApi.currentDataManager = this;
             emitter.setThisContext(props.calendarApi);
             emitter.setOptions(currentViewData.options);
             var calendarContext = {
@@ -7251,7 +7251,7 @@ var FullCalendar = (function (exports) {
                 props.onAction(action);
             }
         };
-        CalendarDataManAger.prototype.updateData = function () {
+        CalendarDataManager.prototype.updateData = function () {
             var _a = this, props = _a.props, state = _a.state;
             var oldData = this.data;
             var optionsData = this.computeOptionsData(props.optionOverrides, state.dynamicOptionOverrides, props.calendarApi);
@@ -7276,7 +7276,7 @@ var FullCalendar = (function (exports) {
                 props.onData(data);
             }
         };
-        CalendarDataManAger.prototype._computeOptionsData = function (optionOverrides, dynamicOptionOverrides, calendarApi) {
+        CalendarDataManager.prototype._computeOptionsData = function (optionOverrides, dynamicOptionOverrides, calendarApi) {
             // TODO: blacklist options that are handled by optionChangeHandlers
             var _a = this.processRawCalendarOptions(optionOverrides, dynamicOptionOverrides), refinedOptions = _a.refinedOptions, pluginHooks = _a.pluginHooks, localeDefaults = _a.localeDefaults, availableLocaleData = _a.availableLocaleData, extra = _a.extra;
             warnUnknownOptions(extra);
@@ -7296,7 +7296,7 @@ var FullCalendar = (function (exports) {
             };
         };
         // always called from behind a memoizer
-        CalendarDataManAger.prototype.processRawCalendarOptions = function (optionOverrides, dynamicOptionOverrides) {
+        CalendarDataManager.prototype.processRawCalendarOptions = function (optionOverrides, dynamicOptionOverrides) {
             var _a = mergeRawOptions([
                 BASE_OPTION_DEFAULTS,
                 optionOverrides,
@@ -7348,7 +7348,7 @@ var FullCalendar = (function (exports) {
                 extra: extra,
             };
         };
-        CalendarDataManAger.prototype._computeCurrentViewData = function (viewType, optionsData, optionOverrides, dynamicOptionOverrides) {
+        CalendarDataManager.prototype._computeCurrentViewData = function (viewType, optionsData, optionOverrides, dynamicOptionOverrides) {
             var viewSpec = optionsData.viewSpecs[viewType];
             if (!viewSpec) {
                 throw new Error("viewType \"" + viewType + "\" is not available. Please make sure you've loaded all neccessary plugins");
@@ -7379,7 +7379,7 @@ var FullCalendar = (function (exports) {
             var viewApi = this.buildViewApi(viewType, this.getCurrentData, optionsData.dateEnv);
             return { viewSpec: viewSpec, options: refinedOptions, dateProfileGenerator: dateProfileGenerator, viewApi: viewApi };
         };
-        CalendarDataManAger.prototype.processRawViewOptions = function (viewSpec, pluginHooks, localeDefaults, optionOverrides, dynamicOptionOverrides) {
+        CalendarDataManager.prototype.processRawViewOptions = function (viewSpec, pluginHooks, localeDefaults, optionOverrides, dynamicOptionOverrides) {
             var raw = mergeRawOptions([
                 BASE_OPTION_DEFAULTS,
                 viewSpec.optionDefaults,
@@ -7423,7 +7423,7 @@ var FullCalendar = (function (exports) {
                 extra: extra,
             };
         };
-        return CalendarDataManAger;
+        return CalendarDataManager;
     }());
     function buildDateEnv(timeZone, explicitLocale, weekNumberCalculation, firstDay, weekText, pluginHooks, availableLocaleData, defaultSeparator) {
         var locale = buildLocale(explicitLocale || availableLocaleData.defaultCode, availableLocaleData.map);
@@ -7512,7 +7512,7 @@ var FullCalendar = (function (exports) {
         function CalendarDataProvider(props) {
             var _this = _super.call(this, props) || this;
             _this.handleData = function (data) {
-                if (!_this.dataManAger) { // still within initial run, before assignment in constructor
+                if (!_this.dataManager) { // still within initial run, before assignment in constructor
                     // eslint-disable-next-line react/no-direct-mutation-state
                     _this.state = data; // can't use setState yet
                 }
@@ -7520,7 +7520,7 @@ var FullCalendar = (function (exports) {
                     _this.setState(data);
                 }
             };
-            _this.dataManAger = new CalendarDataManAger({
+            _this.dataManager = new CalendarDataManager({
                 optionOverrides: props.optionOverrides,
                 calendarApi: props.calendarApi,
                 onData: _this.handleData,
@@ -7533,7 +7533,7 @@ var FullCalendar = (function (exports) {
         CalendarDataProvider.prototype.componentDidUpdate = function (prevProps) {
             var newOptionOverrides = this.props.optionOverrides;
             if (newOptionOverrides !== prevProps.optionOverrides) { // prevent recursive handleData
-                this.dataManAger.resetOptions(newOptionOverrides);
+                this.dataManager.resetOptions(newOptionOverrides);
             }
         };
         return CalendarDataProvider;
@@ -7830,7 +7830,7 @@ var FullCalendar = (function (exports) {
     - dragstart
     - dragmove
     - pointerup
-    - drAgend
+    - dragend
     */
     var ElementDragging = /** @class */ (function () {
         function ElementDragging(el, selector) {
@@ -9081,7 +9081,7 @@ var FullCalendar = (function (exports) {
             return refCallback;
         };
         // TODO: check callers that don't care about order. should use getAll instead
-        // NOTE: this method has become less valuable now that we are encourAged to map order by some other index
+        // NOTE: this method has become less valuable now that we are encouraged to map order by some other index
         // TODO: provide ONE array-export function, buildArray, which fails on non-numeric indexes. caller can manipulate and "collect"
         RefMap.prototype.collect = function (startIndex, endIndex, step) {
             return collectFromHash(this.currentMap, startIndex, endIndex, step);
@@ -9842,7 +9842,7 @@ var FullCalendar = (function (exports) {
             };
             _this.el = el;
             _this.renderRunner = new DelayedRunner(_this.handleRenderRequest);
-            new CalendarDataManAger({
+            new CalendarDataManager({
                 optionOverrides: optionOverrides,
                 calendarApi: _this,
                 onAction: _this.handleAction,
@@ -9891,7 +9891,7 @@ var FullCalendar = (function (exports) {
             this.renderRunner.resume('pauseRendering', true);
         };
         Calendar.prototype.resetOptions = function (optionOverrides, append) {
-            this.currentDataManAger.resetOptions(optionOverrides, append);
+            this.currentDataManager.resetOptions(optionOverrides, append);
         };
         Calendar.prototype.setClassNames = function (classNames) {
             if (!isArraysEqual(classNames, this.currentClassNames)) {
@@ -9985,7 +9985,7 @@ var FullCalendar = (function (exports) {
                     }
                     targetEl.addEventListener('touchend', _this.handleTouchEnd);
                     targetEl.addEventListener('touchcancel', _this.handleTouchEnd); // treat it as a touch end
-                    // attach a handler to get called when ANY scroll action happens on the pAge.
+                    // attach a handler to get called when ANY scroll action happens on the page.
                     // this was impossible to do with normal on/off because 'scroll' doesn't bubble.
                     // http://stackoverflow.com/a/32954565/96342
                     window.addEventListener('scroll', _this.handleTouchScroll, true);
@@ -10014,16 +10014,16 @@ var FullCalendar = (function (exports) {
             };
             this.handleScroll = function (ev) {
                 if (!_this.shouldIgnoreMove) {
-                    var pAgeX = (window.pAgeXOffset - _this.prevScrollX) + _this.prevPAgeX;
-                    var pAgeY = (window.pAgeYOffset - _this.prevScrollY) + _this.prevPAgeY;
+                    var pageX = (window.pageXOffset - _this.prevScrollX) + _this.prevPageX;
+                    var pageY = (window.pageYOffset - _this.prevScrollY) + _this.prevPageY;
                     _this.emitter.trigger('pointermove', {
                         origEvent: ev,
                         isTouch: _this.isTouchDragging,
                         subjectEl: _this.subjectEl,
-                        pAgeX: pAgeX,
-                        pAgeY: pAgeY,
-                        deltaX: pAgeX - _this.origPAgeX,
-                        deltaY: pAgeY - _this.origPAgeY,
+                        pageX: pageX,
+                        pageY: pageY,
+                        deltaX: pageX - _this.origPageX,
+                        deltaY: pageY - _this.origPageY,
                     });
                 }
             };
@@ -10082,10 +10082,10 @@ var FullCalendar = (function (exports) {
         };
         PointerDragging.prototype.recordCoords = function (ev) {
             if (this.shouldWatchScroll) {
-                this.prevPAgeX = ev.pAgeX;
-                this.prevPAgeY = ev.pAgeY;
-                this.prevScrollX = window.pAgeXOffset;
-                this.prevScrollY = window.pAgeYOffset;
+                this.prevPageX = ev.pageX;
+                this.prevPageY = ev.pageY;
+                this.prevScrollX = window.pageXOffset;
+                this.prevScrollY = window.pageYOffset;
             }
         };
         PointerDragging.prototype.destroyScrollWatch = function () {
@@ -10100,54 +10100,54 @@ var FullCalendar = (function (exports) {
             var deltaY = 0;
             // TODO: repeat code
             if (isFirst) {
-                this.origPAgeX = ev.pAgeX;
-                this.origPAgeY = ev.pAgeY;
+                this.origPageX = ev.pageX;
+                this.origPageY = ev.pageY;
             }
             else {
-                deltaX = ev.pAgeX - this.origPAgeX;
-                deltaY = ev.pAgeY - this.origPAgeY;
+                deltaX = ev.pageX - this.origPageX;
+                deltaY = ev.pageY - this.origPageY;
             }
             return {
                 origEvent: ev,
                 isTouch: false,
                 subjectEl: this.subjectEl,
-                pAgeX: ev.pAgeX,
-                pAgeY: ev.pAgeY,
+                pageX: ev.pageX,
+                pageY: ev.pageY,
                 deltaX: deltaX,
                 deltaY: deltaY,
             };
         };
         PointerDragging.prototype.createEventFromTouch = function (ev, isFirst) {
             var touches = ev.touches;
-            var pAgeX;
-            var pAgeY;
+            var pageX;
+            var pageY;
             var deltaX = 0;
             var deltaY = 0;
             // if touch coords available, prefer,
-            // because FF would give bad ev.pAgeX ev.pAgeY
+            // because FF would give bad ev.pageX ev.pageY
             if (touches && touches.length) {
-                pAgeX = touches[0].pAgeX;
-                pAgeY = touches[0].pAgeY;
+                pageX = touches[0].pageX;
+                pageY = touches[0].pageY;
             }
             else {
-                pAgeX = ev.pAgeX;
-                pAgeY = ev.pAgeY;
+                pageX = ev.pageX;
+                pageY = ev.pageY;
             }
             // TODO: repeat code
             if (isFirst) {
-                this.origPAgeX = pAgeX;
-                this.origPAgeY = pAgeY;
+                this.origPageX = pageX;
+                this.origPageY = pageY;
             }
             else {
-                deltaX = pAgeX - this.origPAgeX;
-                deltaY = pAgeY - this.origPAgeY;
+                deltaX = pageX - this.origPageX;
+                deltaY = pageY - this.origPageY;
             }
             return {
                 origEvent: ev,
                 isTouch: true,
                 subjectEl: this.subjectEl,
-                pAgeX: pAgeX,
-                pAgeY: pAgeY,
+                pageX: pageX,
+                pageY: pageY,
                 deltaX: deltaX,
                 deltaY: deltaY,
             };
@@ -10202,18 +10202,18 @@ var FullCalendar = (function (exports) {
             this.zIndex = 9999;
             this.revertDuration = 0;
         }
-        ElementMirror.prototype.start = function (sourceEl, pAgeX, pAgeY) {
+        ElementMirror.prototype.start = function (sourceEl, pageX, pageY) {
             this.sourceEl = sourceEl;
             this.sourceElRect = this.sourceEl.getBoundingClientRect();
-            this.origScreenX = pAgeX - window.pAgeXOffset;
-            this.origScreenY = pAgeY - window.pAgeYOffset;
+            this.origScreenX = pageX - window.pageXOffset;
+            this.origScreenY = pageY - window.pageYOffset;
             this.deltaX = 0;
             this.deltaY = 0;
             this.updateElPosition();
         };
-        ElementMirror.prototype.handleMove = function (pAgeX, pAgeY) {
-            this.deltaX = (pAgeX - window.pAgeXOffset) - this.origScreenX;
-            this.deltaY = (pAgeY - window.pAgeYOffset) - this.origScreenY;
+        ElementMirror.prototype.handleMove = function (pageX, pageY) {
+            this.deltaX = (pageX - window.pageXOffset) - this.origScreenX;
+            this.deltaY = (pageY - window.pageYOffset) - this.origScreenY;
             this.updateElPosition();
         };
         // can be called before start
@@ -10455,7 +10455,7 @@ var FullCalendar = (function (exports) {
             this.everMovedRight = false;
             this.animate = function () {
                 if (_this.isAnimating) { // wasn't cancelled between animation calls
-                    var edge = _this.computeBestEdge(_this.pointerScreenX + window.pAgeXOffset, _this.pointerScreenY + window.pAgeYOffset);
+                    var edge = _this.computeBestEdge(_this.pointerScreenX + window.pageXOffset, _this.pointerScreenY + window.pageYOffset);
                     if (edge) {
                         var now = getTime();
                         _this.handleSide(edge, (now - _this.msSinceRequest) / 1000);
@@ -10467,7 +10467,7 @@ var FullCalendar = (function (exports) {
                 }
             };
         }
-        AutoScroller.prototype.start = function (pAgeX, pAgeY, scrollStartEl) {
+        AutoScroller.prototype.start = function (pageX, pageY, scrollStartEl) {
             if (this.isEnabled) {
                 this.scrollCaches = this.buildCaches(scrollStartEl);
                 this.pointerScreenX = null;
@@ -10476,13 +10476,13 @@ var FullCalendar = (function (exports) {
                 this.everMovedDown = false;
                 this.everMovedLeft = false;
                 this.everMovedRight = false;
-                this.handleMove(pAgeX, pAgeY);
+                this.handleMove(pageX, pageY);
             }
         };
-        AutoScroller.prototype.handleMove = function (pAgeX, pAgeY) {
+        AutoScroller.prototype.handleMove = function (pageX, pageY) {
             if (this.isEnabled) {
-                var pointerScreenX = pAgeX - window.pAgeXOffset;
-                var pointerScreenY = pAgeY - window.pAgeYOffset;
+                var pointerScreenX = pageX - window.pageXOffset;
+                var pointerScreenY = pageY - window.pageYOffset;
                 var yDelta = this.pointerScreenY === null ? 0 : pointerScreenY - this.pointerScreenY;
                 var xDelta = this.pointerScreenX === null ? 0 : pointerScreenX - this.pointerScreenX;
                 if (yDelta < 0) {
@@ -10637,9 +10637,9 @@ var FullCalendar = (function (exports) {
                     _this.emitter.trigger('pointerdown', ev);
                     if (_this.isInteracting && // not destroyed via pointerdown handler
                         !_this.pointer.shouldIgnoreMove) {
-                        // actions related to initiating dragstart+dragmove+drAgend...
+                        // actions related to initiating dragstart+dragmove+dragend...
                         _this.mirror.setIsVisible(false); // reset. caller must set-visible
-                        _this.mirror.start(ev.subjectEl, ev.pAgeX, ev.pAgeY); // must happen on first pointer down
+                        _this.mirror.start(ev.subjectEl, ev.pageX, ev.pageY); // must happen on first pointer down
                         _this.startDelay(ev);
                         if (!_this.minDistance) {
                             _this.handleDistanceSurpassed(ev);
@@ -10662,8 +10662,8 @@ var FullCalendar = (function (exports) {
                     if (_this.isDragging) {
                         // a real pointer move? (not one simulated by scrolling)
                         if (ev.origEvent.type !== 'scroll') {
-                            _this.mirror.handleMove(ev.pAgeX, ev.pAgeY);
-                            _this.autoScroller.handleMove(ev.pAgeX, ev.pAgeY);
+                            _this.mirror.handleMove(ev.pageX, ev.pageY);
+                            _this.autoScroller.handleMove(ev.pageX, ev.pageY);
                         }
                         _this.emitter.trigger('dragmove', ev);
                     }
@@ -10699,7 +10699,7 @@ var FullCalendar = (function (exports) {
         FeaturefulElementDragging.prototype.destroy = function () {
             this.pointer.destroy();
             // HACK: simulate a pointer-up to end the current drag
-            // TODO: fire 'drAgend' directly and stop interaction. discourAge use of pointerup event (b/c might not fire)
+            // TODO: fire 'dragend' directly and stop interaction. discourage use of pointerup event (b/c might not fire)
             this.onPointerUp({});
         };
         FeaturefulElementDragging.prototype.startDelay = function (ev) {
@@ -10727,7 +10727,7 @@ var FullCalendar = (function (exports) {
                 if (!this.pointer.wasTouchScroll || this.touchScrollAllowed) {
                     this.isDragging = true;
                     this.mirrorNeedsRevert = false;
-                    this.autoScroller.start(ev.pAgeX, ev.pAgeY, this.containerEl);
+                    this.autoScroller.start(ev.pageX, ev.pageY, this.containerEl);
                     this.emitter.trigger('dragstart', ev);
                     if (this.touchScrollAllowed === false) {
                         this.pointer.cancelTouchScroll();
@@ -10742,7 +10742,7 @@ var FullCalendar = (function (exports) {
         };
         FeaturefulElementDragging.prototype.stopDrag = function (ev) {
             this.isDragging = false;
-            this.emitter.trigger('drAgend', ev);
+            this.emitter.trigger('dragend', ev);
         };
         // fill in the implementations...
         FeaturefulElementDragging.prototype.setIgnoreMove = function (bool) {
@@ -10796,8 +10796,8 @@ var FullCalendar = (function (exports) {
             }
             return top;
         };
-        OffsetTracker.prototype.isWithinClipping = function (pAgeX, pAgeY) {
-            var point = { left: pAgeX, top: pAgeY };
+        OffsetTracker.prototype.isWithinClipping = function (pageX, pageY) {
+            var point = { left: pageX, top: pageY };
             for (var _i = 0, _a = this.scrollCaches; _i < _a.length; _i++) {
                 var scrollCache = _a[_i];
                 if (!isIgnoredClipping(scrollCache.getEventTarget()) &&
@@ -10827,7 +10827,7 @@ var FullCalendar = (function (exports) {
     - hitchange - fires initially, even if not over a hit
     - pointerup
     - (hitchange - again, to null, if ended over a hit)
-    - drAgend
+    - dragend
     */
     var HitDragging = /** @class */ (function () {
         function HitDragging(dragging, droppableStore) {
@@ -10866,27 +10866,27 @@ var FullCalendar = (function (exports) {
                 _this.releaseHits();
                 _this.emitter.trigger('pointerup', ev);
             };
-            this.handleDrAgend = function (ev) {
+            this.handleDragEnd = function (ev) {
                 if (_this.movingHit) {
                     _this.emitter.trigger('hitupdate', null, true, ev);
                 }
                 _this.finalHit = _this.movingHit;
                 _this.movingHit = null;
-                _this.emitter.trigger('drAgend', ev);
+                _this.emitter.trigger('dragend', ev);
             };
             this.droppableStore = droppableStore;
             dragging.emitter.on('pointerdown', this.handlePointerDown);
             dragging.emitter.on('dragstart', this.handleDragStart);
             dragging.emitter.on('dragmove', this.handleDragMove);
             dragging.emitter.on('pointerup', this.handlePointerUp);
-            dragging.emitter.on('drAgend', this.handleDrAgend);
+            dragging.emitter.on('dragend', this.handleDragEnd);
             this.dragging = dragging;
             this.emitter = new Emitter();
         }
         // sets initialHit
         // sets coordAdjust
         HitDragging.prototype.processFirstCoord = function (ev) {
-            var origPoint = { left: ev.pAgeX, top: ev.pAgeY };
+            var origPoint = { left: ev.pageX, top: ev.pageY };
             var adjustedPoint = origPoint;
             var subjectEl = ev.subjectEl;
             var subjectRect;
@@ -10909,7 +10909,7 @@ var FullCalendar = (function (exports) {
             }
         };
         HitDragging.prototype.handleMove = function (ev, forceHandle) {
-            var hit = this.queryHitForOffset(ev.pAgeX + this.coordAdjust.left, ev.pAgeY + this.coordAdjust.top);
+            var hit = this.queryHitForOffset(ev.pageX + this.coordAdjust.left, ev.pageY + this.coordAdjust.top);
             if (forceHandle || !isHitsEqual(this.movingHit, hit)) {
                 this.movingHit = hit;
                 this.emitter.trigger('hitupdate', hit, false, ev);
@@ -11006,11 +11006,11 @@ var FullCalendar = (function (exports) {
             _this.handlePointerDown = function (pev) {
                 var dragging = _this.dragging;
                 var downEl = pev.origEvent.target;
-                // do this in pointerdown (not drAgend) because DOM might be mutated by the time drAgend is fired
+                // do this in pointerdown (not dragend) because DOM might be mutated by the time dragend is fired
                 dragging.setIgnoreMove(!_this.component.isValidDateDownEl(downEl));
             };
             // won't even fire if moving was ignored
-            _this.handleDrAgend = function (ev) {
+            _this.handleDragEnd = function (ev) {
                 var component = _this.component;
                 var pointer = _this.dragging.pointer;
                 if (!pointer.wasTouchScroll) {
@@ -11027,7 +11027,7 @@ var FullCalendar = (function (exports) {
             _this.dragging.autoScroller.isEnabled = false;
             var hitDragging = _this.hitDragging = new HitDragging(_this.dragging, interactionSettingsToStore(settings));
             hitDragging.emitter.on('pointerdown', _this.handlePointerDown);
-            hitDragging.emitter.on('drAgend', _this.handleDrAgend);
+            hitDragging.emitter.on('dragend', _this.handleDragEnd);
             return _this;
         }
         DateClicking.prototype.destroy = function () {
@@ -11241,7 +11241,7 @@ var FullCalendar = (function (exports) {
                     var receivingOptions = receivingContext.options;
                     if (initialContext === receivingContext ||
                         (receivingOptions.editable && receivingOptions.droppable)) {
-                        mutation = computeEventMutation(initialHit, hit, receivingContext.getCurrentData().pluginHooks.eventDragMutationMassAgers);
+                        mutation = computeEventMutation(initialHit, hit, receivingContext.getCurrentData().pluginHooks.eventDragMutationMassagers);
                         if (mutation) {
                             mutatedRelevantEvents = applyMutationToEventStore(relevantEvents, receivingContext.getCurrentData().eventUiBases, mutation, receivingContext);
                             interaction.mutatedEvents = mutatedRelevantEvents;
@@ -11281,10 +11281,10 @@ var FullCalendar = (function (exports) {
             };
             _this.handlePointerUp = function () {
                 if (!_this.isDragging) {
-                    _this.cleanup(); // because handleDrAgend won't fire
+                    _this.cleanup(); // because handleDragEnd won't fire
                 }
             };
-            _this.handleDrAgend = function (ev) {
+            _this.handleDragEnd = function (ev) {
                 if (_this.isDragging) {
                     var initialContext_1 = _this.component.context;
                     var initialView = initialContext_1.viewApi;
@@ -11393,7 +11393,7 @@ var FullCalendar = (function (exports) {
             hitDragging.emitter.on('dragstart', _this.handleDragStart);
             hitDragging.emitter.on('hitupdate', _this.handleHitUpdate);
             hitDragging.emitter.on('pointerup', _this.handlePointerUp);
-            hitDragging.emitter.on('drAgend', _this.handleDrAgend);
+            hitDragging.emitter.on('dragend', _this.handleDragEnd);
             return _this;
         }
         EventDragging.prototype.destroy = function () {
@@ -11451,7 +11451,7 @@ var FullCalendar = (function (exports) {
         EventDragging.SELECTOR = '.fc-event-draggable, .fc-event-resizable';
         return EventDragging;
     }(Interaction));
-    function computeEventMutation(hit0, hit1, massAgers) {
+    function computeEventMutation(hit0, hit1, massagers) {
         var dateSpan0 = hit0.dateSpan;
         var dateSpan1 = hit1.dateSpan;
         var date0 = dateSpan0.range.start;
@@ -11476,9 +11476,9 @@ var FullCalendar = (function (exports) {
             datesDelta: delta,
             standardProps: standardProps,
         };
-        for (var _i = 0, massAgers_1 = massAgers; _i < massAgers_1.length; _i++) {
-            var massAger = massAgers_1[_i];
-            massAger(mutation, hit0, hit1);
+        for (var _i = 0, massagers_1 = massagers; _i < massagers_1.length; _i++) {
+            var massager = massagers_1[_i];
+            massager(mutation, hit0, hit1);
         }
         return mutation;
     }
@@ -11581,7 +11581,7 @@ var FullCalendar = (function (exports) {
                     _this.mutatedRelevantEvents = mutatedRelevantEvents;
                 }
             };
-            _this.handleDrAgend = function (ev) {
+            _this.handleDragEnd = function (ev) {
                 var context = _this.component.context;
                 var eventDef = _this.eventRange.def;
                 var eventInstance = _this.eventRange.instance;
@@ -11632,7 +11632,7 @@ var FullCalendar = (function (exports) {
             hitDragging.emitter.on('pointerdown', _this.handlePointerDown);
             hitDragging.emitter.on('dragstart', _this.handleDragStart);
             hitDragging.emitter.on('hitupdate', _this.handleHitUpdate);
-            hitDragging.emitter.on('drAgend', _this.handleDrAgend);
+            hitDragging.emitter.on('dragend', _this.handleDragEnd);
             return _this;
         }
         EventResizing.prototype.destroy = function () {
@@ -11785,7 +11785,7 @@ var FullCalendar = (function (exports) {
                     _this.droppableEvent = droppableEvent;
                 }
             };
-            this.handleDrAgend = function (pev) {
+            this.handleDragEnd = function (pev) {
                 var _a = _this, receivingContext = _a.receivingContext, droppableEvent = _a.droppableEvent;
                 _this.clearDrag();
                 if (receivingContext && droppableEvent) {
@@ -11827,7 +11827,7 @@ var FullCalendar = (function (exports) {
             hitDragging.requireInitial = false; // will start outside of a component
             hitDragging.emitter.on('dragstart', this.handleDragStart);
             hitDragging.emitter.on('hitupdate', this.handleHitUpdate);
-            hitDragging.emitter.on('drAgend', this.handleDrAgend);
+            hitDragging.emitter.on('dragend', this.handleDragEnd);
             this.suppliedDragMeta = suppliedDragMeta;
         }
         ExternalElementDragging.prototype.buildDragMeta = function (subjectEl) {
@@ -11907,7 +11907,7 @@ var FullCalendar = (function (exports) {
     /*
     Makes an element (that is *external* to any calendar) draggable.
     Can pass in data that determines how an event will be created when dropped onto a calendar.
-    LeverAges FullCalendar's internal drag-n-drop functionality WITHOUT a third-party drag system.
+    Leverages FullCalendar's internal drag-n-drop functionality WITHOUT a third-party drag system.
     */
     var ExternalDraggable = /** @class */ (function () {
         function ExternalDraggable(el, settings) {
@@ -11979,8 +11979,8 @@ var FullCalendar = (function (exports) {
             _this.handlePointerUp = function (ev) {
                 _this.emitter.trigger('pointerup', ev);
                 if (!_this.shouldIgnoreMove) {
-                    // fire drAgend right away. does not support a revert animation
-                    _this.emitter.trigger('drAgend', ev);
+                    // fire dragend right away. does not support a revert animation
+                    _this.emitter.trigger('dragend', ev);
                 }
             };
             var pointer = _this.pointer = new PointerDragging(containerEl);
@@ -12063,7 +12063,7 @@ var FullCalendar = (function (exports) {
 
     /* An abstract class for the daygrid views, as well as month view. Renders one or more rows of day cells.
     ----------------------------------------------------------------------------------------------------------------------*/
-    // It is a manAger for a Table subcomponent, which does most of the heavy lifting.
+    // It is a manager for a Table subcomponent, which does most of the heavy lifting.
     // It is responsible for managing width/height.
     var TableView = /** @class */ (function (_super) {
         __extends(TableView, _super);
@@ -13341,21 +13341,21 @@ var FullCalendar = (function (exports) {
             var _a = this, positions = _a.positions, dateProfile = _a.dateProfile;
             var len = positions.els.length;
             // floating-point value of # of slots covered
-            var slatCoverAge = (duration.milliseconds - asRoughMs(dateProfile.slotMinTime)) / asRoughMs(this.slotDuration);
+            var slatCoverage = (duration.milliseconds - asRoughMs(dateProfile.slotMinTime)) / asRoughMs(this.slotDuration);
             var slatIndex;
             var slatRemainder;
             // compute a floating-point number for how many slats should be progressed through.
             // from 0 to number of slats (inclusive)
             // constrained because slotMinTime/slotMaxTime might be customized.
-            slatCoverAge = Math.max(0, slatCoverAge);
-            slatCoverAge = Math.min(len, slatCoverAge);
+            slatCoverage = Math.max(0, slatCoverage);
+            slatCoverage = Math.min(len, slatCoverage);
             // an integer index of the furthest whole slat
             // from 0 to number slats (*exclusive*, so len-1)
-            slatIndex = Math.floor(slatCoverAge);
+            slatIndex = Math.floor(slatCoverage);
             slatIndex = Math.min(slatIndex, len - 1);
             // how much further through the slatIndex slat (from 0.0-1.0) must be covered in addition.
-            // could be 1.0 if slatCoverAge is covering *all* the slots
-            slatRemainder = slatCoverAge - slatIndex;
+            // could be 1.0 if slatCoverage is covering *all* the slots
+            slatRemainder = slatCoverage - slatIndex;
             return positions.tops[slatIndex] +
                 positions.getHeight(slatIndex) * slatRemainder;
         };
@@ -14356,9 +14356,9 @@ var FullCalendar = (function (exports) {
             return (createElement(ViewRoot, { viewSpec: context.viewSpec, elRef: this.setRootEl }, function (rootElRef, classNames) { return (createElement("div", { ref: rootElRef, className: extraClassNames.concat(classNames).join(' ') },
                 createElement(Scroller, { liquid: !props.isHeightAuto, overflowX: props.isHeightAuto ? 'visible' : 'hidden', overflowY: props.isHeightAuto ? 'visible' : 'auto' }, eventSegs.length > 0 ?
                     _this.renderSegList(eventSegs, dayDates) :
-                    _this.renderEmptyMessAge()))); }));
+                    _this.renderEmptyMessage()))); }));
         };
-        ListView.prototype.renderEmptyMessAge = function () {
+        ListView.prototype.renderEmptyMessage = function () {
             var _a = this.context, options = _a.options, viewApi = _a.viewApi;
             var hookProps = {
                 text: options.noEventsText,
@@ -14562,7 +14562,7 @@ var FullCalendar = (function (exports) {
         },
     });
 
-    // rename this file to options.ts like other packAges?
+    // rename this file to options.ts like other packages?
     var OPTION_REFINERS = {
         googleCalendarApiKey: String,
     };
@@ -14598,7 +14598,7 @@ var FullCalendar = (function (exports) {
             var apiKey = meta.googleCalendarApiKey || options.googleCalendarApiKey;
             if (!apiKey) {
                 onFailure({
-                    messAge: 'Specify a googleCalendarApiKey. See http://fullcalendar.io/docs/google_calendar/',
+                    message: 'Specify a googleCalendarApiKey. See http://fullcalendar.io/docs/google_calendar/',
                 });
             }
             else {
@@ -14610,7 +14610,7 @@ var FullCalendar = (function (exports) {
                 requestJson('GET', url, requestParams_1, function (body, xhr) {
                     if (body.error) {
                         onFailure({
-                            messAge: 'Google Calendar API: ' + body.error.messAge,
+                            message: 'Google Calendar API: ' + body.error.message,
                             errors: body.error.errors,
                             xhr: xhr,
                         });
@@ -14621,8 +14621,8 @@ var FullCalendar = (function (exports) {
                             xhr: xhr,
                         });
                     }
-                }, function (messAge, xhr) {
-                    onFailure({ messAge: messAge, xhr: xhr });
+                }, function (message, xhr) {
+                    onFailure({ message: message, xhr: xhr });
                 });
             }
         },
@@ -14712,7 +14712,7 @@ var FullCalendar = (function (exports) {
     exports.Calendar = Calendar;
     exports.CalendarApi = CalendarApi;
     exports.CalendarContent = CalendarContent;
-    exports.CalendarDataManAger = CalendarDataManAger;
+    exports.CalendarDataManager = CalendarDataManager;
     exports.CalendarDataProvider = CalendarDataProvider;
     exports.CalendarRoot = CalendarRoot;
     exports.Component = Component;

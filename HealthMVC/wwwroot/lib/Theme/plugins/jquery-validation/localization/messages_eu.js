@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: EU (Basque; euskara, euskera)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "Eremu hau beharrezkoa da.",
 	remote: "Mesedez, bete eremu hau.",
 	email: "Mesedez, idatzi baliozko posta helbide bat.",

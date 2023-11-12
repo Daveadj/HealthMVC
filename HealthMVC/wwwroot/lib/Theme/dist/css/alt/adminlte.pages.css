@@ -1,6 +1,6 @@
 /*!
  *   AdminLTE v3.2.0
- *     Only PAges
+ *     Only Pages
  *   Author: Colorlib
  *   Website: AdminLTE.io <https://adminlte.io>
  *   License: Open source - MIT <https://opensource.org/licenses/MIT>
@@ -280,7 +280,7 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   }
 }
 
-.mailbox-messAges > .table {
+.mailbox-messages > .table {
   margin: 0;
 }
 
@@ -312,7 +312,7 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   font-size: 13px;
 }
 
-.mailbox-read-messAge {
+.mailbox-read-message {
   padding: 10px;
 }
 
@@ -407,7 +407,7 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   width: 290px;
 }
 
-.lockscreen-imAge {
+.lockscreen-image {
   border-radius: 50%;
   background-color: #fff;
   left: -10px;
@@ -417,7 +417,7 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   z-index: 10;
 }
 
-.lockscreen-imAge > img {
+.lockscreen-image > img {
   border-radius: 50%;
   height: 70px;
   width: 70px;
@@ -453,7 +453,7 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   background-color: #343a40;
 }
 
-.dark-mode .lockscreen-imAge {
+.dark-mode .lockscreen-image {
   background-color: #6c757d;
 }
 
@@ -470,8 +470,8 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   color: #495057;
 }
 
-.login-pAge,
-.register-pAge {
+.login-page,
+.register-page {
   -ms-flex-align: center;
   align-items: center;
   background-color: #e9ecef;
@@ -582,48 +582,48 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   color: #fff;
 }
 
-.error-pAge {
+.error-page {
   margin: 20px auto 0;
   width: 600px;
 }
 
 @media (max-width: 767.98px) {
-  .error-pAge {
+  .error-page {
     width: 100%;
   }
 }
 
-.error-pAge > .headline {
+.error-page > .headline {
   float: left;
   font-size: 100px;
   font-weight: 300;
 }
 
 @media (max-width: 767.98px) {
-  .error-pAge > .headline {
+  .error-page > .headline {
     float: none;
     text-align: center;
   }
 }
 
-.error-pAge > .error-content {
+.error-page > .error-content {
   display: block;
   margin-left: 190px;
 }
 
 @media (max-width: 767.98px) {
-  .error-pAge > .error-content {
+  .error-page > .error-content {
     margin-left: 0;
   }
 }
 
-.error-pAge > .error-content > h3 {
+.error-page > .error-content > h3 {
   font-size: 25px;
   font-weight: 300;
 }
 
 @media (max-width: 767.98px) {
-  .error-pAge > .error-content > h3 {
+  .error-page > .error-content > h3 {
     text-align: center;
   }
 }
@@ -681,13 +681,13 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   border-color: #6c757d;
 }
 
-.product-imAge {
+.product-image {
   max-width: 100%;
   height: auto;
   width: 100%;
 }
 
-.product-imAge-thumbs {
+.product-image-thumbs {
   -ms-flex-align: stretch;
   align-items: stretch;
   display: -ms-flexbox;
@@ -695,7 +695,7 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   margin-top: 2rem;
 }
 
-.product-imAge-thumb {
+.product-image-thumb {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
   border-radius: 0.25rem;
   background-color: #fff;
@@ -707,14 +707,14 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   padding: 0.5rem;
 }
 
-.product-imAge-thumb img {
+.product-image-thumb img {
   max-width: 100%;
   height: auto;
   -ms-flex-item-align: center;
   align-self: center;
 }
 
-.product-imAge-thumb:hover {
+.product-image-thumb:hover {
   opacity: .5;
 }
 
@@ -957,4 +957,4 @@ body.iframe-mode-fullscreen .content-wrapper.iframe-mode {
   padding-left: 0;
   padding-right: 0;
 }
-/*# sourceMappingURL=adminlte.pAges.css.map */
+/*# sourceMappingURL=adminlte.pages.css.map */

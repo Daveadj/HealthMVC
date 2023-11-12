@@ -4,17 +4,17 @@
         grid: {
             noDataContent: "Данных не найдено",
             deleteConfirm: "Вы действительно хотите удалить запись?",
-            pAgerFormat: "Страницы: {first} {prev} {pAges} {next} {last} &nbsp;&nbsp; {pAgeIndex} из {pAgeCount}",
-            pAgePrevText: "<",
-            pAgeNextText: ">",
-            pAgeFirstText: "<<",
-            pAgeLastText: ">>",
-            loadMessAge: "Пожалуйста, подождите...",
-            invalidMessAge: "Введены неверные данные!"
+            pagerFormat: "Страницы: {first} {prev} {pages} {next} {last} &nbsp;&nbsp; {pageIndex} из {pageCount}",
+            pagePrevText: "<",
+            pageNextText: ">",
+            pageFirstText: "<<",
+            pageLastText: ">>",
+            loadMessage: "Пожалуйста, подождите...",
+            invalidMessage: "Введены неверные данные!"
         },
 
         loadIndicator: {
-            messAge: "Загрузка..."
+            message: "Загрузка..."
         },
 
         fields: {
@@ -32,14 +32,14 @@
         },
 
         validators: {
-            required: { messAge: "Поле обязательно для заполения" },
-            rangeLength: { messAge: "Длинна введенного значения вне допустимого диапазона" },
-            minLength: { messAge: "Введенное значение слишком короткое" },
-            maxLength: { messAge: "Введенное значение слишком длинное" },
-            pattern: { messAge: "Введенное значение не соответствует заданному шаблону" },
-            range: { messAge: "Введенное значение вне допустимого диапазона" },
-            min: { messAge: "Введенное значение слишком маленькое" },
-            max: { messAge: "Введенное значение слишком большое" }
+            required: { message: "Поле обязательно для заполения" },
+            rangeLength: { message: "Длинна введенного значения вне допустимого диапазона" },
+            minLength: { message: "Введенное значение слишком короткое" },
+            maxLength: { message: "Введенное значение слишком длинное" },
+            pattern: { message: "Введенное значение не соответствует заданному шаблону" },
+            range: { message: "Введенное значение вне допустимого диапазона" },
+            min: { message: "Введенное значение слишком маленькое" },
+            max: { message: "Введенное значение слишком большое" }
         }
     };
 

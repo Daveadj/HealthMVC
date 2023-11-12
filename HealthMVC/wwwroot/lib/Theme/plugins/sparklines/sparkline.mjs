@@ -171,7 +171,7 @@ Sparkline.options = {
   maxLine: false,
   bottomLine: false,
   topLine: false,
-  averAgeLine: false
+  averageLine: false
 };
 
 function minmax(a, b, c) {

@@ -40,19 +40,19 @@
   const toArray = nodeList => Array.prototype.slice.call(nodeList);
   /**
    * Standardize console warnings
-   * @param {string | array} messAge
+   * @param {string | array} message
    */
 
-  const warn = messAge => {
-    console.warn("".concat(consolePrefix, " ").concat(typeof messAge === 'object' ? messAge.join(' ') : messAge));
+  const warn = message => {
+    console.warn("".concat(consolePrefix, " ").concat(typeof message === 'object' ? message.join(' ') : message));
   };
   /**
    * Standardize console errors
-   * @param {string} messAge
+   * @param {string} message
    */
 
-  const error = messAge => {
-    console.error("".concat(consolePrefix, " ").concat(messAge));
+  const error = message => {
+    console.error("".concat(consolePrefix, " ").concat(message));
   };
   /**
    * Private global state for `warnOnce`
@@ -60,16 +60,16 @@
    * @private
    */
 
-  const previousWarnOnceMessAges = [];
+  const previousWarnOnceMessages = [];
   /**
    * Show a console warning, but only if it hasn't already been shown
-   * @param {string} messAge
+   * @param {string} message
    */
 
-  const warnOnce = messAge => {
-    if (!previousWarnOnceMessAges.includes(messAge)) {
-      previousWarnOnceMessAges.push(messAge);
-      warn(messAge);
+  const warnOnce = message => {
+    if (!previousWarnOnceMessages.includes(message)) {
+      previousWarnOnceMessages.push(message);
+      warn(message);
     }
   };
   /**
@@ -147,10 +147,10 @@
     loaderHtml: '',
     showLoaderOnConfirm: false,
     showLoaderOnDeny: false,
-    imAgeUrl: undefined,
-    imAgeWidth: undefined,
-    imAgeHeight: undefined,
-    imAgeAlt: '',
+    imageUrl: undefined,
+    imageWidth: undefined,
+    imageHeight: undefined,
+    imageAlt: '',
     timer: undefined,
     timerProgressBar: false,
     width: undefined,
@@ -165,7 +165,7 @@
     inputAttributes: {},
     inputValidator: undefined,
     returnInputValueOnDeny: false,
-    validationMessAge: undefined,
+    validationMessage: undefined,
     grow: false,
     position: 'center',
     progressSteps: [],
@@ -179,7 +179,7 @@
     didDestroy: undefined,
     scrollbarPadding: true
   };
-  const updatableParams = ['allowEscapeKey', 'allowOutsideClick', 'background', 'buttonsStyling', 'cancelButtonAriaLabel', 'cancelButtonColor', 'cancelButtonText', 'closeButtonAriaLabel', 'closeButtonHtml', 'color', 'confirmButtonAriaLabel', 'confirmButtonColor', 'confirmButtonText', 'currentProgressStep', 'customClass', 'denyButtonAriaLabel', 'denyButtonColor', 'denyButtonText', 'didClose', 'didDestroy', 'footer', 'hideClass', 'html', 'icon', 'iconColor', 'iconHtml', 'imAgeAlt', 'imAgeHeight', 'imAgeUrl', 'imAgeWidth', 'preConfirm', 'preDeny', 'progressSteps', 'returnFocus', 'reverseButtons', 'showCancelButton', 'showCloseButton', 'showConfirmButton', 'showDenyButton', 'text', 'title', 'titleText', 'willClose'];
+  const updatableParams = ['allowEscapeKey', 'allowOutsideClick', 'background', 'buttonsStyling', 'cancelButtonAriaLabel', 'cancelButtonColor', 'cancelButtonText', 'closeButtonAriaLabel', 'closeButtonHtml', 'color', 'confirmButtonAriaLabel', 'confirmButtonColor', 'confirmButtonText', 'currentProgressStep', 'customClass', 'denyButtonAriaLabel', 'denyButtonColor', 'denyButtonText', 'didClose', 'didDestroy', 'footer', 'hideClass', 'html', 'icon', 'iconColor', 'iconHtml', 'imageAlt', 'imageHeight', 'imageUrl', 'imageWidth', 'preConfirm', 'preDeny', 'progressSteps', 'returnFocus', 'reverseButtons', 'showCancelButton', 'showCloseButton', 'showConfirmButton', 'showDenyButton', 'text', 'title', 'titleText', 'willClose'];
   const deprecatedParams = {};
   const toastIncompatibleParams = ['allowOutsideClick', 'allowEnterKey', 'backdrop', 'focusConfirm', 'focusDeny', 'focusCancel', 'returnFocus', 'heightAuto', 'keydownListenerCapture'];
   /**
@@ -257,7 +257,7 @@
 
     return result;
   };
-  const swalClasses = prefix(['container', 'shown', 'height-auto', 'iosfix', 'popup', 'modal', 'no-backdrop', 'no-transition', 'toast', 'toast-shown', 'show', 'hide', 'close', 'title', 'html-container', 'actions', 'confirm', 'deny', 'cancel', 'default-outline', 'footer', 'icon', 'icon-content', 'imAge', 'input', 'file', 'range', 'select', 'radio', 'checkbox', 'label', 'textarea', 'inputerror', 'input-label', 'validation-messAge', 'progress-steps', 'active-progress-step', 'progress-step', 'progress-step-line', 'loader', 'loading', 'styled', 'top', 'top-start', 'top-end', 'top-left', 'top-right', 'center', 'center-start', 'center-end', 'center-left', 'center-right', 'bottom', 'bottom-start', 'bottom-end', 'bottom-left', 'bottom-right', 'grow-row', 'grow-column', 'grow-fullscreen', 'rtl', 'timer-progress-bar', 'timer-progress-bar-container', 'scrollbar-measure', 'icon-success', 'icon-warning', 'icon-info', 'icon-question', 'icon-error']);
+  const swalClasses = prefix(['container', 'shown', 'height-auto', 'iosfix', 'popup', 'modal', 'no-backdrop', 'no-transition', 'toast', 'toast-shown', 'show', 'hide', 'close', 'title', 'html-container', 'actions', 'confirm', 'deny', 'cancel', 'default-outline', 'footer', 'icon', 'icon-content', 'image', 'input', 'file', 'range', 'select', 'radio', 'checkbox', 'label', 'textarea', 'inputerror', 'input-label', 'validation-message', 'progress-steps', 'active-progress-step', 'progress-step', 'progress-step-line', 'loader', 'loading', 'styled', 'top', 'top-start', 'top-end', 'top-left', 'top-right', 'center', 'center-start', 'center-end', 'center-left', 'center-right', 'bottom', 'bottom-start', 'bottom-end', 'bottom-left', 'bottom-right', 'grow-row', 'grow-column', 'grow-fullscreen', 'rtl', 'timer-progress-bar', 'timer-progress-bar-container', 'scrollbar-measure', 'icon-success', 'icon-warning', 'icon-info', 'icon-question', 'icon-error']);
   const iconTypes = prefix(['success', 'warning', 'info', 'question', 'error']);
 
   /**
@@ -280,9 +280,9 @@
   const getIcon = () => elementByClass(swalClasses.icon);
   const getTitle = () => elementByClass(swalClasses.title);
   const getHtmlContainer = () => elementByClass(swalClasses['html-container']);
-  const getImAge = () => elementByClass(swalClasses.imAge);
+  const getImage = () => elementByClass(swalClasses.image);
   const getProgressSteps = () => elementByClass(swalClasses['progress-steps']);
-  const getValidationMessAge = () => elementByClass(swalClasses['validation-messAge']);
+  const getValidationMessage = () => elementByClass(swalClasses['validation-message']);
   const getConfirmButton = () => elementBySelector(".".concat(swalClasses.actions, " .").concat(swalClasses.confirm));
   const getDenyButton = () => elementBySelector(".".concat(swalClasses.actions, " .").concat(swalClasses.deny));
   const getInputLabel = () => elementByClass(swalClasses['input-label']);
@@ -608,7 +608,7 @@
     });
   };
 
-  const sweetHTML = "\n <div aria-labelledby=\"".concat(swalClasses.title, "\" aria-describedby=\"").concat(swalClasses['html-container'], "\" class=\"").concat(swalClasses.popup, "\" tabindex=\"-1\">\n   <button type=\"button\" class=\"").concat(swalClasses.close, "\"></button>\n   <ul class=\"").concat(swalClasses['progress-steps'], "\"></ul>\n   <div class=\"").concat(swalClasses.icon, "\"></div>\n   <img class=\"").concat(swalClasses.imAge, "\" />\n   <h2 class=\"").concat(swalClasses.title, "\" id=\"").concat(swalClasses.title, "\"></h2>\n   <div class=\"").concat(swalClasses['html-container'], "\" id=\"").concat(swalClasses['html-container'], "\"></div>\n   <input class=\"").concat(swalClasses.input, "\" />\n   <input type=\"file\" class=\"").concat(swalClasses.file, "\" />\n   <div class=\"").concat(swalClasses.range, "\">\n     <input type=\"range\" />\n     <output></output>\n   </div>\n   <select class=\"").concat(swalClasses.select, "\"></select>\n   <div class=\"").concat(swalClasses.radio, "\"></div>\n   <label for=\"").concat(swalClasses.checkbox, "\" class=\"").concat(swalClasses.checkbox, "\">\n     <input type=\"checkbox\" />\n     <span class=\"").concat(swalClasses.label, "\"></span>\n   </label>\n   <textarea class=\"").concat(swalClasses.textarea, "\"></textarea>\n   <div class=\"").concat(swalClasses['validation-messAge'], "\" id=\"").concat(swalClasses['validation-messAge'], "\"></div>\n   <div class=\"").concat(swalClasses.actions, "\">\n     <div class=\"").concat(swalClasses.loader, "\"></div>\n     <button type=\"button\" class=\"").concat(swalClasses.confirm, "\"></button>\n     <button type=\"button\" class=\"").concat(swalClasses.deny, "\"></button>\n     <button type=\"button\" class=\"").concat(swalClasses.cancel, "\"></button>\n   </div>\n   <div class=\"").concat(swalClasses.footer, "\"></div>\n   <div class=\"").concat(swalClasses['timer-progress-bar-container'], "\">\n     <div class=\"").concat(swalClasses['timer-progress-bar'], "\"></div>\n   </div>\n </div>\n").replace(/(^|\n)\s*/g, '');
+  const sweetHTML = "\n <div aria-labelledby=\"".concat(swalClasses.title, "\" aria-describedby=\"").concat(swalClasses['html-container'], "\" class=\"").concat(swalClasses.popup, "\" tabindex=\"-1\">\n   <button type=\"button\" class=\"").concat(swalClasses.close, "\"></button>\n   <ul class=\"").concat(swalClasses['progress-steps'], "\"></ul>\n   <div class=\"").concat(swalClasses.icon, "\"></div>\n   <img class=\"").concat(swalClasses.image, "\" />\n   <h2 class=\"").concat(swalClasses.title, "\" id=\"").concat(swalClasses.title, "\"></h2>\n   <div class=\"").concat(swalClasses['html-container'], "\" id=\"").concat(swalClasses['html-container'], "\"></div>\n   <input class=\"").concat(swalClasses.input, "\" />\n   <input type=\"file\" class=\"").concat(swalClasses.file, "\" />\n   <div class=\"").concat(swalClasses.range, "\">\n     <input type=\"range\" />\n     <output></output>\n   </div>\n   <select class=\"").concat(swalClasses.select, "\"></select>\n   <div class=\"").concat(swalClasses.radio, "\"></div>\n   <label for=\"").concat(swalClasses.checkbox, "\" class=\"").concat(swalClasses.checkbox, "\">\n     <input type=\"checkbox\" />\n     <span class=\"").concat(swalClasses.label, "\"></span>\n   </label>\n   <textarea class=\"").concat(swalClasses.textarea, "\"></textarea>\n   <div class=\"").concat(swalClasses['validation-message'], "\" id=\"").concat(swalClasses['validation-message'], "\"></div>\n   <div class=\"").concat(swalClasses.actions, "\">\n     <div class=\"").concat(swalClasses.loader, "\"></div>\n     <button type=\"button\" class=\"").concat(swalClasses.confirm, "\"></button>\n     <button type=\"button\" class=\"").concat(swalClasses.deny, "\"></button>\n     <button type=\"button\" class=\"").concat(swalClasses.cancel, "\"></button>\n   </div>\n   <div class=\"").concat(swalClasses.footer, "\"></div>\n   <div class=\"").concat(swalClasses['timer-progress-bar-container'], "\">\n     <div class=\"").concat(swalClasses['timer-progress-bar'], "\"></div>\n   </div>\n </div>\n").replace(/(^|\n)\s*/g, '');
 
   const resetOldContainer = () => {
     const oldContainer = getContainer();
@@ -622,8 +622,8 @@
     return true;
   };
 
-  const resetValidationMessAge = () => {
-    globalState.currentInstance.resetValidationMessAge();
+  const resetValidationMessage = () => {
+    globalState.currentInstance.resetValidationMessage();
   };
 
   const addInputChangeListeners = () => {
@@ -635,19 +635,19 @@
     const select = getDirectChildByClass(popup, swalClasses.select);
     const checkbox = popup.querySelector(".".concat(swalClasses.checkbox, " input"));
     const textarea = getDirectChildByClass(popup, swalClasses.textarea);
-    input.oninput = resetValidationMessAge;
-    file.onchange = resetValidationMessAge;
-    select.onchange = resetValidationMessAge;
-    checkbox.onchange = resetValidationMessAge;
-    textarea.oninput = resetValidationMessAge;
+    input.oninput = resetValidationMessage;
+    file.onchange = resetValidationMessage;
+    select.onchange = resetValidationMessage;
+    checkbox.onchange = resetValidationMessage;
+    textarea.oninput = resetValidationMessage;
 
     range.oninput = () => {
-      resetValidationMessAge();
+      resetValidationMessage();
       rangeOutput.value = range.value;
     };
 
     range.onchange = () => {
-      resetValidationMessAge();
+      resetValidationMessage();
       range.nextSibling.value = range.value;
     };
   };
@@ -903,7 +903,7 @@
    *   https://github.com/tc39/proposal-private-methods
    *   https://github.com/babel/babel/pull/7555
    * Once we have the changes from that PR in Babel, and our core class fits reasonable in *one module*
-   *   then we can use that languAge feature.
+   *   then we can use that language feature.
    */
   var privateProps = {
     awaitingPromise: new WeakMap(),
@@ -1239,23 +1239,23 @@
 
   const iconContent = content => "<div class=\"".concat(swalClasses['icon-content'], "\">").concat(content, "</div>");
 
-  const renderImAge = (instance, params) => {
-    const imAge = getImAge();
+  const renderImage = (instance, params) => {
+    const image = getImage();
 
-    if (!params.imAgeUrl) {
-      return hide(imAge);
+    if (!params.imageUrl) {
+      return hide(image);
     }
 
-    show(imAge, ''); // Src, alt
+    show(image, ''); // Src, alt
 
-    imAge.setAttribute('src', params.imAgeUrl);
-    imAge.setAttribute('alt', params.imAgeAlt); // Width, height
+    image.setAttribute('src', params.imageUrl);
+    image.setAttribute('alt', params.imageAlt); // Width, height
 
-    applyNumericalStyle(imAge, 'width', params.imAgeWidth);
-    applyNumericalStyle(imAge, 'height', params.imAgeHeight); // Class
+    applyNumericalStyle(image, 'width', params.imageWidth);
+    applyNumericalStyle(image, 'height', params.imageHeight); // Class
 
-    imAge.className = swalClasses.imAge;
-    applyCustomClass(imAge, params, 'imAge');
+    image.className = swalClasses.image;
+    applyCustomClass(image, params, 'image');
   };
 
   const createStepElement = step => {
@@ -1346,7 +1346,7 @@
       popup.style.background = params.background;
     }
 
-    hide(getValidationMessAge()); // Classes
+    hide(getValidationMessage()); // Classes
 
     addClasses(popup, params);
   };
@@ -1380,7 +1380,7 @@
     renderContainer(instance, params);
     renderProgressSteps(instance, params);
     renderIcon(instance, params);
-    renderImAge(instance, params);
+    renderImage(instance, params);
     renderTitle(instance, params);
     renderCloseButton(instance, params);
     renderContent(instance, params);
@@ -1442,7 +1442,7 @@
 
     const templateContent = template.content;
     showWarningsForElements(templateContent);
-    const result = Object.assign(getSwalParams(templateContent), getSwalButtons(templateContent), getSwalImAge(templateContent), getSwalIcon(templateContent), getSwalInput(templateContent), getSwalStringParams(templateContent, swalStringParams));
+    const result = Object.assign(getSwalParams(templateContent), getSwalButtons(templateContent), getSwalImage(templateContent), getSwalIcon(templateContent), getSwalInput(templateContent), getSwalStringParams(templateContent, swalStringParams));
     return result;
   };
   /**
@@ -1494,29 +1494,29 @@
    */
 
 
-  const getSwalImAge = templateContent => {
+  const getSwalImage = templateContent => {
     const result = {};
     /** @type {HTMLElement} */
 
-    const imAge = templateContent.querySelector('swal-imAge');
+    const image = templateContent.querySelector('swal-image');
 
-    if (imAge) {
-      showWarningsForAttributes(imAge, ['src', 'width', 'height', 'alt']);
+    if (image) {
+      showWarningsForAttributes(image, ['src', 'width', 'height', 'alt']);
 
-      if (imAge.hasAttribute('src')) {
-        result.imAgeUrl = imAge.getAttribute('src');
+      if (image.hasAttribute('src')) {
+        result.imageUrl = image.getAttribute('src');
       }
 
-      if (imAge.hasAttribute('width')) {
-        result.imAgeWidth = imAge.getAttribute('width');
+      if (image.hasAttribute('width')) {
+        result.imageWidth = image.getAttribute('width');
       }
 
-      if (imAge.hasAttribute('height')) {
-        result.imAgeHeight = imAge.getAttribute('height');
+      if (image.hasAttribute('height')) {
+        result.imageHeight = image.getAttribute('height');
       }
 
-      if (imAge.hasAttribute('alt')) {
-        result.imAgeAlt = imAge.getAttribute('alt');
+      if (image.hasAttribute('alt')) {
+        result.imageAlt = image.getAttribute('alt');
       }
     }
 
@@ -1620,7 +1620,7 @@
 
 
   const showWarningsForElements = templateContent => {
-    const allowedElements = swalStringParams.concat(['swal-param', 'swal-button', 'swal-imAge', 'swal-icon', 'swal-input', 'swal-input-option']);
+    const allowedElements = swalStringParams.concat(['swal-param', 'swal-button', 'swal-image', 'swal-icon', 'swal-input', 'swal-input-option']);
     toArray(templateContent.children).forEach(el => {
       const tagName = el.tagName.toLowerCase();
 
@@ -1644,12 +1644,12 @@
   };
 
   var defaultInputValidators = {
-    email: (string, validationMessAge) => {
-      return /^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9-]{2,24}$/.test(string) ? Promise.resolve() : Promise.resolve(validationMessAge || 'Invalid email address');
+    email: (string, validationMessage) => {
+      return /^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9-]{2,24}$/.test(string) ? Promise.resolve() : Promise.resolve(validationMessage || 'Invalid email address');
     },
-    url: (string, validationMessAge) => {
+    url: (string, validationMessage) => {
       // taken from https://stackoverflow.com/a/3809435 with a small change from #1306 and #2013
-      return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,63}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/.test(string) ? Promise.resolve() : Promise.resolve(validationMessAge || 'Invalid URL');
+      return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,63}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/.test(string) ? Promise.resolve() : Promise.resolve(validationMessage || 'Invalid URL');
     }
   };
 
@@ -1682,7 +1682,7 @@
     setDefaultInputValidators(params); // showLoaderOnConfirm && preConfirm
 
     if (params.showLoaderOnConfirm && !params.preConfirm) {
-      warn('showLoaderOnConfirm is set to true, but preConfirm is not defined.\n' + 'showLoaderOnConfirm should be used together with preConfirm, see usAge example:\n' + 'https://sweetalert2.github.io/#ajax-request');
+      warn('showLoaderOnConfirm is set to true, but preConfirm is not defined.\n' + 'showLoaderOnConfirm should be used together with preConfirm, see usage example:\n' + 'https://sweetalert2.github.io/#ajax-request');
     }
 
     validateCustomTargetElement(params); // Replace newlines with <br> in title
@@ -2230,7 +2230,7 @@
       handleInputValidator(instance, inputValue, type);
     } else if (!instance.getInput().checkValidity()) {
       instance.enableButtons();
-      instance.showValidationMessAge(innerParams.validationMessAge);
+      instance.showValidationMessage(innerParams.validationMessage);
     } else if (type === 'deny') {
       deny(instance, inputValue);
     } else {
@@ -2243,13 +2243,13 @@
   ) => {
     const innerParams = privateProps.innerParams.get(instance);
     instance.disableInput();
-    const validationPromise = Promise.resolve().then(() => asPromise(innerParams.inputValidator(inputValue, innerParams.validationMessAge)));
-    validationPromise.then(validationMessAge => {
+    const validationPromise = Promise.resolve().then(() => asPromise(innerParams.inputValidator(inputValue, innerParams.validationMessage)));
+    validationPromise.then(validationMessage => {
       instance.enableButtons();
       instance.enableInput();
 
-      if (validationMessAge) {
-        instance.showValidationMessAge(validationMessAge);
+      if (validationMessage) {
+        instance.showValidationMessage(validationMessage);
       } else if (type === 'deny') {
         deny(instance, inputValue);
       } else {
@@ -2268,7 +2268,7 @@
     if (innerParams.preDeny) {
       privateProps.awaitingPromise.set(instance || undefined, true); // Flagging the instance as awaiting a promise so it's own promise's reject/resolve methods doesn't get destroyed until the result from this preDeny's promise is received
 
-      const preDenyPromise = Promise.resolve().then(() => asPromise(innerParams.preDeny(value, innerParams.validationMessAge)));
+      const preDenyPromise = Promise.resolve().then(() => asPromise(innerParams.preDeny(value, innerParams.validationMessage)));
       preDenyPromise.then(preDenyValue => {
         if (preDenyValue === false) {
           instance.hideLoading();
@@ -2306,12 +2306,12 @@
     }
 
     if (innerParams.preConfirm) {
-      instance.resetValidationMessAge();
+      instance.resetValidationMessage();
       privateProps.awaitingPromise.set(instance || undefined, true); // Flagging the instance as awaiting a promise so it's own promise's reject/resolve methods doesn't get destroyed until the result from this preConfirm's promise is received
 
-      const preConfirmPromise = Promise.resolve().then(() => asPromise(innerParams.preConfirm(value, innerParams.validationMessAge)));
+      const preConfirmPromise = Promise.resolve().then(() => asPromise(innerParams.preConfirm(value, innerParams.validationMessage)));
       preConfirmPromise.then(preConfirmValue => {
-        if (isVisible(getValidationMessAge()) || preConfirmValue === false) {
+        if (isVisible(getValidationMessage()) || preConfirmValue === false) {
           instance.hideLoading();
         } else {
           succeedWith(instance, typeof preConfirmValue === 'undefined' ? value : preConfirmValue);
@@ -2722,7 +2722,7 @@
     getPopup: getPopup,
     getTitle: getTitle,
     getHtmlContainer: getHtmlContainer,
-    getImAge: getImAge,
+    getImage: getImage,
     getIcon: getIcon,
     getInputLabel: getInputLabel,
     getCloseButton: getCloseButton,
@@ -2734,7 +2734,7 @@
     getFooter: getFooter,
     getTimerProgressBar: getTimerProgressBar,
     getFocusableElements: getFocusableElements,
-    getValidationMessAge: getValidationMessAge,
+    getValidationMessage: getValidationMessage,
     isLoading: isLoading,
     fire: fire,
     mixin: mixin,
@@ -2813,7 +2813,7 @@
    *   https://github.com/tc39/proposal-private-methods
    *   https://github.com/babel/babel/pull/7555
    * Once we have the changes from that PR in Babel, and our core class fits reasonable in *one module*
-   *   then we can use that languAge feature.
+   *   then we can use that language feature.
    */
   var privateMethods = {
     swalPromiseResolve: new WeakMap(),
@@ -3012,32 +3012,32 @@
     return setInputDisabled(this.getInput(), true);
   }
 
-  function showValidationMessAge(error) {
+  function showValidationMessage(error) {
     const domCache = privateProps.domCache.get(this);
     const params = privateProps.innerParams.get(this);
-    setInnerHtml(domCache.validationMessAge, error);
-    domCache.validationMessAge.className = swalClasses['validation-messAge'];
+    setInnerHtml(domCache.validationMessage, error);
+    domCache.validationMessage.className = swalClasses['validation-message'];
 
-    if (params.customClass && params.customClass.validationMessAge) {
-      addClass(domCache.validationMessAge, params.customClass.validationMessAge);
+    if (params.customClass && params.customClass.validationMessage) {
+      addClass(domCache.validationMessage, params.customClass.validationMessage);
     }
 
-    show(domCache.validationMessAge);
+    show(domCache.validationMessage);
     const input = this.getInput();
 
     if (input) {
       input.setAttribute('aria-invalid', true);
-      input.setAttribute('aria-describedby', swalClasses['validation-messAge']);
+      input.setAttribute('aria-describedby', swalClasses['validation-message']);
       focusInput(input);
       addClass(input, swalClasses.inputerror);
     }
-  } // Hide block with validation messAge
+  } // Hide block with validation message
 
-  function resetValidationMessAge$1() {
+  function resetValidationMessage$1() {
     const domCache = privateProps.domCache.get(this);
 
-    if (domCache.validationMessAge) {
-      hide(domCache.validationMessAge);
+    if (domCache.validationMessage) {
+      hide(domCache.validationMessage);
     }
 
     const input = this.getInput();
@@ -3164,8 +3164,8 @@
     disableButtons: disableButtons,
     enableInput: enableInput,
     disableInput: disableInput,
-    showValidationMessAge: showValidationMessAge,
-    resetValidationMessAge: resetValidationMessAge$1,
+    showValidationMessage: showValidationMessage,
+    resetValidationMessage: resetValidationMessage$1,
     getProgressSteps: getProgressSteps$1,
     update: update,
     _destroy: _destroy
@@ -3297,7 +3297,7 @@
       cancelButton: getCancelButton(),
       loader: getLoader(),
       closeButton: getCloseButton(),
-      validationMessAge: getValidationMessAge(),
+      validationMessage: getValidationMessage(),
       progressSteps: getProgressSteps()
     };
     privateProps.domCache.set(instance, domCache);

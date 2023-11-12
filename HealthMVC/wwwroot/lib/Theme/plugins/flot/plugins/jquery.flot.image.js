@@ -1,32 +1,32 @@
-/* Flot plugin for plotting imAges.
+/* Flot plugin for plotting images.
 
 Copyright (c) 2007-2014 IOLA and Ole Laursen.
 Licensed under the MIT license.
 
-The data syntax is [ [ imAge, x1, y1, x2, y2 ], ... ] where (x1, y1) and
-(x2, y2) are where you intend the two opposite corners of the imAge to end up
-in the plot. ImAge must be a fully loaded Javascript imAge (you can make one
-with new ImAge()). If the imAge is not complete, it's skipped when plotting.
+The data syntax is [ [ image, x1, y1, x2, y2 ], ... ] where (x1, y1) and
+(x2, y2) are where you intend the two opposite corners of the image to end up
+in the plot. Image must be a fully loaded Javascript image (you can make one
+with new Image()). If the image is not complete, it's skipped when plotting.
 
-There are two helpers included for retrieving imAges. The easiest work the way
-that you put in URLs instead of imAges in the data, like this:
+There are two helpers included for retrieving images. The easiest work the way
+that you put in URLs instead of images in the data, like this:
 
-    [ "myimAge.png", 0, 0, 10, 10 ]
+    [ "myimage.png", 0, 0, 10, 10 ]
 
-Then call $.plot.imAge.loadData( data, options, callback ) where data and
-options are the same as you pass in to $.plot. This loads the imAges, replaces
-the URLs in the data with the corresponding imAges and calls "callback" when
-all imAges are loaded (or failed loading). In the callback, you can then call
+Then call $.plot.image.loadData( data, options, callback ) where data and
+options are the same as you pass in to $.plot. This loads the images, replaces
+the URLs in the data with the corresponding images and calls "callback" when
+all images are loaded (or failed loading). In the callback, you can then call
 $.plot with the data set. See the included example.
 
-A more low-level helper, $.plot.imAge.load(urls, callback) is also included.
+A more low-level helper, $.plot.image.load(urls, callback) is also included.
 Given a list of URLs, it calls callback with an object mapping from URL to
-ImAge object when all imAges are loaded or have failed loading.
+Image object when all images are loaded or have failed loading.
 
 The plugin supports these options:
 
     series: {
-        imAges: {
+        images: {
             show: boolean
             anchor: "corner" or "center"
             alpha: [ 0, 1 ]
@@ -37,17 +37,17 @@ They can be specified for a specific series:
 
     $.plot( $("#placeholder"), [{
         data: [ ... ],
-        imAges: { ... }
+        images: { ... }
     ])
 
 Note that because the data format is different from usual data points, you
-can't use imAges with anything else in a specific data series.
+can't use images with anything else in a specific data series.
 
-Setting "anchor" to "center" causes the pixels in the imAge to be anchored at
+Setting "anchor" to "center" causes the pixels in the image to be anchored at
 the corner pixel centers inside of at the pixel corners, effectively letting
 half a pixel stick out to each side in the plot.
 
-A possible future direction could be support for tiling for large imAges (like
+A possible future direction could be support for tiling for large images (like
 Google Maps).
 
 */
@@ -55,7 +55,7 @@ Google Maps).
 (function ($) {
     var options = {
         series: {
-            imAges: {
+            images: {
                 show: false,
                 alpha: 1,
                 anchor: "corner" // or "center"
@@ -63,15 +63,15 @@ Google Maps).
         }
     };
 
-    $.plot.imAge = {};
+    $.plot.image = {};
 
-    $.plot.imAge.loadDataImAges = function (series, options, callback) {
+    $.plot.image.loadDataImages = function (series, options, callback) {
         var urls = [], points = [];
 
-        var defaultShow = options.series.imAges.show;
+        var defaultShow = options.series.images.show;
 
         $.each(series, function (i, s) {
-            if (!(defaultShow || s.imAges.show)) {
+            if (!(defaultShow || s.images.show)) {
                 return;
             }
 
@@ -87,11 +87,11 @@ Google Maps).
             });
         });
 
-        $.plot.imAge.load(urls, function (loadedImAges) {
+        $.plot.image.load(urls, function (loadedImages) {
             $.each(points, function (i, p) {
                 var url = p[0];
-                if (loadedImAges[url]) {
-                    p[0] = loadedImAges[url];
+                if (loadedImages[url]) {
+                    p[0] = loadedImages[url];
                 }
             });
 
@@ -99,7 +99,7 @@ Google Maps).
         });
     }
 
-    $.plot.imAge.load = function (urls, callback) {
+    $.plot.image.load = function (urls, callback) {
         var missing = urls.length, loaded = {};
         if (missing === 0) {
             callback({});
@@ -122,7 +122,7 @@ Google Maps).
     function drawSeries(plot, ctx, series) {
         var plotOffset = plot.getPlotOffset();
 
-        if (!series.imAges || !series.imAges.show) {
+        if (!series.images || !series.images.show) {
             return;
         }
 
@@ -155,8 +155,8 @@ Google Maps).
             }
 
             // if the anchor is at the center of the pixel, expand the
-            // imAge by 1/2 pixel in each direction
-            if (series.imAges.anchor === "center") {
+            // image by 1/2 pixel in each direction
+            if (series.images.anchor === "center") {
                 tmp = 0.5 * (x2 - x1) / (img.width - 1);
                 x1 -= tmp;
                 x2 += tmp;
@@ -211,8 +211,8 @@ Google Maps).
             }
 
             tmp = ctx.globalAlpha;
-            ctx.globalAlpha *= series.imAges.alpha;
-            ctx.drawImAge(img,
+            ctx.globalAlpha *= series.images.alpha;
+            ctx.drawImage(img,
                           sx1, sy1, sx2 - sx1, sy2 - sy1,
                           x1 + plotOffset.left, y1 + plotOffset.top,
                           x2 - x1, y2 - y1);
@@ -221,11 +221,11 @@ Google Maps).
     }
 
     function processRawData(plot, series, data, datapoints) {
-        if (!series.imAges.show) {
+        if (!series.images.show) {
             return;
         }
 
-        // format is ImAge, x1, y1, x2, y2 (opposite corners)
+        // format is Image, x1, y1, x2, y2 (opposite corners)
         datapoints.format = [
             { required: true },
             { x: true, number: true, required: true },
@@ -243,7 +243,7 @@ Google Maps).
     $.plot.plugins.push({
         init: init,
         options: options,
-        name: 'imAge',
+        name: 'image',
         version: '1.1'
     });
 })(jQuery);

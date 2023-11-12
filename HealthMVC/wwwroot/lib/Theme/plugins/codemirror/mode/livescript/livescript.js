@@ -2,7 +2,7 @@
 // Distributed under an MIT license: https://codemirror.net/LICENSE
 
 /**
- * Link to the project's GitHub pAge:
+ * Link to the project's GitHub page:
  * https://github.com/duralog/CodeMirror
  */
 
@@ -94,19 +94,19 @@
         token: 'keyword',
         regex: '(?:t(?:h(?:is|row|en)|ry|ypeof!?)|c(?:on(?:tinue|st)|a(?:se|tch)|lass)|i(?:n(?:stanceof)?|mp(?:ort(?:\\s+all)?|lements)|[fs])|d(?:e(?:fault|lete|bugger)|o)|f(?:or(?:\\s+own)?|inally|unction)|s(?:uper|witch)|e(?:lse|x(?:tends|port)|val)|a(?:nd|rguments)|n(?:ew|ot)|un(?:less|til)|w(?:hile|ith)|o[fr]|return|break|let|var|loop)' + keywordend
       }, {
-        token: 'constant.languAge',
+        token: 'constant.language',
         regex: '(?:true|false|yes|no|on|off|null|void|undefined)' + keywordend
       }, {
         token: 'invalid.illegal',
-        regex: '(?:p(?:ackAge|r(?:ivate|otected)|ublic)|i(?:mplements|nterface)|enum|static|yield)' + keywordend
+        regex: '(?:p(?:ackage|r(?:ivate|otected)|ublic)|i(?:mplements|nterface)|enum|static|yield)' + keywordend
       }, {
-        token: 'languAge.support.class',
+        token: 'language.support.class',
         regex: '(?:R(?:e(?:gExp|ferenceError)|angeError)|S(?:tring|yntaxError)|E(?:rror|valError)|Array|Boolean|Date|Function|Number|Object|TypeError|URIError)' + keywordend
       }, {
-        token: 'languAge.support.function',
+        token: 'language.support.function',
         regex: '(?:is(?:NaN|Finite)|parse(?:Int|Float)|Math|JSON|(?:en|de)codeURI(?:Component)?)' + keywordend
       }, {
-        token: 'variable.languAge',
+        token: 'variable.language',
         regex: '(?:t(?:hat|il|o)|f(?:rom|allthrough)|it|by|e)' + keywordend
       }, {
         token: 'identifier',

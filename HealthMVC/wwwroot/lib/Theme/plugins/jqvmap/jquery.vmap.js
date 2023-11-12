@@ -216,14 +216,14 @@ var JQVMap = function (params) {
   if (params.showTooltip) {
     params.container.mousemove(function (e) {
       if (map.label.is(':visible')) {
-        var left = e.pAgeX - 15 - map.labelWidth;
-        var top = e.pAgeY - 15 - map.labelHeight;
+        var left = e.pageX - 15 - map.labelWidth;
+        var top = e.pageY - 15 - map.labelHeight;
 
         if(left < 0) {
-          left = e.pAgeX + 15;
+          left = e.pageX + 15;
         }
         if(top < 0) {
-          top = e.pAgeY + 15;
+          top = e.pageY + 15;
         }
 
         map.label.css({
@@ -636,7 +636,7 @@ JQVMap.prototype.isSelected = function(cc) {
 
 JQVMap.prototype.makeDraggable = function () {
   var mouseDown = false;
-  var oldPAgeX, oldPAgeY;
+  var oldPageX, oldPageY;
   var self = this;
 
   self.isMoving = false;
@@ -653,13 +653,13 @@ JQVMap.prototype.makeDraggable = function () {
   this.container.mousemove(function (e) {
 
     if (mouseDown) {
-      self.transX -= (oldPAgeX - e.pAgeX) / self.scale;
-      self.transY -= (oldPAgeY - e.pAgeY) / self.scale;
+      self.transX -= (oldPageX - e.pageX) / self.scale;
+      self.transY -= (oldPageY - e.pageY) / self.scale;
 
       self.applyTransform();
 
-      oldPAgeX = e.pAgeX;
-      oldPAgeY = e.pAgeY;
+      oldPageX = e.pageX;
+      oldPageY = e.pageY;
 
       self.isMoving = true;
       if (self.isMovingTimeout) {
@@ -674,8 +674,8 @@ JQVMap.prototype.makeDraggable = function () {
   }).mousedown(function (e) {
 
     mouseDown = true;
-    oldPAgeX = e.pAgeX;
-    oldPAgeY = e.pAgeY;
+    oldPageX = e.pageX;
+    oldPageY = e.pageY;
 
     return false;
 
@@ -715,15 +715,15 @@ JQVMap.prototype.makeDraggable = function () {
     if (touches.length === 1) {
       if (lastTouchCount === 1) {
 
-        if(touchX === touches[0].pAgeX && touchY === touches[0].pAgeY){
+        if(touchX === touches[0].pageX && touchY === touches[0].pageY){
           return;
         }
 
         transformXOld = self.transX;
         transformYOld = self.transY;
 
-        self.transX -= (touchX - touches[0].pAgeX) / self.scale;
-        self.transY -= (touchY - touches[0].pAgeY) / self.scale;
+        self.transX -= (touchX - touches[0].pageX) / self.scale;
+        self.transY -= (touchY - touches[0].pageY) / self.scale;
 
         self.applyTransform();
 
@@ -737,15 +737,15 @@ JQVMap.prototype.makeDraggable = function () {
         }
       }
 
-      touchX = touches[0].pAgeX;
-      touchY = touches[0].pAgeY;
+      touchX = touches[0].pageX;
+      touchY = touches[0].pageY;
 
     } else if (touches.length === 2) {
 
       if (lastTouchCount === 2) {
         scale = Math.sqrt(
-            Math.pow(touches[0].pAgeX - touches[1].pAgeX, 2) +
-            Math.pow(touches[0].pAgeY - touches[1].pAgeY, 2)
+            Math.pow(touches[0].pageX - touches[1].pageX, 2) +
+            Math.pow(touches[0].pageY - touches[1].pageY, 2)
           ) / touchStartDistance;
 
         self.setScale(
@@ -759,16 +759,16 @@ JQVMap.prototype.makeDraggable = function () {
       } else {
 
         offset = jQuery(self.container).offset();
-        if (touches[0].pAgeX > touches[1].pAgeX) {
-          touchCenterX = touches[1].pAgeX + (touches[0].pAgeX - touches[1].pAgeX) / 2;
+        if (touches[0].pageX > touches[1].pageX) {
+          touchCenterX = touches[1].pageX + (touches[0].pageX - touches[1].pageX) / 2;
         } else {
-          touchCenterX = touches[0].pAgeX + (touches[1].pAgeX - touches[0].pAgeX) / 2;
+          touchCenterX = touches[0].pageX + (touches[1].pageX - touches[0].pageX) / 2;
         }
 
-        if (touches[0].pAgeY > touches[1].pAgeY) {
-          touchCenterY = touches[1].pAgeY + (touches[0].pAgeY - touches[1].pAgeY) / 2;
+        if (touches[0].pageY > touches[1].pageY) {
+          touchCenterY = touches[1].pageY + (touches[0].pageY - touches[1].pageY) / 2;
         } else {
-          touchCenterY = touches[0].pAgeY + (touches[1].pAgeY - touches[0].pAgeY) / 2;
+          touchCenterY = touches[0].pageY + (touches[1].pageY - touches[0].pageY) / 2;
         }
 
         touchCenterX -= offset.left;
@@ -776,8 +776,8 @@ JQVMap.prototype.makeDraggable = function () {
         touchStartScale = self.scale;
 
         touchStartDistance = Math.sqrt(
-          Math.pow(touches[0].pAgeX - touches[1].pAgeX, 2) +
-          Math.pow(touches[0].pAgeY - touches[1].pAgeY, 2)
+          Math.pow(touches[0].pageX - touches[1].pageX, 2) +
+          Math.pow(touches[0].pageY - touches[1].pageY, 2)
         );
       }
     }

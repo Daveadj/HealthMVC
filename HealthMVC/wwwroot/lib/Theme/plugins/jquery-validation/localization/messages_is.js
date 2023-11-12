@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: IS (Icelandic; íslenska)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "Þessi reitur er nauðsynlegur.",
 	remote: "Lagaðu þennan reit.",
 	maxlength: $.validator.format( "Sláðu inn mest {0} stafi." ),

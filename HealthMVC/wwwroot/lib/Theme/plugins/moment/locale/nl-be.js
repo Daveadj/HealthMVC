@@ -89,7 +89,7 @@
             h: 'één uur',
             hh: '%d uur',
             d: 'één dag',
-            dd: '%d dAgen',
+            dd: '%d dagen',
             M: 'één maand',
             MM: '%d maanden',
             y: 'één jaar',

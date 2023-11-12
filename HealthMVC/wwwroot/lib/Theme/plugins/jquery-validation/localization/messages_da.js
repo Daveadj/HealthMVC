@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: DA (Danish; dansk)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "Dette felt er påkrævet.",
 	remote: "Ret venligst dette felt",
 	email: "Indtast en gyldig email-adresse.",

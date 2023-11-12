@@ -79,7 +79,7 @@ $.validator.addMethod( "abaRoutingNumber", function( value ) {
 $.validator.addMethod( "accept", function( value, element, param ) {
 
 	// Split mime on commas in case we have multiple types we can accept
-	var typeParam = typeof param === "string" ? param.replace( /\s/g, "" ) : "imAge/*",
+	var typeParam = typeof param === "string" ? param.replace( /\s/g, "" ) : "image/*",
 		optionalValue = this.optional( element ),
 		i, file, regex;
 
@@ -594,7 +594,7 @@ $.validator.addMethod( "creditcardtypes", function( value, element, param ) {
  * Validates currencies with any given symbols by @jameslouiz
  * Symbols can be optional or required. Symbols required by default
  *
- * UsAge examples:
+ * Usage examples:
  *  currency: ["£", false] - Use false for soft currency validation
  *  currency: ["$", false]
  *  currency: ["RM", false] - also works with text based symbols such as "RM" - Malaysia Ringgit etc
@@ -634,7 +634,7 @@ $.validator.addMethod( "currency", function( value, element, param ) {
 
 $.validator.addMethod( "dateFA", function( value, element ) {
 	return this.optional( element ) || /^[1-4]\d{3}\/((0?[1-6]\/((3[0-1])|([1-2][0-9])|(0?[1-9])))|((1[0-2]|(0?[7-9]))\/(30|([1-2][0-9])|(0?[1-9]))))$/.test( value );
-}, $.validator.messAges.date );
+}, $.validator.messages.date );
 
 /**
  * Return true, if the value is a valid date, also making this formal check dd/mm/yyyy.
@@ -674,11 +674,11 @@ $.validator.addMethod( "dateITA", function( value, element ) {
 		check = false;
 	}
 	return this.optional( element ) || check;
-}, $.validator.messAges.date );
+}, $.validator.messages.date );
 
 $.validator.addMethod( "dateNL", function( value, element ) {
 	return this.optional( element ) || /^(0?[1-9]|[12]\d|3[01])[\.\/\-](0?[1-9]|1[012])[\.\/\-]([12]\d)?(\d\d)$/.test( value );
-}, $.validator.messAges.date );
+}, $.validator.messages.date );
 
 // Older "accept" file extension method. Old docs: http://docs.jquery.com/Plugins/Validation/Methods/accept
 $.validator.addMethod( "extension", function( value, element, param ) {
@@ -1380,7 +1380,7 @@ $.validator.addMethod( "skip_or_fill_minimum", function( value, element, options
  *
  * Note: "States" always includes DC (District of Colombia)
  *
- * UsAge examples:
+ * Usage examples:
  *
  *  This is the default - case insensitive, no territories, no military zones
  *  stateInput: {
@@ -1444,7 +1444,7 @@ $.validator.addMethod( "time12h", function( value, element ) {
 // Same as url, but TLD is optional
 $.validator.addMethod( "url2", function( value, element ) {
 	return this.optional( element ) || /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)*(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test( value );
-}, $.validator.messAges.url );
+}, $.validator.messages.url );
 
 /**
  * Return true, if the value is a valid vehicle identification number (VIN).

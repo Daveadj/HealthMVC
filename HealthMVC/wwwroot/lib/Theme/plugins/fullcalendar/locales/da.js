@@ -17,7 +17,7 @@ FullCalendar.globalLocales.push(function () {
       list: 'Agenda',
     },
     weekText: 'Uge',
-    allDayText: 'Hele dAgen',
+    allDayText: 'Hele dagen',
     moreLinkText: 'flere',
     noEventsText: 'Ingen arrangementer at vise',
   };

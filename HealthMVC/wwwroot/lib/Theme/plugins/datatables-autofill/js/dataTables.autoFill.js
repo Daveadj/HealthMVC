@@ -248,7 +248,7 @@ $.extend( AutoFill.prototype, {
 
 		if ( ! handleDim.height || ! handleDim.width ) {
 			// Append to document so we can get its size. Not expecting it to
-			// change during the life time of the pAge
+			// change during the life time of the page
 			handle.appendTo( 'body' );
 			handleDim.height = handle.outerHeight();
 			handleDim.width = handle.outerWidth();
@@ -360,14 +360,14 @@ $.extend( AutoFill.prototype, {
 		var startCell = $(this.dom.start);
 		var end = {
 			row: this.c.vertical ?
-				dt.rows( { pAge: 'current' } ).nodes().indexOf( target.parentNode ) :
+				dt.rows( { page: 'current' } ).nodes().indexOf( target.parentNode ) :
 				start.row,
 			column: this.c.horizontal ?
 				$(target).index() :
 				start.column
 		};
 		var colIndx = dt.column.index( 'toData', end.column );
-		var endRow =  dt.row( ':eq('+end.row+')', { pAge: 'current' } ); // Workaround for M581
+		var endRow =  dt.row( ':eq('+end.row+')', { page: 'current' } ); // Workaround for M581
 		var endCell = $( dt.cell( endRow.index(), colIndx ).node() );
 
 		// Be sure that is a DataTables controlled cell
@@ -635,7 +635,7 @@ $.extend( AutoFill.prototype, {
 
 		this.dom.start = this.dom.attachedTo;
 		this.s.start = {
-			row: dt.rows( { pAge: 'current' } ).nodes().indexOf( $(this.dom.start).parent()[0] ),
+			row: dt.rows( { page: 'current' } ).nodes().indexOf( $(this.dom.start).parent()[0] ),
 			column: $(this.dom.start).index()
 		};
 
@@ -723,7 +723,7 @@ $.extend( AutoFill.prototype, {
 			return;
 		}
 
-		var startDt = dt.cell( ':eq('+start.row+')', start.column+':visible', {pAge:'current'} );
+		var startDt = dt.cell( ':eq('+start.row+')', start.column+':visible', {page:'current'} );
 
 		// If Editor is active inside this cell (inline editing) we need to wait for Editor to
 		// submit and then we can loop back and trigger the fill.
@@ -762,7 +762,7 @@ $.extend( AutoFill.prototype, {
 		for ( var rowIdx=0 ; rowIdx<rows.length ; rowIdx++ ) {
 			selected.push(
 				$.map( columns, function (column) {
-					var row = dt.row( ':eq('+rows[rowIdx]+')', {pAge:'current'} ); // Workaround for M581
+					var row = dt.row( ':eq('+rows[rowIdx]+')', {page:'current'} ); // Workaround for M581
 					var cell = dt.cell( row.index(), column+':visible' );
 					var data = cell.data();
 					var cellIndex = cell.index();
@@ -842,8 +842,8 @@ $.extend( AutoFill.prototype, {
 		var scrollSpeed = 5;
 		var buffer = 65;
 		var
-			windowY = e.pAgeY - document.body.scrollTop,
-			windowX = e.pAgeX - document.body.scrollLeft,
+			windowY = e.pageY - document.body.scrollTop,
+			windowX = e.pageX - document.body.scrollLeft,
 			windowVert, windowHoriz,
 			dtVert, dtHoriz;
 
@@ -864,18 +864,18 @@ $.extend( AutoFill.prototype, {
 		}
 
 		// DataTables scrolling calculations - based on the table's position in
-		// the document and the mouse position on the pAge
-		if ( scroll.dtTop !== null && e.pAgeY < scroll.dtTop + buffer ) {
+		// the document and the mouse position on the page
+		if ( scroll.dtTop !== null && e.pageY < scroll.dtTop + buffer ) {
 			dtVert = scrollSpeed * -1;
 		}
-		else if ( scroll.dtTop !== null && e.pAgeY > scroll.dtTop + scroll.dtHeight - buffer ) {
+		else if ( scroll.dtTop !== null && e.pageY > scroll.dtTop + scroll.dtHeight - buffer ) {
 			dtVert = scrollSpeed;
 		}
 
-		if ( scroll.dtLeft !== null && e.pAgeX < scroll.dtLeft + buffer ) {
+		if ( scroll.dtLeft !== null && e.pageX < scroll.dtLeft + buffer ) {
 			dtHoriz = scrollSpeed * -1;
 		}
-		else if ( scroll.dtLeft !== null && e.pAgeX > scroll.dtLeft + scroll.dtWidth - buffer ) {
+		else if ( scroll.dtLeft !== null && e.pageX > scroll.dtLeft + scroll.dtWidth - buffer ) {
 			dtHoriz = scrollSpeed;
 		}
 

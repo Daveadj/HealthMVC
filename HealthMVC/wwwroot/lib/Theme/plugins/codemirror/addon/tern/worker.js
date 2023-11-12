@@ -5,26 +5,26 @@
 
 var server;
 
-this.onmessAge = function(e) {
+this.onmessage = function(e) {
   var data = e.data;
   switch (data.type) {
   case "init": return startServer(data.defs, data.plugins, data.scripts);
   case "add": return server.addFile(data.name, data.text);
   case "del": return server.delFile(data.name);
   case "req": return server.request(data.body, function(err, reqData) {
-    postMessAge({id: data.id, body: reqData, err: err && String(err)});
+    postMessage({id: data.id, body: reqData, err: err && String(err)});
   });
   case "getFile":
     var c = pending[data.id];
     delete pending[data.id];
     return c(data.err, data.text);
-  default: throw new Error("Unknown messAge type: " + data.type);
+  default: throw new Error("Unknown message type: " + data.type);
   }
 };
 
 var nextId = 0, pending = {};
 function getFile(file, c) {
-  postMessAge({type: "getFile", name: file, id: ++nextId});
+  postMessage({type: "getFile", name: file, id: ++nextId});
   pending[nextId] = c;
 }
 
@@ -40,5 +40,5 @@ function startServer(defs, plugins, scripts) {
 }
 
 this.console = {
-  log: function(v) { postMessAge({type: "debug", messAge: v}); }
+  log: function(v) { postMessage({type: "debug", message: v}); }
 };

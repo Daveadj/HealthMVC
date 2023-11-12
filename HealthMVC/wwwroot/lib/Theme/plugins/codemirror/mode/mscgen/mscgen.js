@@ -5,7 +5,7 @@
 // For more information on mscgen, see the site of the original author:
 // http://www.mcternan.me.uk/mscgen
 //
-// This mode for mscgen and the two derivative languAges were
+// This mode for mscgen and the two derivative languages were
 // originally made for use in the mscgen_js interpreter
 // (https://sverweij.github.io/mscgen_js)
 
@@ -19,7 +19,7 @@
 })(function(CodeMirror) {
   "use strict";
 
-  var languAges = {
+  var languages = {
     mscgen: {
       "keywords" : ["msc"],
       "options" : ["hscale", "width", "arcgradient", "wordwraparcs"],
@@ -56,11 +56,11 @@
   }
 
   CodeMirror.defineMode("mscgen", function(_, modeConfig) {
-    var languAge = languAges[modeConfig && modeConfig.languAge || "mscgen"]
+    var language = languages[modeConfig && modeConfig.language || "mscgen"]
     return {
       startState: startStateFn,
       copyState: copyStateFn,
-      token: produceTokenFunction(languAge),
+      token: produceTokenFunction(language),
       lineComment : "#",
       blockCommentStart : "/*",
       blockCommentEnd : "*/"
@@ -68,8 +68,8 @@
   });
 
   CodeMirror.defineMIME("text/x-mscgen", "mscgen");
-  CodeMirror.defineMIME("text/x-xu", {name: "mscgen", languAge: "xu"});
-  CodeMirror.defineMIME("text/x-msgenny", {name: "mscgen", languAge: "msgenny"});
+  CodeMirror.defineMIME("text/x-xu", {name: "mscgen", language: "xu"});
+  CodeMirror.defineMIME("text/x-msgenny", {name: "mscgen", language: "msgenny"});
 
   function wordRegexpBoundary(pWords) {
     return new RegExp("^\\b(?:" + pWords.join("|") + ")\\b", "i");

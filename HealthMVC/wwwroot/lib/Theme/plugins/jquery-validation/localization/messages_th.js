@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: TH (Thai; ไทย)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "โปรดระบุ",
 	remote: "โปรดแก้ไขให้ถูกต้อง",
 	email: "โปรดระบุที่อยู่อีเมล์ที่ถูกต้อง",

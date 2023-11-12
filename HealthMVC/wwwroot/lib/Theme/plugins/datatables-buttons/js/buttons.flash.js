@@ -53,7 +53,7 @@ var DataTable = $.fn.dataTable;
  */
 var ZeroClipboard_TableTools = {
 	version: "1.0.4-TableTools2",
-	clients: {}, // registered upload clients on pAge, indexed by id
+	clients: {}, // registered upload clients on page, indexed by id
 	moviePath: '', // URL to movie
 	nextId: 1, // ID of next movie
 
@@ -230,7 +230,7 @@ ZeroClipboard_TableTools.Client.prototype = {
 		}
 		else {
 			// all other browsers get an EMBED tag
-			html += '<embed id="'+this.movieId+'" src="'+ZeroClipboard_TableTools.moviePath+'" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="'+width+'" height="'+height+'" name="'+this.movieId+'" align="middle" allowScriptAccess="always" allowFullScreen="false" type="application/x-shockwave-flash" pluginspAge="http://www.macromedia.com/go/getflashplayer" flashvars="'+flashvars+'" wmode="transparent" />';
+			html += '<embed id="'+this.movieId+'" src="'+ZeroClipboard_TableTools.moviePath+'" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="'+width+'" height="'+height+'" name="'+this.movieId+'" align="middle" allowScriptAccess="always" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="'+flashvars+'" wmode="transparent" />';
 		}
 		return html;
 	},
@@ -875,23 +875,23 @@ function _xlsxToStrings( obj ) {
 var excelStrings = {
 	"_rels/.rels":
 		'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'+
-		'<Relationships xmlns="http://schemas.openxmlformats.org/packAge/2006/relationships">'+
+		'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'+
 			'<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>'+
 		'</Relationships>',
 
 	"xl/_rels/workbook.xml.rels":
 		'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'+
-		'<Relationships xmlns="http://schemas.openxmlformats.org/packAge/2006/relationships">'+
+		'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'+
 			'<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>'+
 			'<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>'+
 		'</Relationships>',
 
 	"[Content_Types].xml":
 		'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'+
-		'<Types xmlns="http://schemas.openxmlformats.org/packAge/2006/content-types">'+
+		'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'+
 			'<Default Extension="xml" ContentType="application/xml" />'+
-			'<Default Extension="rels" ContentType="application/vnd.openxmlformats-packAge.relationships+xml" />'+
-			'<Default Extension="jpeg" ContentType="imAge/jpeg" />'+
+			'<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml" />'+
+			'<Default Extension="jpeg" ContentType="image/jpeg" />'+
 			'<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml" />'+
 			'<Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml" />'+
 			'<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml" />'+
@@ -1413,10 +1413,10 @@ DataTable.ext.buttons.pdfFlash = $.extend( {}, flashButton, {
 
 		_setText( flash, JSON.stringify( {
 			title:       _filename(config, false),
-			messAge: typeof config.messAge == 'function' ? config.messAge(dt, button, config) : config.messAge,
+			message: typeof config.message == 'function' ? config.message(dt, button, config) : config.message,
 			colWidth:    ratios.toArray(),
 			orientation: config.orientation,
-			size:        config.pAgeSize,
+			size:        config.pageSize,
 			header:      config.header ? data.header : null,
 			footer:      config.footer ? data.footer : null,
 			body:        data.body
@@ -1429,9 +1429,9 @@ DataTable.ext.buttons.pdfFlash = $.extend( {}, flashButton, {
 
 	orientation: 'portrait',
 
-	pAgeSize: 'A4',
+	pageSize: 'A4',
 
-	messAge: '',
+	message: '',
 
 	newline: '\n'
 } );

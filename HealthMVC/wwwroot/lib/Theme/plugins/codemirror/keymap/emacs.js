@@ -59,8 +59,8 @@
     return cm.findPosV(pos, dir, "line", cm.doc.sel.goalColumn);
   }
 
-  function byPAge(cm, pos, dir) {
-    return cm.findPosV(pos, dir, "pAge", cm.doc.sel.goalColumn);
+  function byPage(cm, pos, dir) {
+    return cm.findPosV(pos, dir, "page", cm.doc.sel.goalColumn);
   }
 
   function byParagraph(cm, pos, dir) {
@@ -330,9 +330,9 @@
 
   cmds.previousLine = move(byLine, -1);
 
-  cmds.scrollDownCommand = move(byPAge, -1);
+  cmds.scrollDownCommand = move(byPage, -1);
 
-  cmds.scrollUpCommand = move(byPAge, 1);
+  cmds.scrollUpCommand = move(byPage, 1);
 
   cmds.backwardParagraph = move(byParagraph, -1);
 
@@ -480,8 +480,8 @@
     "Home": "goLineStart",
     "Alt-V": "scrollDownCommand",
     "Ctrl-V": "scrollUpCommand",
-    "PAgeUp": "scrollDownCommand",
-    "PAgeDown": "scrollUpCommand",
+    "PageUp": "scrollDownCommand",
+    "PageDown": "scrollUpCommand",
     "Ctrl-Up": "backwardParagraph",
     "Ctrl-Down": "forwardParagraph",
     "Alt-{": "backwardParagraph",

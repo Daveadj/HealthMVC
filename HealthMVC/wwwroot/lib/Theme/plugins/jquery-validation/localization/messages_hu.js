@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: HU (Hungarian; Magyar)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "Kötelező megadni.",
 	maxlength: $.validator.format( "Legfeljebb {0} karakter hosszú legyen." ),
 	minlength: $.validator.format( "Legalább {0} karakter hosszú legyen." ),

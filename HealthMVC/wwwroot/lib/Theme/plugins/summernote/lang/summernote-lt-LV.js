@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         subscript: 'Apakšraksts',
         size: 'Fonta lielums'
       },
-      imAge: {
-        imAge: 'Attēls',
+      image: {
+        image: 'Attēls',
         insert: 'Ievietot attēlu',
         resizeFull: 'Pilns izmērts',
         resizeHalf: 'Samazināt 50%',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Forma: aplis',
         shapeThumbnail: 'Forma: rāmītis',
         shapeNone: 'Forma: orģināla',
-        dragImAgeHere: 'Ievēlciet attēlu šeit',
-        dropImAge: 'Drop imAge or Text',
+        dragImageHere: 'Ievēlciet attēlu šeit',
+        dropImage: 'Drop image or Text',
         selectFromFiles: 'Izvēlēties failu',
         maximumFileSize: 'Maksimālais faila izmērs',
         maximumFileSizeError: 'Faila izmērs pārāk liels!',

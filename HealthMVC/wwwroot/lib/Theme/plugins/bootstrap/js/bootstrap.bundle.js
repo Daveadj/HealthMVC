@@ -677,7 +677,7 @@
     };
 
     _proto.nextWhenVisible = function nextWhenVisible() {
-      var $element = $__default["default"](this._element); // Don't call next when the pAge isn't visible
+      var $element = $__default["default"](this._element); // Don't call next when the page isn't visible
       // or the carousel or its parent isn't visible
 
       if (!document.hidden && $element.is(':visible') && $element.css('visibility') !== 'hidden') {
@@ -1520,7 +1520,7 @@
    * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
    * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
    * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAgeS OR OTHER
+   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
    * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
    * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
    * SOFTWARE.
@@ -3009,7 +3009,7 @@
    * - `-end`
    *
    * Variations are interpreted easily if you think of them as the left to right
-   * written languAges. Horizontally (`top` and `bottom`), `start` is left and `end`
+   * written languages. Horizontally (`top` and `bottom`), `start` is left and `end`
    * is right.<br />
    * Vertically (`left` and `right`), `start` is top and `end` is bottom.
    *
@@ -3567,8 +3567,8 @@
      *
      * It accepts the following units:
      * - `px` or unit-less, interpreted as pixels
-     * - `%` or `%r`, percentAge relative to the length of the reference element
-     * - `%p`, percentAge relative to the length of the popper element
+     * - `%` or `%r`, percentage relative to the length of the reference element
+     * - `%p`, percentage relative to the length of the popper element
      * - `vw`, CSS viewport width unit
      * - `vh`, CSS viewport height unit
      *
@@ -5271,17 +5271,17 @@
   /**
    * A pattern that recognizes a commonly useful subset of URLs that are safe.
    *
-   * Shoutout to Angular https://github.com/angular/angular/blob/12.2.x/packAges/core/src/sanitization/url_sanitizer.ts
+   * Shoutout to Angular https://github.com/angular/angular/blob/12.2.x/packages/core/src/sanitization/url_sanitizer.ts
    */
 
   var SAFE_URL_PATTERN = /^(?:(?:https?|mailto|ftp|tel|file|sms):|[^#&/:?]*(?:[#/?]|$))/i;
   /**
-   * A pattern that matches safe data URLs. Only matches imAge, video and audio types.
+   * A pattern that matches safe data URLs. Only matches image, video and audio types.
    *
-   * Shoutout to Angular https://github.com/angular/angular/blob/12.2.x/packAges/core/src/sanitization/url_sanitizer.ts
+   * Shoutout to Angular https://github.com/angular/angular/blob/12.2.x/packages/core/src/sanitization/url_sanitizer.ts
    */
 
-  var DATA_URL_PATTERN = /^data:(?:imAge\/(?:bmp|gif|jpeg|jpg|png|tiff|webp)|video\/(?:mpeg|mp4|ogg|webm)|audio\/(?:mp3|oga|ogg|opus));base64,[\d+/a-z]+=*$/i;
+  var DATA_URL_PATTERN = /^data:(?:image\/(?:bmp|gif|jpeg|jpg|png|tiff|webp)|video\/(?:mpeg|mp4|ogg|webm)|audio\/(?:mp3|oga|ogg|opus));base64,[\d+/a-z]+=*$/i;
 
   function allowedAttribute(attr, allowedAttributeList) {
     var attrName = attr.nodeName.toLowerCase();
@@ -6368,7 +6368,7 @@
     };
 
     _proto._getScrollTop = function _getScrollTop() {
-      return this._scrollElement === window ? this._scrollElement.pAgeYOffset : this._scrollElement.scrollTop;
+      return this._scrollElement === window ? this._scrollElement.pageYOffset : this._scrollElement.scrollTop;
     };
 
     _proto._getScrollHeight = function _getScrollHeight() {

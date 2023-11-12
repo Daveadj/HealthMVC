@@ -78,7 +78,7 @@ to one direction when the drag direction is close to it;
 'smartLock'. The graph shows pan hint bar and the pan movement will always
 snap to a direction that the drag diorection started with.
 
-Example API usAge:
+Example API usage:
 ```js
     plot = $.plot(...);
 
@@ -159,15 +159,15 @@ can set the default in the options.
             useSmartPan = smartPanLock || options.pan.mode === 'smart';
 
         function onZoomClick(e, zoomOut, amount) {
-            var pAge = browser.getPAgeXY(e);
+            var page = browser.getPageXY(e);
 
             var c = plot.offset();
-            c.left = pAge.X - c.left;
-            c.top = pAge.Y - c.top;
+            c.left = page.X - c.left;
+            c.top = page.Y - c.top;
 
             var ec = plot.getPlaceholder().offset();
-            ec.left = pAge.X - ec.left;
-            ec.top = pAge.Y - ec.top;
+            ec.left = page.X - ec.left;
+            ec.top = page.Y - ec.top;
 
             var axes = plot.getXAxes().concat(plot.getYAxes()).filter(function (axis) {
                 var box = axis.box;
@@ -211,7 +211,7 @@ can set the default in the options.
                 amount = isMacScroll ? 1 + Math.abs(e.originalEvent.deltaY) / macMagicRatio : defaultNonMacScrollAmount;
 
             if (isPanAction) {
-                onDrAgend(e);
+                onDragEnd(e);
             }
 
             if (plot.getOptions().zoom.active) {
@@ -221,7 +221,7 @@ can set the default in the options.
             }
         }
 
-        plot.navigationState = function(startPAgeX, startPAgeY) {
+        plot.navigationState = function(startPageX, startPageY) {
             var axes = this.getAxes();
             var result = {};
             Object.keys(axes).forEach(function(axisName) {
@@ -235,8 +235,8 @@ can set the default in the options.
                 }
             });
 
-            result.startPAgeX = startPAgeX || 0;
-            result.startPAgeY = startPAgeY || 0;
+            result.startPageX = startPageX || 0;
+            result.startPageY = startPageY || 0;
             return result;
         }
 
@@ -258,11 +258,11 @@ can set the default in the options.
             }
 
             isPanAction = true;
-            var pAge = browser.getPAgeXY(e);
+            var page = browser.getPageXY(e);
 
             var ec = plot.getPlaceholder().offset();
-            ec.left = pAge.X - ec.left;
-            ec.top = pAge.Y - ec.top;
+            ec.left = page.X - ec.left;
+            ec.top = page.Y - ec.top;
 
             panAxes = plot.getXAxes().concat(plot.getYAxes()).filter(function (axis) {
                 var box = axis.box;
@@ -284,10 +284,10 @@ can set the default in the options.
             plot.getPlaceholder().css('cursor', plot.getOptions().pan.cursor);
 
             if (useSmartPan) {
-                plotState = plot.navigationState(pAge.X, pAge.Y);
+                plotState = plot.navigationState(page.X, page.Y);
             } else if (useManualPan) {
-                prevDragPosition.x = pAge.X;
-                prevDragPosition.y = pAge.Y;
+                prevDragPosition.x = page.X;
+                prevDragPosition.y = page.Y;
             }
         }
 
@@ -296,23 +296,23 @@ can set the default in the options.
                 return;
             }
 
-            var pAge = browser.getPAgeXY(e);
+            var page = browser.getPageXY(e);
             var frameRate = plot.getOptions().pan.frameRate;
 
             if (frameRate === -1) {
                 if (useSmartPan) {
                     plot.smartPan({
-                        x: plotState.startPAgeX - pAge.X,
-                        y: plotState.startPAgeY - pAge.Y
+                        x: plotState.startPageX - page.X,
+                        y: plotState.startPageY - page.Y
                     }, plotState, panAxes, false, smartPanLock);
                 } else if (useManualPan) {
                     plot.pan({
-                        left: prevDragPosition.x - pAge.X,
-                        top: prevDragPosition.y - pAge.Y,
+                        left: prevDragPosition.x - page.X,
+                        top: prevDragPosition.y - page.Y,
                         axes: panAxes
                     });
-                    prevDragPosition.x = pAge.X;
-                    prevDragPosition.y = pAge.Y;
+                    prevDragPosition.x = page.X;
+                    prevDragPosition.y = page.Y;
                 }
                 return;
             }
@@ -322,24 +322,24 @@ can set the default in the options.
             panTimeout = setTimeout(function() {
                 if (useSmartPan) {
                     plot.smartPan({
-                        x: plotState.startPAgeX - pAge.X,
-                        y: plotState.startPAgeY - pAge.Y
+                        x: plotState.startPageX - page.X,
+                        y: plotState.startPageY - page.Y
                     }, plotState, panAxes, false, smartPanLock);
                 } else if (useManualPan) {
                     plot.pan({
-                        left: prevDragPosition.x - pAge.X,
-                        top: prevDragPosition.y - pAge.Y,
+                        left: prevDragPosition.x - page.X,
+                        top: prevDragPosition.y - page.Y,
                         axes: panAxes
                     });
-                    prevDragPosition.x = pAge.X;
-                    prevDragPosition.y = pAge.Y;
+                    prevDragPosition.x = page.X;
+                    prevDragPosition.y = page.Y;
                 }
 
                 panTimeout = null;
             }, 1 / frameRate * 1000);
         }
 
-        function onDrAgend(e) {
+        function onDragEnd(e) {
             if (!isPanAction) {
                 return;
             }
@@ -350,20 +350,20 @@ can set the default in the options.
             }
 
             isPanAction = false;
-            var pAge = browser.getPAgeXY(e);
+            var page = browser.getPageXY(e);
 
             plot.getPlaceholder().css('cursor', prevCursor);
 
             if (useSmartPan) {
                 plot.smartPan({
-                    x: plotState.startPAgeX - pAge.X,
-                    y: plotState.startPAgeY - pAge.Y
+                    x: plotState.startPageX - page.X,
+                    y: plotState.startPageY - page.Y
                 }, plotState, panAxes, false, smartPanLock);
                 plot.smartPan.end();
             } else if (useManualPan) {
                 plot.pan({
-                    left: prevDragPosition.x - pAge.X,
-                    top: prevDragPosition.y - pAge.Y,
+                    left: prevDragPosition.x - page.X,
+                    top: prevDragPosition.y - page.Y,
                     axes: panAxes
                 });
                 prevDragPosition.x = 0;
@@ -396,7 +396,7 @@ can set the default in the options.
             plot.activate();
 
             if (isPanAction) {
-                onDrAgend(e);
+                onDragEnd(e);
             }
 
             return false;
@@ -420,7 +420,7 @@ can set the default in the options.
             if (o.pan.interactive) {
                 plot.addEventHandler("dragstart", onDragStart, eventHolder, 0);
                 plot.addEventHandler("drag", onDrag, eventHolder, 0);
-                plot.addEventHandler("drAgend", onDrAgend, eventHolder, 0);
+                plot.addEventHandler("dragend", onDragEnd, eventHolder, 0);
                 eventHolder.bind("mousedown", onMouseDown);
                 eventHolder.bind("mouseup", onMouseUp);
             }
@@ -663,19 +663,19 @@ can set the default in the options.
             if (snap) {
                 panHint = {
                     start: {
-                        x: initialState.startPAgeX - plot.offset().left + plot.getPlotOffset().left,
-                        y: initialState.startPAgeY - plot.offset().top + plot.getPlotOffset().top
+                        x: initialState.startPageX - plot.offset().left + plot.getPlotOffset().left,
+                        y: initialState.startPageY - plot.offset().top + plot.getPlotOffset().top
                     },
                     end: {
-                        x: initialState.startPAgeX - delta.x - plot.offset().left + plot.getPlotOffset().left,
-                        y: initialState.startPAgeY - delta.y - plot.offset().top + plot.getPlotOffset().top
+                        x: initialState.startPageX - delta.x - plot.offset().left + plot.getPlotOffset().left,
+                        y: initialState.startPageY - delta.y - plot.offset().top + plot.getPlotOffset().top
                     }
                 }
             } else {
                 panHint = {
                     start: {
-                        x: initialState.startPAgeX - plot.offset().left + plot.getPlotOffset().left,
-                        y: initialState.startPAgeY - plot.offset().top + plot.getPlotOffset().top
+                        x: initialState.startPageX - plot.offset().left + plot.getPlotOffset().left,
+                        y: initialState.startPageY - plot.offset().top + plot.getPlotOffset().top
                     },
                     end: false
                 }
@@ -750,7 +750,7 @@ can set the default in the options.
             eventHolder.unbind("mouseup", onMouseUp);
             eventHolder.unbind("dragstart", onDragStart);
             eventHolder.unbind("drag", onDrag);
-            eventHolder.unbind("drAgend", onDrAgend);
+            eventHolder.unbind("dragend", onDragEnd);
             eventHolder.unbind("dblclick", onDblClick);
             eventHolder.unbind("click", onClick);
 

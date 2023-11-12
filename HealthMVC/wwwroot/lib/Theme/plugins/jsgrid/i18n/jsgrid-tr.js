@@ -4,17 +4,17 @@
         grid: {
             noDataContent: "Kayıt Bulunamadı",
             deleteConfirm: "Emin misiniz ?",
-            pAgerFormat: "Sayfalar: {first} {prev} {pAges} {next} {last} &nbsp;&nbsp; {pAgeIndex} / {pAgeCount}",
-            pAgePrevText: "<",
-            pAgeNextText: ">",
-            pAgeFirstText: "<<",
-            pAgeLastText: ">>",
-            loadMessAge: "Lütfen bekleyiniz...",
-            invalidMessAge: "Geçersiz veri girişi !"
+            pagerFormat: "Sayfalar: {first} {prev} {pages} {next} {last} &nbsp;&nbsp; {pageIndex} / {pageCount}",
+            pagePrevText: "<",
+            pageNextText: ">",
+            pageFirstText: "<<",
+            pageLastText: ">>",
+            loadMessage: "Lütfen bekleyiniz...",
+            invalidMessage: "Geçersiz veri girişi !"
         },
 
         loadIndicator: {
-            messAge: "Yükleniyor..."
+            message: "Yükleniyor..."
         },
 
         fields: {
@@ -32,14 +32,14 @@
         },
 
         validators: {
-            required: { messAge: "Gerekli alandır" },
-            rangeLength: { messAge: "Alan değerinin uzunluğu tanımlanan aralık dışındadır" },
-            minLength: { messAge: "Alan değeri çok kısadır" },
-            maxLength: { messAge: "Alan değeri çok uzundur" },
-            pattern: { messAge: "Alan değeri tanımlanan şablon ile eşleşmiyor" },
-            range: { messAge: "Alan değeri tanımlı aralığın dışındadır" },
-            min: { messAge: "Alan değeri çok küçüktür" },
-            max: { messAge: "Alan değeri çok büyüktür" }
+            required: { message: "Gerekli alandır" },
+            rangeLength: { message: "Alan değerinin uzunluğu tanımlanan aralık dışındadır" },
+            minLength: { message: "Alan değeri çok kısadır" },
+            maxLength: { message: "Alan değeri çok uzundur" },
+            pattern: { message: "Alan değeri tanımlanan şablon ile eşleşmiyor" },
+            range: { message: "Alan değeri tanımlı aralığın dışındadır" },
+            min: { message: "Alan değeri çok küçüktür" },
+            max: { message: "Alan değeri çok büyüktür" }
         }
     };
 

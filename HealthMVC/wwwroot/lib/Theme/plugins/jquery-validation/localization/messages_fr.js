@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: FR (French; français)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "Ce champ est obligatoire.",
 	remote: "Veuillez corriger ce champ.",
 	email: "Veuillez fournir une adresse électronique valide.",
@@ -36,7 +36,7 @@ $.extend( $.validator.messAges, {
 	minWords: $.validator.format( "Veuillez fournir au moins {0} mots." ),
 	rangeWords: $.validator.format( "Veuillez fournir entre {0} et {1} mots." ),
 	letterswithbasicpunc: "Veuillez fournir seulement des lettres et des signes de ponctuation.",
-	alphanumeric: "Veuillez fournir seulement des lettres, nombres, espaces et soulignAges.",
+	alphanumeric: "Veuillez fournir seulement des lettres, nombres, espaces et soulignages.",
 	lettersonly: "Veuillez fournir seulement des lettres.",
 	nowhitespace: "Veuillez ne pas inscrire d'espaces blancs.",
 	ziprange: "Veuillez fournir un code postal entre 902xx-xxxx et 905-xx-xxxx.",

@@ -151,7 +151,7 @@ form.was-validated select:valid ~ .select2-container--bootstrap4 .select2-select
   border: 1px solid #ced4da;
   border-radius: 0.25rem; }
 
-.select2-results__messAge {
+.select2-results__message {
   color: #6c757d; }
 
 .select2-container--bootstrap4 .select2-selection--multiple {

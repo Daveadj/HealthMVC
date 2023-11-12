@@ -38,9 +38,9 @@ var __webpack_exports__ = {};
         size: 'Tamaño de la fuente',
         sizeunit: 'Unidad del tamaño de letra'
       },
-      imAge: {
-        imAge: 'ImAgen',
-        insert: 'Insertar imAgen',
+      image: {
+        image: 'Imagen',
+        insert: 'Insertar imagen',
         resizeFull: 'Redimensionar a tamaño completo',
         resizeHalf: 'Redimensionar a la mitad',
         resizeQuarter: 'Redimensionar a un cuarto',
@@ -52,13 +52,13 @@ var __webpack_exports__ = {};
         shapeCircle: 'Forma: Círculo',
         shapeThumbnail: 'Forma: Miniatura',
         shapeNone: 'Forma: Ninguna',
-        dragImAgeHere: 'Arrastre una imAgen o texto aquí',
-        dropImAge: 'Suelte una imAgen o texto',
+        dragImageHere: 'Arrastre una imagen o texto aquí',
+        dropImage: 'Suelte una imagen o texto',
         selectFromFiles: 'Seleccione un fichero',
         maximumFileSize: 'Tamaño máximo del fichero',
         maximumFileSizeError: 'Superado el tamaño máximo de fichero.',
-        url: 'URL de la imAgen',
-        remove: 'Eliminar la imAgen',
+        url: 'URL de la imagen',
+        remove: 'Eliminar la imagen',
         original: 'Original'
       },
       video: {

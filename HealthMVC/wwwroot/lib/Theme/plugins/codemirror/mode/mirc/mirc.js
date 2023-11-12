@@ -21,7 +21,7 @@ CodeMirror.defineMode("mirc", function() {
     return obj;
   }
   var specials = parseWords("$! $$ $& $? $+ $abook $abs $active $activecid " +
-                            "$activewid $address $addtok $Agent $Agentname $Agentstat $Agentver " +
+                            "$activewid $address $addtok $agent $agentname $agentstat $agentver " +
                             "$alias $and $anick $ansi2mirc $aop $appactive $appstate $asc $asctime " +
                             "$asin $atan $avoice $away $awaymsg $awaytime $banmask $base $bfind " +
                             "$binoff $biton $bnick $bvar $bytes $calc $cb $cd $ceil $chan $chanmodes " +

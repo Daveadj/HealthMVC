@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Superscript',
         size: '大きさ'
       },
-      imAge: {
-        imAge: '画像',
+      image: {
+        image: '画像',
         insert: '画像挿入',
         resizeFull: '最大化',
         resizeHalf: '1/2',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Shape: Circle',
         shapeThumbnail: 'Shape: Thumbnail',
         shapeNone: 'Shape: None',
-        dragImAgeHere: 'ここに画像をドラッグしてください',
-        dropImAge: 'Drop imAge or Text',
+        dragImageHere: 'ここに画像をドラッグしてください',
+        dropImage: 'Drop image or Text',
         selectFromFiles: '画像ファイルを選ぶ',
         maximumFileSize: 'Maximum file size',
         maximumFileSizeError: 'Maximum file size exceeded.',

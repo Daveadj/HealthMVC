@@ -4,17 +4,17 @@
         grid: {
             noDataContent: "לא נמצא",
             deleteConfirm: "האם אתה בטוח?",
-            pAgerFormat: "עמודים: {first} {prev} {pAges} {next} {last} &nbsp;&nbsp; {pAgeIndex} מתוך {pAgeCount}",
-            pAgePrevText: "הקודם",
-            pAgeNextText: "הבא",
-            pAgeFirstText: "ראשון",
-            pAgeLastText: "אחרון",
-            loadMessAge: "אנא המתן ...",
-            invalidMessAge: "נתונים לא חוקיים!"
+            pagerFormat: "עמודים: {first} {prev} {pages} {next} {last} &nbsp;&nbsp; {pageIndex} מתוך {pageCount}",
+            pagePrevText: "הקודם",
+            pageNextText: "הבא",
+            pageFirstText: "ראשון",
+            pageLastText: "אחרון",
+            loadMessage: "אנא המתן ...",
+            invalidMessage: "נתונים לא חוקיים!"
         },
 
         loadIndicator: {
-            messAge: "טוען..."
+            message: "טוען..."
         },
 
         fields: {
@@ -32,14 +32,14 @@
         },
 
         validators: {
-            required: { messAge: "שדה נדרש" },
-            rangeLength: { messAge: "אורכו של הערך הוא מחוץ לטווח המוגדר" },
-            minLength: { messAge: "אורכו של הערך קצר מדי" },
-            maxLength: { messAge: "אורכו של הערך ארוך מדי" },
-            pattern: { messAge: "אורכו של הערך ארוך מדי" },
-            range: { messAge: "ערך מחוץ לטווח" },
-            min: { messAge: "ערך נמוך מדי" },
-            max: { messAge: "גבוה מדי" }
+            required: { message: "שדה נדרש" },
+            rangeLength: { message: "אורכו של הערך הוא מחוץ לטווח המוגדר" },
+            minLength: { message: "אורכו של הערך קצר מדי" },
+            maxLength: { message: "אורכו של הערך ארוך מדי" },
+            pattern: { message: "אורכו של הערך ארוך מדי" },
+            range: { message: "ערך מחוץ לטווח" },
+            min: { message: "ערך נמוך מדי" },
+            max: { message: "גבוה מדי" }
         }
     };
 

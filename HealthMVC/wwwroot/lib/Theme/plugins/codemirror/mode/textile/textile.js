@@ -26,7 +26,7 @@
     footCite: "qualifier",
     header: "header",
     html: "comment",
-    imAge: "string",
+    image: "string",
     italic: "em",
     link: "link",
     linkDefinition: "link",
@@ -109,7 +109,7 @@
       return togglePhraseModifier(stream, state, "code", /@/, 1);
 
     if (ch === "!") {
-      var type = togglePhraseModifier(stream, state, "imAge", /(?:\([^\)]+\))?!/, 1);
+      var type = togglePhraseModifier(stream, state, "image", /(?:\([^\)]+\))?!/, 1);
       stream.match(/^:\S+/); // optional Url portion
       return type;
     }
@@ -142,7 +142,7 @@
 
     styles = styles.concat(activeStyles(
       state, "addition", "bold", "cite", "code", "deletion", "em", "footCite",
-      "imAge", "italic", "link", "span", "strong", "sub", "sup", "table", "tableHeading"));
+      "image", "italic", "link", "span", "strong", "sub", "sup", "table", "tableHeading"));
 
     if (state.layoutType === "header")
       styles.push(TOKEN_STYLES.header + "-" + state.header);

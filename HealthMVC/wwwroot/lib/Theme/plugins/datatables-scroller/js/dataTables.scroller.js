@@ -58,7 +58,7 @@ var DataTable = $.fn.dataTable;
  * the scrolling smooth) is drawn, while the scrolling container gives the
  * visual impression that the whole table is visible. This is done by making use
  * of the pagination abilities of DataTables and moving the table around in the
- * scrolling container DataTables adds to the pAge. The scrolling container is
+ * scrolling container DataTables adds to the page. The scrolling container is
  * forced to the height it would be for the full table display using an extra
  * element.
  *
@@ -199,7 +199,7 @@ var Scroller = function ( dt, opts ) {
 
 		heights: {
 			jump: null,
-			pAge: null,
+			page: null,
 			virtual: null,
 			scroll: null,
 
@@ -316,7 +316,7 @@ $.extend( Scroller.prototype, {
 	 *      end:   {int}, // the 0-indexed record at the bottom of the viewport
 	 *  }
 	*/
-	pAgeInfo: function()
+	pageInfo: function()
 	{
 		var 
 			dt = this.s.dt,
@@ -480,7 +480,7 @@ $.extend( Scroller.prototype, {
 		// Add a 'loading' indicator
 		if ( this.s.loadingIndicator )
 		{
-			this.dom.loader = $('<div class="dataTables_processing dts_loading">'+this.s.dt.oLanguAge.sLoadingRecords+'</div>')
+			this.dom.loader = $('<div class="dataTables_processing dts_loading">'+this.s.dt.oLanguage.sLoadingRecords+'</div>')
 				.css('display', 'none');
 
 			$(this.dom.scroller.parentNode)
@@ -496,7 +496,7 @@ $.extend( Scroller.prototype, {
 			this.s.autoHeight = false;
 		}
 
-		// Scrolling callback to see if a pAge change is needed
+		// Scrolling callback to see if a page change is needed
 		this.s.ingnoreScroll = true;
 		$(this.dom.scroller).on( 'scroll.dt-scroller', function (e) {
 			that._scroll.call( that );
@@ -829,7 +829,7 @@ $.extend( Scroller.prototype, {
 
 		var
 			dt = this.s.dt,
-			languAge = dt.oLanguAge,
+			language = dt.oLanguage,
 			iScrollTop = this.dom.scroller.scrollTop,
 			iStart = Math.floor( this.pixelsToRow(iScrollTop, false, this.s.ani)+1 ),
 			iMax = dt.fnRecordsTotal(),
@@ -846,41 +846,41 @@ $.extend( Scroller.prototype, {
 			   dt.fnRecordsDisplay() == dt.fnRecordsTotal() )
 		{
 			/* Empty record set */
-			sOut = languAge.sInfoEmpty+ languAge.sInfoPostFix;
+			sOut = language.sInfoEmpty+ language.sInfoPostFix;
 		}
 		else if ( dt.fnRecordsDisplay() === 0 )
 		{
 			/* Empty record set after filtering */
-			sOut = languAge.sInfoEmpty +' '+
-				languAge.sInfoFiltered.replace('_MAX_', sMax)+
-					languAge.sInfoPostFix;
+			sOut = language.sInfoEmpty +' '+
+				language.sInfoFiltered.replace('_MAX_', sMax)+
+					language.sInfoPostFix;
 		}
 		else if ( dt.fnRecordsDisplay() == dt.fnRecordsTotal() )
 		{
 			/* Normal record set */
-			sOut = languAge.sInfo.
+			sOut = language.sInfo.
 					replace('_START_', sStart).
 					replace('_END_',   sEnd).
 					replace('_MAX_',   sMax).
 					replace('_TOTAL_', sTotal)+
-				languAge.sInfoPostFix;
+				language.sInfoPostFix;
 		}
 		else
 		{
 			/* Record set after filtering */
-			sOut = languAge.sInfo.
+			sOut = language.sInfo.
 					replace('_START_', sStart).
 					replace('_END_',   sEnd).
 					replace('_MAX_',   sMax).
 					replace('_TOTAL_', sTotal) +' '+
-				languAge.sInfoFiltered.replace(
+				language.sInfoFiltered.replace(
 					'_MAX_',
 					dt.fnFormatNumber(dt.fnRecordsTotal())
 				)+
-				languAge.sInfoPostFix;
+				language.sInfoPostFix;
 		}
 
-		var callback = languAge.fnInfoCallback;
+		var callback = language.fnInfoCallback;
 		if ( callback ) {
 			sOut = callback.call( dt.oInstance,
 				dt, iStart, iEnd, iMax, iTotal, sOut
@@ -1296,11 +1296,11 @@ Api.register( 'scroller.measure()', function ( redraw ) {
 	return this;
 } );
 
-Api.register( 'scroller.pAge()', function() {
+Api.register( 'scroller.page()', function() {
 	var ctx = this.context;
 
 	if ( ctx.length && ctx[0].oScroller ) {
-		return ctx[0].oScroller.pAgeInfo();
+		return ctx[0].oScroller.pageInfo();
 	}
 	// undefined
 } );

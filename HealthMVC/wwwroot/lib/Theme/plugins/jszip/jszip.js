@@ -60,7 +60,7 @@ exports.decode = function(input) {
 
     if (input.substr(0, dataUrlPrefix.length) === dataUrlPrefix) {
         // This is a common error: people give a data url
-        // (data:imAge/png;base64,iVBOR...) with a {base64: true} and
+        // (data:image/png;base64,iVBOR...) with a {base64: true} and
         // wonders why things don't work.
         // We can detect that the string input looks like a data url but we
         // *can't* be sure it is one: removing everything up to the comma would
@@ -533,7 +533,7 @@ var generateZipParts = function(streamInfo, streamedContent, streamingEnded, off
         bitflag |= 0x0008;
     }
     if (!useCustomEncoding && (useUTF8ForFileName || useUTF8ForComment)) {
-        // Bit 11: LanguAge encoding flag (EFS).
+        // Bit 11: Language encoding flag (EFS).
         bitflag |= 0x0800;
     }
 
@@ -573,7 +573,7 @@ var generateZipParts = function(streamInfo, streamedContent, streamingEnded, off
         // set the unicode path extra field. unzip needs at least one extra
         // field to correctly handle unicode path, so using the path is as good
         // as any other information. This could improve the situation with
-        // other archive manAgers too.
+        // other archive managers too.
         // This field is usually used without the utf8 flag, with a non
         // unicode path in the header (winrar, winzip). This helps (a bit)
         // with the messy Windows' default compressed folders feature but
@@ -1058,7 +1058,7 @@ JSZip.support = require('./support');
 JSZip.defaults = require('./defaults');
 
 // TODO find a better way to handle this version,
-// a require('packAge.json').version doesn't work with webpack, see #327
+// a require('package.json').version doesn't work with webpack, see #327
 JSZip.version = "3.7.1";
 
 JSZip.loadAsync = function (content, options) {
@@ -3569,7 +3569,7 @@ ZipEntries.prototype = {
         this.zipCommentLength = this.reader.readInt(2);
         // warning : the encoding depends of the system locale
         // On a linux machine with LANG=en_US.utf8, this field is utf8 encoded.
-        // On a windows machine, this field is encoded with the localized windows code pAge.
+        // On a windows machine, this field is encoded with the localized windows code page.
         var zipComment = this.reader.readData(this.zipCommentLength);
         var decodeParamType = support.uint8array ? "uint8array" : "array";
         // To get consistent behavior with the generation part, we will assume that
@@ -3670,14 +3670,14 @@ ZipEntries.prototype = {
     readEndOfCentral: function() {
         var offset = this.reader.lastIndexOfSignature(sig.CENTRAL_DIRECTORY_END);
         if (offset < 0) {
-            // Check if the content is a truncated zip or complete garbAge.
+            // Check if the content is a truncated zip or complete garbage.
             // A "LOCAL_FILE_HEADER" is not required at the beginning (auto
             // extractible zip for example) but it can give a good hint.
             // If an ajax request was used without responseType, we will also
             // get unreadable data.
-            var isGarbAge = !this.isSignature(0, sig.LOCAL_FILE_HEADER);
+            var isGarbage = !this.isSignature(0, sig.LOCAL_FILE_HEADER);
 
-            if (isGarbAge) {
+            if (isGarbage) {
                 throw new Error("Can't find end of central directory : is this a zip file ? " +
                                 "If it is, see https://stuk.github.io/jszip/documentation/howto/read_zip.html");
             } else {
@@ -4004,7 +4004,7 @@ ZipEntry.prototype = {
             if (upath !== null) {
                 this.fileNameStr = upath;
             } else {
-                // ASCII text or unsupported code pAge
+                // ASCII text or unsupported code page
                 var fileNameByteArray =  utils.transformTo(decodeParamType, this.fileName);
                 this.fileNameStr = this.loadOptions.decodeFileName(fileNameByteArray);
             }
@@ -4013,7 +4013,7 @@ ZipEntry.prototype = {
             if (ucomment !== null) {
                 this.fileCommentStr = ucomment;
             } else {
-                // ASCII text or unsupported code pAge
+                // ASCII text or unsupported code page
                 var commentByteArray =  utils.transformTo(decodeParamType, this.fileComment);
                 this.fileCommentStr = this.loadOptions.decodeFileName(commentByteArray);
             }
@@ -4223,11 +4223,11 @@ var scheduleDrain;
     scheduleDrain = function () {
       element.data = (called = ++called % 2);
     };
-  } else if (!global.setImmediate && typeof global.MessAgeChannel !== 'undefined') {
-    var channel = new global.MessAgeChannel();
-    channel.port1.onmessAge = nextTick;
+  } else if (!global.setImmediate && typeof global.MessageChannel !== 'undefined') {
+    var channel = new global.MessageChannel();
+    channel.port1.onmessage = nextTick;
     scheduleDrain = function () {
-      channel.port2.postMessAge(0);
+      channel.port2.postMessage(0);
     };
   } else if ('document' in global && 'onreadystatechange' in global.document.createElement('script')) {
     scheduleDrain = function () {
@@ -4576,7 +4576,7 @@ module.exports = pako;
 var zlib_deflate = require('./zlib/deflate');
 var utils        = require('./utils/common');
 var strings      = require('./utils/strings');
-var msg          = require('./zlib/messAges');
+var msg          = require('./zlib/messages');
 var ZStream      = require('./zlib/zstream');
 
 var toString = Object.prototype.toString;
@@ -4636,7 +4636,7 @@ var Z_DEFLATED  = 8;
 /**
  * Deflate.msg -> String
  *
- * Error messAge, if [[Deflate.err]] != 0
+ * Error message, if [[Deflate.err]] != 0
  **/
 
 
@@ -4713,7 +4713,7 @@ function Deflate(options) {
   }
 
   this.err    = 0;      // error code, if happens (0 = Z_OK)
-  this.msg    = '';     // error messAge
+  this.msg    = '';     // error message
   this.ended  = false;  // used to avoid multiple onEnd() calls
   this.chunks = [];     // chunks of compressed data
 
@@ -4971,7 +4971,7 @@ exports.deflate = deflate;
 exports.deflateRaw = deflateRaw;
 exports.gzip = gzip;
 
-},{"./utils/common":41,"./utils/strings":42,"./zlib/deflate":46,"./zlib/messAges":51,"./zlib/zstream":53}],40:[function(require,module,exports){
+},{"./utils/common":41,"./utils/strings":42,"./zlib/deflate":46,"./zlib/messages":51,"./zlib/zstream":53}],40:[function(require,module,exports){
 'use strict';
 
 
@@ -4979,7 +4979,7 @@ var zlib_inflate = require('./zlib/inflate');
 var utils        = require('./utils/common');
 var strings      = require('./utils/strings');
 var c            = require('./zlib/constants');
-var msg          = require('./zlib/messAges');
+var msg          = require('./zlib/messages');
 var ZStream      = require('./zlib/zstream');
 var GZheader     = require('./zlib/gzheader');
 
@@ -5019,7 +5019,7 @@ var toString = Object.prototype.toString;
 /**
  * Inflate.msg -> String
  *
- * Error messAge, if [[Inflate.err]] != 0
+ * Error message, if [[Inflate.err]] != 0
  **/
 
 
@@ -5099,7 +5099,7 @@ function Inflate(options) {
   }
 
   this.err    = 0;      // error code, if happens (0 = Z_OK)
-  this.msg    = '';     // error messAge
+  this.msg    = '';     // error message
   this.ended  = false;  // used to avoid multiple onEnd() calls
   this.chunks = [];     // chunks of compressed data
 
@@ -5391,7 +5391,7 @@ exports.inflate = inflate;
 exports.inflateRaw = inflateRaw;
 exports.ungzip  = inflate;
 
-},{"./utils/common":41,"./utils/strings":42,"./zlib/constants":44,"./zlib/gzheader":47,"./zlib/inflate":49,"./zlib/messAges":51,"./zlib/zstream":53}],41:[function(require,module,exports){
+},{"./utils/common":41,"./utils/strings":42,"./zlib/constants":44,"./zlib/gzheader":47,"./zlib/inflate":49,"./zlib/messages":51,"./zlib/zstream":53}],41:[function(require,module,exports){
 'use strict';
 
 
@@ -5693,7 +5693,7 @@ exports.utf8border = function (buf, max) {
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -5742,7 +5742,7 @@ module.exports = adler32;
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -5816,7 +5816,7 @@ module.exports = {
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -5873,7 +5873,7 @@ module.exports = crc32;
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -5892,7 +5892,7 @@ var utils   = require('../utils/common');
 var trees   = require('./trees');
 var adler32 = require('./adler32');
 var crc32   = require('./crc32');
-var msg     = require('./messAges');
+var msg     = require('./messages');
 
 /* Public constants ==========================================================*/
 /* ===========================================================================*/
@@ -6092,7 +6092,7 @@ function read_buf(strm, buf, start, size) {
  * Set match_start to the longest match starting at the given string and
  * return its length. Matches shorter or equal to prev_length are discarded,
  * in which case the result is equal to prev_length and match_start is
- * garbAge.
+ * garbage.
  * IN assertions: cur_match is the head of the hash chain for the current
  *   string (strstart) and its distance is <= MAX_DIST, and prev_length >= 1
  * OUT assertion: the match length is not greater than s->lookahead.
@@ -6246,9 +6246,9 @@ function fill_window(s) {
       s.block_start -= _w_size;
 
       /* Slide the hash table (could be avoided with 32 bit values
-       at the expense of memory usAge). We slide even when level == 0
+       at the expense of memory usage). We slide even when level == 0
        to keep the hash table consistent if we switch back to level > 0
-       later. (Using level 0 permanently is not an optimal usAge of
+       later. (Using level 0 permanently is not an optimal usage of
        zlib, so we don't care about this pathological case.)
        */
 
@@ -6264,7 +6264,7 @@ function fill_window(s) {
       do {
         m = s.prev[--p];
         s.prev[p] = (m >= _w_size ? m - _w_size : 0);
-        /* If n is not on any hash chain, prev[n] is garbAge but
+        /* If n is not on any hash chain, prev[n] is garbage but
          * its value will never be used.
          */
       } while (--n);
@@ -6313,7 +6313,7 @@ function fill_window(s) {
         }
       }
     }
-    /* If the whole input has less than MIN_MATCH bytes, ins_h is garbAge,
+    /* If the whole input has less than MIN_MATCH bytes, ins_h is garbage,
      * but this is not important since only literal bytes will be emitted.
      */
 
@@ -6544,7 +6544,7 @@ function deflate_fast(s, flush) {
 //#if MIN_MATCH != 3
 //                Call UPDATE_HASH() MIN_MATCH-3 more times
 //#endif
-        /* If lookahead < MIN_MATCH, ins_h is garbAge, but it does not
+        /* If lookahead < MIN_MATCH, ins_h is garbage, but it does not
          * matter since it will be recomputed at next deflate call.
          */
       }
@@ -6643,7 +6643,7 @@ function deflate_slow(s, flush) {
       if (s.match_length <= 5 &&
          (s.strategy === Z_FILTERED || (s.match_length === MIN_MATCH && s.strstart - s.match_start > 4096/*TOO_FAR*/))) {
 
-        /* If prev_match is also MIN_MATCH, match_start is garbAge
+        /* If prev_match is also MIN_MATCH, match_start is garbage
          * but we will ignore the current match anyway.
          */
         s.match_length = MIN_MATCH - 1;
@@ -7742,14 +7742,14 @@ exports.deflatePrime = deflatePrime;
 exports.deflateTune = deflateTune;
 */
 
-},{"../utils/common":41,"./adler32":43,"./crc32":45,"./messAges":51,"./trees":52}],47:[function(require,module,exports){
+},{"../utils/common":41,"./adler32":43,"./crc32":45,"./messages":51,"./trees":52}],47:[function(require,module,exports){
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -7809,7 +7809,7 @@ module.exports = GZheader;
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -8156,7 +8156,7 @@ module.exports = function inflate_fast(strm, start) {
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -8313,7 +8313,7 @@ function InflateState() {
   this.have = 0;              /* number of code lengths in lens[] */
   this.next = null;              /* next available space in codes[] */
 
-  this.lens = new utils.Buf16(320); /* temporary storAge for code lengths */
+  this.lens = new utils.Buf16(320); /* temporary storage for code lengths */
   this.work = new utils.Buf16(288); /* work area for code table building */
 
   /*
@@ -8483,10 +8483,10 @@ function fixedtables(state) {
  is loaded.
 
  Providing output buffers larger than 32K to inflate() should provide a speed
- advantAge, since only the last 32K of output is copied to the sliding window
+ advantage, since only the last 32K of output is copied to the sliding window
  upon return from inflate(), and since all distances after the first 32K of
  output will fall in the output data, making match copies simpler and faster.
- The advantAge may be dependent on the size of the processor's data caches.
+ The advantage may be dependent on the size of the processor's data caches.
  */
 function updatewindow(strm, src, end, copy) {
   var dist;
@@ -9714,7 +9714,7 @@ exports.inflateUndermine = inflateUndermine;
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -10059,7 +10059,7 @@ module.exports = function inflate_table(type, lens, lens_index, codes, table, ta
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -10093,7 +10093,7 @@ module.exports = {
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -11315,7 +11315,7 @@ exports._tr_align = _tr_align;
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -11345,7 +11345,7 @@ function ZStream() {
   this.avail_out = 0;
   /* total number of bytes output so far */
   this.total_out = 0;
-  /* last error messAge, NULL if no error */
+  /* last error message, NULL if no error */
   this.msg = ''/*Z_NULL*/;
   /* not visible by applications */
   this.state = null;

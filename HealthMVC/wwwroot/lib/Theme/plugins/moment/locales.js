@@ -2310,7 +2310,7 @@
             h: 'en time',
             hh: '%d timer',
             d: 'en dag',
-            dd: '%d dAge',
+            dd: '%d dage',
             M: 'en måned',
             MM: '%d måneder',
             y: 'et år',
@@ -2331,7 +2331,7 @@
             m: ['eine Minute', 'einer Minute'],
             h: ['eine Stunde', 'einer Stunde'],
             d: ['ein Tag', 'einem Tag'],
-            dd: [number + ' TAge', number + ' TAgen'],
+            dd: [number + ' Tage', number + ' Tagen'],
             w: ['eine Woche', 'einer Woche'],
             M: ['ein Monat', 'einem Monat'],
             MM: [number + ' Monate', number + ' Monaten'],
@@ -2404,7 +2404,7 @@
             m: ['eine Minute', 'einer Minute'],
             h: ['eine Stunde', 'einer Stunde'],
             d: ['ein Tag', 'einem Tag'],
-            dd: [number + ' TAge', number + ' TAgen'],
+            dd: [number + ' Tage', number + ' Tagen'],
             w: ['eine Woche', 'einer Woche'],
             M: ['ein Monat', 'einem Monat'],
             MM: [number + ' Monate', number + ' Monaten'],
@@ -2477,7 +2477,7 @@
             m: ['eine Minute', 'einer Minute'],
             h: ['eine Stunde', 'einer Stunde'],
             d: ['ein Tag', 'einem Tag'],
-            dd: [number + ' TAge', number + ' TAgen'],
+            dd: [number + ' Tage', number + ' Tagen'],
             w: ['eine Woche', 'einer Woche'],
             M: ['ein Monat', 'einem Monat'],
             MM: [number + ' Monate', number + ' Monaten'],
@@ -4472,7 +4472,7 @@
             h: 'ien oere',
             hh: '%d oeren',
             d: 'ien dei',
-            dd: '%d dAgen',
+            dd: '%d dagen',
             M: 'ien moanne',
             MM: '%d moannen',
             y: 'ien jier',
@@ -8299,7 +8299,7 @@
             h: 'en time',
             hh: '%d timer',
             d: 'en dag',
-            dd: '%d dAger',
+            dd: '%d dager',
             w: 'en uke',
             ww: '%d uker',
             M: 'en måned',
@@ -8511,7 +8511,7 @@
             h: 'één uur',
             hh: '%d uur',
             d: 'één dag',
-            dd: '%d dAgen',
+            dd: '%d dagen',
             M: 'één maand',
             MM: '%d maanden',
             y: 'één jaar',
@@ -8609,7 +8609,7 @@
             h: 'één uur',
             hh: '%d uur',
             d: 'één dag',
-            dd: '%d dAgen',
+            dd: '%d dagen',
             w: 'één week',
             ww: '%d weken',
             M: 'één maand',
@@ -9485,7 +9485,7 @@
     //! moment.js locale configuration
 
     moment.defineLocale('se', {
-        months: 'ođđajAgemánnu_guovvamánnu_njukčamánnu_cuoŋománnu_miessemánnu_geassemánnu_suoidnemánnu_borgemánnu_čakčamánnu_golggotmánnu_skábmamánnu_juovlamánnu'.split(
+        months: 'ođđajagemánnu_guovvamánnu_njukčamánnu_cuoŋománnu_miessemánnu_geassemánnu_suoidnemánnu_borgemánnu_čakčamánnu_golggotmánnu_skábmamánnu_juovlamánnu'.split(
             '_'
         ),
         monthsShort: 'ođđj_guov_njuk_cuo_mies_geas_suoi_borg_čakč_golg_skáb_juov'.split(

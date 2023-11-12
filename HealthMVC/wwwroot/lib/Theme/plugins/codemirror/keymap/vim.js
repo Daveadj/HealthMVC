@@ -93,8 +93,8 @@
     { keys: 'S', type: 'keyToKey', toKeys: 'VdO', context: 'visual' },
     { keys: '<Home>', type: 'keyToKey', toKeys: '0' },
     { keys: '<End>', type: 'keyToKey', toKeys: '$' },
-    { keys: '<PAgeUp>', type: 'keyToKey', toKeys: '<C-b>' },
-    { keys: '<PAgeDown>', type: 'keyToKey', toKeys: '<C-f>' },
+    { keys: '<PageUp>', type: 'keyToKey', toKeys: '<C-b>' },
+    { keys: '<PageDown>', type: 'keyToKey', toKeys: '<C-f>' },
     { keys: '<CR>', type: 'keyToKey', toKeys: 'j^', context: 'normal' },
     { keys: '<Ins>', type: 'keyToKey', toKeys: 'i', context: 'normal'},
     { keys: '<Ins>', type: 'action', action: 'toggleOverwrite', context: 'insert' },
@@ -120,8 +120,8 @@
     { keys: '}', type: 'motion', motion: 'moveByParagraph', motionArgs: { forward: true, toJumplist: true }},
     { keys: '(', type: 'motion', motion: 'moveBySentence', motionArgs: { forward: false }},
     { keys: ')', type: 'motion', motion: 'moveBySentence', motionArgs: { forward: true }},
-    { keys: '<C-f>', type: 'motion', motion: 'moveByPAge', motionArgs: { forward: true }},
-    { keys: '<C-b>', type: 'motion', motion: 'moveByPAge', motionArgs: { forward: false }},
+    { keys: '<C-f>', type: 'motion', motion: 'moveByPage', motionArgs: { forward: true }},
+    { keys: '<C-b>', type: 'motion', motion: 'moveByPage', motionArgs: { forward: false }},
     { keys: '<C-d>', type: 'motion', motion: 'moveByScroll', motionArgs: { forward: true, explicitRepeat: true }},
     { keys: '<C-u>', type: 'motion', motion: 'moveByScroll', motionArgs: { forward: false, explicitRepeat: true }},
     { keys: 'gg', type: 'motion', motion: 'moveToLineOrEdgeOfDocument', motionArgs: { forward: false, explicitRepeat: true, linewise: true, toJumplist: true }},
@@ -1982,13 +1982,13 @@
         vim.lastHPos = res.ch;
         return res;
       },
-      moveByPAge: function(cm, head, motionArgs) {
-        // CodeMirror only exposes functions that move the cursor pAge down, so
+      moveByPage: function(cm, head, motionArgs) {
+        // CodeMirror only exposes functions that move the cursor page down, so
         // doing this bad hack to move the cursor and move it back. evalInput
         // will move the cursor to where it should be in the end.
         var curStart = head;
         var repeat = motionArgs.repeat;
-        return cm.findPosV(curStart, (motionArgs.forward ? repeat : -repeat), 'pAge');
+        return cm.findPosV(curStart, (motionArgs.forward ? repeat : -repeat), 'page');
       },
       moveByParagraph: function(cm, head, motionArgs) {
         var dir = motionArgs.forward ? 1 : -1;
@@ -4301,7 +4301,7 @@
 
     /**
      * dom - Document Object Manipulator
-     * UsAge:
+     * Usage:
      *   dom('<tag>'|<node>[, ...{<attributes>|<$styles>}|<child-node>|'<text>'])
      * Examples:
      *   dom('div', {id:'xyz'}, dom('p', 'CM rocks!', {$color:'red'}))
@@ -4325,7 +4325,7 @@
     }
 
     function showConfirm(cm, template) {
-      var pre = dom('pre', {$color: 'red', class: 'cm-vim-messAge'}, template);
+      var pre = dom('pre', {$color: 'red', class: 'cm-vim-message'}, template);
       if (cm.openNotification) {
         cm.openNotification(pre, {bottom: true, duration: 5000});
       } else {
@@ -4889,7 +4889,7 @@
         if (!optionIsBoolean && value === undefined || forceGet) {
           var oldValue = getOption(optionName, cm, setCfg);
           if (oldValue instanceof Error) {
-            showConfirm(cm, oldValue.messAge);
+            showConfirm(cm, oldValue.message);
           } else if (oldValue === true || oldValue === false) {
             showConfirm(cm, ' ' + (oldValue ? '' : 'no') + optionName);
           } else {
@@ -4898,7 +4898,7 @@
         } else {
           var setOptionReturn = setOption(optionName, value, cm, setCfg);
           if (setOptionReturn instanceof Error) {
-            showConfirm(cm, setOptionReturn.messAge);
+            showConfirm(cm, setOptionReturn.message);
           }
         }
       },
@@ -5213,7 +5213,7 @@
           stream.eatSpace();
 
           // Record the streams position at the beginning of the loop for use
-          // in error messAges.
+          // in error messages.
           var count = stream.pos;
 
           if (!stream.match(/[a-zA-Z]/, false)) {

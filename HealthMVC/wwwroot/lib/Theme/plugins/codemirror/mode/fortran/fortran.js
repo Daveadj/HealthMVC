@@ -56,7 +56,7 @@ CodeMirror.defineMode("fortran", function() {
                           "c_funloc", "c_loc", "c_associated", "c_null_ptr",
                           "c_null_funptr", "c_f_pointer", "c_null_char",
                           "c_alert", "c_backspace", "c_form_feed",
-                          "c_new_line", "c_carriAge_return",
+                          "c_new_line", "c_carriage_return",
                           "c_horizontal_tab", "c_vertical_tab", "dabs",
                           "dacos", "dasin", "datan", "date_and_time",
                           "dbesj", "dbesj", "dbesjn", "dbesy", "dbesy",

@@ -9,10 +9,10 @@
 }(function( $ ) {
 
 /*
- * Translated default messAges for the jQuery validation plugin.
+ * Translated default messages for the jQuery validation plugin.
  * Locale: HY_AM (Armenian; հայերեն լեզու)
  */
-$.extend( $.validator.messAges, {
+$.extend( $.validator.messages, {
 	required: "Պարտադիր լրացման դաշտ",
 	remote: "Ներմուծեք ճիշտ արժեքը",
 	email: "Ներմուծեք վավեր էլեկտրոնային փոստի հասցե",

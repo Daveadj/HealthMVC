@@ -35,7 +35,7 @@ return /******/ (function() { // webpackBootstrap
 // THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS BE LIABLE FOR ANY CLAIM, DAMAgeS OR OTHER LIABILITY, WHETHER IN AN
+// AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
 // ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
@@ -93,36 +93,36 @@ var warned = false; // The assert module provides functions that throw
 
 var assert = module.exports = ok;
 var NO_EXCEPTION_SENTINEL = {}; // All of the following functions must throw an AssertionError
-// when a corresponding condition is not met, with a messAge that
+// when a corresponding condition is not met, with a message that
 // may be undefined if not provided. All assertion methods provide
 // both the actual and expected values to the assertion error for
 // display purposes.
 
 function innerFail(obj) {
-  if (obj.messAge instanceof Error) throw obj.messAge;
+  if (obj.message instanceof Error) throw obj.message;
   throw new AssertionError(obj);
 }
 
-function fail(actual, expected, messAge, operator, stackStartFn) {
+function fail(actual, expected, message, operator, stackStartFn) {
   var argsLen = arguments.length;
-  var internalMessAge;
+  var internalMessage;
 
   if (argsLen === 0) {
-    internalMessAge = 'Failed';
+    internalMessage = 'Failed';
   } else if (argsLen === 1) {
-    messAge = actual;
+    message = actual;
     actual = undefined;
   } else {
     if (warned === false) {
       warned = true;
       var warn = process.emitWarning ? process.emitWarning : console.warn.bind(console);
-      warn('assert.fail() with more than one argument is deprecated. ' + 'Please use assert.strictEqual() instead or only pass a messAge.', 'DeprecationWarning', 'DEP0094');
+      warn('assert.fail() with more than one argument is deprecated. ' + 'Please use assert.strictEqual() instead or only pass a message.', 'DeprecationWarning', 'DEP0094');
     }
 
     if (argsLen === 2) operator = '!=';
   }
 
-  if (messAge instanceof Error) throw messAge;
+  if (message instanceof Error) throw message;
   var errArgs = {
     actual: actual,
     expected: expected,
@@ -130,15 +130,15 @@ function fail(actual, expected, messAge, operator, stackStartFn) {
     stackStartFn: stackStartFn || fail
   };
 
-  if (messAge !== undefined) {
-    errArgs.messAge = messAge;
+  if (message !== undefined) {
+    errArgs.message = message;
   }
 
   var err = new AssertionError(errArgs);
 
-  if (internalMessAge) {
-    err.messAge = internalMessAge;
-    err.generatedMessAge = true;
+  if (internalMessage) {
+    err.message = internalMessage;
+    err.generatedMessage = true;
   }
 
   throw err;
@@ -148,25 +148,25 @@ assert.fail = fail; // The AssertionError is defined in internal/error.
 
 assert.AssertionError = AssertionError;
 
-function innerOk(fn, argLen, value, messAge) {
+function innerOk(fn, argLen, value, message) {
   if (!value) {
-    var generatedMessAge = false;
+    var generatedMessage = false;
 
     if (argLen === 0) {
-      generatedMessAge = true;
-      messAge = 'No value argument passed to `assert.ok()`';
-    } else if (messAge instanceof Error) {
-      throw messAge;
+      generatedMessage = true;
+      message = 'No value argument passed to `assert.ok()`';
+    } else if (message instanceof Error) {
+      throw message;
     }
 
     var err = new AssertionError({
       actual: value,
       expected: true,
-      messAge: messAge,
+      message: message,
       operator: '==',
       stackStartFn: fn
     });
-    err.generatedMessAge = generatedMessAge;
+    err.generatedMessage = generatedMessage;
     throw err;
   }
 } // Pure assertion tests whether a value is truthy, as determined
@@ -185,7 +185,7 @@ assert.ok = ok; // The equality assertion tests shallow, coercive equality with 
 
 /* eslint-disable no-restricted-properties */
 
-assert.equal = function equal(actual, expected, messAge) {
+assert.equal = function equal(actual, expected, message) {
   if (arguments.length < 2) {
     throw new ERR_MISSING_ARGS('actual', 'expected');
   } // eslint-disable-next-line eqeqeq
@@ -195,7 +195,7 @@ assert.equal = function equal(actual, expected, messAge) {
     innerFail({
       actual: actual,
       expected: expected,
-      messAge: messAge,
+      message: message,
       operator: '==',
       stackStartFn: equal
     });
@@ -204,7 +204,7 @@ assert.equal = function equal(actual, expected, messAge) {
 // equal with !=.
 
 
-assert.notEqual = function notEqual(actual, expected, messAge) {
+assert.notEqual = function notEqual(actual, expected, message) {
   if (arguments.length < 2) {
     throw new ERR_MISSING_ARGS('actual', 'expected');
   } // eslint-disable-next-line eqeqeq
@@ -214,7 +214,7 @@ assert.notEqual = function notEqual(actual, expected, messAge) {
     innerFail({
       actual: actual,
       expected: expected,
-      messAge: messAge,
+      message: message,
       operator: '!=',
       stackStartFn: notEqual
     });
@@ -222,7 +222,7 @@ assert.notEqual = function notEqual(actual, expected, messAge) {
 }; // The equivalence assertion tests a deep equality relation.
 
 
-assert.deepEqual = function deepEqual(actual, expected, messAge) {
+assert.deepEqual = function deepEqual(actual, expected, message) {
   if (arguments.length < 2) {
     throw new ERR_MISSING_ARGS('actual', 'expected');
   }
@@ -233,7 +233,7 @@ assert.deepEqual = function deepEqual(actual, expected, messAge) {
     innerFail({
       actual: actual,
       expected: expected,
-      messAge: messAge,
+      message: message,
       operator: 'deepEqual',
       stackStartFn: deepEqual
     });
@@ -241,7 +241,7 @@ assert.deepEqual = function deepEqual(actual, expected, messAge) {
 }; // The non-equivalence assertion tests for any deep inequality.
 
 
-assert.notDeepEqual = function notDeepEqual(actual, expected, messAge) {
+assert.notDeepEqual = function notDeepEqual(actual, expected, message) {
   if (arguments.length < 2) {
     throw new ERR_MISSING_ARGS('actual', 'expected');
   }
@@ -252,7 +252,7 @@ assert.notDeepEqual = function notDeepEqual(actual, expected, messAge) {
     innerFail({
       actual: actual,
       expected: expected,
-      messAge: messAge,
+      message: message,
       operator: 'notDeepEqual',
       stackStartFn: notDeepEqual
     });
@@ -261,7 +261,7 @@ assert.notDeepEqual = function notDeepEqual(actual, expected, messAge) {
 /* eslint-enable */
 
 
-assert.deepStrictEqual = function deepStrictEqual(actual, expected, messAge) {
+assert.deepStrictEqual = function deepStrictEqual(actual, expected, message) {
   if (arguments.length < 2) {
     throw new ERR_MISSING_ARGS('actual', 'expected');
   }
@@ -272,7 +272,7 @@ assert.deepStrictEqual = function deepStrictEqual(actual, expected, messAge) {
     innerFail({
       actual: actual,
       expected: expected,
-      messAge: messAge,
+      message: message,
       operator: 'deepStrictEqual',
       stackStartFn: deepStrictEqual
     });
@@ -281,7 +281,7 @@ assert.deepStrictEqual = function deepStrictEqual(actual, expected, messAge) {
 
 assert.notDeepStrictEqual = notDeepStrictEqual;
 
-function notDeepStrictEqual(actual, expected, messAge) {
+function notDeepStrictEqual(actual, expected, message) {
   if (arguments.length < 2) {
     throw new ERR_MISSING_ARGS('actual', 'expected');
   }
@@ -292,14 +292,14 @@ function notDeepStrictEqual(actual, expected, messAge) {
     innerFail({
       actual: actual,
       expected: expected,
-      messAge: messAge,
+      message: message,
       operator: 'notDeepStrictEqual',
       stackStartFn: notDeepStrictEqual
     });
   }
 }
 
-assert.strictEqual = function strictEqual(actual, expected, messAge) {
+assert.strictEqual = function strictEqual(actual, expected, message) {
   if (arguments.length < 2) {
     throw new ERR_MISSING_ARGS('actual', 'expected');
   }
@@ -308,14 +308,14 @@ assert.strictEqual = function strictEqual(actual, expected, messAge) {
     innerFail({
       actual: actual,
       expected: expected,
-      messAge: messAge,
+      message: message,
       operator: 'strictEqual',
       stackStartFn: strictEqual
     });
   }
 };
 
-assert.notStrictEqual = function notStrictEqual(actual, expected, messAge) {
+assert.notStrictEqual = function notStrictEqual(actual, expected, message) {
   if (arguments.length < 2) {
     throw new ERR_MISSING_ARGS('actual', 'expected');
   }
@@ -324,7 +324,7 @@ assert.notStrictEqual = function notStrictEqual(actual, expected, messAge) {
     innerFail({
       actual: actual,
       expected: expected,
-      messAge: messAge,
+      message: message,
       operator: 'notStrictEqual',
       stackStartFn: notStrictEqual
     });
@@ -347,9 +347,9 @@ var Comparison = function Comparison(obj, keys, actual) {
   });
 };
 
-function compareExceptionKey(actual, expected, key, messAge, keys, fn) {
+function compareExceptionKey(actual, expected, key, message, keys, fn) {
   if (!(key in actual) || !isDeepStrictEqual(actual[key], expected[key])) {
-    if (!messAge) {
+    if (!message) {
       // Create placeholder objects to create a nice output.
       var a = new Comparison(actual, keys);
       var b = new Comparison(expected, keys, actual);
@@ -368,7 +368,7 @@ function compareExceptionKey(actual, expected, key, messAge, keys, fn) {
     innerFail({
       actual: actual,
       expected: expected,
-      messAge: messAge,
+      message: message,
       operator: fn.name,
       stackStartFn: fn
     });
@@ -388,7 +388,7 @@ function expectedException(actual, expected, msg, fn) {
       var err = new AssertionError({
         actual: actual,
         expected: expected,
-        messAge: msg,
+        message: msg,
         operator: 'deepStrictEqual',
         stackStartFn: fn
       });
@@ -396,11 +396,11 @@ function expectedException(actual, expected, msg, fn) {
       throw err;
     }
 
-    var keys = Object.keys(expected); // Special handle errors to make sure the name and the messAge are compared
+    var keys = Object.keys(expected); // Special handle errors to make sure the name and the message are compared
     // as well.
 
     if (expected instanceof Error) {
-      keys.push('name', 'messAge');
+      keys.push('name', 'message');
     } else if (keys.length === 0) {
       throw new ERR_INVALID_ARG_VALUE('error', expected, 'may not be an empty object');
     }
@@ -479,21 +479,21 @@ function waitForActual(promiseFn) {
   });
 }
 
-function expectsError(stackStartFn, actual, error, messAge) {
+function expectsError(stackStartFn, actual, error, message) {
   if (typeof error === 'string') {
     if (arguments.length === 4) {
       throw new ERR_INVALID_ARG_TYPE('error', ['Object', 'Error', 'Function', 'RegExp'], error);
     }
 
     if (_typeof(actual) === 'object' && actual !== null) {
-      if (actual.messAge === error) {
-        throw new ERR_AMBIGUOUS_ARGUMENT('error/messAge', "The error messAge \"".concat(actual.messAge, "\" is identical to the messAge."));
+      if (actual.message === error) {
+        throw new ERR_AMBIGUOUS_ARGUMENT('error/message', "The error message \"".concat(actual.message, "\" is identical to the message."));
       }
     } else if (actual === error) {
-      throw new ERR_AMBIGUOUS_ARGUMENT('error/messAge', "The error \"".concat(actual, "\" is identical to the messAge."));
+      throw new ERR_AMBIGUOUS_ARGUMENT('error/message', "The error \"".concat(actual, "\" is identical to the message."));
     }
 
-    messAge = error;
+    message = error;
     error = undefined;
   } else if (error != null && _typeof(error) !== 'object' && typeof error !== 'function') {
     throw new ERR_INVALID_ARG_TYPE('error', ['Object', 'Error', 'Function', 'RegExp'], error);
@@ -506,38 +506,38 @@ function expectsError(stackStartFn, actual, error, messAge) {
       details += " (".concat(error.name, ")");
     }
 
-    details += messAge ? ": ".concat(messAge) : '.';
+    details += message ? ": ".concat(message) : '.';
     var fnType = stackStartFn.name === 'rejects' ? 'rejection' : 'exception';
     innerFail({
       actual: undefined,
       expected: error,
       operator: stackStartFn.name,
-      messAge: "Missing expected ".concat(fnType).concat(details),
+      message: "Missing expected ".concat(fnType).concat(details),
       stackStartFn: stackStartFn
     });
   }
 
-  if (error && !expectedException(actual, error, messAge, stackStartFn)) {
+  if (error && !expectedException(actual, error, message, stackStartFn)) {
     throw actual;
   }
 }
 
-function expectsNoError(stackStartFn, actual, error, messAge) {
+function expectsNoError(stackStartFn, actual, error, message) {
   if (actual === NO_EXCEPTION_SENTINEL) return;
 
   if (typeof error === 'string') {
-    messAge = error;
+    message = error;
     error = undefined;
   }
 
   if (!error || expectedException(actual, error)) {
-    var details = messAge ? ": ".concat(messAge) : '.';
+    var details = message ? ": ".concat(message) : '.';
     var fnType = stackStartFn.name === 'doesNotReject' ? 'rejection' : 'exception';
     innerFail({
       actual: actual,
       expected: error,
       operator: stackStartFn.name,
-      messAge: "Got unwanted ".concat(fnType).concat(details, "\n") + "Actual messAge: \"".concat(actual && actual.messAge, "\""),
+      message: "Got unwanted ".concat(fnType).concat(details, "\n") + "Actual message: \"".concat(actual && actual.message, "\""),
       stackStartFn: stackStartFn
     });
   }
@@ -583,23 +583,23 @@ assert.doesNotReject = function doesNotReject(fn) {
 
 assert.ifError = function ifError(err) {
   if (err !== null && err !== undefined) {
-    var messAge = 'ifError got unwanted exception: ';
+    var message = 'ifError got unwanted exception: ';
 
-    if (_typeof(err) === 'object' && typeof err.messAge === 'string') {
-      if (err.messAge.length === 0 && err.constructor) {
-        messAge += err.constructor.name;
+    if (_typeof(err) === 'object' && typeof err.message === 'string') {
+      if (err.message.length === 0 && err.constructor) {
+        message += err.constructor.name;
       } else {
-        messAge += err.messAge;
+        message += err.message;
       }
     } else {
-      messAge += inspect(err);
+      message += inspect(err);
     }
 
     var newErr = new AssertionError({
       actual: err,
       expected: null,
       operator: 'ifError',
-      messAge: messAge,
+      message: message,
       stackStartFn: ifError
     }); // Make sure we actually have a stack trace!
 
@@ -748,15 +748,15 @@ function copyError(source) {
   keys.forEach(function (key) {
     target[key] = source[key];
   });
-  Object.defineProperty(target, 'messAge', {
-    value: source.messAge
+  Object.defineProperty(target, 'message', {
+    value: source.message
   });
   return target;
 }
 
 function inspectValue(val) {
   // The util.inspect default values could be changed. This makes sure the
-  // error messAges contain the necessary information nevertheless.
+  // error messages contain the necessary information nevertheless.
   return inspect(val, {
     compact: false,
     customInspect: false,
@@ -1012,7 +1012,7 @@ function (_Error) {
       throw new ERR_INVALID_ARG_TYPE('options', 'Object', options);
     }
 
-    var messAge = options.messAge,
+    var message = options.message,
         operator = options.operator,
         stackStartFn = options.stackStartFn;
     var actual = options.actual,
@@ -1020,8 +1020,8 @@ function (_Error) {
     var limit = Error.stackTraceLimit;
     Error.stackTraceLimit = 0;
 
-    if (messAge != null) {
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(AssertionError).call(this, String(messAge)));
+    if (message != null) {
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(AssertionError).call(this, String(message)));
     } else {
       if (process.stderr && process.stderr.isTTY) {
         // Reset on each call to make sure we handle dynamically set environment
@@ -1110,7 +1110,7 @@ function (_Error) {
     }
 
     Error.stackTraceLimit = limit;
-    _this.generatedMessAge = !messAge;
+    _this.generatedMessage = !message;
     Object.defineProperty(_assertThisInitialized(_this), 'name', {
       value: 'AssertionError [ERR_ASSERTION]',
       enumerable: false,
@@ -1125,7 +1125,7 @@ function (_Error) {
     if (Error.captureStackTrace) {
       // eslint-disable-next-line no-restricted-syntax
       Error.captureStackTrace(_assertThisInitialized(_this), stackStartFn);
-    } // Create error messAge including the error code in the name.
+    } // Create error message including the error code in the name.
 
 
     _this.stack; // Reset the name.
@@ -1137,14 +1137,14 @@ function (_Error) {
   _createClass(AssertionError, [{
     key: "toString",
     value: function toString() {
-      return "".concat(this.name, " [").concat(this.code, "]: ").concat(this.messAge);
+      return "".concat(this.name, " [").concat(this.code, "]: ").concat(this.message);
     }
   }, {
     key: inspect.custom,
     value: function value(recurseTimes, ctx) {
       // This limits the `actual` and `expected` property default inspection to
       // the minimum depth. Otherwise those values would be too verbose compared
-      // to the actual error messAge which contains a combined view of these two
+      // to the actual error message which contains a combined view of these two
       // input values.
       return inspect(this, _objectSpread({}, ctx, {
         customInspect: false,
@@ -1173,10 +1173,10 @@ module.exports = AssertionError;
 
 /* eslint node-core/prefer-util-format-errors: "error" */
  // The whole point behind this internal module is to allow Node.js to no
-// longer be forced to treat every error messAge change as a semver-major
+// longer be forced to treat every error message change as a semver-major
 // change. The NodeError classes here all expose a `code` property whose
 // value statically and permanently identifies the error. While the error
-// messAge may change, the code should not.
+// message may change, the code should not.
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -1197,16 +1197,16 @@ var codes = {}; // Lazy loaded
 var assert;
 var util;
 
-function createErrorType(code, messAge, Base) {
+function createErrorType(code, message, Base) {
   if (!Base) {
     Base = Error;
   }
 
-  function getMessAge(arg1, arg2, arg3) {
-    if (typeof messAge === 'string') {
-      return messAge;
+  function getMessage(arg1, arg2, arg3) {
+    if (typeof message === 'string') {
+      return message;
     } else {
-      return messAge(arg1, arg2, arg3);
+      return message(arg1, arg2, arg3);
     }
   }
 
@@ -1220,7 +1220,7 @@ function createErrorType(code, messAge, Base) {
 
       _classCallCheck(this, NodeError);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(NodeError).call(this, getMessAge(arg1, arg2, arg3)));
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(NodeError).call(this, getMessage(arg1, arg2, arg3)));
       _this.code = code;
       return _this;
     }
@@ -1636,7 +1636,7 @@ function innerDeepEqual(val1, val2, strict, memos) {
   } else if (isNativeError(val1) || val1 instanceof Error) {
     // Do not compare the stack as it might differ even though the error itself
     // is otherwise identical.
-    if (val1.messAge !== val2.messAge || val1.name !== val2.name) {
+    if (val1.message !== val2.message || val1.name !== val2.name) {
       return false;
     }
   } else if (isArrayBufferView(val1)) {
@@ -2137,7 +2137,7 @@ exports.BK = 34; // Break (mandatory)
 
 exports.CJ = 35; // Conditional Japanese Starter
 
-exports.CR = 36; // CarriAge return
+exports.CR = 36; // Carriage return
 
 exports.LF = 37; // Line feed
 
@@ -4592,11 +4592,11 @@ function slowToString(encoding, start, end) {
         loweredCase = true;
     }
   }
-} // This property is used by `Buffer.isBuffer` (and the `is-buffer` npm packAge)
+} // This property is used by `Buffer.isBuffer` (and the `is-buffer` npm package)
 // to detect a Buffer instance. It's not possible to use `instanceof Buffer`
 // reliably in a browserify context because there could be multiple different
-// copies of the 'buffer' packAge in use. This method works even for Buffer
-// instances that were created from another copy of the `buffer` packAge.
+// copies of the 'buffer' package in use. This method works even for Buffer
+// instances that were created from another copy of the `buffer` package.
 // See: https://github.com/feross/buffer/issues/154
 
 
@@ -5766,7 +5766,7 @@ Buffer.prototype.copy = function copy(target, targetStart, start, end) {
   }
 
   return len;
-}; // UsAge:
+}; // Usage:
 //    buffer.fill(number[, offset[, end]])
 //    buffer.fill(buffer[, offset[, end]])
 //    buffer.fill(string[, offset[, end]][, encoding])
@@ -5840,12 +5840,12 @@ Buffer.prototype.fill = function fill(val, start, end, encoding) {
   return this;
 }; // CUSTOM ERRORS
 // =============
-// Simplified versions from Node, changed for Buffer-only usAge
+// Simplified versions from Node, changed for Buffer-only usage
 
 
 var errors = {};
 
-function E(sym, getMessAge, Base) {
+function E(sym, getMessage, Base) {
   errors[sym] = /*#__PURE__*/function (_Base) {
     _inheritsLoose(NodeError, _Base);
 
@@ -5853,13 +5853,13 @@ function E(sym, getMessAge, Base) {
       var _this;
 
       _this = _Base.call(this) || this;
-      Object.defineProperty(_assertThisInitialized(_this), 'messAge', {
-        value: getMessAge.apply(_assertThisInitialized(_this), arguments),
+      Object.defineProperty(_assertThisInitialized(_this), 'message', {
+        value: getMessage.apply(_assertThisInitialized(_this), arguments),
         writable: true,
         configurable: true
       }); // Add the error code to the name to include it in the stack trace.
 
-      _this.name = _this.name + " [" + sym + "]"; // Access the stack to generate the error messAge including the error code
+      _this.name = _this.name + " [" + sym + "]"; // Access the stack to generate the error message including the error code
       // from the name.
 
       _this.stack; // eslint-disable-line no-unused-expressions
@@ -5872,7 +5872,7 @@ function E(sym, getMessAge, Base) {
     var _proto = NodeError.prototype;
 
     _proto.toString = function toString() {
-      return this.name + " [" + sym + "]: " + this.messAge;
+      return this.name + " [" + sym + "]: " + this.message;
     };
 
     _createClass(NodeError, [{
@@ -6917,7 +6917,7 @@ setSpecies(ARRAY_BUFFER);
      *
      * @example
      *
-     *     var ciphertext = CryptoJS.AES.encrypt(messAge, key, cfg);
+     *     var ciphertext = CryptoJS.AES.encrypt(message, key, cfg);
      *     var plaintext  = CryptoJS.AES.decrypt(ciphertext, key, cfg);
      */
 
@@ -7130,8 +7130,8 @@ __webpack_require__(561);
 
         return function (cipher) {
           return {
-            encrypt: function encrypt(messAge, key, cfg) {
-              return selectCipherStrategy(key).encrypt(cipher, messAge, key, cfg);
+            encrypt: function encrypt(message, key, cfg) {
+              return selectCipherStrategy(key).encrypt(cipher, message, key, cfg);
             },
             decrypt: function decrypt(ciphertext, key, cfg) {
               return selectCipherStrategy(key).decrypt(cipher, ciphertext, key, cfg);
@@ -7570,10 +7570,10 @@ __webpack_require__(561);
       }),
 
       /**
-       * Encrypts a messAge.
+       * Encrypts a message.
        *
        * @param {Cipher} cipher The cipher algorithm to use.
-       * @param {WordArray|string} messAge The messAge to encrypt.
+       * @param {WordArray|string} message The message to encrypt.
        * @param {WordArray} key The key.
        * @param {Object} cfg (Optional) The configuration options to use for this operation.
        *
@@ -7583,16 +7583,16 @@ __webpack_require__(561);
        *
        * @example
        *
-       *     var ciphertextParams = CryptoJS.lib.SerializableCipher.encrypt(CryptoJS.algo.AES, messAge, key);
-       *     var ciphertextParams = CryptoJS.lib.SerializableCipher.encrypt(CryptoJS.algo.AES, messAge, key, { iv: iv });
-       *     var ciphertextParams = CryptoJS.lib.SerializableCipher.encrypt(CryptoJS.algo.AES, messAge, key, { iv: iv, format: CryptoJS.format.OpenSSL });
+       *     var ciphertextParams = CryptoJS.lib.SerializableCipher.encrypt(CryptoJS.algo.AES, message, key);
+       *     var ciphertextParams = CryptoJS.lib.SerializableCipher.encrypt(CryptoJS.algo.AES, message, key, { iv: iv });
+       *     var ciphertextParams = CryptoJS.lib.SerializableCipher.encrypt(CryptoJS.algo.AES, message, key, { iv: iv, format: CryptoJS.format.OpenSSL });
        */
-      encrypt: function encrypt(cipher, messAge, key, cfg) {
+      encrypt: function encrypt(cipher, message, key, cfg) {
         // Apply config defaults
         cfg = this.cfg.extend(cfg); // Encrypt
 
         var encryptor = cipher.createEncryptor(key, cfg);
-        var ciphertext = encryptor.finalize(messAge); // Shortcut
+        var ciphertext = encryptor.finalize(message); // Shortcut
 
         var cipherCfg = encryptor.cfg; // Create and return serializable cipher params
 
@@ -7722,10 +7722,10 @@ __webpack_require__(561);
       }),
 
       /**
-       * Encrypts a messAge using a password.
+       * Encrypts a message using a password.
        *
        * @param {Cipher} cipher The cipher algorithm to use.
-       * @param {WordArray|string} messAge The messAge to encrypt.
+       * @param {WordArray|string} message The message to encrypt.
        * @param {string} password The password.
        * @param {Object} cfg (Optional) The configuration options to use for this operation.
        *
@@ -7735,10 +7735,10 @@ __webpack_require__(561);
        *
        * @example
        *
-       *     var ciphertextParams = CryptoJS.lib.PasswordBasedCipher.encrypt(CryptoJS.algo.AES, messAge, 'password');
-       *     var ciphertextParams = CryptoJS.lib.PasswordBasedCipher.encrypt(CryptoJS.algo.AES, messAge, 'password', { format: CryptoJS.format.OpenSSL });
+       *     var ciphertextParams = CryptoJS.lib.PasswordBasedCipher.encrypt(CryptoJS.algo.AES, message, 'password');
+       *     var ciphertextParams = CryptoJS.lib.PasswordBasedCipher.encrypt(CryptoJS.algo.AES, message, 'password', { format: CryptoJS.format.OpenSSL });
        */
-      encrypt: function encrypt(cipher, messAge, password, cfg) {
+      encrypt: function encrypt(cipher, message, password, cfg) {
         // Apply config defaults
         cfg = this.cfg.extend(cfg); // Derive key and other params
 
@@ -7746,7 +7746,7 @@ __webpack_require__(561);
 
         cfg.iv = derivedParams.iv; // Encrypt
 
-        var ciphertext = SerializableCipher.encrypt.call(this, cipher, messAge, derivedParams.key, cfg); // Mix in derived params
+        var ciphertext = SerializableCipher.encrypt.call(this, cipher, message, derivedParams.key, cfg); // Mix in derived params
 
         ciphertext.mixIn(derivedParams);
         return ciphertext;
@@ -8537,20 +8537,20 @@ __webpack_require__(561);
       },
 
       /**
-       * Updates this hasher with a messAge.
+       * Updates this hasher with a message.
        *
-       * @param {WordArray|string} messAgeUpdate The messAge to append.
+       * @param {WordArray|string} messageUpdate The message to append.
        *
        * @return {Hasher} This hasher.
        *
        * @example
        *
-       *     hasher.update('messAge');
+       *     hasher.update('message');
        *     hasher.update(wordArray);
        */
-      update: function update(messAgeUpdate) {
+      update: function update(messageUpdate) {
         // Append
-        this._append(messAgeUpdate); // Update the hash
+        this._append(messageUpdate); // Update the hash
 
 
         this._process(); // Chainable
@@ -8563,20 +8563,20 @@ __webpack_require__(561);
        * Finalizes the hash computation.
        * Note that the finalize operation is effectively a destructive, read-once operation.
        *
-       * @param {WordArray|string} messAgeUpdate (Optional) A final messAge update.
+       * @param {WordArray|string} messageUpdate (Optional) A final message update.
        *
        * @return {WordArray} The hash.
        *
        * @example
        *
        *     var hash = hasher.finalize();
-       *     var hash = hasher.finalize('messAge');
+       *     var hash = hasher.finalize('message');
        *     var hash = hasher.finalize(wordArray);
        */
-      finalize: function finalize(messAgeUpdate) {
-        // Final messAge update
-        if (messAgeUpdate) {
-          this._append(messAgeUpdate);
+      finalize: function finalize(messageUpdate) {
+        // Final message update
+        if (messageUpdate) {
+          this._append(messageUpdate);
         } // Perform concrete-hasher logic
 
 
@@ -8600,8 +8600,8 @@ __webpack_require__(561);
        *     var SHA256 = CryptoJS.lib.Hasher._createHelper(CryptoJS.algo.SHA256);
        */
       _createHelper: function _createHelper(hasher) {
-        return function (messAge, cfg) {
-          return new hasher.init(cfg).finalize(messAge);
+        return function (message, cfg) {
+          return new hasher.init(cfg).finalize(message);
         };
       },
 
@@ -8619,8 +8619,8 @@ __webpack_require__(561);
        *     var HmacSHA256 = CryptoJS.lib.Hasher._createHmacHelper(CryptoJS.algo.SHA256);
        */
       _createHmacHelper: function _createHmacHelper(hasher) {
-        return function (messAge, key) {
-          return new C_algo.HMAC.init(hasher, key).finalize(messAge);
+        return function (message, key) {
+          return new C_algo.HMAC.init(hasher, key).finalize(message);
         };
       }
     });
@@ -9373,19 +9373,19 @@ __webpack_require__(2222);
       },
 
       /**
-       * Updates this HMAC with a messAge.
+       * Updates this HMAC with a message.
        *
-       * @param {WordArray|string} messAgeUpdate The messAge to append.
+       * @param {WordArray|string} messageUpdate The message to append.
        *
        * @return {HMAC} This HMAC instance.
        *
        * @example
        *
-       *     hmacHasher.update('messAge');
+       *     hmacHasher.update('message');
        *     hmacHasher.update(wordArray);
        */
-      update: function update(messAgeUpdate) {
-        this._hasher.update(messAgeUpdate); // Chainable
+      update: function update(messageUpdate) {
+        this._hasher.update(messageUpdate); // Chainable
 
 
         return this;
@@ -9395,21 +9395,21 @@ __webpack_require__(2222);
        * Finalizes the HMAC computation.
        * Note that the finalize operation is effectively a destructive, read-once operation.
        *
-       * @param {WordArray|string} messAgeUpdate (Optional) A final messAge update.
+       * @param {WordArray|string} messageUpdate (Optional) A final message update.
        *
        * @return {WordArray} The HMAC.
        *
        * @example
        *
        *     var hmac = hmacHasher.finalize();
-       *     var hmac = hmacHasher.finalize('messAge');
+       *     var hmac = hmacHasher.finalize('message');
        *     var hmac = hmacHasher.finalize(wordArray);
        */
-      finalize: function finalize(messAgeUpdate) {
+      finalize: function finalize(messageUpdate) {
         // Shortcut
         var hasher = this._hasher; // Compute HMAC
 
-        var innerHash = hasher.finalize(messAgeUpdate);
+        var innerHash = hasher.finalize(messageUpdate);
         hasher.reset();
         var hmac = hasher.finalize(this._oKey.clone().concat(innerHash));
         return hmac;
@@ -9773,7 +9773,7 @@ __webpack_require__(6495);
     /**
      * Shortcut function to the hasher's object interface.
      *
-     * @param {WordArray|string} messAge The messAge to hash.
+     * @param {WordArray|string} message The message to hash.
      *
      * @return {WordArray} The hash.
      *
@@ -9781,7 +9781,7 @@ __webpack_require__(6495);
      *
      * @example
      *
-     *     var hash = CryptoJS.MD5('messAge');
+     *     var hash = CryptoJS.MD5('message');
      *     var hash = CryptoJS.MD5(wordArray);
      */
 
@@ -9790,7 +9790,7 @@ __webpack_require__(6495);
     /**
      * Shortcut function to the HMAC's object interface.
      *
-     * @param {WordArray|string} messAge The messAge to hash.
+     * @param {WordArray|string} message The message to hash.
      * @param {WordArray|string} key The secret key.
      *
      * @return {WordArray} The HMAC.
@@ -9799,7 +9799,7 @@ __webpack_require__(6495);
      *
      * @example
      *
-     *     var hmac = CryptoJS.HmacMD5(messAge, key);
+     *     var hmac = CryptoJS.HmacMD5(message, key);
      */
 
     C.HmacMD5 = Hasher._createHmacHelper(MD5);
@@ -10605,7 +10605,7 @@ __webpack_require__(2222);
      *
      * @example
      *
-     *     var ciphertext = CryptoJS.RabbitLegacy.encrypt(messAge, key, cfg);
+     *     var ciphertext = CryptoJS.RabbitLegacy.encrypt(message, key, cfg);
      *     var plaintext  = CryptoJS.RabbitLegacy.decrypt(ciphertext, key, cfg);
      */
 
@@ -10767,7 +10767,7 @@ __webpack_require__(2222);
      *
      * @example
      *
-     *     var ciphertext = CryptoJS.Rabbit.encrypt(messAge, key, cfg);
+     *     var ciphertext = CryptoJS.Rabbit.encrypt(message, key, cfg);
      *     var plaintext  = CryptoJS.Rabbit.decrypt(ciphertext, key, cfg);
      */
 
@@ -10870,7 +10870,7 @@ __webpack_require__(8674);
      *
      * @example
      *
-     *     var ciphertext = CryptoJS.RC4.encrypt(messAge, key, cfg);
+     *     var ciphertext = CryptoJS.RC4.encrypt(message, key, cfg);
      *     var plaintext  = CryptoJS.RC4.decrypt(ciphertext, key, cfg);
      */
 
@@ -10903,7 +10903,7 @@ __webpack_require__(8674);
      *
      * @example
      *
-     *     var ciphertext = CryptoJS.RC4Drop.encrypt(messAge, key, cfg);
+     *     var ciphertext = CryptoJS.RC4Drop.encrypt(message, key, cfg);
      *     var plaintext  = CryptoJS.RC4Drop.decrypt(ciphertext, key, cfg);
      */
 
@@ -10934,7 +10934,7 @@ __webpack_require__(8674);
   	Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
   	    - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
       - Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-  	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAgeS (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAge.
+  	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   */
   (function (Math) {
     // Shortcuts
@@ -11110,7 +11110,7 @@ __webpack_require__(8674);
     /**
      * Shortcut function to the hasher's object interface.
      *
-     * @param {WordArray|string} messAge The messAge to hash.
+     * @param {WordArray|string} message The message to hash.
      *
      * @return {WordArray} The hash.
      *
@@ -11118,7 +11118,7 @@ __webpack_require__(8674);
      *
      * @example
      *
-     *     var hash = CryptoJS.RIPEMD160('messAge');
+     *     var hash = CryptoJS.RIPEMD160('message');
      *     var hash = CryptoJS.RIPEMD160(wordArray);
      */
 
@@ -11127,7 +11127,7 @@ __webpack_require__(8674);
     /**
      * Shortcut function to the HMAC's object interface.
      *
-     * @param {WordArray|string} messAge The messAge to hash.
+     * @param {WordArray|string} message The message to hash.
      * @param {WordArray|string} key The secret key.
      *
      * @return {WordArray} The HMAC.
@@ -11136,7 +11136,7 @@ __webpack_require__(8674);
      *
      * @example
      *
-     *     var hmac = CryptoJS.HmacRIPEMD160(messAge, key);
+     *     var hmac = CryptoJS.HmacRIPEMD160(message, key);
      */
 
     C.HmacRIPEMD160 = Hasher._createHmacHelper(RIPEMD160);
@@ -11250,7 +11250,7 @@ __webpack_require__(8674);
     /**
      * Shortcut function to the hasher's object interface.
      *
-     * @param {WordArray|string} messAge The messAge to hash.
+     * @param {WordArray|string} message The message to hash.
      *
      * @return {WordArray} The hash.
      *
@@ -11258,7 +11258,7 @@ __webpack_require__(8674);
      *
      * @example
      *
-     *     var hash = CryptoJS.SHA1('messAge');
+     *     var hash = CryptoJS.SHA1('message');
      *     var hash = CryptoJS.SHA1(wordArray);
      */
 
@@ -11266,7 +11266,7 @@ __webpack_require__(8674);
     /**
      * Shortcut function to the HMAC's object interface.
      *
-     * @param {WordArray|string} messAge The messAge to hash.
+     * @param {WordArray|string} message The message to hash.
      * @param {WordArray|string} key The secret key.
      *
      * @return {WordArray} The HMAC.
@@ -11275,7 +11275,7 @@ __webpack_require__(8674);
      *
      * @example
      *
-     *     var hmac = CryptoJS.HmacSHA1(messAge, key);
+     *     var hmac = CryptoJS.HmacSHA1(message, key);
      */
 
     C.HmacSHA1 = Hasher._createHmacHelper(SHA1);
@@ -11325,7 +11325,7 @@ __webpack_require__(8674);
     /**
      * Shortcut function to the hasher's object interface.
      *
-     * @param {WordArray|string} messAge The messAge to hash.
+     * @param {WordArray|string} message The message to hash.
      *
      * @return {WordArray} The hash.
      *
@@ -11333,7 +11333,7 @@ __webpack_require__(8674);
      *
      * @example
      *
-     *     var hash = CryptoJS.SHA224('messAge');
+     *     var hash = CryptoJS.SHA224('message');
      *     var hash = CryptoJS.SHA224(wordArray);
      */
 
@@ -11341,7 +11341,7 @@ __webpack_require__(8674);
     /**
      * Shortcut function to the HMAC's object interface.
      *
-     * @param {WordArray|string} messAge The messAge to hash.
+     * @param {WordArray|string} message The message to hash.
      * @param {WordArray|string} key The secret key.
      *
      * @return {WordArray} The HMAC.
@@ -11350,7 +11350,7 @@ __webpack_require__(8674);
      *
      * @example
      *
-     *     var hmac = CryptoJS.HmacSHA224(messAge, key);
+     *     var hmac = CryptoJS.HmacSHA224(message, key);
      */
 
     C.HmacSHA224 = SHA256._createHmacHelper(SHA224);
@@ -11508,7 +11508,7 @@ __webpack_require__(7042);
     /**
      * Shortcut function to the hasher's object interface.
      *
-     * @param {WordArray|string} messAge The messAge to hash.
+     * @param {WordArray|string} message The message to hash.
      *
      * @return {WordArray} The hash.
      *
@@ -11516,7 +11516,7 @@ __webpack_require__(7042);
      *
      * @example
      *
-     *     var hash = CryptoJS.SHA256('messAge');
+     *     var hash = CryptoJS.SHA256('message');
      *     var hash = CryptoJS.SHA256(wordArray);
      */
 
@@ -11524,7 +11524,7 @@ __webpack_require__(7042);
     /**
      * Shortcut function to the HMAC's object interface.
      *
-     * @param {WordArray|string} messAge The messAge to hash.
+     * @param {WordArray|string} message The message to hash.
      * @param {WordArray|string} key The secret key.
      *
      * @return {WordArray} The HMAC.
@@ -11533,7 +11533,7 @@ __webpack_require__(7042);
      *
      * @example
      *
-     *     var hmac = CryptoJS.HmacSHA256(messAge, key);
+     *     var hmac = CryptoJS.HmacSHA256(message, key);
      */
 
     C.HmacSHA256 = Hasher._createHmacHelper(SHA256);
@@ -11672,7 +11672,7 @@ __webpack_require__(7042);
           var M2i1 = M[offset + 2 * i + 1]; // Swap endian
 
           M2i = (M2i << 8 | M2i >>> 24) & 0x00ff00ff | (M2i << 24 | M2i >>> 8) & 0xff00ff00;
-          M2i1 = (M2i1 << 8 | M2i1 >>> 24) & 0x00ff00ff | (M2i1 << 24 | M2i1 >>> 8) & 0xff00ff00; // Absorb messAge into state
+          M2i1 = (M2i1 << 8 | M2i1 >>> 24) & 0x00ff00ff | (M2i1 << 24 | M2i1 >>> 8) & 0xff00ff00; // Absorb message into state
 
           var lane = state[i];
           lane.high ^= M2i1;
@@ -11821,7 +11821,7 @@ __webpack_require__(7042);
     /**
      * Shortcut function to the hasher's object interface.
      *
-     * @param {WordArray|string} messAge The messAge to hash.
+     * @param {WordArray|string} message The message to hash.
      *
      * @return {WordArray} The hash.
      *
@@ -11829,7 +11829,7 @@ __webpack_require__(7042);
      *
      * @example
      *
-     *     var hash = CryptoJS.SHA3('messAge');
+     *     var hash = CryptoJS.SHA3('message');
      *     var hash = CryptoJS.SHA3(wordArray);
      */
 
@@ -11837,7 +11837,7 @@ __webpack_require__(7042);
     /**
      * Shortcut function to the HMAC's object interface.
      *
-     * @param {WordArray|string} messAge The messAge to hash.
+     * @param {WordArray|string} message The message to hash.
      * @param {WordArray|string} key The secret key.
      *
      * @return {WordArray} The HMAC.
@@ -11846,7 +11846,7 @@ __webpack_require__(7042);
      *
      * @example
      *
-     *     var hmac = CryptoJS.HmacSHA3(messAge, key);
+     *     var hmac = CryptoJS.HmacSHA3(message, key);
      */
 
     C.HmacSHA3 = Hasher._createHmacHelper(SHA3);
@@ -11897,7 +11897,7 @@ __webpack_require__(7042);
     /**
      * Shortcut function to the hasher's object interface.
      *
-     * @param {WordArray|string} messAge The messAge to hash.
+     * @param {WordArray|string} message The message to hash.
      *
      * @return {WordArray} The hash.
      *
@@ -11905,7 +11905,7 @@ __webpack_require__(7042);
      *
      * @example
      *
-     *     var hash = CryptoJS.SHA384('messAge');
+     *     var hash = CryptoJS.SHA384('message');
      *     var hash = CryptoJS.SHA384(wordArray);
      */
 
@@ -11913,7 +11913,7 @@ __webpack_require__(7042);
     /**
      * Shortcut function to the HMAC's object interface.
      *
-     * @param {WordArray|string} messAge The messAge to hash.
+     * @param {WordArray|string} message The message to hash.
      * @param {WordArray|string} key The secret key.
      *
      * @return {WordArray} The HMAC.
@@ -11922,7 +11922,7 @@ __webpack_require__(7042);
      *
      * @example
      *
-     *     var hmac = CryptoJS.HmacSHA384(messAge, key);
+     *     var hmac = CryptoJS.HmacSHA384(message, key);
      */
 
     C.HmacSHA384 = SHA512._createHmacHelper(SHA384);
@@ -12029,7 +12029,7 @@ __webpack_require__(7042);
           var Wil;
           var Wih; // Shortcut
 
-          var Wi = W[i]; // Extend messAge
+          var Wi = W[i]; // Extend message
 
           if (i < 16) {
             Wih = Wi.high = M[offset + i * 2] | 0;
@@ -12154,7 +12154,7 @@ __webpack_require__(7042);
     /**
      * Shortcut function to the hasher's object interface.
      *
-     * @param {WordArray|string} messAge The messAge to hash.
+     * @param {WordArray|string} message The message to hash.
      *
      * @return {WordArray} The hash.
      *
@@ -12162,7 +12162,7 @@ __webpack_require__(7042);
      *
      * @example
      *
-     *     var hash = CryptoJS.SHA512('messAge');
+     *     var hash = CryptoJS.SHA512('message');
      *     var hash = CryptoJS.SHA512(wordArray);
      */
 
@@ -12170,7 +12170,7 @@ __webpack_require__(7042);
     /**
      * Shortcut function to the HMAC's object interface.
      *
-     * @param {WordArray|string} messAge The messAge to hash.
+     * @param {WordArray|string} message The message to hash.
      * @param {WordArray|string} key The secret key.
      *
      * @return {WordArray} The HMAC.
@@ -12179,7 +12179,7 @@ __webpack_require__(7042);
      *
      * @example
      *
-     *     var hmac = CryptoJS.HmacSHA512(messAge, key);
+     *     var hmac = CryptoJS.HmacSHA512(message, key);
      */
 
     C.HmacSHA512 = Hasher._createHmacHelper(SHA512);
@@ -12863,7 +12863,7 @@ __webpack_require__(7042);
      *
      * @example
      *
-     *     var ciphertext = CryptoJS.DES.encrypt(messAge, key, cfg);
+     *     var ciphertext = CryptoJS.DES.encrypt(message, key, cfg);
      *     var plaintext  = CryptoJS.DES.decrypt(ciphertext, key, cfg);
      */
 
@@ -12915,7 +12915,7 @@ __webpack_require__(7042);
      *
      * @example
      *
-     *     var ciphertext = CryptoJS.TripleDES.encrypt(messAge, key, cfg);
+     *     var ciphertext = CryptoJS.TripleDES.encrypt(message, key, cfg);
      *     var plaintext  = CryptoJS.TripleDES.decrypt(ciphertext, key, cfg);
      */
 
@@ -13424,7 +13424,7 @@ __webpack_require__(6699);
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
  * BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
  * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
- * DAMAgeS OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 var fs = __webpack_require__(3857);
@@ -13663,7 +13663,7 @@ module.exports = /*#__PURE__*/function () {
               break;
 
             case 3:
-              // AverAge
+              // Average
               for (i = 0; i < scanlineLength; i++) {
                 byte = data[pos++];
                 col = (i - i % pixelBytes) / pixelBytes;
@@ -13779,7 +13779,7 @@ module.exports = /*#__PURE__*/function () {
     return ret;
   };
 
-  _proto.copyToImAgeData = function copyToImAgeData(imAgeData, pixels) {
+  _proto.copyToImageData = function copyToImageData(imageData, pixels) {
     var j, k;
     var colors = this.colors;
     var palette = null;
@@ -13791,7 +13791,7 @@ module.exports = /*#__PURE__*/function () {
       alpha = true;
     }
 
-    var data = imAgeData.data || imAgeData;
+    var data = imageData.data || imageData;
     var length = data.length;
     var input = palette || pixels;
     var i = j = 0;
@@ -13823,7 +13823,7 @@ module.exports = /*#__PURE__*/function () {
 
     var ret = new Buffer(this.width * this.height * 4);
     return this.decodePixels(function (pixels) {
-      _this2.copyToImAgeData(ret, pixels);
+      _this2.copyToImageData(ret, pixels);
 
       return fn(ret);
     });
@@ -15118,7 +15118,7 @@ var PDFReference = /*#__PURE__*/function (_PDFAbstractReference) {
   return PDFReference;
 }(PDFAbstractReference);
 /*
-PDFPAge - represents a single pAge in the PDF document
+PDFPage - represents a single page in the PDF document
 By Devon Govett
 */
 
@@ -15182,11 +15182,11 @@ var SIZES = {
   TABLOID: [792.0, 1224.0]
 };
 
-var PDFPAge = /*#__PURE__*/function () {
-  function PDFPAge(document) {
+var PDFPage = /*#__PURE__*/function () {
+  function PDFPage(document) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-    _classCallCheck(this, PDFPAge);
+    _classCallCheck(this, PDFPage);
 
     this.document = document;
     this.size = options.size || 'letter';
@@ -15201,7 +15201,7 @@ var PDFPAge = /*#__PURE__*/function () {
       }; // default to 1 inch margins
     } else {
       this.margins = options.margins || DEFAULT_MARGINS;
-    } // calculate pAge dimensions
+    } // calculate page dimensions
 
 
     var dimensions = Array.isArray(this.size) ? this.size : SIZES[this.size.toUpperCase()];
@@ -15210,12 +15210,12 @@ var PDFPAge = /*#__PURE__*/function () {
     this.content = this.document.ref(); // Initialize the Font, XObject, and ExtGState dictionaries
 
     this.resources = this.document.ref({
-      ProcSet: ['PDF', 'Text', 'ImAgeB', 'ImAgeC', 'ImAgeI']
-    }); // The pAge dictionary
+      ProcSet: ['PDF', 'Text', 'ImageB', 'ImageC', 'ImageI']
+    }); // The page dictionary
 
     this.dictionary = this.document.ref({
-      Type: 'PAge',
-      Parent: this.document._root.data.PAges,
+      Type: 'Page',
+      Parent: this.document._root.data.Pages,
       MediaBox: [0, 0, this.width, this.height],
       Contents: this.content,
       Resources: this.resources
@@ -15224,7 +15224,7 @@ var PDFPAge = /*#__PURE__*/function () {
   } // Lazily create these objects
 
 
-  _createClass(PDFPAge, [{
+  _createClass(PDFPage, [{
     key: "maxY",
     value: function maxY() {
       return this.height - this.margins.bottom;
@@ -15285,7 +15285,7 @@ var PDFPAge = /*#__PURE__*/function () {
     }
   }]);
 
-  return PDFPAge;
+  return PDFPage;
 }();
 
 var PDFNameTree = /*#__PURE__*/function (_PDFTree) {
@@ -15588,7 +15588,7 @@ var prohibited_characters = [
  * @link https://tools.ietf.org/html/rfc3454#appendix-C.9
  */
 0xe0001, 0xe0001
-/* LANGUAge TAG */
+/* LANGUAGE TAG */
 , 0xe0020, 0xe007f
 /* [TAGGING CHARACTERS] */
 ,
@@ -15657,7 +15657,7 @@ var last = function last(x) {
 /**
  * Convert provided string into an array of Unicode Code Points.
  * Based on https://stackoverflow.com/a/21409165/1556249
- * and https://www.npmjs.com/packAge/code-point-at.
+ * and https://www.npmjs.com/package/code-point-at.
  * @param {string} input
  * @returns {number[]}
  */
@@ -16350,26 +16350,26 @@ var PDFGradient = /*#__PURE__*/function () {
         }
 
         grad = grad.embed(this.matrix);
-        var pAgeBBox = [0, 0, this.doc.pAge.width, this.doc.pAge.height];
+        var pageBBox = [0, 0, this.doc.page.width, this.doc.page.height];
         var form = this.doc.ref({
           Type: 'XObject',
           Subtype: 'Form',
           FormType: 1,
-          BBox: pAgeBBox,
+          BBox: pageBBox,
           Group: {
             Type: 'Group',
             S: 'Transparency',
             CS: 'DeviceGray'
           },
           Resources: {
-            ProcSet: ['PDF', 'Text', 'ImAgeB', 'ImAgeC', 'ImAgeI'],
+            ProcSet: ['PDF', 'Text', 'ImageB', 'ImageC', 'ImageI'],
             Pattern: {
               Sh1: grad
             }
           }
         });
         form.write('/Pattern cs /Sh1 scn');
-        form.end("".concat(pAgeBBox.join(' '), " re f"));
+        form.end("".concat(pageBBox.join(' '), " re f"));
         var gstate = this.doc.ref({
           Type: 'ExtGState',
           SMask: {
@@ -16384,11 +16384,11 @@ var PDFGradient = /*#__PURE__*/function () {
           PatternType: 1,
           PaintType: 1,
           TilingType: 2,
-          BBox: pAgeBBox,
-          XStep: pAgeBBox[2],
-          YStep: pAgeBBox[3],
+          BBox: pageBBox,
+          XStep: pageBBox[2],
+          YStep: pageBBox[3],
           Resources: {
-            ProcSet: ['PDF', 'Text', 'ImAgeB', 'ImAgeC', 'ImAgeI'],
+            ProcSet: ['PDF', 'Text', 'ImageB', 'ImageC', 'ImageI'],
             Pattern: {
               Sh1: pattern
             },
@@ -16398,10 +16398,10 @@ var PDFGradient = /*#__PURE__*/function () {
           }
         });
         opacityPattern.write('/Gs1 gs /Pattern cs /Sh1 scn');
-        opacityPattern.end("".concat(pAgeBBox.join(' '), " re f"));
-        this.doc.pAge.patterns[this.id] = opacityPattern;
+        opacityPattern.end("".concat(pageBBox.join(' '), " re f"));
+        this.doc.page.patterns[this.id] = opacityPattern;
       } else {
-        this.doc.pAge.patterns[this.id] = pattern;
+        this.doc.page.patterns[this.id] = pattern;
       }
 
       return pattern;
@@ -16548,7 +16548,7 @@ var PDFTilingPattern = /*#__PURE__*/function () {
   _createClass(PDFTilingPattern, [{
     key: "createPattern",
     value: function createPattern() {
-      // no resources needed for our current usAge
+      // no resources needed for our current usage
       // required entry
       var resources = this.doc.ref();
       resources.end(); // apply default transform matrix (flipped in the default doc._ctm)
@@ -16592,18 +16592,18 @@ var PDFTilingPattern = /*#__PURE__*/function () {
     key: "embedPatternColorSpaces",
     value: function embedPatternColorSpaces() {
       var _this = this; // map each pattern to an underlying color space
-      // and embed on each pAge
+      // and embed on each page
 
 
       underlyingColorSpaces.forEach(function (csName) {
         var csId = _this.getPatternColorSpaceId(csName);
 
-        if (_this.doc.pAge.colorSpaces[csId]) return;
+        if (_this.doc.page.colorSpaces[csId]) return;
 
         var cs = _this.doc.ref(['Pattern', csName]);
 
         cs.end();
-        _this.doc.pAge.colorSpaces[csId] = cs;
+        _this.doc.page.colorSpaces[csId] = cs;
       });
     }
   }, {
@@ -16618,11 +16618,11 @@ var PDFTilingPattern = /*#__PURE__*/function () {
         this.doc._patternCount = this.doc._patternCount + 1;
         this.id = 'P' + this.doc._patternCount;
         this.pattern = this.createPattern();
-      } // patterns are embedded in each pAge
+      } // patterns are embedded in each page
 
 
-      if (!this.doc.pAge.patterns[this.id]) {
-        this.doc.pAge.patterns[this.id] = this.pattern;
+      if (!this.doc.page.patterns[this.id]) {
+        this.doc.page.patterns[this.id] = this.pattern;
       }
     }
   }, {
@@ -16737,7 +16737,7 @@ var ColorMixin = {
     if (set) {
       this.fillOpacity(opacity);
     } // save this for text wrapper, which needs to reset
-    // the fill color on new pAges
+    // the fill color on new pages
 
 
     this._fillColor = [color, opacity];
@@ -16809,7 +16809,7 @@ var ColorMixin = {
       this._opacityRegistry[key] = [dictionary, name];
     }
 
-    this.pAge.ext_gstates[name] = dictionary;
+    this.page.ext_gstates[name] = dictionary;
     return this.addContent("/".concat(name, " gs"));
   },
   linearGradient: function linearGradient(x1, y1, x2, y2) {
@@ -16851,7 +16851,7 @@ var namedColors = {
   darkgreen: [0, 100, 0],
   darkgrey: [169, 169, 169],
   darkkhaki: [189, 183, 107],
-  darkmAgenta: [139, 0, 139],
+  darkmagenta: [139, 0, 139],
   darkolivegreen: [85, 107, 47],
   darkorange: [255, 140, 0],
   darkorchid: [153, 50, 204],
@@ -16908,7 +16908,7 @@ var namedColors = {
   lime: [0, 255, 0],
   limegreen: [50, 205, 50],
   linen: [250, 240, 230],
-  mAgenta: [255, 0, 255],
+  magenta: [255, 0, 255],
   maroon: [128, 0, 0],
   mediumaquamarine: [102, 205, 170],
   mediumblue: [0, 0, 205],
@@ -18540,7 +18540,7 @@ var LineWrapper = /*#__PURE__*/function (_EventEmitter) {
       _this.height = options.height;
       _this.maxY = _this.startY + options.height;
     } else {
-      _this.maxY = _this.document.pAge.maxY();
+      _this.maxY = _this.document.page.maxY();
     } // handle paragraph indents
 
 
@@ -18687,9 +18687,9 @@ var LineWrapper = /*#__PURE__*/function (_EventEmitter) {
 
       if (options.ellipsis != null) {
         this.ellipsis = options.ellipsis;
-      } // make sure we're actually on the pAge
+      } // make sure we're actually on the page
       // and that the first line of is never by
-      // itself at the bottom of a pAge (orphans)
+      // itself at the bottom of a page (orphans)
 
 
       var nextY = this.document.y + this.document.currentLineHeight(true);
@@ -18768,8 +18768,8 @@ var LineWrapper = /*#__PURE__*/function (_EventEmitter) {
             _this2.emit('lastLine', options, _this2);
           }
 
-          emitLine(); // if we've reached the edge of the pAge,
-          // continue on a new pAge or column
+          emitLine(); // if we've reached the edge of the page,
+          // continue on a new page or column
 
           if (_this2.document.y + lh > _this2.maxY) {
             var shouldContinue = _this2.nextSection(); // stop if we reached the maximum height
@@ -18827,15 +18827,15 @@ var LineWrapper = /*#__PURE__*/function (_EventEmitter) {
 
       if (++this.column > this.columns) {
         // if a max height was specified by the user, we're done.
-        // otherwise, the default is to make a new pAge at the bottom.
+        // otherwise, the default is to make a new page at the bottom.
         if (this.height != null) {
           return false;
         }
 
-        this.document.continueOnNewPAge();
+        this.document.continueOnNewPage();
         this.column = 1;
-        this.startY = this.document.pAge.margins.top;
-        this.maxY = this.document.pAge.maxY();
+        this.startY = this.document.page.margins.top;
+        this.maxY = this.document.page.maxY();
         this.document.x = this.startX;
 
         if (this.document._fillColor) {
@@ -18844,7 +18844,7 @@ var LineWrapper = /*#__PURE__*/function (_EventEmitter) {
           (_this$document = this.document).fillColor.apply(_this$document, _toConsumableArray(this.document._fillColor));
         }
 
-        this.emit('pAgeBreak', options, this);
+        this.emit('pageBreak', options, this);
       } else {
         this.document.x += this.lineWidth + this.columnGap;
         this.document.y = this.startY;
@@ -18950,7 +18950,7 @@ var TextMixin = {
     var x = this.x,
         y = this.y;
     options = this._initOptions(options);
-    options.height = Infinity; // don't break pAges
+    options.height = Infinity; // don't break pages
 
     var lineGap = options.lineGap || this._lineGap || 0;
 
@@ -19130,7 +19130,7 @@ var TextMixin = {
 
     if (result.lineBreak !== false) {
       if (result.width == null) {
-        result.width = this.pAge.width - this.x - this.pAge.margins.right;
+        result.width = this.page.width - this.x - this.page.margins.right;
       }
 
       result.width = Math.max(result.width, 0);
@@ -19308,11 +19308,11 @@ var TextMixin = {
     } // flip coordinate system
 
 
-    this.transform(1, 0, 0, -1, 0, this.pAge.height);
-    y = this.pAge.height - y - dy; // add current font to pAge if necessary
+    this.transform(1, 0, 0, -1, 0, this.page.height);
+    y = this.page.height - y - dy; // add current font to page if necessary
 
-    if (this.pAge.fonts[this._font.id] == null) {
-      this.pAge.fonts[this._font.id] = this._font.ref();
+    if (this.page.fonts[this._font.id] == null) {
+      this.page.fonts[this._font.id] = this._font.ref();
     } // begin the text object
 
 
@@ -19503,13 +19503,13 @@ var JPEG = /*#__PURE__*/function () {
 
       this.obj = document.ref({
         Type: 'XObject',
-        Subtype: 'ImAge',
+        Subtype: 'Image',
         BitsPerComponent: this.bits,
         Width: this.width,
         Height: this.height,
         ColorSpace: this.colorSpace,
         Filter: 'DCTDecode'
-      }); // add extra decode params for CMYK imAges. By swapping the
+      }); // add extra decode params for CMYK images. By swapping the
       // min and max values from the default, we invert the colors. See
       // section 4.8.4 of the spec.
 
@@ -19526,19 +19526,19 @@ var JPEG = /*#__PURE__*/function () {
   return JPEG;
 }();
 
-var PNGImAge = /*#__PURE__*/function () {
-  function PNGImAge(data, label) {
-    _classCallCheck(this, PNGImAge);
+var PNGImage = /*#__PURE__*/function () {
+  function PNGImage(data, label) {
+    _classCallCheck(this, PNGImage);
 
     this.label = label;
-    this.imAge = new _pngJs.default(data);
-    this.width = this.imAge.width;
-    this.height = this.imAge.height;
-    this.imgData = this.imAge.imgData;
+    this.image = new _pngJs.default(data);
+    this.width = this.image.width;
+    this.height = this.image.height;
+    this.imgData = this.image.imgData;
     this.obj = null;
   }
 
-  _createClass(PNGImAge, [{
+  _createClass(PNGImage, [{
     key: "embed",
     value: function embed(document) {
       var dataDecoded = false;
@@ -19548,12 +19548,12 @@ var PNGImAge = /*#__PURE__*/function () {
         return;
       }
 
-      var hasAlphaChannel = this.imAge.hasAlphaChannel;
-      var isInterlaced = this.imAge.interlaceMethod === 1;
+      var hasAlphaChannel = this.image.hasAlphaChannel;
+      var isInterlaced = this.image.interlaceMethod === 1;
       this.obj = this.document.ref({
         Type: 'XObject',
-        Subtype: 'ImAge',
-        BitsPerComponent: hasAlphaChannel ? 8 : this.imAge.bits,
+        Subtype: 'Image',
+        BitsPerComponent: hasAlphaChannel ? 8 : this.image.bits,
         Width: this.width,
         Height: this.height,
         Filter: 'FlateDecode'
@@ -19562,35 +19562,35 @@ var PNGImAge = /*#__PURE__*/function () {
       if (!hasAlphaChannel) {
         var params = this.document.ref({
           Predictor: isInterlaced ? 1 : 15,
-          Colors: this.imAge.colors,
-          BitsPerComponent: this.imAge.bits,
+          Colors: this.image.colors,
+          BitsPerComponent: this.image.bits,
           Columns: this.width
         });
         this.obj.data['DecodeParms'] = params;
         params.end();
       }
 
-      if (this.imAge.palette.length === 0) {
-        this.obj.data['ColorSpace'] = this.imAge.colorSpace;
+      if (this.image.palette.length === 0) {
+        this.obj.data['ColorSpace'] = this.image.colorSpace;
       } else {
         // embed the color palette in the PDF as an object stream
         var palette = this.document.ref();
-        palette.end(Buffer.from(this.imAge.palette)); // build the color space array for the imAge
+        palette.end(Buffer.from(this.image.palette)); // build the color space array for the image
 
-        this.obj.data['ColorSpace'] = ['Indexed', 'DeviceRGB', this.imAge.palette.length / 3 - 1, palette];
+        this.obj.data['ColorSpace'] = ['Indexed', 'DeviceRGB', this.image.palette.length / 3 - 1, palette];
       } // For PNG color types 0, 2 and 3, the transparency data is stored in
       // a dedicated PNG chunk.
 
 
-      if (this.imAge.transparency.grayscale != null) {
+      if (this.image.transparency.grayscale != null) {
         // Use Color Key Masking (spec section 4.8.5)
         // An array with N elements, where N is two times the number of color components.
-        var val = this.imAge.transparency.grayscale;
+        var val = this.image.transparency.grayscale;
         this.obj.data['Mask'] = [val, val];
-      } else if (this.imAge.transparency.rgb) {
+      } else if (this.image.transparency.rgb) {
         // Use Color Key Masking (spec section 4.8.5)
         // An array with N elements, where N is two times the number of color components.
-        var rgb = this.imAge.transparency.rgb;
+        var rgb = this.image.transparency.rgb;
         var mask = [];
 
         var _iterator = _createForOfIteratorHelper(rgb),
@@ -19608,14 +19608,14 @@ var PNGImAge = /*#__PURE__*/function () {
         }
 
         this.obj.data['Mask'] = mask;
-      } else if (this.imAge.transparency.indexed) {
-        // Create a transparency SMask for the imAge based on the data
+      } else if (this.image.transparency.indexed) {
+        // Create a transparency SMask for the image based on the data
         // in the PLTE and tRNS sections. See below for details on SMasks.
         dataDecoded = true;
         return this.loadIndexedAlphaChannel();
       } else if (hasAlphaChannel) {
         // For PNG color types 4 and 6, the transparency data is stored as a alpha
-        // channel mixed in with the main imAge data. Separate this data out into an
+        // channel mixed in with the main image data. Separate this data out into an
         // SMask object and store it separately in the PDF.
         dataDecoded = true;
         return this.splitAlphaChannel();
@@ -19633,7 +19633,7 @@ var PNGImAge = /*#__PURE__*/function () {
       if (this.alphaChannel) {
         var sMask = this.document.ref({
           Type: 'XObject',
-          Subtype: 'ImAge',
+          Subtype: 'Image',
           Height: this.height,
           Width: this.width,
           BitsPerComponent: 8,
@@ -19643,12 +19643,12 @@ var PNGImAge = /*#__PURE__*/function () {
         });
         sMask.end(this.alphaChannel);
         this.obj.data['SMask'] = sMask;
-      } // add the actual imAge data
+      } // add the actual image data
 
 
       this.obj.end(this.imgData); // free memory
 
-      this.imAge = null;
+      this.image = null;
       return this.imgData = null;
     }
   }, {
@@ -19656,16 +19656,16 @@ var PNGImAge = /*#__PURE__*/function () {
     value: function splitAlphaChannel() {
       var _this = this;
 
-      return this.imAge.decodePixels(function (pixels) {
+      return this.image.decodePixels(function (pixels) {
         var a, p;
-        var colorCount = _this.imAge.colors;
+        var colorCount = _this.image.colors;
         var pixelCount = _this.width * _this.height;
         var imgData = Buffer.alloc(pixelCount * colorCount);
         var alphaChannel = Buffer.alloc(pixelCount);
         var i = p = a = 0;
-        var len = pixels.length; // For 16bit imAges copy only most significant byte (MSB) - PNG data is always stored in network byte order (MSB first)
+        var len = pixels.length; // For 16bit images copy only most significant byte (MSB) - PNG data is always stored in network byte order (MSB first)
 
-        var skipByteCount = _this.imAge.bits === 16 ? 1 : 0;
+        var skipByteCount = _this.image.bits === 16 ? 1 : 0;
 
         while (i < len) {
           for (var colorIndex = 0; colorIndex < colorCount; colorIndex++) {
@@ -19687,8 +19687,8 @@ var PNGImAge = /*#__PURE__*/function () {
     value: function loadIndexedAlphaChannel() {
       var _this2 = this;
 
-      var transparency = this.imAge.transparency.indexed;
-      return this.imAge.decodePixels(function (pixels) {
+      var transparency = this.image.transparency.indexed;
+      return this.image.decodePixels(function (pixels) {
         var alphaChannel = Buffer.alloc(_this2.width * _this2.height);
         var i = 0;
 
@@ -19705,7 +19705,7 @@ var PNGImAge = /*#__PURE__*/function () {
     value: function decodeData() {
       var _this3 = this;
 
-      this.imAge.decodePixels(function (pixels) {
+      this.image.decodePixels(function (pixels) {
         _this3.imgData = _zlib.default.deflateSync(pixels);
 
         _this3.finalize();
@@ -19713,15 +19713,15 @@ var PNGImAge = /*#__PURE__*/function () {
     }
   }]);
 
-  return PNGImAge;
+  return PNGImage;
 }();
 
-var PDFImAge = /*#__PURE__*/function () {
-  function PDFImAge() {
-    _classCallCheck(this, PDFImAge);
+var PDFImage = /*#__PURE__*/function () {
+  function PDFImage() {
+    _classCallCheck(this, PDFImage);
   }
 
-  _createClass(PDFImAge, null, [{
+  _createClass(PDFImage, null, [{
     key: "open",
     value: function open(src, label) {
       var data;
@@ -19747,24 +19747,24 @@ var PDFImAge = /*#__PURE__*/function () {
       if (data[0] === 0xff && data[1] === 0xd8) {
         return new JPEG(data, label);
       } else if (data[0] === 0x89 && data.toString('ascii', 1, 4) === 'PNG') {
-        return new PNGImAge(data, label);
+        return new PNGImage(data, label);
       } else {
-        throw new Error('Unknown imAge format.');
+        throw new Error('Unknown image format.');
       }
     }
   }]);
 
-  return PDFImAge;
+  return PDFImage;
 }();
 
-var ImAgesMixin = {
-  initImAges: function initImAges() {
-    this._imAgeRegistry = {};
-    return this._imAgeCount = 0;
+var ImagesMixin = {
+  initImages: function initImages() {
+    this._imageRegistry = {};
+    return this._imageCount = 0;
   },
-  imAge: function imAge(src, x, y) {
+  image: function image(src, x, y) {
     var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
-    var bh, bp, bw, imAge, ip, left, left1;
+    var bh, bp, bw, image, ip, left, left1;
 
     if (typeof x === 'object') {
       options = x;
@@ -19775,46 +19775,46 @@ var ImAgesMixin = {
     y = (left1 = y != null ? y : options.y) != null ? left1 : this.y;
 
     if (typeof src === 'string') {
-      imAge = this._imAgeRegistry[src];
+      image = this._imageRegistry[src];
     }
 
-    if (!imAge) {
+    if (!image) {
       if (src.width && src.height) {
-        imAge = src;
+        image = src;
       } else {
-        imAge = this.openImAge(src);
+        image = this.openImage(src);
       }
     }
 
-    if (!imAge.obj) {
-      imAge.embed(this);
+    if (!image.obj) {
+      image.embed(this);
     }
 
-    if (this.pAge.xobjects[imAge.label] == null) {
-      this.pAge.xobjects[imAge.label] = imAge.obj;
+    if (this.page.xobjects[image.label] == null) {
+      this.page.xobjects[image.label] = image.obj;
     }
 
-    var w = options.width || imAge.width;
-    var h = options.height || imAge.height;
+    var w = options.width || image.width;
+    var h = options.height || image.height;
 
     if (options.width && !options.height) {
-      var wp = w / imAge.width;
-      w = imAge.width * wp;
-      h = imAge.height * wp;
+      var wp = w / image.width;
+      w = image.width * wp;
+      h = image.height * wp;
     } else if (options.height && !options.width) {
-      var hp = h / imAge.height;
-      w = imAge.width * hp;
-      h = imAge.height * hp;
+      var hp = h / image.height;
+      w = image.width * hp;
+      h = image.height * hp;
     } else if (options.scale) {
-      w = imAge.width * options.scale;
-      h = imAge.height * options.scale;
+      w = image.width * options.scale;
+      h = image.height * options.scale;
     } else if (options.fit) {
       var _options$fit = _slicedToArray(options.fit, 2);
 
       bw = _options$fit[0];
       bh = _options$fit[1];
       bp = bw / bh;
-      ip = imAge.width / imAge.height;
+      ip = image.width / image.height;
 
       if (ip > bp) {
         w = bw;
@@ -19829,7 +19829,7 @@ var ImAgesMixin = {
       bw = _options$cover[0];
       bh = _options$cover[1];
       bp = bw / bh;
-      ip = imAge.width / imAge.height;
+      ip = image.width / image.height;
 
       if (ip > bp) {
         h = bh;
@@ -19865,7 +19865,7 @@ var ImAgesMixin = {
 
     if (options.destination != null) {
       this.addNamedDestination(options.destination, 'XYZ', x, y, null);
-    } // Set the current y position to below the imAge if it is in the document flow
+    } // Set the current y position to below the image if it is in the document flow
 
 
     if (this.y === y) {
@@ -19874,26 +19874,26 @@ var ImAgesMixin = {
 
     this.save();
     this.transform(w, 0, 0, -h, x, y + h);
-    this.addContent("/".concat(imAge.label, " Do"));
+    this.addContent("/".concat(image.label, " Do"));
     this.restore();
     return this;
   },
-  openImAge: function openImAge(src) {
-    var imAge;
+  openImage: function openImage(src) {
+    var image;
 
     if (typeof src === 'string') {
-      imAge = this._imAgeRegistry[src];
+      image = this._imageRegistry[src];
     }
 
-    if (!imAge) {
-      imAge = PDFImAge.open(src, "I".concat(++this._imAgeCount));
+    if (!image) {
+      image = PDFImage.open(src, "I".concat(++this._imageCount));
 
       if (typeof src === 'string') {
-        this._imAgeRegistry[src] = imAge;
+        this._imageRegistry[src] = image;
       }
     }
 
-    return imAge;
+    return image;
   }
 };
 var AnnotationsMixin = {
@@ -19926,7 +19926,7 @@ var AnnotationsMixin = {
     }
 
     var ref = this.ref(options);
-    this.pAge.annotations.push(ref);
+    this.page.annotations.push(ref);
     ref.end();
     return this;
   },
@@ -19957,17 +19957,17 @@ var AnnotationsMixin = {
     options.Subtype = 'Link';
 
     if (typeof url === 'number') {
-      // Link to a pAge in the document (the pAge must already exist)
-      var pAges = this._root.data.PAges.data;
+      // Link to a page in the document (the page must already exist)
+      var pages = this._root.data.Pages.data;
 
-      if (url >= 0 && url < pAges.Kids.length) {
+      if (url >= 0 && url < pages.Kids.length) {
         options.A = this.ref({
           S: 'GoTo',
-          D: [pAges.Kids[url], 'XYZ', null, null, null]
+          D: [pages.Kids[url], 'XYZ', null, null, null]
         });
         options.A.end();
       } else {
-        throw new Error("The document has no pAge ".concat(url));
+        throw new Error("The document has no page ".concat(url));
       }
     } else {
       // Link to an external url
@@ -20018,7 +20018,7 @@ var AnnotationsMixin = {
     var options = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {};
     options.Subtype = 'Line';
     options.Contents = new String();
-    options.L = [x1, this.pAge.height - y1, x2, this.pAge.height - y2];
+    options.L = [x1, this.page.height - y1, x2, this.page.height - y2];
     return this.annotate(x1, y1, x2, y2, options);
   },
   rectAnnotation: function rectAnnotation(x, y, w, h) {
@@ -20115,7 +20115,7 @@ var PDFOutline = /*#__PURE__*/function () {
       var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
         expanded: false
       };
-      var result = new PDFOutline(this.document, this.dictionary, title, this.document.pAge, options);
+      var result = new PDFOutline(this.document, this.dictionary, title, this.document.page, options);
       this.children.push(result);
       return result;
     }
@@ -20163,7 +20163,7 @@ var OutlineMixin = {
 
     if (this.outline.children.length > 0) {
       this._root.data.Outlines = this.outline.dictionary;
-      return this._root.data.PAgeMode = 'UseOutlines';
+      return this._root.data.PageMode = 'UseOutlines';
     }
   }
 };
@@ -20173,11 +20173,11 @@ By Ben Schmidt
 */
 
 var PDFStructureContent = /*#__PURE__*/function () {
-  function PDFStructureContent(pAgeRef, mcid) {
+  function PDFStructureContent(pageRef, mcid) {
     _classCallCheck(this, PDFStructureContent);
 
     this.refs = [{
-      pAgeRef: pAgeRef,
+      pageRef: pageRef,
       mcid: mcid
     }];
   }
@@ -20292,12 +20292,12 @@ var PDFStructureElement = /*#__PURE__*/function () {
       var _this2 = this;
 
       content.refs.forEach(function (_ref) {
-        var pAgeRef = _ref.pAgeRef,
+        var pageRef = _ref.pageRef,
             mcid = _ref.mcid;
 
-        var pAgeStructParents = _this2.document.getStructParentTree().get(pAgeRef.data.StructParents);
+        var pageStructParents = _this2.document.getStructParentTree().get(pageRef.data.StructParents);
 
-        pAgeStructParents[mcid] = _this2.dictionary;
+        pageStructParents[mcid] = _this2.dictionary;
       });
     }
   }, {
@@ -20420,19 +20420,19 @@ var PDFStructureElement = /*#__PURE__*/function () {
 
       if (child instanceof PDFStructureContent) {
         child.refs.forEach(function (_ref2) {
-          var pAgeRef = _ref2.pAgeRef,
+          var pageRef = _ref2.pageRef,
               mcid = _ref2.mcid;
 
           if (!_this5.dictionary.data.Pg) {
-            _this5.dictionary.data.Pg = pAgeRef;
+            _this5.dictionary.data.Pg = pageRef;
           }
 
-          if (_this5.dictionary.data.Pg === pAgeRef) {
+          if (_this5.dictionary.data.Pg === pageRef) {
             _this5.dictionary.data.K.push(mcid);
           } else {
             _this5.dictionary.data.K.push({
               Type: "MCR",
-              Pg: pAgeRef,
+              Pg: pageRef,
               MCID: mcid
             });
           }
@@ -20489,7 +20489,7 @@ var MarkingsMixin = {
 
     if (tag === 'Artifact' || options && options.mcid) {
       var toClose = 0;
-      this.pAge.markings.forEach(function (marking) {
+      this.page.markings.forEach(function (marking) {
         if (toClose || marking.structContent || marking.tag === 'Artifact') {
           toClose++;
         }
@@ -20501,14 +20501,14 @@ var MarkingsMixin = {
     }
 
     if (!options) {
-      this.pAge.markings.push({
+      this.page.markings.push({
         tag: tag
       });
       this.addContent("/".concat(tag, " BMC"));
       return this;
     }
 
-    this.pAge.markings.push({
+    this.page.markings.push({
       tag: tag,
       options: options
     });
@@ -20524,7 +20524,7 @@ var MarkingsMixin = {
       }
 
       if (Array.isArray(options.bbox)) {
-        dictionary.BBox = [options.bbox[0], this.pAge.height - options.bbox[3], options.bbox[2], this.pAge.height - options.bbox[1]];
+        dictionary.BBox = [options.bbox[0], this.page.height - options.bbox[3], options.bbox[2], this.page.height - options.bbox[1]];
       }
 
       if (Array.isArray(options.attached) && options.attached.every(function (val) {
@@ -20557,18 +20557,18 @@ var MarkingsMixin = {
   },
   markStructureContent: function markStructureContent(tag) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    var pAgeStructParents = this.getStructParentTree().get(this.pAge.structParentTreeKey);
-    var mcid = pAgeStructParents.length;
-    pAgeStructParents.push(null);
+    var pageStructParents = this.getStructParentTree().get(this.page.structParentTreeKey);
+    var mcid = pageStructParents.length;
+    pageStructParents.push(null);
     this.markContent(tag, _objectSpread2(_objectSpread2({}, options), {}, {
       mcid: mcid
     }));
-    var structContent = new PDFStructureContent(this.pAge.dictionary, mcid);
-    this.pAge.markings.slice(-1)[0].structContent = structContent;
+    var structContent = new PDFStructureContent(this.page.dictionary, mcid);
+    this.page.markings.slice(-1)[0].structContent = structContent;
     return structContent;
   },
   endMarkedContent: function endMarkedContent() {
-    this.pAge.markings.pop();
+    this.page.markings.pop();
     this.addContent('EMC');
     return this;
   },
@@ -20590,29 +20590,29 @@ var MarkingsMixin = {
     structTreeRoot.data.K.push(structElem.dictionary);
     return this;
   },
-  initPAgeMarkings: function initPAgeMarkings(pAgeMarkings) {
+  initPageMarkings: function initPageMarkings(pageMarkings) {
     var _this = this;
 
-    pAgeMarkings.forEach(function (marking) {
+    pageMarkings.forEach(function (marking) {
       if (marking.structContent) {
         var structContent = marking.structContent;
 
         var newStructContent = _this.markStructureContent(marking.tag, marking.options);
 
         structContent.push(newStructContent);
-        _this.pAge.markings.slice(-1)[0].structContent = structContent;
+        _this.page.markings.slice(-1)[0].structContent = structContent;
       } else {
         _this.markContent(marking.tag, marking.options);
       }
     });
   },
-  endPAgeMarkings: function endPAgeMarkings(pAge) {
-    var pAgeMarkings = pAge.markings;
-    pAgeMarkings.forEach(function () {
-      return pAge.write('EMC');
+  endPageMarkings: function endPageMarkings(page) {
+    var pageMarkings = page.markings;
+    pageMarkings.forEach(function () {
+      return page.write('EMC');
     });
-    pAge.markings = [];
-    return pAgeMarkings;
+    page.markings = [];
+    return pageMarkings;
   },
   getMarkInfoDictionary: function getMarkInfoDictionary() {
     if (!this._root.data.MarkInfo) {
@@ -20808,11 +20808,11 @@ var AcroFormMixin = {
 
     if (fieldDict.F === undefined) {
       fieldDict.F = 4; // print the annotation
-    } // Add Field annot to pAge, and get it's ref
+    } // Add Field annot to page, and get it's ref
 
 
     this.annotate(x, y, w, h, fieldDict);
-    var annotRef = this.pAge.annotations[this.pAge.annotations.length - 1];
+    var annotRef = this.page.annotations[this.page.annotations.length - 1];
     return this._addToParent(annotRef);
   },
   formText: function formText(name, x, y, w, h) {
@@ -21239,16 +21239,16 @@ var PDFDocument = /*#__PURE__*/function (_stream$Readable) {
 
 
     _this.compress = _this.options.compress != null ? _this.options.compress : true;
-    _this._pAgeBuffer = [];
-    _this._pAgeBufferStart = 0; // The PDF object store
+    _this._pageBuffer = [];
+    _this._pageBufferStart = 0; // The PDF object store
 
     _this._offsets = [];
     _this._waiting = 0;
     _this._ended = false;
     _this._offset = 0;
 
-    var PAges = _this.ref({
-      Type: 'PAges',
+    var Pages = _this.ref({
+      Type: 'Pages',
       Count: 0,
       Kids: []
     });
@@ -21259,16 +21259,16 @@ var PDFDocument = /*#__PURE__*/function (_stream$Readable) {
 
     _this._root = _this.ref({
       Type: 'Catalog',
-      PAges: PAges,
+      Pages: Pages,
       Names: Names
     });
 
     if (_this.options.lang) {
       _this._root.data.Lang = new String(_this.options.lang);
-    } // The current pAge
+    } // The current page
 
 
-    _this.pAge = null; // Initialize mixins
+    _this.page = null; // Initialize mixins
 
     _this.initColor();
 
@@ -21278,7 +21278,7 @@ var PDFDocument = /*#__PURE__*/function (_stream$Readable) {
 
     _this.initText();
 
-    _this.initImAges();
+    _this.initImages();
 
     _this.initOutline();
 
@@ -21313,91 +21313,91 @@ var PDFDocument = /*#__PURE__*/function (_stream$Readable) {
     _this._write("%PDF-".concat(_this.version)); // 4 binary chars, as recommended by the spec
 
 
-    _this._write('%\xFF\xFF\xFF\xFF'); // Add the first pAge
+    _this._write('%\xFF\xFF\xFF\xFF'); // Add the first page
 
 
-    if (_this.options.autoFirstPAge !== false) {
-      _this.addPAge();
+    if (_this.options.autoFirstPage !== false) {
+      _this.addPage();
     }
 
     return _this;
   }
 
   _createClass(PDFDocument, [{
-    key: "addPAge",
-    value: function addPAge(options) {
+    key: "addPage",
+    value: function addPage(options) {
       if (options == null) {
         options = this.options;
-      } // end the current pAge if needed
+      } // end the current page if needed
 
 
-      if (!this.options.bufferPAges) {
-        this.flushPAges();
-      } // create a pAge object
+      if (!this.options.bufferPages) {
+        this.flushPages();
+      } // create a page object
 
 
-      this.pAge = new PDFPAge(this, options);
+      this.page = new PDFPage(this, options);
 
-      this._pAgeBuffer.push(this.pAge); // add the pAge to the object store
+      this._pageBuffer.push(this.page); // add the page to the object store
 
 
-      var pAges = this._root.data.PAges.data;
-      pAges.Kids.push(this.pAge.dictionary);
-      pAges.Count++; // reset x and y coordinates
+      var pages = this._root.data.Pages.data;
+      pages.Kids.push(this.page.dictionary);
+      pages.Count++; // reset x and y coordinates
 
-      this.x = this.pAge.margins.left;
-      this.y = this.pAge.margins.top; // flip PDF coordinate system so that the origin is in
+      this.x = this.page.margins.left;
+      this.y = this.page.margins.top; // flip PDF coordinate system so that the origin is in
       // the top left rather than the bottom left
 
       this._ctm = [1, 0, 0, 1, 0, 0];
-      this.transform(1, 0, 0, -1, 0, this.pAge.height);
-      this.emit('pAgeAdded');
+      this.transform(1, 0, 0, -1, 0, this.page.height);
+      this.emit('pageAdded');
       return this;
     }
   }, {
-    key: "continueOnNewPAge",
-    value: function continueOnNewPAge(options) {
-      var pAgeMarkings = this.endPAgeMarkings(this.pAge);
-      this.addPAge(options);
-      this.initPAgeMarkings(pAgeMarkings);
+    key: "continueOnNewPage",
+    value: function continueOnNewPage(options) {
+      var pageMarkings = this.endPageMarkings(this.page);
+      this.addPage(options);
+      this.initPageMarkings(pageMarkings);
       return this;
     }
   }, {
-    key: "bufferedPAgeRange",
-    value: function bufferedPAgeRange() {
+    key: "bufferedPageRange",
+    value: function bufferedPageRange() {
       return {
-        start: this._pAgeBufferStart,
-        count: this._pAgeBuffer.length
+        start: this._pageBufferStart,
+        count: this._pageBuffer.length
       };
     }
   }, {
-    key: "switchToPAge",
-    value: function switchToPAge(n) {
-      var pAge;
+    key: "switchToPage",
+    value: function switchToPage(n) {
+      var page;
 
-      if (!(pAge = this._pAgeBuffer[n - this._pAgeBufferStart])) {
-        throw new Error("switchToPAge(".concat(n, ") out of bounds, current buffer covers pAges ").concat(this._pAgeBufferStart, " to ").concat(this._pAgeBufferStart + this._pAgeBuffer.length - 1));
+      if (!(page = this._pageBuffer[n - this._pageBufferStart])) {
+        throw new Error("switchToPage(".concat(n, ") out of bounds, current buffer covers pages ").concat(this._pageBufferStart, " to ").concat(this._pageBufferStart + this._pageBuffer.length - 1));
       }
 
-      return this.pAge = pAge;
+      return this.page = page;
     }
   }, {
-    key: "flushPAges",
-    value: function flushPAges() {
+    key: "flushPages",
+    value: function flushPages() {
       // this local variable exists so we're future-proof against
-      // reentrant calls to flushPAges.
-      var pAges = this._pAgeBuffer;
-      this._pAgeBuffer = [];
-      this._pAgeBufferStart += pAges.length;
+      // reentrant calls to flushPages.
+      var pages = this._pageBuffer;
+      this._pageBuffer = [];
+      this._pageBufferStart += pages.length;
 
-      var _iterator = _createForOfIteratorHelper(pAges),
+      var _iterator = _createForOfIteratorHelper(pages),
           _step;
 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var pAge = _step.value;
-          this.endPAgeMarkings(pAge);
-          pAge.end();
+          var page = _step.value;
+          this.endPageMarkings(page);
+          page.end();
         }
       } catch (err) {
         _iterator.e(err);
@@ -21417,10 +21417,10 @@ var PDFDocument = /*#__PURE__*/function (_stream$Readable) {
       }
 
       if (args[0] === 'XYZ' && args[2] !== null) {
-        args[2] = this.pAge.height - args[2];
+        args[2] = this.page.height - args[2];
       }
 
-      args.unshift(this.pAge.dictionary);
+      args.unshift(this.page.dictionary);
 
       this._root.data.Names.data.Dests.add(name, args);
     }
@@ -21479,7 +21479,7 @@ var PDFDocument = /*#__PURE__*/function (_stream$Readable) {
   }, {
     key: "addContent",
     value: function addContent(data) {
-      this.pAge.write(data);
+      this.page.write(data);
       return this;
     }
   }, {
@@ -21506,7 +21506,7 @@ var PDFDocument = /*#__PURE__*/function (_stream$Readable) {
   }, {
     key: "end",
     value: function end() {
-      this.flushPAges();
+      this.flushPages();
       this._info = this.ref();
 
       for (var key in this.info) {
@@ -21533,7 +21533,7 @@ var PDFDocument = /*#__PURE__*/function (_stream$Readable) {
 
       this._root.end();
 
-      this._root.data.PAges.end();
+      this._root.data.Pages.end();
 
       this._root.data.Names.end();
 
@@ -21624,7 +21624,7 @@ mixin(ColorMixin);
 mixin(VectorMixin);
 mixin(FontsMixin);
 mixin(TextMixin);
-mixin(ImAgesMixin);
+mixin(ImagesMixin);
 mixin(AnnotationsMixin);
 mixin(OutlineMixin);
 mixin(MarkingsMixin);
@@ -21657,7 +21657,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var categories = ["Cc", "Zs", "Po", "Sc", "Ps", "Pe", "Sm", "Pd", "Nd", "Lu", "Sk", "Pc", "Ll", "So", "Lo", "Pi", "Cf", "No", "Pf", "Lt", "Lm", "Mn", "Me", "Mc", "Nl", "Zl", "Zp", "Cs", "Co"];
 var combiningClasses = ["Not_Reordered", "Above", "Above_Right", "Below", "Attached_Above_Right", "Attached_Below", "Overlay", "Iota_Subscript", "Double_Below", "Double_Above", "Below_Right", "Above_Left", "CCC10", "CCC11", "CCC12", "CCC13", "CCC14", "CCC15", "CCC16", "CCC17", "CCC18", "CCC19", "CCC20", "CCC21", "CCC22", "CCC23", "CCC24", "CCC25", "CCC30", "CCC31", "CCC32", "CCC27", "CCC28", "CCC29", "CCC33", "CCC34", "CCC35", "CCC36", "Nukta", "Virama", "CCC84", "CCC91", "CCC103", "CCC107", "CCC118", "CCC122", "CCC129", "CCC130", "CCC132", "Attached_Above", "Below_Left", "Left", "Kana_Voicing", "CCC26", "Right"];
-var scripts = ["Common", "Latin", "Bopomofo", "Inherited", "Greek", "Coptic", "Cyrillic", "Armenian", "Hebrew", "Arabic", "Syriac", "Thaana", "Nko", "Samaritan", "Mandaic", "Devanagari", "Bengali", "Gurmukhi", "Gujarati", "Oriya", "Tamil", "Telugu", "Kannada", "Malayalam", "Sinhala", "Thai", "Lao", "Tibetan", "Myanmar", "Georgian", "Hangul", "Ethiopic", "Cherokee", "Canadian_Aboriginal", "Ogham", "Runic", "Tagalog", "Hanunoo", "Buhid", "Tagbanwa", "Khmer", "Mongolian", "Limbu", "Tai_Le", "New_Tai_Lue", "Buginese", "Tai_Tham", "Balinese", "Sundanese", "Batak", "Lepcha", "Ol_Chiki", "Braille", "Glagolitic", "Tifinagh", "Han", "Hiragana", "Katakana", "Yi", "Lisu", "Vai", "Bamum", "Syloti_Nagri", "Phags_Pa", "Saurashtra", "Kayah_Li", "Rejang", "Javanese", "Cham", "Tai_Viet", "Meetei_Mayek", "null", "Linear_B", "Lycian", "Carian", "Old_Italic", "Gothic", "Old_Permic", "Ugaritic", "Old_Persian", "Deseret", "Shavian", "Osmanya", "OsAge", "Elbasan", "Caucasian_Albanian", "Linear_A", "Cypriot", "Imperial_Aramaic", "Palmyrene", "Nabataean", "Hatran", "Phoenician", "Lydian", "Meroitic_Hieroglyphs", "Meroitic_Cursive", "Kharoshthi", "Old_South_Arabian", "Old_North_Arabian", "Manichaean", "Avestan", "Inscriptional_Parthian", "Inscriptional_Pahlavi", "Psalter_Pahlavi", "Old_Turkic", "Old_Hungarian", "Hanifi_Rohingya", "Old_Sogdian", "Sogdian", "Elymaic", "Brahmi", "Kaithi", "Sora_Sompeng", "Chakma", "Mahajani", "Sharada", "Khojki", "Multani", "Khudawadi", "Grantha", "Newa", "Tirhuta", "Siddham", "Modi", "Takri", "Ahom", "Dogra", "Warang_Citi", "Nandinagari", "Zanabazar_Square", "Soyombo", "Pau_Cin_Hau", "Bhaiksuki", "Marchen", "Masaram_Gondi", "Gunjala_Gondi", "Makasar", "Cuneiform", "Egyptian_Hieroglyphs", "Anatolian_Hieroglyphs", "Mro", "Bassa_Vah", "Pahawh_Hmong", "Medefaidrin", "Miao", "Tangut", "Nushu", "Duployan", "SignWriting", "Nyiakeng_Puachue_Hmong", "Wancho", "Mende_Kikakui", "Adlam"];
+var scripts = ["Common", "Latin", "Bopomofo", "Inherited", "Greek", "Coptic", "Cyrillic", "Armenian", "Hebrew", "Arabic", "Syriac", "Thaana", "Nko", "Samaritan", "Mandaic", "Devanagari", "Bengali", "Gurmukhi", "Gujarati", "Oriya", "Tamil", "Telugu", "Kannada", "Malayalam", "Sinhala", "Thai", "Lao", "Tibetan", "Myanmar", "Georgian", "Hangul", "Ethiopic", "Cherokee", "Canadian_Aboriginal", "Ogham", "Runic", "Tagalog", "Hanunoo", "Buhid", "Tagbanwa", "Khmer", "Mongolian", "Limbu", "Tai_Le", "New_Tai_Lue", "Buginese", "Tai_Tham", "Balinese", "Sundanese", "Batak", "Lepcha", "Ol_Chiki", "Braille", "Glagolitic", "Tifinagh", "Han", "Hiragana", "Katakana", "Yi", "Lisu", "Vai", "Bamum", "Syloti_Nagri", "Phags_Pa", "Saurashtra", "Kayah_Li", "Rejang", "Javanese", "Cham", "Tai_Viet", "Meetei_Mayek", "null", "Linear_B", "Lycian", "Carian", "Old_Italic", "Gothic", "Old_Permic", "Ugaritic", "Old_Persian", "Deseret", "Shavian", "Osmanya", "Osage", "Elbasan", "Caucasian_Albanian", "Linear_A", "Cypriot", "Imperial_Aramaic", "Palmyrene", "Nabataean", "Hatran", "Phoenician", "Lydian", "Meroitic_Hieroglyphs", "Meroitic_Cursive", "Kharoshthi", "Old_South_Arabian", "Old_North_Arabian", "Manichaean", "Avestan", "Inscriptional_Parthian", "Inscriptional_Pahlavi", "Psalter_Pahlavi", "Old_Turkic", "Old_Hungarian", "Hanifi_Rohingya", "Old_Sogdian", "Sogdian", "Elymaic", "Brahmi", "Kaithi", "Sora_Sompeng", "Chakma", "Mahajani", "Sharada", "Khojki", "Multani", "Khudawadi", "Grantha", "Newa", "Tirhuta", "Siddham", "Modi", "Takri", "Ahom", "Dogra", "Warang_Citi", "Nandinagari", "Zanabazar_Square", "Soyombo", "Pau_Cin_Hau", "Bhaiksuki", "Marchen", "Masaram_Gondi", "Gunjala_Gondi", "Makasar", "Cuneiform", "Egyptian_Hieroglyphs", "Anatolian_Hieroglyphs", "Mro", "Bassa_Vah", "Pahawh_Hmong", "Medefaidrin", "Miao", "Tangut", "Nushu", "Duployan", "SignWriting", "Nyiakeng_Puachue_Hmong", "Wancho", "Mende_Kikakui", "Adlam"];
 var eaw = ["N", "Na", "A", "W", "H", "F"];
 var data = {
   categories: categories,
@@ -22187,7 +22187,7 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
     darkgrey: [169, 169, 169],
     darkgreen: [0, 100, 0],
     darkkhaki: [189, 183, 107],
-    darkmAgenta: [139, 0, 139],
+    darkmagenta: [139, 0, 139],
     darkolivegreen: [85, 107, 47],
     darkorange: [255, 140, 0],
     darkorchid: [153, 50, 204],
@@ -22244,7 +22244,7 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
     lime: [0, 255, 0],
     limegreen: [50, 205, 50],
     linen: [250, 240, 230],
-    mAgenta: [255, 0, 255],
+    magenta: [255, 0, 255],
     maroon: [128, 0, 0],
     mediumaquamarine: [102, 205, 170],
     mediumblue: [0, 0, 205],
@@ -22502,7 +22502,7 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
     oline: 8254,
     frasl: 8260,
     weierp: 8472,
-    imAge: 8465,
+    image: 8465,
     real: 8476,
     trade: 8482,
     alefsym: 8501,
@@ -22894,12 +22894,12 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
     });
     group.xobj.write('');
     group.savedMatrix = doc._ctm;
-    group.savedPAge = doc.pAge;
+    group.savedPage = doc.page;
     groupStack.push(group);
     doc._ctm = [1, 0, 0, 1, 0, 0];
-    doc.pAge = {
-      width: doc.pAge.width,
-      height: doc.pAge.height,
+    doc.page = {
+      width: doc.page.width,
+      height: doc.page.height,
       write: function write(data) {
         group.xobj.write(data);
       },
@@ -22916,30 +22916,30 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
       throw 'Group not matching';
     }
 
-    if (Object.keys(doc.pAge.fonts).length) {
-      group.resources.data.Font = doc.pAge.fonts;
+    if (Object.keys(doc.page.fonts).length) {
+      group.resources.data.Font = doc.page.fonts;
     }
 
-    if (Object.keys(doc.pAge.xobjects).length) {
-      group.resources.data.XObject = doc.pAge.xobjects;
+    if (Object.keys(doc.page.xobjects).length) {
+      group.resources.data.XObject = doc.page.xobjects;
     }
 
-    if (Object.keys(doc.pAge.ext_gstates).length) {
-      group.resources.data.ExtGState = doc.pAge.ext_gstates;
+    if (Object.keys(doc.page.ext_gstates).length) {
+      group.resources.data.ExtGState = doc.page.ext_gstates;
     }
 
-    if (Object.keys(doc.pAge.patterns).length) {
-      group.resources.data.Pattern = doc.pAge.patterns;
+    if (Object.keys(doc.page.patterns).length) {
+      group.resources.data.Pattern = doc.page.patterns;
     }
 
     group.resources.end();
     group.xobj.end();
     doc._ctm = group.savedMatrix;
-    doc.pAge = group.savedPAge;
+    doc.page = group.savedPage;
   }
 
   function docInsertGroup(group) {
-    doc.pAge.xobjects[group.name] = group.xobj;
+    doc.page.xobjects[group.name] = group.xobj;
     doc.addContent('/' + group.name + ' Do');
   }
 
@@ -22957,7 +22957,7 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
       }
     });
     gstate.end();
-    doc.pAge.ext_gstates[name] = gstate;
+    doc.page.ext_gstates[name] = gstate;
     doc.addContent('/' + name + ' gs');
   }
 
@@ -22982,7 +22982,7 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
       YStep: pattern.dy,
       Matrix: multiplyMatrix(doc._ctm, pattern.matrix),
       Resources: {
-        ProcSet: ['PDF', 'Text', 'ImAgeB', 'ImAgeC', 'ImAgeI'],
+        ProcSet: ['PDF', 'Text', 'ImageB', 'ImageC', 'ImageI'],
         XObject: function () {
           var temp = {};
           temp[pattern.group.name] = pattern.group.xobj;
@@ -22992,7 +22992,7 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
     });
     ref.write('/' + pattern.group.name + ' Do');
     ref.end();
-    doc.pAge.patterns[name] = ref;
+    doc.page.patterns[name] = ref;
 
     if (stroke) {
       doc.addContent('/Pattern CS');
@@ -23004,8 +23004,8 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
   }
 
   function docBeginText(font, size) {
-    if (!doc.pAge.fonts[font.id]) {
-      doc.pAge.fonts[font.id] = font.ref();
+    if (!doc.page.fonts[font.id]) {
+      doc.page.fonts[font.id] = font.ref();
     }
 
     doc.addContent('BT').addContent('/' + font.id + ' ' + size + ' Tf');
@@ -23313,8 +23313,8 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
     return ctm;
   }
 
-  function getPAgeBBox() {
-    return new SvgShape().M(0, 0).L(doc.pAge.width, 0).L(doc.pAge.width, doc.pAge.height).L(0, doc.pAge.height).transform(inverseMatrix(getGlobalMatrix())).getBoundingBox();
+  function getPageBBox() {
+    return new SvgShape().M(0, 0).L(doc.page.width, 0).L(doc.page.width, doc.page.height).L(0, doc.page.height).transform(inverseMatrix(getGlobalMatrix())).getBoundingBox();
   }
 
   function inverseMatrix(m) {
@@ -23776,8 +23776,8 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
       case 'svg':
         return new SvgElemSvg(obj, inherits);
 
-      case 'imAge':
-        return new SVGElemImAge(obj, inherits);
+      case 'image':
+        return new SVGElemImage(obj, inherits);
 
       case 'rect':
         return new SvgElemRect(obj, inherits);
@@ -24898,7 +24898,7 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
 
   var SvgElemHasChildren = function SvgElemHasChildren(obj, inherits) {
     SvgElemStylable.call(this, obj, inherits);
-    this.allowedChildren = ['use', 'g', 'a', 'svg', 'imAge', 'rect', 'circle', 'ellipse', 'line', 'polyline', 'polygon', 'path', 'text'];
+    this.allowedChildren = ['use', 'g', 'a', 'svg', 'image', 'rect', 'circle', 'ellipse', 'line', 'polyline', 'polygon', 'path', 'text'];
 
     this.getBoundingShape = function () {
       var shape = new SvgShape(),
@@ -24944,7 +24944,7 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
           group;
 
       if ((this.get('opacity') < 1 || clipped || masked) && !isClip) {
-        group = docBeginGroup(getPAgeBBox());
+        group = docBeginGroup(getPageBBox());
       }
 
       this.drawChildren(isClip, isMask);
@@ -25098,29 +25098,29 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
     };
   };
 
-  var SVGElemImAge = function SVGElemImAge(obj, inherits) {
+  var SVGElemImage = function SVGElemImage(obj, inherits) {
     SvgElemStylable.call(this, obj, inherits);
-    var link = imAgeCallback(this.attr('href') || this.attr('xlink:href') || ''),
+    var link = imageCallback(this.attr('href') || this.attr('xlink:href') || ''),
         x = this.getLength('x', this.getVWidth(), 0),
         y = this.getLength('y', this.getVHeight(), 0),
         width = this.getLength('width', this.getVWidth(), 'auto'),
         height = this.getLength('height', this.getVHeight(), 'auto'),
-        imAge;
+        image;
 
     try {
-      imAge = doc.openImAge(link);
+      image = doc.openImage(link);
     } catch (e) {
-      warningCallback('SVGElemImAge: failed to open imAge "' + link + '" in PDFKit');
+      warningCallback('SVGElemImage: failed to open image "' + link + '" in PDFKit');
     }
 
-    if (imAge) {
+    if (image) {
       if (width === 'auto' && height !== 'auto') {
-        width = height * imAge.width / imAge.height;
+        width = height * image.width / image.height;
       } else if (height === 'auto' && width !== 'auto') {
-        height = width * imAge.height / imAge.width;
+        height = width * image.height / image.width;
       } else if (width === 'auto' && height === 'auto') {
-        width = imAge.width;
-        height = imAge.height;
+        width = image.width;
+        height = image.height;
       }
     }
 
@@ -25141,7 +25141,7 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
     };
 
     this.drawInDocument = function (isClip, isMask) {
-      if (this.get('visibility') === 'hidden' || !imAge) {
+      if (this.get('visibility') === 'hidden' || !image) {
         return;
       }
 
@@ -25155,13 +25155,13 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
       this.clip();
       this.mask();
       doc.translate(x, y);
-      doc.transform.apply(doc, parseAspectRatio(this.attr('preserveAspectRatio'), width, height, imAge ? imAge.width : width, imAge ? imAge.height : height));
+      doc.transform.apply(doc, parseAspectRatio(this.attr('preserveAspectRatio'), width, height, image ? image.width : width, image ? image.height : height));
 
       if (!isClip) {
         doc.fillOpacity(this.get('opacity'));
-        doc.imAge(imAge, 0, 0);
+        doc.image(image, 0, 0);
       } else {
-        doc.rect(0, 0, imAge.width, imAge.height);
+        doc.rect(0, 0, image.width, image.height);
         docFillColor(DefaultColors.white).fill();
       }
 
@@ -25454,7 +25454,7 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
             group;
 
         if (masked) {
-          group = docBeginGroup(getPAgeBBox());
+          group = docBeginGroup(getPageBBox());
         }
 
         var subPaths = this.shape.getSubPaths(),
@@ -25716,7 +25716,7 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
       var group;
 
       if (this.get('opacity') < 1 && !isClip) {
-        group = docBeginGroup(getPAgeBBox());
+        group = docBeginGroup(getPageBBox());
       }
 
       this.drawChildren(isClip, isMask);
@@ -25735,7 +25735,7 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
     SvgElemHasChildren.call(this, obj, inherits);
 
     this.useMask = function (bBox) {
-      var group = docBeginGroup(getPAgeBBox());
+      var group = docBeginGroup(getPageBBox());
       doc.save();
 
       if (this.attr('clipPathUnits') === 'objectBoundingBox') {
@@ -25754,7 +25754,7 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
     SvgElemHasChildren.call(this, obj, inherits);
 
     this.useMask = function (bBox) {
-      var group = docBeginGroup(getPAgeBBox());
+      var group = docBeginGroup(getPageBBox());
       doc.save();
       var x, y, w, h;
 
@@ -26266,7 +26266,7 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
           group;
 
       if (masked) {
-        group = docBeginGroup(getPAgeBBox());
+        group = docBeginGroup(getPageBBox());
       }
 
       this.drawTextInDocument(isClip, isMask);
@@ -26283,14 +26283,14 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
   options = options || {};
   var pxToPt = options.assumePt ? 1 : 72 / 96,
       // 1px = 72/96pt, but only if assumePt is false
-  viewportWidth = (options.width || doc.pAge.width) / pxToPt,
-      viewportHeight = (options.height || doc.pAge.height) / pxToPt,
+  viewportWidth = (options.width || doc.page.width) / pxToPt,
+      viewportHeight = (options.height || doc.page.height) / pxToPt,
       preserveAspectRatio = options.preserveAspectRatio || null,
       // default to null so that the attr can override if not passed
   useCSS = options.useCSS && typeof SVGElement !== 'undefined' && svg instanceof SVGElement && typeof getComputedStyle === 'function',
       warningCallback = options.warningCallback,
       fontCallback = options.fontCallback,
-      imAgeCallback = options.imAgeCallback,
+      imageCallback = options.imageCallback,
       colorCallback = options.colorCallback,
       documentCallback = options.documentCallback,
       precision = Math.ceil(Math.max(1, options.precision)) || 3,
@@ -26403,8 +26403,8 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
     };
   }
 
-  if (typeof imAgeCallback !== 'function') {
-    imAgeCallback = function imAgeCallback(link) {
+  if (typeof imageCallback !== 'function') {
+    imageCallback = function imageCallback(link) {
       return link.replace(/\s+/g, '');
     };
   }
@@ -26446,7 +26446,7 @@ var SVGtoPDF = function SVGtoPDF(doc, svg, x, y, options) {
       elem.drawInDocument();
 
       for (var _i8 = 0; _i8 < links.length; _i8++) {
-        doc.pAge.annotations.push(links[_i8]);
+        doc.page.annotations.push(links[_i8]);
       }
 
       doc.restore();
@@ -26639,7 +26639,7 @@ function fromByteArray (uint8) {
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific languAge governing permissions and
+   See the License for the specific language governing permissions and
    limitations under the License.
 
    Bit reading helpers
@@ -26770,7 +26770,7 @@ module.exports = BrotliBitReader;
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific languAge governing permissions and
+   See the License for the specific language governing permissions and
    limitations under the License.
 
    Lookup table to map the previous two bytes to a context id.
@@ -27028,7 +27028,7 @@ var __webpack_unused_export__;
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific languAge governing permissions and
+   See the License for the specific language governing permissions and
    limitations under the License.
 */
 
@@ -27967,7 +27967,7 @@ var fs = __webpack_require__(3857);
 
 /**
  * The normal dictionary-data.js is quite large, which makes it 
- * unsuitable for browser usAge. In order to make it smaller, 
+ * unsuitable for browser usage. In order to make it smaller, 
  * we read dictionary.bin, which is a compressed version of
  * the dictionary, and on initial load, Brotli decompresses 
  * it's own dictionary. 😜
@@ -27984,7 +27984,7 @@ exports.init = function() {
 /***/ 2722:
 /***/ (function(module) {
 
-module.exports="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";
+module.exports="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";
 
 
 /***/ }),
@@ -28003,7 +28003,7 @@ module.exports="W5/fcQLn5gKf2XUbAiQ1XULX+TZz6ADToDsgqk6qVfeC0e4m6OO2wcQ1J76ZBVRV
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific languAge governing permissions and
+   See the License for the specific language governing permissions and
    limitations under the License.
 
    Collection of static dictionary words.
@@ -28176,7 +28176,7 @@ exports.g = function(root_table, table, root_bits, code_lengths, code_lengths_si
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific languAge governing permissions and
+   See the License for the specific language governing permissions and
    limitations under the License.
 
    Lookup tables to map prefix codes to value ranges. This is used during
@@ -28284,7 +28284,7 @@ exports.j = BrotliOutput;
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific languAge governing permissions and
+   See the License for the specific language governing permissions and
    limitations under the License.
 
    Transformations on dictionary words.
@@ -28756,7 +28756,7 @@ Zlib.prototype._process = function () {
       }
       while (this.strm.avail_in > 0 && this.mode === exports.GUNZIP && this.err === exports.Z_STREAM_END && this.strm.next_in[0] !== 0x00) {
         // Bytes remain in input buffer. Perhaps this is another compressed
-        // member in the same archive, or just trailing garbAge.
+        // member in the same archive, or just trailing garbage.
         // Trailing zero bytes are okay, though, since they are frequently
         // used for padding.
 
@@ -28816,11 +28816,11 @@ Zlib.prototype._after = function () {
   }
 };
 
-Zlib.prototype._error = function (messAge) {
+Zlib.prototype._error = function (message) {
   if (this.strm.msg) {
-    messAge = this.strm.msg;
+    message = this.strm.msg;
   }
-  this.onerror(messAge, this.err
+  this.onerror(message, this.err
 
   // no hope of rescue.
   );this.write_in_progress = false;
@@ -28963,7 +28963,7 @@ var binding = __webpack_require__(4505);
 var util = __webpack_require__(9539);
 var assert = (__webpack_require__(9282).ok);
 var kMaxLength = (__webpack_require__(8823).kMaxLength);
-var kRangeErrorMessAge = 'Cannot create final Buffer. It would be larger ' + 'than 0x' + kMaxLength.toString(16) + ' bytes';
+var kRangeErrorMessage = 'Cannot create final Buffer. It would be larger ' + 'than 0x' + kMaxLength.toString(16) + ' bytes';
 
 // zlib doesn't provide these, so kludge them in following the same
 // const naming scheme zlib uses.
@@ -29172,7 +29172,7 @@ function zlibBuffer(engine, buffer, callback) {
     var err = null;
 
     if (nread >= kMaxLength) {
-      err = new RangeError(kRangeErrorMessAge);
+      err = new RangeError(kRangeErrorMessage);
     } else {
       buf = Buffer.concat(buffers, nread);
     }
@@ -29238,7 +29238,7 @@ function isValidFlushFlag(flag) {
 }
 
 // the Zlib class they all inherit from
-// This thing manAges the queue of requests, and returns
+// This thing manages the queue of requests, and returns
 // true or false if there is anything in the queue when
 // you call the .write() method.
 
@@ -29300,13 +29300,13 @@ function Zlib(opts, mode) {
 
   var self = this;
   this._hadError = false;
-  this._handle.onerror = function (messAge, errno) {
+  this._handle.onerror = function (message, errno) {
     // there is no way to cleanly recover.
     // continuing only obscures problems.
     _close(self);
     self._hadError = true;
 
-    var error = new Error(messAge);
+    var error = new Error(message);
     error.errno = errno;
     error.code = exports.codes[errno];
     self.emit('error', error);
@@ -29479,7 +29479,7 @@ Zlib.prototype._processChunk = function (chunk, flushFlag, cb) {
 
     if (nread >= kMaxLength) {
       _close(this);
-      throw new RangeError(kRangeErrorMessAge);
+      throw new RangeError(kRangeErrorMessage);
     }
 
     var buf = Buffer.concat(buffers, nread);
@@ -29694,7 +29694,7 @@ exports.setTyped(TYPED_OK);
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -29749,7 +29749,7 @@ module.exports = adler32;
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -29829,7 +29829,7 @@ module.exports = {
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -29892,7 +29892,7 @@ module.exports = crc32;
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -30111,7 +30111,7 @@ function read_buf(strm, buf, start, size) {
  * Set match_start to the longest match starting at the given string and
  * return its length. Matches shorter or equal to prev_length are discarded,
  * in which case the result is equal to prev_length and match_start is
- * garbAge.
+ * garbage.
  * IN assertions: cur_match is the head of the hash chain for the current
  *   string (strstart) and its distance is <= MAX_DIST, and prev_length >= 1
  * OUT assertion: the match length is not greater than s->lookahead.
@@ -30265,9 +30265,9 @@ function fill_window(s) {
       s.block_start -= _w_size;
 
       /* Slide the hash table (could be avoided with 32 bit values
-       at the expense of memory usAge). We slide even when level == 0
+       at the expense of memory usage). We slide even when level == 0
        to keep the hash table consistent if we switch back to level > 0
-       later. (Using level 0 permanently is not an optimal usAge of
+       later. (Using level 0 permanently is not an optimal usage of
        zlib, so we don't care about this pathological case.)
        */
 
@@ -30283,7 +30283,7 @@ function fill_window(s) {
       do {
         m = s.prev[--p];
         s.prev[p] = (m >= _w_size ? m - _w_size : 0);
-        /* If n is not on any hash chain, prev[n] is garbAge but
+        /* If n is not on any hash chain, prev[n] is garbage but
          * its value will never be used.
          */
       } while (--n);
@@ -30332,7 +30332,7 @@ function fill_window(s) {
         }
       }
     }
-    /* If the whole input has less than MIN_MATCH bytes, ins_h is garbAge,
+    /* If the whole input has less than MIN_MATCH bytes, ins_h is garbage,
      * but this is not important since only literal bytes will be emitted.
      */
 
@@ -30563,7 +30563,7 @@ function deflate_fast(s, flush) {
 //#if MIN_MATCH != 3
 //                Call UPDATE_HASH() MIN_MATCH-3 more times
 //#endif
-        /* If lookahead < MIN_MATCH, ins_h is garbAge, but it does not
+        /* If lookahead < MIN_MATCH, ins_h is garbage, but it does not
          * matter since it will be recomputed at next deflate call.
          */
       }
@@ -30662,7 +30662,7 @@ function deflate_slow(s, flush) {
       if (s.match_length <= 5 &&
          (s.strategy === Z_FILTERED || (s.match_length === MIN_MATCH && s.strstart - s.match_start > 4096/*TOO_FAR*/))) {
 
-        /* If prev_match is also MIN_MATCH, match_start is garbAge
+        /* If prev_match is also MIN_MATCH, match_start is garbage
          * but we will ignore the current match anyway.
          */
         s.match_length = MIN_MATCH - 1;
@@ -31774,7 +31774,7 @@ exports.deflateTune = deflateTune;
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -32127,7 +32127,7 @@ module.exports = function inflate_fast(strm, start) {
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -32284,7 +32284,7 @@ function InflateState() {
   this.have = 0;              /* number of code lengths in lens[] */
   this.next = null;              /* next available space in codes[] */
 
-  this.lens = new utils.Buf16(320); /* temporary storAge for code lengths */
+  this.lens = new utils.Buf16(320); /* temporary storage for code lengths */
   this.work = new utils.Buf16(288); /* work area for code table building */
 
   /*
@@ -32454,10 +32454,10 @@ function fixedtables(state) {
  is loaded.
 
  Providing output buffers larger than 32K to inflate() should provide a speed
- advantAge, since only the last 32K of output is copied to the sliding window
+ advantage, since only the last 32K of output is copied to the sliding window
  upon return from inflate(), and since all distances after the first 32K of
  output will fall in the output data, making match copies simpler and faster.
- The advantAge may be dependent on the size of the processor's data caches.
+ The advantage may be dependent on the size of the processor's data caches.
  */
 function updatewindow(strm, src, end, copy) {
   var dist;
@@ -33691,7 +33691,7 @@ exports.inflateUndermine = inflateUndermine;
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -34042,7 +34042,7 @@ module.exports = function inflate_table(type, lens, lens_index, codes, table, ta
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -34082,7 +34082,7 @@ module.exports = {
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -35312,7 +35312,7 @@ exports._tr_align = _tr_align;
 // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
 //
 // This software is provided 'as-is', without any express or implied
-// warranty. In no event will the authors be held liable for any damAges
+// warranty. In no event will the authors be held liable for any damages
 // arising from the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
@@ -35342,7 +35342,7 @@ function ZStream() {
   this.avail_out = 0;
   /* total number of bytes output so far */
   this.total_out = 0;
-  /* last error messAge, NULL if no error */
+  /* last error message, NULL if no error */
   this.msg = ''/*Z_NULL*/;
   /* not visible by applications */
   this.state = null;
@@ -38626,7 +38626,7 @@ if (!queueMicrotask) {
     };
   // for other environments - macrotask based on:
   // - setImmediate
-  // - MessAgeChannel
+  // - MessageChannel
   // - window.postMessag
   // - onreadystatechange
   // - setTimeout
@@ -39965,7 +39965,7 @@ var clear = global.clearImmediate;
 var process = global.process;
 var Dispatch = global.Dispatch;
 var Function = global.Function;
-var MessAgeChannel = global.MessAgeChannel;
+var MessageChannel = global.MessageChannel;
 var String = global.String;
 var counter = 0;
 var queue = {};
@@ -39997,7 +39997,7 @@ var listener = function (event) {
 
 var post = function (id) {
   // old engines have not location.origin
-  global.postMessAge(String(id), location.protocol + '//' + location.host);
+  global.postMessage(String(id), location.protocol + '//' + location.host);
 };
 
 // Node.js 0.9+ & IE10+ has setImmediate, otherwise:
@@ -40023,24 +40023,24 @@ if (!set || !clear) {
     defer = function (id) {
       Dispatch.now(runner(id));
     };
-  // Browsers with MessAgeChannel, includes WebWorkers
+  // Browsers with MessageChannel, includes WebWorkers
   // except iOS - https://github.com/zloirock/core-js/issues/624
-  } else if (MessAgeChannel && !IS_IOS) {
-    channel = new MessAgeChannel();
+  } else if (MessageChannel && !IS_IOS) {
+    channel = new MessageChannel();
     port = channel.port2;
-    channel.port1.onmessAge = listener;
-    defer = bind(port.postMessAge, port);
-  // Browsers with postMessAge, skip WebWorkers
-  // IE8 has postMessAge, but it's sync & typeof its postMessAge is 'object'
+    channel.port1.onmessage = listener;
+    defer = bind(port.postMessage, port);
+  // Browsers with postMessage, skip WebWorkers
+  // IE8 has postMessage, but it's sync & typeof its postMessage is 'object'
   } else if (
     global.addEventListener &&
-    isCallable(global.postMessAge) &&
+    isCallable(global.postMessage) &&
     !global.importScripts &&
     location && location.protocol !== 'file:' &&
     !fails(post)
   ) {
     defer = post;
-    global.addEventListener('messAge', listener, false);
+    global.addEventListener('message', listener, false);
   // IE8-
   } else if (ONREADYSTATECHANGE in createElement('script')) {
     defer = function (id) {
@@ -40770,13 +40770,13 @@ var ERROR_STACK_INSTALLABLE = __webpack_require__(2914);
 var Error = global.Error;
 var push = [].push;
 
-var $AggregateError = function AggregateError(errors, messAge /* , options */) {
+var $AggregateError = function AggregateError(errors, message /* , options */) {
   var that = isPrototypeOf(AggregateErrorPrototype, this) ? this : create(AggregateErrorPrototype);
   var options = arguments.length > 2 ? arguments[2] : undefined;
   if (setPrototypeOf) {
     that = setPrototypeOf(new Error(undefined), getPrototypeOf(that));
   }
-  createNonEnumerableProperty(that, 'messAge', normalizeStringArgument(messAge, ''));
+  createNonEnumerableProperty(that, 'message', normalizeStringArgument(message, ''));
   if (ERROR_STACK_INSTALLABLE) createNonEnumerableProperty(that, 'stack', clearErrorStack(that.stack, 1));
   installErrorCause(that, options);
   var errorsArray = [];
@@ -40790,7 +40790,7 @@ else copyConstructorProperties($AggregateError, Error);
 
 var AggregateErrorPrototype = $AggregateError.prototype = create(Error.prototype, {
   constructor: createPropertyDescriptor(1, $AggregateError),
-  messAge: createPropertyDescriptor(1, ''),
+  message: createPropertyDescriptor(1, ''),
   name: createPropertyDescriptor(1, 'AggregateError')
 });
 
@@ -41123,7 +41123,7 @@ $({ target: 'Array', proto: true, forced: !HAS_SPECIES_SUPPORT }, {
     var length = lengthOfArrayLike(O);
     var k = toAbsoluteIndex(start, length);
     var fin = toAbsoluteIndex(end === undefined ? length : end, length);
-    // inline `ArraySpeciesCreate` for usAge native `Array#slice` where it's possible
+    // inline `ArraySpeciesCreate` for usage native `Array#slice` where it's possible
     var Constructor, result, n;
     if (isArray(O)) {
       Constructor = O.constructor;
@@ -44967,7 +44967,7 @@ module.exports = {
 // OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
 // NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAgeS OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
@@ -45091,7 +45091,7 @@ EventEmitter.prototype.emit = function emit(type) {
       throw er; // Unhandled 'error' event
     }
     // At least give some kind of context to the user
-    var err = new Error('Unhandled error.' + (er ? ' (' + er.messAge + ')' : ''));
+    var err = new Error('Unhandled error.' + (er ? ' (' + er.message + ')' : ''));
     err.context = er;
     throw err; // Unhandled 'error' event
   }
@@ -45540,7 +45540,7 @@ module.exports = function forEach (obj, fn, ctx) {
 
 /* eslint no-invalid-this: 1 */
 
-var ERROR_MESSAge = 'Function.prototype.bind called on incompatible ';
+var ERROR_MESSAGE = 'Function.prototype.bind called on incompatible ';
 var slice = Array.prototype.slice;
 var toStr = Object.prototype.toString;
 var funcType = '[object Function]';
@@ -45548,7 +45548,7 @@ var funcType = '[object Function]';
 module.exports = function bind(that) {
     var target = this;
     if (typeof target !== 'function' || toStr.call(target) !== funcType) {
-        throw new TypeError(ERROR_MESSAge + target);
+        throw new TypeError(ERROR_MESSAGE + target);
     }
     var args = slice.call(arguments, 1);
 
@@ -46752,7 +46752,7 @@ module.exports = {
     // Main source: https://www.w3.org/TR/encoding/#gbk-encoder
     // http://icu-project.org/docs/papers/gb18030.html
     // http://source.icu-project.org/repos/icu/data/trunk/charset/data/xml/gb-18030-2000.xml
-    // http://www.khngai.com/chinese/charmap/tblgbk.php?pAge=0
+    // http://www.khngai.com/chinese/charmap/tblgbk.php?page=0
     'gb18030': {
         type: '_dbcs',
         table: function() { return (__webpack_require__(3336).concat)(__webpack_require__(4346)) },
@@ -47754,7 +47754,7 @@ module.exports = {
     "10079": "maciceland",
     "10081": "macturkish",
 
-    "cspc8codepAge437": "cp437",
+    "cspc8codepage437": "cp437",
     "cspc775baltic": "cp775",
     "cspc850multilingual": "cp850",
     "cspcp852": "cp852",
@@ -49591,8 +49591,8 @@ if (!Object.keys) {
 		$onmozfullscreenerror: true,
 		$outerHeight: true,
 		$outerWidth: true,
-		$pAgeXOffset: true,
-		$pAgeYOffset: true,
+		$pageXOffset: true,
+		$pageYOffset: true,
 		$parent: true,
 		$scrollLeft: true,
 		$scrollTop: true,
@@ -49600,7 +49600,7 @@ if (!Object.keys) {
 		$scrollY: true,
 		$self: true,
 		$webkitIndexedDB: true,
-		$webkitStorAgeInfo: true,
+		$webkitStorageInfo: true,
 		$window: true
 	};
 	var hasAutomationEqualityBug = (function () {
@@ -50838,7 +50838,7 @@ module.exports = function shimFlags() {
   // since that's the earliest that a buffer overrun could occur.  This way, checks are
   // as rare as required, but as often as necessary to ensure never crossing this bound.
   // Furthermore, buffers are only tested at most once per write(), so passing a very
-  // large string into write() might have undesirable effects, but this is manAgeable by
+  // large string into write() might have undesirable effects, but this is manageable by
   // the caller, so it is assumed to be safe.  Thus, a call to write() may, in the extreme
   // edge case, result in creating at most one complete copy of the string passed in.
   // Set to Infinity to have unlimited buffers.
@@ -51103,7 +51103,7 @@ module.exports = function shimFlags() {
   // This implementation works on strings, a single character at a time
   // as such, it cannot ever support astral-plane characters (10000-EFFFF)
   // without a significant breaking change to either this  parser, or the
-  // JavaScript languAge.  Implementation of an emoji-capable xml parser
+  // JavaScript language.  Implementation of an emoji-capable xml parser
   // is left as an exercise for the reader.
   var nameStart = /[:_A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]/
 
@@ -51369,7 +51369,7 @@ module.exports = function shimFlags() {
     'oline': 8254,
     'frasl': 8260,
     'euro': 8364,
-    'imAge': 8465,
+    'image': 8465,
     'weierp': 8472,
     'real': 8476,
     'trade': 8482,
@@ -51498,12 +51498,12 @@ module.exports = function shimFlags() {
     return parser
   }
 
-  function strictFail (parser, messAge) {
+  function strictFail (parser, message) {
     if (typeof parser !== 'object' || !(parser instanceof SAXParser)) {
       throw new Error('bad call to strictFail')
     }
     if (parser.strict) {
-      error(parser, messAge)
+      error(parser, message)
     }
   }
 
@@ -52416,7 +52416,7 @@ module.exports = function shimFlags() {
 // OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
 // NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAgeS OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
@@ -52525,7 +52525,7 @@ Stream.prototype.pipe = function(dest, options) {
 
   dest.emit('pipe', source);
 
-  // Allow for unix-like usAge: A.pipe(B).pipe(C)
+  // Allow for unix-like usage: A.pipe(B).pipe(C)
   return dest;
 };
 
@@ -52542,16 +52542,16 @@ function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.crea
 
 var codes = {};
 
-function createErrorType(code, messAge, Base) {
+function createErrorType(code, message, Base) {
   if (!Base) {
     Base = Error;
   }
 
-  function getMessAge(arg1, arg2, arg3) {
-    if (typeof messAge === 'string') {
-      return messAge;
+  function getMessage(arg1, arg2, arg3) {
+    if (typeof message === 'string') {
+      return message;
     } else {
-      return messAge(arg1, arg2, arg3);
+      return message(arg1, arg2, arg3);
     }
   }
 
@@ -52561,7 +52561,7 @@ function createErrorType(code, messAge, Base) {
     _inheritsLoose(NodeError, _Base);
 
     function NodeError(arg1, arg2, arg3) {
-      return _Base.call(this, getMessAge(arg1, arg2, arg3)) || this;
+      return _Base.call(this, getMessage(arg1, arg2, arg3)) || this;
     }
 
     return NodeError;
@@ -52689,7 +52689,7 @@ module.exports.q = codes;
 // OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
 // NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAgeS OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 // a duplex stream is just a stream that is both readable and writable.
@@ -52835,7 +52835,7 @@ Object.defineProperty(Duplex.prototype, 'destroyed', {
 // OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
 // NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAgeS OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 // a passthrough stream.
@@ -52882,7 +52882,7 @@ PassThrough.prototype._transform = function (chunk, encoding, cb) {
 // OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
 // NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAgeS OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
@@ -54013,7 +54013,7 @@ function indexOf(xs, x) {
 // OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
 // NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAgeS OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 // a transform stream is a readable/writable stream where you do
@@ -54222,7 +54222,7 @@ function done(stream, er, data) {
 // OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
 // NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAgeS OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 // A bit simpler than readable streams.
@@ -55533,7 +55533,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 // OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
 // NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAgeS OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
@@ -56413,14 +56413,14 @@ fontkit.create = function (buffer, postscriptName) {
   throw new Error('Unknown font format');
 };
 
-fontkit.defaultLanguAge = 'en';
+fontkit.defaultLanguage = 'en';
 
-fontkit.setDefaultLanguAge = function (lang) {
+fontkit.setDefaultLanguage = function (lang) {
   if (lang === void 0) {
     lang = 'en';
   }
 
-  fontkit.defaultLanguAge = lang;
+  fontkit.defaultLanguage = lang;
 };
 
 function _defineProperty(obj, key, value) {
@@ -56550,14 +56550,14 @@ var CmapSubtable = new r.VersionedStruct(r.uint16, {
     // Byte encoding
     length: r.uint16,
     // Total table length in bytes (set to 262 for format 0)
-    languAge: r.uint16,
-    // LanguAge code for this encoding subtable, or zero if languAge-independent
+    language: r.uint16,
+    // Language code for this encoding subtable, or zero if language-independent
     codeMap: new r.LazyArray(r.uint8, 256)
   },
   2: {
     // High-byte mapping (CJK)
     length: r.uint16,
-    languAge: r.uint16,
+    language: r.uint16,
     subHeaderKeys: new r.Array(r.uint16, 256),
     subHeaderCount: function subHeaderCount(t) {
       return Math.max.apply(Math, t.subHeaderKeys);
@@ -56569,8 +56569,8 @@ var CmapSubtable = new r.VersionedStruct(r.uint16, {
     // Segment mapping to delta values
     length: r.uint16,
     // Total table length in bytes
-    languAge: r.uint16,
-    // LanguAge code
+    language: r.uint16,
+    // Language code
     segCountX2: r.uint16,
     segCount: function segCount(t) {
       return t.segCountX2 >> 1;
@@ -56591,16 +56591,16 @@ var CmapSubtable = new r.VersionedStruct(r.uint16, {
   6: {
     // Trimmed table
     length: r.uint16,
-    languAge: r.uint16,
+    language: r.uint16,
     firstCode: r.uint16,
     entryCount: r.uint16,
     glyphIndices: new r.LazyArray(r.uint16, 'entryCount')
   },
   8: {
-    // mixed 16-bit and 32-bit coverAge
+    // mixed 16-bit and 32-bit coverage
     reserved: new r.Reserved(r.uint16),
     length: r.uint32,
-    languAge: r.uint16,
+    language: r.uint16,
     is32: new r.LazyArray(r.uint8, 8192),
     nGroups: r.uint32,
     groups: new r.LazyArray(CmapGroup, 'nGroups')
@@ -56609,16 +56609,16 @@ var CmapSubtable = new r.VersionedStruct(r.uint16, {
     // Trimmed Array
     reserved: new r.Reserved(r.uint16),
     length: r.uint32,
-    languAge: r.uint32,
+    language: r.uint32,
     firstCode: r.uint32,
     entryCount: r.uint32,
     glyphIndices: new r.LazyArray(r.uint16, 'numChars')
   },
   12: {
-    // Segmented coverAge
+    // Segmented coverage
     reserved: new r.Reserved(r.uint16),
     length: r.uint32,
-    languAge: r.uint32,
+    language: r.uint32,
     nGroups: r.uint32,
     groups: new r.LazyArray(CmapGroup, 'nGroups')
   },
@@ -56626,7 +56626,7 @@ var CmapSubtable = new r.VersionedStruct(r.uint16, {
     // Many-to-one range mappings (same as 12 except for group.startGlyphID)
     reserved: new r.Reserved(r.uint16),
     length: r.uint32,
-    languAge: r.uint32,
+    language: r.uint32,
     nGroups: r.uint32,
     groups: new r.LazyArray(CmapGroup, 'nGroups')
   },
@@ -56738,8 +56738,8 @@ var maxp = new r.Struct({
   // 1 if instructions do not use the twilight zone, 2 otherwise
   maxTwilightPoints: r.uint16,
   // Maximum points used in Z0
-  maxStorAge: r.uint16,
-  // Number of StorAge Area locations
+  maxStorage: r.uint16,
+  // Number of Storage Area locations
   maxFunctionDefs: r.uint16,
   // Number of FDEFs
   maxInstructionDefs: r.uint16,
@@ -56754,17 +56754,17 @@ var maxp = new r.Struct({
 
 });
 /**
- * Gets an encoding name from platform, encoding, and languAge ids.
+ * Gets an encoding name from platform, encoding, and language ids.
  * Returned encoding names can be used in iconv-lite to decode text.
  */
 
-function getEncoding(platformID, encodingID, languAgeID) {
-  if (languAgeID === void 0) {
-    languAgeID = 0;
+function getEncoding(platformID, encodingID, languageID) {
+  if (languageID === void 0) {
+    languageID = 0;
   }
 
-  if (platformID === 1 && MAC_LANGUAge_ENCODINGS[languAgeID]) {
-    return MAC_LANGUAge_ENCODINGS[languAgeID];
+  if (platformID === 1 && MAC_LANGUAGE_ENCODINGS[languageID]) {
+    return MAC_LANGUAGE_ENCODINGS[languageID];
   }
 
   return ENCODINGS[platformID][encodingID];
@@ -56794,10 +56794,10 @@ var ENCODINGS = [// unicode
 ['macroman', 'shift-jis', 'big5', 'euc-kr', 'iso-8859-6', 'iso-8859-8', 'macgreek', 'maccyrillic', 'symbol', 'Devanagari', 'Gurmukhi', 'Gujarati', 'Oriya', 'Bengali', 'Tamil', 'Telugu', 'Kannada', 'Malayalam', 'Sinhalese', 'Burmese', 'Khmer', 'macthai', 'Laotian', 'Georgian', 'Armenian', 'gb-2312-80', 'Tibetan', 'Mongolian', 'Geez', 'maccenteuro', 'Vietnamese', 'Sindhi'], // ISO (deprecated)
 ['ascii'], // windows
 // Docs here: http://msdn.microsoft.com/en-us/library/system.text.encoding(v=vs.110).aspx
-['symbol', 'utf16be', 'shift-jis', 'gb18030', 'big5', 'wansung', 'johab', null, null, null, 'utf16be']]; // Overrides for Mac scripts by languAge id.
+['symbol', 'utf16be', 'shift-jis', 'gb18030', 'big5', 'wansung', 'johab', null, null, null, 'utf16be']]; // Overrides for Mac scripts by language id.
 // See http://unicode.org/Public/MAPPINGS/VENDORS/APPLE/Readme.txt
 
-var MAC_LANGUAge_ENCODINGS = {
+var MAC_LANGUAGE_ENCODINGS = {
   15: 'maciceland',
   17: 'macturkish',
   18: 'maccroatian',
@@ -56815,9 +56815,9 @@ var MAC_LANGUAge_ENCODINGS = {
   // Unsupported by iconv-lite
   146: 'macgaelic' // Unsupported by iconv-lite
 
-}; // Map of platform ids to BCP-47 languAge codes.
+}; // Map of platform ids to BCP-47 language codes.
 
-var LANGUAgeS = [// unicode
+var LANGUAGES = [// unicode
 [], {
   // macintosh
   0: 'en',
@@ -57151,11 +57151,11 @@ var LANGUAgeS = [// unicode
 var NameRecord = new r.Struct({
   platformID: r.uint16,
   encodingID: r.uint16,
-  languAgeID: r.uint16,
+  languageID: r.uint16,
   nameID: r.uint16,
   length: r.uint16,
   string: new r.Pointer(r.uint16, new r.String('length', function (t) {
-    return getEncoding(t.platformID, t.encodingID, t.languAgeID);
+    return getEncoding(t.platformID, t.encodingID, t.languageID);
   }), {
     type: 'parent',
     relativeTo: function relativeTo(ctx) {
@@ -57196,15 +57196,15 @@ NameTable.process = function (stream) {
 
   for (var _iterator = _createForOfIteratorHelperLoose(this.records), _step; !(_step = _iterator()).done;) {
     var record = _step.value;
-    // find out what languAge this is for
-    var languAge = LANGUAgeS[record.platformID][record.languAgeID];
+    // find out what language this is for
+    var language = LANGUAGES[record.platformID][record.languageID];
 
-    if (languAge == null && this.langTags != null && record.languAgeID >= 0x8000) {
-      languAge = this.langTags[record.languAgeID - 0x8000].tag;
+    if (language == null && this.langTags != null && record.languageID >= 0x8000) {
+      language = this.langTags[record.languageID - 0x8000].tag;
     }
 
-    if (languAge == null) {
-      languAge = record.platformID + '-' + record.languAgeID;
+    if (language == null) {
+      language = record.platformID + '-' + record.languageID;
     } // if the nameID is >= 256, it is a font feature record (AAT)
 
 
@@ -57220,8 +57220,8 @@ NameTable.process = function (stream) {
       obj = obj[record.nameID] || (obj[record.nameID] = {});
     }
 
-    if (typeof record.string === 'string' || typeof obj[languAge] !== 'string') {
-      obj[languAge] = record.string;
+    if (typeof record.string === 'string' || typeof obj[language] !== 'string') {
+      obj[language] = record.string;
     }
   }
 
@@ -57239,7 +57239,7 @@ NameTable.preEncode = function () {
     records.push({
       platformID: 3,
       encodingID: 1,
-      languAgeID: 0x409,
+      languageID: 0x409,
       nameID: NAMES.indexOf(key),
       length: Buffer.byteLength(val.en, 'utf16le'),
       string: val.en
@@ -57249,7 +57249,7 @@ NameTable.preEncode = function () {
       records.push({
         platformID: 1,
         encodingID: 0,
-        languAgeID: 0,
+        languageID: 0,
         nameID: NAMES.indexOf(key),
         length: val.en.length,
         string: val.en
@@ -57265,7 +57265,7 @@ NameTable.preEncode = function () {
 var OS2 = new r.VersionedStruct(r.uint16, {
   header: {
     xAvgCharWidth: r.int16,
-    // averAge weighted advance width of lower case letters and space
+    // average weighted advance width of lower case letters and space
     usWeightClass: r.uint16,
     // visual weight of stroke in glyphs
     usWidthClass: r.uint16,
@@ -57314,7 +57314,7 @@ var OS2 = new r.VersionedStruct(r.uint16, {
     typoLineGap: r.int16,
     winAscent: r.uint16,
     winDescent: r.uint16,
-    codePAgeRange: new r.Array(r.uint32, 2)
+    codePageRange: new r.Array(r.uint32, 2)
   },
   2: {
     // these should be common with version 1 somehow
@@ -57323,7 +57323,7 @@ var OS2 = new r.VersionedStruct(r.uint16, {
     typoLineGap: r.int16,
     winAscent: r.uint16,
     winDescent: r.uint16,
-    codePAgeRange: new r.Array(r.uint32, 2),
+    codePageRange: new r.Array(r.uint32, 2),
     xHeight: r.int16,
     capHeight: r.int16,
     defaultChar: r.uint16,
@@ -57336,7 +57336,7 @@ var OS2 = new r.VersionedStruct(r.uint16, {
     typoLineGap: r.int16,
     winAscent: r.uint16,
     winDescent: r.uint16,
-    codePAgeRange: new r.Array(r.uint32, 2),
+    codePageRange: new r.Array(r.uint32, 2),
     xHeight: r.int16,
     capHeight: r.int16,
     defaultChar: r.uint16,
@@ -57360,12 +57360,12 @@ var post = new r.VersionedStruct(r.fixed32, {
     isFixedPitch: r.uint32,
     // Whether the font is monospaced
     minMemType42: r.uint32,
-    // Minimum memory usAge when a TrueType font is downloaded as a Type 42 font
+    // Minimum memory usage when a TrueType font is downloaded as a Type 42 font
     maxMemType42: r.uint32,
-    // Maximum memory usAge when a TrueType font is downloaded as a Type 42 font
+    // Maximum memory usage when a TrueType font is downloaded as a Type 42 font
     minMemType1: r.uint32,
-    // Minimum memory usAge when a TrueType font is downloaded as a Type 1 font
-    maxMemType1: r.uint32 // Maximum memory usAge when a TrueType font is downloaded as a Type 1 font
+    // Minimum memory usage when a TrueType font is downloaded as a Type 1 font
+    maxMemType1: r.uint32 // Maximum memory usage when a TrueType font is downloaded as a Type 1 font
 
   },
   1: {},
@@ -57999,7 +57999,7 @@ var CFFBlendOp = /*#__PURE__*/function () {
 }();
 
 var CFFPrivateDict = new CFFDict([// key       name                    type                                          default
-[6, 'BlueValues', 'delta', null], [7, 'OtherBlues', 'delta', null], [8, 'FamilyBlues', 'delta', null], [9, 'FamilyOtherBlues', 'delta', null], [[12, 9], 'BlueScale', 'number', 0.039625], [[12, 10], 'BlueShift', 'number', 7], [[12, 11], 'BlueFuzz', 'number', 1], [10, 'StdHW', 'number', null], [11, 'StdVW', 'number', null], [[12, 12], 'StemSnapH', 'delta', null], [[12, 13], 'StemSnapV', 'delta', null], [[12, 14], 'ForceBold', 'boolean', false], [[12, 17], 'LanguAgeGroup', 'number', 0], [[12, 18], 'ExpansionFactor', 'number', 0.06], [[12, 19], 'initialRandomSeed', 'number', 0], [20, 'defaultWidthX', 'number', 0], [21, 'nominalWidthX', 'number', 0], [22, 'vsindex', 'number', 0], [23, 'blend', CFFBlendOp, null], [19, 'Subrs', new CFFPointer(new CFFIndex(), {
+[6, 'BlueValues', 'delta', null], [7, 'OtherBlues', 'delta', null], [8, 'FamilyBlues', 'delta', null], [9, 'FamilyOtherBlues', 'delta', null], [[12, 9], 'BlueScale', 'number', 0.039625], [[12, 10], 'BlueShift', 'number', 7], [[12, 11], 'BlueFuzz', 'number', 1], [10, 'StdHW', 'number', null], [11, 'StdVW', 'number', null], [[12, 12], 'StemSnapH', 'delta', null], [[12, 13], 'StemSnapV', 'delta', null], [[12, 14], 'ForceBold', 'boolean', false], [[12, 17], 'LanguageGroup', 'number', 0], [[12, 18], 'ExpansionFactor', 'number', 0.06], [[12, 19], 'initialRandomSeed', 'number', 0], [20, 'defaultWidthX', 'number', 0], [21, 'nominalWidthX', 'number', 0], [22, 'vsindex', 'number', 0], [23, 'blend', CFFBlendOp, null], [19, 'Subrs', new CFFPointer(new CFFIndex(), {
   type: 'local'
 }), null]]); // Automatically generated from Appendix A of the CFF specification; do
 // not edit. Length should be 391.
@@ -58009,7 +58009,7 @@ var StandardEncoding = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', 
 var ExpertEncoding = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'space', 'exclamsmall', 'Hungarumlautsmall', '', 'dollaroldstyle', 'dollarsuperior', 'ampersandsmall', 'Acutesmall', 'parenleftsuperior', 'parenrightsuperior', 'twodotenleader', 'onedotenleader', 'comma', 'hyphen', 'period', 'fraction', 'zerooldstyle', 'oneoldstyle', 'twooldstyle', 'threeoldstyle', 'fouroldstyle', 'fiveoldstyle', 'sixoldstyle', 'sevenoldstyle', 'eightoldstyle', 'nineoldstyle', 'colon', 'semicolon', 'commasuperior', 'threequartersemdash', 'periodsuperior', 'questionsmall', '', 'asuperior', 'bsuperior', 'centsuperior', 'dsuperior', 'esuperior', '', '', 'isuperior', '', '', 'lsuperior', 'msuperior', 'nsuperior', 'osuperior', '', '', 'rsuperior', 'ssuperior', 'tsuperior', '', 'ff', 'fi', 'fl', 'ffi', 'ffl', 'parenleftinferior', '', 'parenrightinferior', 'Circumflexsmall', 'hyphensuperior', 'Gravesmall', 'Asmall', 'Bsmall', 'Csmall', 'Dsmall', 'Esmall', 'Fsmall', 'Gsmall', 'Hsmall', 'Ismall', 'Jsmall', 'Ksmall', 'Lsmall', 'Msmall', 'Nsmall', 'Osmall', 'Psmall', 'Qsmall', 'Rsmall', 'Ssmall', 'Tsmall', 'Usmall', 'Vsmall', 'Wsmall', 'Xsmall', 'Ysmall', 'Zsmall', 'colonmonetary', 'onefitted', 'rupiah', 'Tildesmall', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'exclamdownsmall', 'centoldstyle', 'Lslashsmall', '', '', 'Scaronsmall', 'Zcaronsmall', 'Dieresissmall', 'Brevesmall', 'Caronsmall', '', 'Dotaccentsmall', '', '', 'Macronsmall', '', '', 'figuredash', 'hypheninferior', '', '', 'Ogoneksmall', 'Ringsmall', 'Cedillasmall', '', '', '', 'onequarter', 'onehalf', 'threequarters', 'questiondownsmall', 'oneeighth', 'threeeighths', 'fiveeighths', 'seveneighths', 'onethird', 'twothirds', '', '', 'zerosuperior', 'onesuperior', 'twosuperior', 'threesuperior', 'foursuperior', 'fivesuperior', 'sixsuperior', 'sevensuperior', 'eightsuperior', 'ninesuperior', 'zeroinferior', 'oneinferior', 'twoinferior', 'threeinferior', 'fourinferior', 'fiveinferior', 'sixinferior', 'seveninferior', 'eightinferior', 'nineinferior', 'centinferior', 'dollarinferior', 'periodinferior', 'commainferior', 'Agravesmall', 'Aacutesmall', 'Acircumflexsmall', 'Atildesmall', 'Adieresissmall', 'Aringsmall', 'AEsmall', 'Ccedillasmall', 'Egravesmall', 'Eacutesmall', 'Ecircumflexsmall', 'Edieresissmall', 'Igravesmall', 'Iacutesmall', 'Icircumflexsmall', 'Idieresissmall', 'Ethsmall', 'Ntildesmall', 'Ogravesmall', 'Oacutesmall', 'Ocircumflexsmall', 'Otildesmall', 'Odieresissmall', 'OEsmall', 'Oslashsmall', 'Ugravesmall', 'Uacutesmall', 'Ucircumflexsmall', 'Udieresissmall', 'Yacutesmall', 'Thornsmall', 'Ydieresissmall'];
 var ISOAdobeCharset = ['.notdef', 'space', 'exclam', 'quotedbl', 'numbersign', 'dollar', 'percent', 'ampersand', 'quoteright', 'parenleft', 'parenright', 'asterisk', 'plus', 'comma', 'hyphen', 'period', 'slash', 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'colon', 'semicolon', 'less', 'equal', 'greater', 'question', 'at', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'bracketleft', 'backslash', 'bracketright', 'asciicircum', 'underscore', 'quoteleft', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'braceleft', 'bar', 'braceright', 'asciitilde', 'exclamdown', 'cent', 'sterling', 'fraction', 'yen', 'florin', 'section', 'currency', 'quotesingle', 'quotedblleft', 'guillemotleft', 'guilsinglleft', 'guilsinglright', 'fi', 'fl', 'endash', 'dagger', 'daggerdbl', 'periodcentered', 'paragraph', 'bullet', 'quotesinglbase', 'quotedblbase', 'quotedblright', 'guillemotright', 'ellipsis', 'perthousand', 'questiondown', 'grave', 'acute', 'circumflex', 'tilde', 'macron', 'breve', 'dotaccent', 'dieresis', 'ring', 'cedilla', 'hungarumlaut', 'ogonek', 'caron', 'emdash', 'AE', 'ordfeminine', 'Lslash', 'Oslash', 'OE', 'ordmasculine', 'ae', 'dotlessi', 'lslash', 'oslash', 'oe', 'germandbls', 'onesuperior', 'logicalnot', 'mu', 'trademark', 'Eth', 'onehalf', 'plusminus', 'Thorn', 'onequarter', 'divide', 'brokenbar', 'degree', 'thorn', 'threequarters', 'twosuperior', 'registered', 'minus', 'eth', 'multiply', 'threesuperior', 'copyright', 'Aacute', 'Acircumflex', 'Adieresis', 'Agrave', 'Aring', 'Atilde', 'Ccedilla', 'Eacute', 'Ecircumflex', 'Edieresis', 'Egrave', 'Iacute', 'Icircumflex', 'Idieresis', 'Igrave', 'Ntilde', 'Oacute', 'Ocircumflex', 'Odieresis', 'Ograve', 'Otilde', 'Scaron', 'Uacute', 'Ucircumflex', 'Udieresis', 'Ugrave', 'Yacute', 'Ydieresis', 'Zcaron', 'aacute', 'acircumflex', 'adieresis', 'agrave', 'aring', 'atilde', 'ccedilla', 'eacute', 'ecircumflex', 'edieresis', 'egrave', 'iacute', 'icircumflex', 'idieresis', 'igrave', 'ntilde', 'oacute', 'ocircumflex', 'odieresis', 'ograve', 'otilde', 'scaron', 'uacute', 'ucircumflex', 'udieresis', 'ugrave', 'yacute', 'ydieresis', 'zcaron'];
 var ExpertCharset = ['.notdef', 'space', 'exclamsmall', 'Hungarumlautsmall', 'dollaroldstyle', 'dollarsuperior', 'ampersandsmall', 'Acutesmall', 'parenleftsuperior', 'parenrightsuperior', 'twodotenleader', 'onedotenleader', 'comma', 'hyphen', 'period', 'fraction', 'zerooldstyle', 'oneoldstyle', 'twooldstyle', 'threeoldstyle', 'fouroldstyle', 'fiveoldstyle', 'sixoldstyle', 'sevenoldstyle', 'eightoldstyle', 'nineoldstyle', 'colon', 'semicolon', 'commasuperior', 'threequartersemdash', 'periodsuperior', 'questionsmall', 'asuperior', 'bsuperior', 'centsuperior', 'dsuperior', 'esuperior', 'isuperior', 'lsuperior', 'msuperior', 'nsuperior', 'osuperior', 'rsuperior', 'ssuperior', 'tsuperior', 'ff', 'fi', 'fl', 'ffi', 'ffl', 'parenleftinferior', 'parenrightinferior', 'Circumflexsmall', 'hyphensuperior', 'Gravesmall', 'Asmall', 'Bsmall', 'Csmall', 'Dsmall', 'Esmall', 'Fsmall', 'Gsmall', 'Hsmall', 'Ismall', 'Jsmall', 'Ksmall', 'Lsmall', 'Msmall', 'Nsmall', 'Osmall', 'Psmall', 'Qsmall', 'Rsmall', 'Ssmall', 'Tsmall', 'Usmall', 'Vsmall', 'Wsmall', 'Xsmall', 'Ysmall', 'Zsmall', 'colonmonetary', 'onefitted', 'rupiah', 'Tildesmall', 'exclamdownsmall', 'centoldstyle', 'Lslashsmall', 'Scaronsmall', 'Zcaronsmall', 'Dieresissmall', 'Brevesmall', 'Caronsmall', 'Dotaccentsmall', 'Macronsmall', 'figuredash', 'hypheninferior', 'Ogoneksmall', 'Ringsmall', 'Cedillasmall', 'onequarter', 'onehalf', 'threequarters', 'questiondownsmall', 'oneeighth', 'threeeighths', 'fiveeighths', 'seveneighths', 'onethird', 'twothirds', 'zerosuperior', 'onesuperior', 'twosuperior', 'threesuperior', 'foursuperior', 'fivesuperior', 'sixsuperior', 'sevensuperior', 'eightsuperior', 'ninesuperior', 'zeroinferior', 'oneinferior', 'twoinferior', 'threeinferior', 'fourinferior', 'fiveinferior', 'sixinferior', 'seveninferior', 'eightinferior', 'nineinferior', 'centinferior', 'dollarinferior', 'periodinferior', 'commainferior', 'Agravesmall', 'Aacutesmall', 'Acircumflexsmall', 'Atildesmall', 'Adieresissmall', 'Aringsmall', 'AEsmall', 'Ccedillasmall', 'Egravesmall', 'Eacutesmall', 'Ecircumflexsmall', 'Edieresissmall', 'Igravesmall', 'Iacutesmall', 'Icircumflexsmall', 'Idieresissmall', 'Ethsmall', 'Ntildesmall', 'Ogravesmall', 'Oacutesmall', 'Ocircumflexsmall', 'Otildesmall', 'Odieresissmall', 'OEsmall', 'Oslashsmall', 'Ugravesmall', 'Uacutesmall', 'Ucircumflexsmall', 'Udieresissmall', 'Yacutesmall', 'Thornsmall', 'Ydieresissmall'];
-var ExpertSubsetCharset = ['.notdef', 'space', 'dollaroldstyle', 'dollarsuperior', 'parenleftsuperior', 'parenrightsuperior', 'twodotenleader', 'onedotenleader', 'comma', 'hyphen', 'period', 'fraction', 'zerooldstyle', 'oneoldstyle', 'twooldstyle', 'threeoldstyle', 'fouroldstyle', 'fiveoldstyle', 'sixoldstyle', 'sevenoldstyle', 'eightoldstyle', 'nineoldstyle', 'colon', 'semicolon', 'commasuperior', 'threequartersemdash', 'periodsuperior', 'asuperior', 'bsuperior', 'centsuperior', 'dsuperior', 'esuperior', 'isuperior', 'lsuperior', 'msuperior', 'nsuperior', 'osuperior', 'rsuperior', 'ssuperior', 'tsuperior', 'ff', 'fi', 'fl', 'ffi', 'ffl', 'parenleftinferior', 'parenrightinferior', 'hyphensuperior', 'colonmonetary', 'onefitted', 'rupiah', 'centoldstyle', 'figuredash', 'hypheninferior', 'onequarter', 'onehalf', 'threequarters', 'oneeighth', 'threeeighths', 'fiveeighths', 'seveneighths', 'onethird', 'twothirds', 'zerosuperior', 'onesuperior', 'twosuperior', 'threesuperior', 'foursuperior', 'fivesuperior', 'sixsuperior', 'sevensuperior', 'eightsuperior', 'ninesuperior', 'zeroinferior', 'oneinferior', 'twoinferior', 'threeinferior', 'fourinferior', 'fiveinferior', 'sixinferior', 'seveninferior', 'eightinferior', 'nineinferior', 'centinferior', 'dollarinferior', 'periodinferior', 'commainferior']; // Scripts and LanguAges #
+var ExpertSubsetCharset = ['.notdef', 'space', 'dollaroldstyle', 'dollarsuperior', 'parenleftsuperior', 'parenrightsuperior', 'twodotenleader', 'onedotenleader', 'comma', 'hyphen', 'period', 'fraction', 'zerooldstyle', 'oneoldstyle', 'twooldstyle', 'threeoldstyle', 'fouroldstyle', 'fiveoldstyle', 'sixoldstyle', 'sevenoldstyle', 'eightoldstyle', 'nineoldstyle', 'colon', 'semicolon', 'commasuperior', 'threequartersemdash', 'periodsuperior', 'asuperior', 'bsuperior', 'centsuperior', 'dsuperior', 'esuperior', 'isuperior', 'lsuperior', 'msuperior', 'nsuperior', 'osuperior', 'rsuperior', 'ssuperior', 'tsuperior', 'ff', 'fi', 'fl', 'ffi', 'ffl', 'parenleftinferior', 'parenrightinferior', 'hyphensuperior', 'colonmonetary', 'onefitted', 'rupiah', 'centoldstyle', 'figuredash', 'hypheninferior', 'onequarter', 'onehalf', 'threequarters', 'oneeighth', 'threeeighths', 'fiveeighths', 'seveneighths', 'onethird', 'twothirds', 'zerosuperior', 'onesuperior', 'twosuperior', 'threesuperior', 'foursuperior', 'fivesuperior', 'sixsuperior', 'sevensuperior', 'eightsuperior', 'ninesuperior', 'zeroinferior', 'oneinferior', 'twoinferior', 'threeinferior', 'fourinferior', 'fiveinferior', 'sixinferior', 'seveninferior', 'eightinferior', 'nineinferior', 'centinferior', 'dollarinferior', 'periodinferior', 'commainferior']; // Scripts and Languages #
 //########################
 
 var LangSysTable = new r.Struct({
@@ -58069,16 +58069,16 @@ function LookupList(SubTable) {
   });
   return new r.LazyArray(new r.Pointer(r.uint16, Lookup), r.uint16);
 } //#################
-// CoverAge Table #
+// Coverage Table #
 //#################
 
 
 var RangeRecord = new r.Struct({
   start: r.uint16,
   end: r.uint16,
-  startCoverAgeIndex: r.uint16
+  startCoverageIndex: r.uint16
 });
-var CoverAge = new r.VersionedStruct(r.uint16, {
+var Coverage = new r.VersionedStruct(r.uint16, {
   1: {
     glyphCount: r.uint16,
     glyphs: new r.Array(r.uint16, 'glyphCount')
@@ -58147,13 +58147,13 @@ var ClassSet = new r.Array(new r.Pointer(r.uint16, ClassRule), r.uint16);
 var Context = new r.VersionedStruct(r.uint16, {
   1: {
     // Simple context
-    coverAge: new r.Pointer(r.uint16, CoverAge),
+    coverage: new r.Pointer(r.uint16, Coverage),
     ruleSetCount: r.uint16,
     ruleSets: new r.Array(new r.Pointer(r.uint16, RuleSet), 'ruleSetCount')
   },
   2: {
     // Class-based context
-    coverAge: new r.Pointer(r.uint16, CoverAge),
+    coverage: new r.Pointer(r.uint16, Coverage),
     classDef: new r.Pointer(r.uint16, ClassDef),
     classSetCnt: r.uint16,
     classSet: new r.Array(new r.Pointer(r.uint16, ClassSet), 'classSetCnt')
@@ -58161,7 +58161,7 @@ var Context = new r.VersionedStruct(r.uint16, {
   3: {
     glyphCount: r.uint16,
     lookupCount: r.uint16,
-    coverAges: new r.Array(new r.Pointer(r.uint16, CoverAge), 'glyphCount'),
+    coverages: new r.Array(new r.Pointer(r.uint16, Coverage), 'glyphCount'),
     lookupRecords: new r.Array(LookupRecord, 'lookupCount')
   }
 }); //######################################################
@@ -58184,13 +58184,13 @@ var ChainRuleSet = new r.Array(new r.Pointer(r.uint16, ChainRule), r.uint16);
 var ChainingContext = new r.VersionedStruct(r.uint16, {
   1: {
     // Simple context glyph substitution
-    coverAge: new r.Pointer(r.uint16, CoverAge),
+    coverage: new r.Pointer(r.uint16, Coverage),
     chainCount: r.uint16,
     chainRuleSets: new r.Array(new r.Pointer(r.uint16, ChainRuleSet), 'chainCount')
   },
   2: {
     // Class-based chaining context
-    coverAge: new r.Pointer(r.uint16, CoverAge),
+    coverage: new r.Pointer(r.uint16, Coverage),
     backtrackClassDef: new r.Pointer(r.uint16, ClassDef),
     inputClassDef: new r.Pointer(r.uint16, ClassDef),
     lookaheadClassDef: new r.Pointer(r.uint16, ClassDef),
@@ -58198,13 +58198,13 @@ var ChainingContext = new r.VersionedStruct(r.uint16, {
     chainClassSet: new r.Array(new r.Pointer(r.uint16, ChainRuleSet), 'chainCount')
   },
   3: {
-    // CoverAge-based chaining context
+    // Coverage-based chaining context
     backtrackGlyphCount: r.uint16,
-    backtrackCoverAge: new r.Array(new r.Pointer(r.uint16, CoverAge), 'backtrackGlyphCount'),
+    backtrackCoverage: new r.Array(new r.Pointer(r.uint16, Coverage), 'backtrackGlyphCount'),
     inputGlyphCount: r.uint16,
-    inputCoverAge: new r.Array(new r.Pointer(r.uint16, CoverAge), 'inputGlyphCount'),
+    inputCoverage: new r.Array(new r.Pointer(r.uint16, Coverage), 'inputGlyphCount'),
     lookaheadGlyphCount: r.uint16,
-    lookaheadCoverAge: new r.Array(new r.Pointer(r.uint16, CoverAge), 'lookaheadGlyphCount'),
+    lookaheadCoverage: new r.Array(new r.Pointer(r.uint16, Coverage), 'lookaheadGlyphCount'),
     lookupCount: r.uint16,
     lookupRecords: new r.Array(LookupRecord, 'lookupCount')
   }
@@ -58755,8 +58755,8 @@ var CodeOffsetPair = new r.Struct({
 });
 var IndexSubtable = new r.VersionedStruct(r.uint16, {
   header: {
-    imAgeFormat: r.uint16,
-    imAgeDataOffset: r.uint32
+    imageFormat: r.uint16,
+    imageDataOffset: r.uint32
   },
   1: {
     offsetArray: new r.Array(r.uint32, function (t) {
@@ -58764,7 +58764,7 @@ var IndexSubtable = new r.VersionedStruct(r.uint16, {
     })
   },
   2: {
-    imAgeSize: r.uint32,
+    imageSize: r.uint32,
     bigMetrics: BigMetrics
   },
   3: {
@@ -58779,7 +58779,7 @@ var IndexSubtable = new r.VersionedStruct(r.uint16, {
     })
   },
   5: {
-    imAgeSize: r.uint32,
+    imageSize: r.uint32,
     bigMetrics: BigMetrics,
     numGlyphs: r.uint32,
     glyphCodeArray: new r.Array(r.uint16, 'numGlyphs')
@@ -58812,21 +58812,21 @@ var EBLC = new r.Struct({
   numSizes: r.uint32,
   sizes: new r.Array(BitmapSizeTable, 'numSizes')
 });
-var ImAgeTable = new r.Struct({
+var ImageTable = new r.Struct({
   ppem: r.uint16,
   resolution: r.uint16,
-  imAgeOffsets: new r.Array(new r.Pointer(r.uint32, 'void'), function (t) {
+  imageOffsets: new r.Array(new r.Pointer(r.uint32, 'void'), function (t) {
     return t.parent.parent.maxp.numGlyphs + 1;
   })
 }); // This is the Apple sbix table, used by the "Apple Color Emoji" font.
-// It includes several imAge tables with imAges for each bitmap glyph
+// It includes several image tables with images for each bitmap glyph
 // of several different sizes.
 
 var sbix = new r.Struct({
   version: r.uint16,
   flags: new r.Bitfield(r.uint16, ['renderOutlines']),
   numImgTables: r.uint32,
-  imAgeTables: new r.Array(new r.Pointer(r.uint32, ImAgeTable), 'numImgTables')
+  imageTables: new r.Array(new r.Pointer(r.uint32, ImageTable), 'numImgTables')
 });
 var LayerRecord = new r.Struct({
   gid: r.uint16,
@@ -58930,7 +58930,7 @@ var MinMax = new r.Struct({
 });
 var BaseLangSysRecord = new r.Struct({
   tag: new r.String(4),
-  // 4-byte languAge system identification tag
+  // 4-byte language system identification tag
   minMax: new r.Pointer(r.uint16, MinMax, {
     type: 'parent'
   })
@@ -58974,7 +58974,7 @@ var BASE = new r.VersionedStruct(r.uint32, {
 });
 var AttachPoint = new r.Array(r.uint16, r.uint16);
 var AttachList = new r.Struct({
-  coverAge: new r.Pointer(r.uint16, CoverAge),
+  coverage: new r.Pointer(r.uint16, Coverage),
   glyphCount: r.uint16,
   attachPoints: new r.Array(new r.Pointer(r.uint16, AttachPoint), 'glyphCount')
 });
@@ -58995,14 +58995,14 @@ var CaretValue = new r.VersionedStruct(r.uint16, {
 });
 var LigGlyph = new r.Array(new r.Pointer(r.uint16, CaretValue), r.uint16);
 var LigCaretList = new r.Struct({
-  coverAge: new r.Pointer(r.uint16, CoverAge),
+  coverage: new r.Pointer(r.uint16, Coverage),
   ligGlyphCount: r.uint16,
   ligGlyphs: new r.Array(new r.Pointer(r.uint16, LigGlyph), 'ligGlyphCount')
 });
 var MarkGlyphSetsDef = new r.Struct({
   markSetTableFormat: r.uint16,
   markSetCount: r.uint16,
-  coverAge: new r.Array(new r.Pointer(r.uint32, CoverAge), 'markSetCount')
+  coverage: new r.Array(new r.Pointer(r.uint32, Coverage), 'markSetCount')
 });
 var GDEF = new r.VersionedStruct(r.uint32, {
   header: {
@@ -59160,12 +59160,12 @@ var GPOSLookup = new r.VersionedStruct('lookupType', {
     // Single Adjustment
     1: {
       // Single positioning value
-      coverAge: new r.Pointer(r.uint16, CoverAge),
+      coverage: new r.Pointer(r.uint16, Coverage),
       valueFormat: ValueFormat,
       value: new ValueRecord()
     },
     2: {
-      coverAge: new r.Pointer(r.uint16, CoverAge),
+      coverage: new r.Pointer(r.uint16, Coverage),
       valueFormat: ValueFormat,
       valueCount: r.uint16,
       values: new r.LazyArray(new ValueRecord(), 'valueCount')
@@ -59175,7 +59175,7 @@ var GPOSLookup = new r.VersionedStruct('lookupType', {
     // Pair Adjustment Positioning
     1: {
       // Adjustments for glyph pairs
-      coverAge: new r.Pointer(r.uint16, CoverAge),
+      coverage: new r.Pointer(r.uint16, Coverage),
       valueFormat1: ValueFormat,
       valueFormat2: ValueFormat,
       pairSetCount: r.uint16,
@@ -59183,7 +59183,7 @@ var GPOSLookup = new r.VersionedStruct('lookupType', {
     },
     2: {
       // Class pair adjustment
-      coverAge: new r.Pointer(r.uint16, CoverAge),
+      coverage: new r.Pointer(r.uint16, Coverage),
       valueFormat1: ValueFormat,
       valueFormat2: ValueFormat,
       classDef1: new r.Pointer(r.uint16, ClassDef),
@@ -59196,15 +59196,15 @@ var GPOSLookup = new r.VersionedStruct('lookupType', {
   3: {
     // Cursive Attachment Positioning
     format: r.uint16,
-    coverAge: new r.Pointer(r.uint16, CoverAge),
+    coverage: new r.Pointer(r.uint16, Coverage),
     entryExitCount: r.uint16,
     entryExitRecords: new r.Array(EntryExitRecord, 'entryExitCount')
   },
   4: {
     // MarkToBase Attachment Positioning
     format: r.uint16,
-    markCoverAge: new r.Pointer(r.uint16, CoverAge),
-    baseCoverAge: new r.Pointer(r.uint16, CoverAge),
+    markCoverage: new r.Pointer(r.uint16, Coverage),
+    baseCoverage: new r.Pointer(r.uint16, Coverage),
     classCount: r.uint16,
     markArray: new r.Pointer(r.uint16, MarkArray),
     baseArray: new r.Pointer(r.uint16, BaseArray)
@@ -59212,8 +59212,8 @@ var GPOSLookup = new r.VersionedStruct('lookupType', {
   5: {
     // MarkToLigature Attachment Positioning
     format: r.uint16,
-    markCoverAge: new r.Pointer(r.uint16, CoverAge),
-    ligatureCoverAge: new r.Pointer(r.uint16, CoverAge),
+    markCoverage: new r.Pointer(r.uint16, Coverage),
+    ligatureCoverage: new r.Pointer(r.uint16, Coverage),
     classCount: r.uint16,
     markArray: new r.Pointer(r.uint16, MarkArray),
     ligatureArray: new r.Pointer(r.uint16, LigatureArray)
@@ -59221,8 +59221,8 @@ var GPOSLookup = new r.VersionedStruct('lookupType', {
   6: {
     // MarkToMark Attachment Positioning
     format: r.uint16,
-    mark1CoverAge: new r.Pointer(r.uint16, CoverAge),
-    mark2CoverAge: new r.Pointer(r.uint16, CoverAge),
+    mark1Coverage: new r.Pointer(r.uint16, Coverage),
+    mark2Coverage: new r.Pointer(r.uint16, Coverage),
     classCount: r.uint16,
     mark1Array: new r.Pointer(r.uint16, MarkArray),
     mark2Array: new r.Pointer(r.uint16, BaseArray)
@@ -59267,11 +59267,11 @@ var GSUBLookup = new r.VersionedStruct('lookupType', {
   1: new r.VersionedStruct(r.uint16, {
     // Single Substitution
     1: {
-      coverAge: new r.Pointer(r.uint16, CoverAge),
+      coverage: new r.Pointer(r.uint16, Coverage),
       deltaGlyphID: r.int16
     },
     2: {
-      coverAge: new r.Pointer(r.uint16, CoverAge),
+      coverage: new r.Pointer(r.uint16, Coverage),
       glyphCount: r.uint16,
       substitute: new r.LazyArray(r.uint16, 'glyphCount')
     }
@@ -59279,21 +59279,21 @@ var GSUBLookup = new r.VersionedStruct('lookupType', {
   2: {
     // Multiple Substitution
     substFormat: r.uint16,
-    coverAge: new r.Pointer(r.uint16, CoverAge),
+    coverage: new r.Pointer(r.uint16, Coverage),
     count: r.uint16,
     sequences: new r.LazyArray(new r.Pointer(r.uint16, Sequence), 'count')
   },
   3: {
     // Alternate Substitution
     substFormat: r.uint16,
-    coverAge: new r.Pointer(r.uint16, CoverAge),
+    coverage: new r.Pointer(r.uint16, Coverage),
     count: r.uint16,
     alternateSet: new r.LazyArray(new r.Pointer(r.uint16, AlternateSet), 'count')
   },
   4: {
     // Ligature Substitution
     substFormat: r.uint16,
-    coverAge: new r.Pointer(r.uint16, CoverAge),
+    coverage: new r.Pointer(r.uint16, Coverage),
     count: r.uint16,
     ligatureSets: new r.LazyArray(new r.Pointer(r.uint16, LigatureSet), 'count')
   },
@@ -59311,10 +59311,10 @@ var GSUBLookup = new r.VersionedStruct('lookupType', {
   8: {
     // Reverse Chaining Contextual Single Substitution
     substFormat: r.uint16,
-    coverAge: new r.Pointer(r.uint16, CoverAge),
-    backtrackCoverAge: new r.Array(new r.Pointer(r.uint16, CoverAge), 'backtrackGlyphCount'),
+    coverage: new r.Pointer(r.uint16, Coverage),
+    backtrackCoverage: new r.Array(new r.Pointer(r.uint16, Coverage), 'backtrackGlyphCount'),
     lookaheadGlyphCount: r.uint16,
-    lookaheadCoverAge: new r.Array(new r.Pointer(r.uint16, CoverAge), 'lookaheadGlyphCount'),
+    lookaheadCoverage: new r.Array(new r.Pointer(r.uint16, Coverage), 'lookaheadGlyphCount'),
     glyphCount: r.uint16,
     substitutes: new r.Array(r.uint16, 'glyphCount')
   }
@@ -59334,11 +59334,11 @@ var GSUB = new r.VersionedStruct(r.uint32, {
 });
 var JstfGSUBModList = new r.Array(r.uint16, r.uint16);
 var JstfPriority = new r.Struct({
-  shrinkAgeEnableGSUB: new r.Pointer(r.uint16, JstfGSUBModList),
-  shrinkAgeDisableGSUB: new r.Pointer(r.uint16, JstfGSUBModList),
-  shrinkAgeEnableGPOS: new r.Pointer(r.uint16, JstfGSUBModList),
-  shrinkAgeDisableGPOS: new r.Pointer(r.uint16, JstfGSUBModList),
-  shrinkAgeJstfMax: new r.Pointer(r.uint16, new LookupList(GPOSLookup)),
+  shrinkageEnableGSUB: new r.Pointer(r.uint16, JstfGSUBModList),
+  shrinkageDisableGSUB: new r.Pointer(r.uint16, JstfGSUBModList),
+  shrinkageEnableGPOS: new r.Pointer(r.uint16, JstfGSUBModList),
+  shrinkageDisableGPOS: new r.Pointer(r.uint16, JstfGSUBModList),
+  shrinkageJstfMax: new r.Pointer(r.uint16, new LookupList(GPOSLookup)),
   extensionEnableGSUB: new r.Pointer(r.uint16, JstfGSUBModList),
   extensionDisableGSUB: new r.Pointer(r.uint16, JstfGSUBModList),
   extensionEnableGPOS: new r.Pointer(r.uint16, JstfGSUBModList),
@@ -59538,7 +59538,7 @@ var KernTable = new r.VersionedStruct('version', {
     // Length of the subtable, in bytes
     format: r.uint8,
     // Format of subtable
-    coverAge: new r.Bitfield(r.uint8, ['horizontal', // 1 if table has horizontal data, 0 if vertical
+    coverage: new r.Bitfield(r.uint8, ['horizontal', // 1 if table has horizontal data, 0 if vertical
     'minimum', // If set to 1, the table has minimum values. If set to 0, the table has kerning values.
     'crossStream', // If set to 1, kerning is perpendicular to the flow of the text
     'override' // If set to 1 the value in this table replaces the accumulated value
@@ -59551,7 +59551,7 @@ var KernTable = new r.VersionedStruct('version', {
   1: {
     // Apple uses this format
     length: r.uint32,
-    coverAge: new r.Bitfield(r.uint8, [null, null, null, null, null, 'variation', // Set if table has variation kerning values
+    coverage: new r.Bitfield(r.uint8, [null, null, null, null, null, 'variation', // Set if table has variation kerning values
     'crossStream', // Set if table has cross-stream kerning values
     'vertical' // Set if table has vertical kerning values
     ]),
@@ -59583,7 +59583,7 @@ var LTSH = new r.Struct({
   version: r.uint16,
   numGlyphs: r.uint16,
   yPels: new r.Array(r.uint8, 'numGlyphs')
-}); // NOTE: The PCLT table is strongly discourAged for OpenType fonts with TrueType outlines
+}); // NOTE: The PCLT table is strongly discouraged for OpenType fonts with TrueType outlines
 
 var PCLT = new r.Struct({
   version: r.uint16,
@@ -60025,7 +60025,7 @@ var gvar = new r.Struct({
 });
 var ClassTable$1 = new r.Struct({
   length: r.uint16,
-  coverAge: r.uint16,
+  coverage: r.uint16,
   subFeatureFlags: r.uint32,
   stateTable: new StateTable1()
 });
@@ -60149,7 +60149,7 @@ var SubtableData = new r.VersionedStruct('type', {
 });
 var Subtable = new r.Struct({
   length: r.uint32,
-  coverAge: r.uint24,
+  coverage: r.uint24,
   type: r.uint8,
   subFeatureFlags: r.uint32,
   table: SubtableData,
@@ -60342,7 +60342,7 @@ var CmapProcessor = (_class = /*#__PURE__*/function () {
     if (!this.cmap && iconv) {
       for (var _iterator10 = _createForOfIteratorHelperLoose(cmapTable.tables), _step10; !(_step10 = _iterator10()).done;) {
         var cmap = _step10.value;
-        var encoding = getEncoding(cmap.platformID, cmap.encodingID, cmap.table.languAge - 1);
+        var encoding = getEncoding(cmap.platformID, cmap.encodingID, cmap.table.language - 1);
 
         if (iconv.encodingExists(encoding)) {
           this.cmap = cmap.table;
@@ -60674,20 +60674,20 @@ var KernProcessor = /*#__PURE__*/function () {
     for (var _iterator16 = _createForOfIteratorHelperLoose(this.kern.tables), _step16; !(_step16 = _iterator16()).done;) {
       var table = _step16.value;
 
-      if (table.coverAge.crossStream) {
+      if (table.coverage.crossStream) {
         continue;
       }
 
       switch (table.version) {
         case 0:
-          if (!table.coverAge.horizontal) {
+          if (!table.coverage.horizontal) {
             continue;
           }
 
           break;
 
         case 1:
-          if (table.coverAge.vertical || table.coverAge.variation) {
+          if (table.coverage.vertical || table.coverage.variation) {
             continue;
           }
 
@@ -60744,7 +60744,7 @@ var KernProcessor = /*#__PURE__*/function () {
       // Otherwise, the sum of the results from all subtables is returned
 
 
-      if (table.coverAge.override) {
+      if (table.coverage.override) {
         res = val;
       } else {
         res += val;
@@ -60975,7 +60975,7 @@ var UnicodeLayoutEngine = /*#__PURE__*/function () {
         return 'Above';
 
       case 'CCC21':
-        // dAgesh
+        // dagesh
         break;
       // Arabic and Syriac
 
@@ -61398,7 +61398,7 @@ function direction(script) {
 
 
 var GlyphRun = /*#__PURE__*/function () {
-  function GlyphRun(glyphs, features, script, languAge, direction$1) {
+  function GlyphRun(glyphs, features, script, language, direction$1) {
     /**
      * An array of Glyph objects in the run
      * @type {Glyph[]}
@@ -61417,12 +61417,12 @@ var GlyphRun = /*#__PURE__*/function () {
 
     this.script = script;
     /**
-     * The languAge requested for shaping, as passed in. If `null`, the default languAge for the
+     * The language requested for shaping, as passed in. If `null`, the default language for the
      * script was used.
      * @type {string}
      */
 
-    this.languAge = languAge || null;
+    this.language = language || null;
     /**
      * The direction requested for shaping, as passed in (either ltr or rtl).
      * If `null`, the default direction of the script is used.
@@ -61891,7 +61891,7 @@ var features = {
     upperCaseSmallCaps: 1,
     upperCasePetiteCaps: 2
   },
-  languAgeTag: {
+  languageTag: {
     // indices into ltag table
     code: 39,
     exclusive: true
@@ -61934,7 +61934,7 @@ var OTMapping = {
   // kern, vkrn -> kern table
   // lfbd + opbd + rtbd -> opbd table?
   // mark, mkmk -> acnt table?
-  // locl -> languAgeTag + ltag table
+  // locl -> languageTag + ltag table
   case: feature('caseSensitiveLayout', 'caseSensitiveLayout'),
   // also caseSensitiveSpacing
   ccmp: feature('unicodeDecomposition', 'canonicalComposition'),
@@ -62395,7 +62395,7 @@ var CURRENT_INSERT_COUNT = 0x03E0;
 var MARKED_INSERT_COUNT = 0x001F;
 var AATMorxProcessor = (_class$2 = /*#__PURE__*/function () {
   function AATMorxProcessor(font) {
-    this.processIndicRearrAgement = this.processIndicRearrAgement.bind(this);
+    this.processIndicRearragement = this.processIndicRearragement.bind(this);
     this.processContextualSubstitution = this.processContextualSubstitution.bind(this);
     this.processLigature = this.processLigature.bind(this);
     this.processNoncontextualSubstitutions = this.processNoncontextualSubstitutions.bind(this);
@@ -62472,7 +62472,7 @@ var AATMorxProcessor = (_class$2 = /*#__PURE__*/function () {
     this.markedIndex = null;
     var stateMachine = this.getStateMachine(subtable);
     var process = this.getProcessor();
-    var reverse = !!(this.subtable.coverAge & REVERSE_DIRECTION);
+    var reverse = !!(this.subtable.coverage & REVERSE_DIRECTION);
     return stateMachine.process(this.glyphs, reverse, process);
   };
 
@@ -62483,7 +62483,7 @@ var AATMorxProcessor = (_class$2 = /*#__PURE__*/function () {
   _proto21.getProcessor = function getProcessor() {
     switch (this.subtable.type) {
       case 0:
-        return this.processIndicRearrAgement;
+        return this.processIndicRearragement;
 
       case 1:
         return this.processContextualSubstitution;
@@ -62502,7 +62502,7 @@ var AATMorxProcessor = (_class$2 = /*#__PURE__*/function () {
     }
   };
 
-  _proto21.processIndicRearrAgement = function processIndicRearrAgement(glyph, entry, index) {
+  _proto21.processIndicRearragement = function processIndicRearragement(glyph, entry, index) {
     if (entry.flags & MARK_FIRST) {
       this.firstGlyph = index;
     }
@@ -62699,7 +62699,7 @@ var AATMorxProcessor = (_class$2 = /*#__PURE__*/function () {
       return;
     }
 
-    var reverse = !!(subtable.coverAge & REVERSE_DIRECTION);
+    var reverse = !!(subtable.coverage & REVERSE_DIRECTION);
 
     if (reverse) {
       throw new Error('Reverse subtable, not supported.');
@@ -62879,7 +62879,7 @@ var AATLayoutEngine = /*#__PURE__*/function () {
     this.morxProcessor.process(glyphRun.glyphs, mapOTToAAT(glyphRun.features));
   };
 
-  _proto22.getAvailableFeatures = function getAvailableFeatures(script, languAge) {
+  _proto22.getAvailableFeatures = function getAvailableFeatures(script, language) {
     return mapAATToOT(this.morxProcessor.getSupportedFeatures());
   };
 
@@ -62916,7 +62916,7 @@ var AATLayoutEngine = /*#__PURE__*/function () {
 /**
  * ShapingPlans are used by the OpenType shapers to store which
  * features should by applied, and in what order to apply them.
- * The features are applied in groups called stAges. A feature
+ * The features are applied in groups called stages. A feature
  * can be applied globally to all glyphs, or locally to only
  * specific glyphs.
  *
@@ -62929,12 +62929,12 @@ var ShapingPlan = /*#__PURE__*/function () {
     this.font = font;
     this.script = script;
     this.direction = direction;
-    this.stAges = [];
+    this.stages = [];
     this.globalFeatures = {};
     this.allFeatures = {};
   }
   /**
-   * Adds the given features to the last stAge.
+   * Adds the given features to the last stage.
    * Ignores features that have already been applied.
    */
 
@@ -62942,15 +62942,15 @@ var ShapingPlan = /*#__PURE__*/function () {
   var _proto23 = ShapingPlan.prototype;
 
   _proto23._addFeatures = function _addFeatures(features, global) {
-    var stAgeIndex = this.stAges.length - 1;
-    var stAge = this.stAges[stAgeIndex];
+    var stageIndex = this.stages.length - 1;
+    var stage = this.stages[stageIndex];
 
     for (var _iterator33 = _createForOfIteratorHelperLoose(features), _step33; !(_step33 = _iterator33()).done;) {
       var feature = _step33.value;
 
       if (this.allFeatures[feature] == null) {
-        stAge.push(feature);
-        this.allFeatures[feature] = stAgeIndex;
+        stage.push(feature);
+        this.allFeatures[feature] = stageIndex;
 
         if (global) {
           this.globalFeatures[feature] = true;
@@ -62959,7 +62959,7 @@ var ShapingPlan = /*#__PURE__*/function () {
     }
   }
   /**
-   * Add features to the last stAge
+   * Add features to the last stage
    */
   ;
 
@@ -62968,8 +62968,8 @@ var ShapingPlan = /*#__PURE__*/function () {
       global = true;
     }
 
-    if (this.stAges.length === 0) {
-      this.stAges.push([]);
+    if (this.stages.length === 0) {
+      this.stages.push([]);
     }
 
     if (typeof arg === 'string') {
@@ -62987,15 +62987,15 @@ var ShapingPlan = /*#__PURE__*/function () {
     }
   }
   /**
-   * Add a new stAge
+   * Add a new stage
    */
   ;
 
-  _proto23.addStAge = function addStAge(arg, global) {
+  _proto23.addStage = function addStage(arg, global) {
     if (typeof arg === 'function') {
-      this.stAges.push(arg, []);
+      this.stages.push(arg, []);
     } else {
-      this.stAges.push([]);
+      this.stages.push([]);
       this.add(arg, global);
     }
   };
@@ -63008,8 +63008,8 @@ var ShapingPlan = /*#__PURE__*/function () {
         if (features[tag]) {
           this.add(tag);
         } else if (this.allFeatures[tag] != null) {
-          var stAge = this.stAges[this.allFeatures[tag]];
-          stAge.splice(stAge.indexOf(tag), 1);
+          var stage = this.stages[this.allFeatures[tag]];
+          stage.splice(stage.indexOf(tag), 1);
           delete this.allFeatures[tag];
           delete this.globalFeatures[tag];
         }
@@ -63031,20 +63031,20 @@ var ShapingPlan = /*#__PURE__*/function () {
     }
   }
   /**
-   * Executes the planned stAges using the given OTProcessor
+   * Executes the planned stages using the given OTProcessor
    */
   ;
 
   _proto23.process = function process(processor, glyphs, positions) {
-    for (var _iterator35 = _createForOfIteratorHelperLoose(this.stAges), _step35; !(_step35 = _iterator35()).done;) {
-      var stAge = _step35.value;
+    for (var _iterator35 = _createForOfIteratorHelperLoose(this.stages), _step35; !(_step35 = _iterator35()).done;) {
+      var stage = _step35.value;
 
-      if (typeof stAge === 'function') {
+      if (typeof stage === 'function') {
         if (!positions) {
-          stAge(this.font, glyphs, this);
+          stage(this.font, glyphs, this);
         }
-      } else if (stAge.length > 0) {
-        processor.applyFeatures(stAge, glyphs, positions);
+      } else if (stage.length > 0) {
+        processor.applyFeatures(stage, glyphs, positions);
       }
     }
   };
@@ -63177,10 +63177,10 @@ var ArabicShaper = /*#__PURE__*/function (_DefaultShaper) {
 
     for (var i = 0; i < FEATURES.length; i++) {
       var feature = FEATURES[i];
-      plan.addStAge(feature, false);
+      plan.addStage(feature, false);
     }
 
-    plan.addStAge('mset');
+    plan.addStage('mset');
   };
 
   ArabicShaper.assignFeatures = function assignFeatures(plan, glyphs) {
@@ -63349,12 +63349,12 @@ var OTProcessor = /*#__PURE__*/function () {
     this.table = table;
     this.script = null;
     this.scriptTag = null;
-    this.languAge = null;
-    this.languAgeTag = null;
+    this.language = null;
+    this.languageTag = null;
     this.features = {};
     this.lookups = {}; // Setup variation substitutions
 
-    this.variationsIndex = font._variationProcessor ? this.findVariationsIndex(font._variationProcessor.normalizedCoords) : -1; // initialize to default script + languAge
+    this.variationsIndex = font._variationProcessor ? this.findVariationsIndex(font._variationProcessor.normalizedCoords) : -1; // initialize to default script + language
 
     this.selectScript(); // current context (set by applyFeatures)
 
@@ -63391,7 +63391,7 @@ var OTProcessor = /*#__PURE__*/function () {
     return null;
   };
 
-  _proto25.selectScript = function selectScript(script, languAge, direction$1) {
+  _proto25.selectScript = function selectScript(script, language, direction$1) {
     var changed = false;
     var entry;
 
@@ -63408,8 +63408,8 @@ var OTProcessor = /*#__PURE__*/function () {
 
       this.scriptTag = entry.tag;
       this.script = entry.script;
-      this.languAge = null;
-      this.languAgeTag = null;
+      this.language = null;
+      this.languageTag = null;
       changed = true;
     }
 
@@ -63417,26 +63417,26 @@ var OTProcessor = /*#__PURE__*/function () {
       this.direction = direction$1 || direction(script);
     }
 
-    if (languAge && languAge.length < 4) {
-      languAge += ' '.repeat(4 - languAge.length);
+    if (language && language.length < 4) {
+      language += ' '.repeat(4 - language.length);
     }
 
-    if (!languAge || languAge !== this.languAgeTag) {
-      this.languAge = null;
+    if (!language || language !== this.languageTag) {
+      this.language = null;
 
       for (var _iterator38 = _createForOfIteratorHelperLoose(this.script.langSysRecords), _step38; !(_step38 = _iterator38()).done;) {
         var lang = _step38.value;
 
-        if (lang.tag === languAge) {
-          this.languAge = lang.langSys;
-          this.languAgeTag = lang.tag;
+        if (lang.tag === language) {
+          this.language = lang.langSys;
+          this.languageTag = lang.tag;
           break;
         }
       }
 
-      if (!this.languAge) {
-        this.languAge = this.script.defaultLangSys;
-        this.languAgeTag = null;
+      if (!this.language) {
+        this.language = this.script.defaultLangSys;
+        this.languageTag = null;
       }
 
       changed = true;
@@ -63446,8 +63446,8 @@ var OTProcessor = /*#__PURE__*/function () {
     if (changed) {
       this.features = {};
 
-      if (this.languAge) {
-        for (var _iterator39 = _createForOfIteratorHelperLoose(this.languAge.featureIndexes), _step39; !(_step39 = _iterator39()).done;) {
+      if (this.language) {
+        for (var _iterator39 = _createForOfIteratorHelperLoose(this.language.featureIndexes), _step39; !(_step39 = _iterator39()).done;) {
           var featureIndex = _step39.value;
           var record = this.table.featureList[featureIndex];
           var substituteFeature = this.substituteFeatureForVariations(featureIndex);
@@ -63608,21 +63608,21 @@ var OTProcessor = /*#__PURE__*/function () {
     return true;
   };
 
-  _proto25.coverAgeIndex = function coverAgeIndex(coverAge, glyph) {
+  _proto25.coverageIndex = function coverageIndex(coverage, glyph) {
     if (glyph == null) {
       glyph = this.glyphIterator.cur.id;
     }
 
-    switch (coverAge.version) {
+    switch (coverage.version) {
       case 1:
-        return coverAge.glyphs.indexOf(glyph);
+        return coverage.glyphs.indexOf(glyph);
 
       case 2:
-        for (var _iterator47 = _createForOfIteratorHelperLoose(coverAge.rangeRecords), _step47; !(_step47 = _iterator47()).done;) {
+        for (var _iterator47 = _createForOfIteratorHelperLoose(coverage.rangeRecords), _step47; !(_step47 = _iterator47()).done;) {
           var range = _step47.value;
 
           if (range.start <= glyph && glyph <= range.end) {
-            return range.startCoverAgeIndex + glyph - range.start;
+            return range.startCoverageIndex + glyph - range.start;
           }
         }
 
@@ -63674,11 +63674,11 @@ var OTProcessor = /*#__PURE__*/function () {
     }, []);
   };
 
-  _proto25.coverAgeSequenceMatches = function coverAgeSequenceMatches(sequenceIndex, sequence) {
+  _proto25.coverageSequenceMatches = function coverageSequenceMatches(sequenceIndex, sequence) {
     var _this5 = this;
 
-    return this.match(sequenceIndex, sequence, function (coverAge, glyph) {
-      return _this5.coverAgeIndex(coverAge, glyph.id) >= 0;
+    return this.match(sequenceIndex, sequence, function (coverage, glyph) {
+      return _this5.coverageIndex(coverage, glyph.id) >= 0;
     });
   };
 
@@ -63720,7 +63720,7 @@ var OTProcessor = /*#__PURE__*/function () {
   _proto25.applyContext = function applyContext(table) {
     switch (table.version) {
       case 1:
-        var index = this.coverAgeIndex(table.coverAge);
+        var index = this.coverageIndex(table.coverage);
 
         if (index === -1) {
           return false;
@@ -63739,7 +63739,7 @@ var OTProcessor = /*#__PURE__*/function () {
         break;
 
       case 2:
-        if (this.coverAgeIndex(table.coverAge) === -1) {
+        if (this.coverageIndex(table.coverage) === -1) {
           return false;
         }
 
@@ -63762,7 +63762,7 @@ var OTProcessor = /*#__PURE__*/function () {
         break;
 
       case 3:
-        if (this.coverAgeSequenceMatches(0, table.coverAges)) {
+        if (this.coverageSequenceMatches(0, table.coverages)) {
           return this.applyLookupList(table.lookupRecords);
         }
 
@@ -63775,7 +63775,7 @@ var OTProcessor = /*#__PURE__*/function () {
   _proto25.applyChainingContext = function applyChainingContext(table) {
     switch (table.version) {
       case 1:
-        var index = this.coverAgeIndex(table.coverAge);
+        var index = this.coverageIndex(table.coverage);
 
         if (index === -1) {
           return false;
@@ -63794,7 +63794,7 @@ var OTProcessor = /*#__PURE__*/function () {
         break;
 
       case 2:
-        if (this.coverAgeIndex(table.coverAge) === -1) {
+        if (this.coverageIndex(table.coverage) === -1) {
           return false;
         }
 
@@ -63816,7 +63816,7 @@ var OTProcessor = /*#__PURE__*/function () {
         break;
 
       case 3:
-        if (this.coverAgeSequenceMatches(-table.backtrackGlyphCount, table.backtrackCoverAge) && this.coverAgeSequenceMatches(0, table.inputCoverAge) && this.coverAgeSequenceMatches(table.inputGlyphCount, table.lookaheadCoverAge)) {
+        if (this.coverageSequenceMatches(-table.backtrackGlyphCount, table.backtrackCoverage) && this.coverageSequenceMatches(0, table.inputCoverage) && this.coverageSequenceMatches(table.inputGlyphCount, table.lookaheadCoverage)) {
           return this.applyLookupList(table.lookupRecords);
         }
 
@@ -63894,7 +63894,7 @@ var GlyphInfo = /*#__PURE__*/function () {
   return GlyphInfo;
 }();
 /**
- * This is a shaper for the Hangul script, used by the Korean languAge.
+ * This is a shaper for the Hangul script, used by the Korean language.
  * It does the following:
  *   - decompose if unsupported by the font:
  *     <LV>   -> <L,V>
@@ -64474,23 +64474,23 @@ var IndicShaper = /*#__PURE__*/function (_DefaultShaper3) {
   }
 
   IndicShaper.planFeatures = function planFeatures(plan) {
-    plan.addStAge(setupSyllables);
-    plan.addStAge(['locl', 'ccmp']);
-    plan.addStAge(initialReordering);
-    plan.addStAge('nukt');
-    plan.addStAge('akhn');
-    plan.addStAge('rphf', false);
-    plan.addStAge('rkrf');
-    plan.addStAge('pref', false);
-    plan.addStAge('blwf', false);
-    plan.addStAge('abvf', false);
-    plan.addStAge('half', false);
-    plan.addStAge('pstf', false);
-    plan.addStAge('vatu');
-    plan.addStAge('cjct');
-    plan.addStAge('cfar', false);
-    plan.addStAge(finalReordering);
-    plan.addStAge({
+    plan.addStage(setupSyllables);
+    plan.addStage(['locl', 'ccmp']);
+    plan.addStage(initialReordering);
+    plan.addStage('nukt');
+    plan.addStage('akhn');
+    plan.addStage('rphf', false);
+    plan.addStage('rkrf');
+    plan.addStage('pref', false);
+    plan.addStage('blwf', false);
+    plan.addStage('abvf', false);
+    plan.addStage('half', false);
+    plan.addStage('pstf', false);
+    plan.addStage('vatu');
+    plan.addStage('cjct');
+    plan.addStage('cfar', false);
+    plan.addStage(finalReordering);
+    plan.addStage({
       local: ['init'],
       global: ['pres', 'abvs', 'blws', 'psts', 'haln', 'dist', 'abvm', 'blwm', 'calt', 'clig']
     }); // Setup the indic config for the selected script
@@ -65152,7 +65152,7 @@ function finalReordering(font, glyphs, plan) {
     } // o Reorder reph:
     //
     // Reph’s original position is always at the beginning of the syllable,
-    // (i.e. it is not reordered at the character reordering stAge). However,
+    // (i.e. it is not reordered at the character reordering stage). However,
     // it will be reordered according to the basic-forms shaping results.
     // Possible positions for reph, depending on the script, are; after main,
     // before post-base consonant forms, and after post-base consonant forms.
@@ -65382,24 +65382,24 @@ var UniversalShaper = /*#__PURE__*/function (_DefaultShaper4) {
   }
 
   UniversalShaper.planFeatures = function planFeatures(plan) {
-    plan.addStAge(setupSyllables$1); // Default glyph pre-processing group
+    plan.addStage(setupSyllables$1); // Default glyph pre-processing group
 
-    plan.addStAge(['locl', 'ccmp', 'nukt', 'akhn']); // Reordering group
+    plan.addStage(['locl', 'ccmp', 'nukt', 'akhn']); // Reordering group
 
-    plan.addStAge(clearSubstitutionFlags);
-    plan.addStAge(['rphf'], false);
-    plan.addStAge(recordRphf);
-    plan.addStAge(clearSubstitutionFlags);
-    plan.addStAge(['pref']);
-    plan.addStAge(recordPref); // Orthographic unit shaping group
+    plan.addStage(clearSubstitutionFlags);
+    plan.addStage(['rphf'], false);
+    plan.addStage(recordRphf);
+    plan.addStage(clearSubstitutionFlags);
+    plan.addStage(['pref']);
+    plan.addStage(recordPref); // Orthographic unit shaping group
 
-    plan.addStAge(['rkrf', 'abvf', 'blwf', 'half', 'pstf', 'vatu', 'cjct']);
-    plan.addStAge(reorder); // Topographical features
+    plan.addStage(['rkrf', 'abvf', 'blwf', 'half', 'pstf', 'vatu', 'cjct']);
+    plan.addStage(reorder); // Topographical features
     // Scripts that need this are handled by the Arabic shaper, not implemented here for now.
-    // plan.addStAge(['isol', 'init', 'medi', 'fina', 'med2', 'fin2', 'fin3'], false);
+    // plan.addStage(['isol', 'init', 'medi', 'fina', 'med2', 'fin2', 'fin3'], false);
     // Standard topographic presentation and positional feature application
 
-    plan.addStAge(['abvs', 'blws', 'pres', 'psts', 'dist', 'abvm', 'blwm']);
+    plan.addStage(['abvs', 'blws', 'pres', 'psts', 'dist', 'abvm', 'blwm']);
   };
 
   UniversalShaper.assignFeatures = function assignFeatures(plan, glyphs) {
@@ -65744,7 +65744,7 @@ var GSUBProcessor = /*#__PURE__*/function (_OTProcessor) {
       case 1:
         {
           // Single Substitution
-          var index = this.coverAgeIndex(table.coverAge);
+          var index = this.coverageIndex(table.coverage);
 
           if (index === -1) {
             return false;
@@ -65768,7 +65768,7 @@ var GSUBProcessor = /*#__PURE__*/function (_OTProcessor) {
       case 2:
         {
           // Multiple Substitution
-          var _index = this.coverAgeIndex(table.coverAge);
+          var _index = this.coverageIndex(table.coverage);
 
           if (_index !== -1) {
             var _this$glyphs2;
@@ -65807,7 +65807,7 @@ var GSUBProcessor = /*#__PURE__*/function (_OTProcessor) {
       case 3:
         {
           // Alternate Substitution
-          var _index2 = this.coverAgeIndex(table.coverAge);
+          var _index2 = this.coverageIndex(table.coverage);
 
           if (_index2 !== -1) {
             var USER_INDEX = 0; // TODO
@@ -65822,7 +65822,7 @@ var GSUBProcessor = /*#__PURE__*/function (_OTProcessor) {
       case 4:
         {
           // Ligature Substitution
-          var _index3 = this.coverAgeIndex(table.coverAge);
+          var _index3 = this.coverageIndex(table.coverage);
 
           if (_index3 === -1) {
             return false;
@@ -66009,7 +66009,7 @@ var GPOSProcessor = /*#__PURE__*/function (_OTProcessor2) {
       case 1:
         {
           // Single positioning value
-          var index = this.coverAgeIndex(table.coverAge);
+          var index = this.coverageIndex(table.coverage);
 
           if (index === -1) {
             return false;
@@ -66037,7 +66037,7 @@ var GPOSProcessor = /*#__PURE__*/function (_OTProcessor2) {
             return false;
           }
 
-          var _index = this.coverAgeIndex(table.coverAge);
+          var _index = this.coverageIndex(table.coverage);
 
           if (_index === -1) {
             return false;
@@ -66086,13 +66086,13 @@ var GPOSProcessor = /*#__PURE__*/function (_OTProcessor2) {
             return false;
           }
 
-          var curRecord = table.entryExitRecords[this.coverAgeIndex(table.coverAge)];
+          var curRecord = table.entryExitRecords[this.coverageIndex(table.coverage)];
 
           if (!curRecord || !curRecord.exitAnchor) {
             return false;
           }
 
-          var nextRecord = table.entryExitRecords[this.coverAgeIndex(table.coverAge, _nextGlyph.id)];
+          var nextRecord = table.entryExitRecords[this.coverageIndex(table.coverage, _nextGlyph.id)];
 
           if (!nextRecord || !nextRecord.entryAnchor) {
             return false;
@@ -66133,7 +66133,7 @@ var GPOSProcessor = /*#__PURE__*/function (_OTProcessor2) {
       case 4:
         {
           // Mark to base positioning
-          var markIndex = this.coverAgeIndex(table.markCoverAge);
+          var markIndex = this.coverageIndex(table.markCoverage);
 
           if (markIndex === -1) {
             return false;
@@ -66148,7 +66148,7 @@ var GPOSProcessor = /*#__PURE__*/function (_OTProcessor2) {
             return false;
           }
 
-          var baseIndex = this.coverAgeIndex(table.baseCoverAge, this.glyphs[baseGlyphIndex].id);
+          var baseIndex = this.coverageIndex(table.baseCoverage, this.glyphs[baseGlyphIndex].id);
 
           if (baseIndex === -1) {
             return false;
@@ -66163,7 +66163,7 @@ var GPOSProcessor = /*#__PURE__*/function (_OTProcessor2) {
       case 5:
         {
           // Mark to ligature positioning
-          var _markIndex = this.coverAgeIndex(table.markCoverAge);
+          var _markIndex = this.coverageIndex(table.markCoverage);
 
           if (_markIndex === -1) {
             return false;
@@ -66178,7 +66178,7 @@ var GPOSProcessor = /*#__PURE__*/function (_OTProcessor2) {
             return false;
           }
 
-          var ligIndex = this.coverAgeIndex(table.ligatureCoverAge, this.glyphs[_baseGlyphIndex].id);
+          var ligIndex = this.coverageIndex(table.ligatureCoverage, this.glyphs[_baseGlyphIndex].id);
 
           if (ligIndex === -1) {
             return false;
@@ -66197,7 +66197,7 @@ var GPOSProcessor = /*#__PURE__*/function (_OTProcessor2) {
       case 6:
         {
           // Mark to mark positioning
-          var mark1Index = this.coverAgeIndex(table.mark1CoverAge);
+          var mark1Index = this.coverageIndex(table.mark1Coverage);
 
           if (mark1Index === -1) {
             return false;
@@ -66235,7 +66235,7 @@ var GPOSProcessor = /*#__PURE__*/function (_OTProcessor2) {
             return false;
           }
 
-          var mark2Index = this.coverAgeIndex(table.mark2CoverAge, prev.id);
+          var mark2Index = this.coverageIndex(table.mark2Coverage, prev.id);
 
           if (mark2Index === -1) {
             return false;
@@ -66378,11 +66378,11 @@ var OTLayoutEngine = /*#__PURE__*/function () {
     var script = null;
 
     if (this.GPOSProcessor) {
-      script = this.GPOSProcessor.selectScript(glyphRun.script, glyphRun.languAge, glyphRun.direction);
+      script = this.GPOSProcessor.selectScript(glyphRun.script, glyphRun.language, glyphRun.direction);
     }
 
     if (this.GSUBProcessor) {
-      script = this.GSUBProcessor.selectScript(glyphRun.script, glyphRun.languAge, glyphRun.direction);
+      script = this.GSUBProcessor.selectScript(glyphRun.script, glyphRun.language, glyphRun.direction);
     } // Choose a shaper based on the script, and setup a shaping plan.
     // This determines which features to apply to which glyphs.
 
@@ -66445,16 +66445,16 @@ var OTLayoutEngine = /*#__PURE__*/function () {
     this.shaper = null;
   };
 
-  _proto29.getAvailableFeatures = function getAvailableFeatures(script, languAge) {
+  _proto29.getAvailableFeatures = function getAvailableFeatures(script, language) {
     var features = [];
 
     if (this.GSUBProcessor) {
-      this.GSUBProcessor.selectScript(script, languAge);
+      this.GSUBProcessor.selectScript(script, language);
       features.push.apply(features, Object.keys(this.GSUBProcessor.features));
     }
 
     if (this.GPOSProcessor) {
-      this.GPOSProcessor.selectScript(script, languAge);
+      this.GPOSProcessor.selectScript(script, language);
       features.push.apply(features, Object.keys(this.GPOSProcessor.features));
     }
 
@@ -66480,11 +66480,11 @@ var LayoutEngine = /*#__PURE__*/function () {
 
   var _proto30 = LayoutEngine.prototype;
 
-  _proto30.layout = function layout(string, features, script, languAge, direction) {
+  _proto30.layout = function layout(string, features, script, language, direction) {
     // Make the features parameter optional
     if (typeof features === 'string') {
-      direction = languAge;
-      languAge = script;
+      direction = language;
+      language = script;
       script = features;
       features = [];
     } // Map string to glyphs if needed
@@ -66513,7 +66513,7 @@ var LayoutEngine = /*#__PURE__*/function () {
       var glyphs = string;
     }
 
-    var glyphRun = new GlyphRun(glyphs, features, script, languAge, direction); // Return early if there are no glyphs
+    var glyphRun = new GlyphRun(glyphs, features, script, language, direction); // Return early if there are no glyphs
 
     if (glyphs.length === 0) {
       glyphRun.positions = [];
@@ -66638,11 +66638,11 @@ var LayoutEngine = /*#__PURE__*/function () {
     }
   };
 
-  _proto30.getAvailableFeatures = function getAvailableFeatures(script, languAge) {
+  _proto30.getAvailableFeatures = function getAvailableFeatures(script, language) {
     var features = [];
 
     if (this.engine) {
-      features.push.apply(features, this.engine.getAvailableFeatures(script, languAge));
+      features.push.apply(features, this.engine.getAvailableFeatures(script, language));
     }
 
     if (this.font.kern && features.indexOf('kern') === -1) {
@@ -68294,7 +68294,7 @@ var CFFGlyph = /*#__PURE__*/function (_Glyph2) {
   return CFFGlyph;
 }(Glyph);
 
-var SBIXImAge = new r.Struct({
+var SBIXImage = new r.Struct({
   originX: r.uint16,
   originY: r.uint16,
   type: new r.String(4),
@@ -68316,23 +68316,23 @@ var SBIXGlyph = /*#__PURE__*/function (_TTFGlyph) {
   var _proto36 = SBIXGlyph.prototype;
 
   /**
-   * Returns an object representing a glyph imAge at the given point size.
-   * The object has a data property with a Buffer containing the actual imAge data,
-   * along with the imAge type, and origin.
+   * Returns an object representing a glyph image at the given point size.
+   * The object has a data property with a Buffer containing the actual image data,
+   * along with the image type, and origin.
    *
    * @param {number} size
    * @return {object}
    */
-  _proto36.getImAgeForSize = function getImAgeForSize(size) {
-    for (var i = 0; i < this._font.sbix.imAgeTables.length; i++) {
-      var table = this._font.sbix.imAgeTables[i];
+  _proto36.getImageForSize = function getImageForSize(size) {
+    for (var i = 0; i < this._font.sbix.imageTables.length; i++) {
+      var table = this._font.sbix.imageTables[i];
 
       if (table.ppem >= size) {
         break;
       }
     }
 
-    var offsets = table.imAgeOffsets;
+    var offsets = table.imageOffsets;
     var start = offsets[this.id];
     var end = offsets[this.id + 1];
 
@@ -68341,17 +68341,17 @@ var SBIXGlyph = /*#__PURE__*/function (_TTFGlyph) {
     }
 
     this._font.stream.pos = start;
-    return SBIXImAge.decode(this._font.stream, {
+    return SBIXImage.decode(this._font.stream, {
       buflen: end - start
     });
   };
 
   _proto36.render = function render(ctx, size) {
-    var img = this.getImAgeForSize(size);
+    var img = this.getImageForSize(size);
 
     if (img != null) {
       var scale = size / this._font.unitsPerEm;
-      ctx.imAge(img.data, {
+      ctx.image(img.data, {
         height: size,
         x: img.originX,
         y: (this.bbox.minY - img.originY) * scale
@@ -69277,7 +69277,7 @@ var TTFSubset = /*#__PURE__*/function (_Subset) {
     // cmapTable =
     //     version: 0
     //     length: 262
-    //     languAge: 0
+    //     language: 0
     //     codeMap: map
     //
     // cmap =
@@ -69521,7 +69521,7 @@ var TTFFont = (_class$4 = /*#__PURE__*/function () {
       variationCoords = null;
     }
 
-    this.defaultLanguAge = null;
+    this.defaultLanguage = null;
     this.stream = stream;
     this.variationCoords = variationCoords;
     this._directoryPos = this.stream.pos;
@@ -69544,12 +69544,12 @@ var TTFFont = (_class$4 = /*#__PURE__*/function () {
 
   var _proto43 = TTFFont.prototype;
 
-  _proto43.setDefaultLanguAge = function setDefaultLanguAge(lang) {
+  _proto43.setDefaultLanguage = function setDefaultLanguage(lang) {
     if (lang === void 0) {
       lang = null;
     }
 
-    this.defaultLanguAge = lang;
+    this.defaultLanguage = lang;
   };
 
   _proto43._getTable = function _getTable(table) {
@@ -69595,21 +69595,21 @@ var TTFFont = (_class$4 = /*#__PURE__*/function () {
   }
   /**
    * Gets a string from the font's `name` table
-   * `lang` is a BCP-47 languAge code.
+   * `lang` is a BCP-47 language code.
    * @return {string}
    */
   ;
 
   _proto43.getName = function getName(key, lang) {
     if (lang === void 0) {
-      lang = this.defaultLanguAge || fontkit.defaultLanguAge;
+      lang = this.defaultLanguage || fontkit.defaultLanguage;
     }
 
     var record = this.name && this.name.records[key];
 
     if (record) {
       // Attempt to retrieve the entry, depending on which translation is available:
-      return record[lang] || record[this.defaultLanguAge] || record[fontkit.defaultLanguAge] || record['en'] || record[Object.keys(record)[0]] // Seriously, ANY languAge would be fine
+      return record[lang] || record[this.defaultLanguage] || record[fontkit.defaultLanguage] || record['en'] || record[Object.keys(record)[0]] // Seriously, ANY language would be fine
       || null;
     }
 
@@ -69704,12 +69704,12 @@ var TTFFont = (_class$4 = /*#__PURE__*/function () {
    * @param {string} string
    * @param {string[]} [userFeatures]
    * @param {string} [script]
-   * @param {string} [languAge]
+   * @param {string} [language]
    * @param {string} [direction]
    * @return {GlyphRun}
    */
-  _proto43.layout = function layout(string, userFeatures, script, languAge, direction) {
-    return this._layoutEngine.layout(string, userFeatures, script, languAge, direction);
+  _proto43.layout = function layout(string, userFeatures, script, language, direction) {
+    return this._layoutEngine.layout(string, userFeatures, script, language, direction);
   }
   /**
    * Returns an array of strings that map to the given glyph id.
@@ -69730,8 +69730,8 @@ var TTFFont = (_class$4 = /*#__PURE__*/function () {
    */
   ;
 
-  _proto43.getAvailableFeatures = function getAvailableFeatures(script, languAge) {
-    return this._layoutEngine.getAvailableFeatures(script, languAge);
+  _proto43.getAvailableFeatures = function getAvailableFeatures(script, language) {
+    return this._layoutEngine.getAvailableFeatures(script, language);
   };
 
   _proto43._getBaseGlyph = function _getBaseGlyph(glyph, characters) {
@@ -70983,12 +70983,12 @@ module.exports = deprecate;
  * Mark that a method should not be used.
  * Returns a modified function which warns once by default.
  *
- * If `localStorAge.noDeprecation = true` is set, then it is a no-op.
+ * If `localStorage.noDeprecation = true` is set, then it is a no-op.
  *
- * If `localStorAge.throwDeprecation = true` is set, then deprecated functions
+ * If `localStorage.throwDeprecation = true` is set, then deprecated functions
  * will throw an Error when invoked.
  *
- * If `localStorAge.traceDeprecation = true` is set, then deprecated functions
+ * If `localStorage.traceDeprecation = true` is set, then deprecated functions
  * will invoke `console.trace()` instead of `console.error()`.
  *
  * @param {Function} fn - the function to deprecate
@@ -71021,7 +71021,7 @@ function deprecate (fn, msg) {
 }
 
 /**
- * Checks `localStorAge` for boolean values for the given `name`.
+ * Checks `localStorage` for boolean values for the given `name`.
  *
  * @param {String} name
  * @returns {Boolean}
@@ -71029,13 +71029,13 @@ function deprecate (fn, msg) {
  */
 
 function config (name) {
-  // accessing global.localStorAge can trigger a DOMException in sandboxed iframes
+  // accessing global.localStorage can trigger a DOMException in sandboxed iframes
   try {
-    if (!__webpack_require__.g.localStorAge) return false;
+    if (!__webpack_require__.g.localStorage) return false;
   } catch (_) {
     return false;
   }
-  var val = __webpack_require__.g.localStorAge[name];
+  var val = __webpack_require__.g.localStorage[name];
   if (null == val) return false;
   return String(val).toLowerCase() === 'true';
 }
@@ -71418,7 +71418,7 @@ exports.isAnyArrayBuffer = isAnyArrayBuffer;
 // OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
 // NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAgeS OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
@@ -71581,7 +71581,7 @@ inspect.colors = {
   'blue' : [34, 39],
   'cyan' : [36, 39],
   'green' : [32, 39],
-  'mAgenta' : [35, 39],
+  'magenta' : [35, 39],
   'red' : [31, 39],
   'yellow' : [33, 39]
 };
@@ -71594,7 +71594,7 @@ inspect.styles = {
   'undefined': 'grey',
   'null': 'bold',
   'string': 'green',
-  'date': 'mAgenta',
+  'date': 'magenta',
   // "name": intentionally not styling
   'regexp': 'red'
 };
@@ -71662,7 +71662,7 @@ function formatValue(ctx, value, recurseTimes) {
   // IE doesn't make error fields non-enumerable
   // http://msdn.microsoft.com/en-us/library/ie/dww52sbt(v=vs.94).aspx
   if (isError(value)
-      && (keys.indexOf('messAge') >= 0 || keys.indexOf('description') >= 0)) {
+      && (keys.indexOf('message') >= 0 || keys.indexOf('description') >= 0)) {
     return formatError(value);
   }
 
@@ -71707,7 +71707,7 @@ function formatValue(ctx, value, recurseTimes) {
     base = ' ' + Date.prototype.toUTCString.call(value);
   }
 
-  // Make error with messAge first say the error
+  // Make error with message first say the error
   if (isError(value)) {
     base = ' ' + formatError(value);
   }
@@ -72714,10 +72714,10 @@ Document.prototype._createDoc = function (options, cb) {
 		}
 	}
 
-	if (this.docDefinition.imAges) {
-		for (var imAge in this.docDefinition.imAges) {
-			if (this.docDefinition.imAges.hasOwnProperty(imAge)) {
-				urlResolver.resolve(this.docDefinition.imAges[imAge]);
+	if (this.docDefinition.images) {
+		for (var image in this.docDefinition.images) {
+			if (this.docDefinition.images.hasOwnProperty(image)) {
+				urlResolver.resolve(this.docDefinition.images[image]);
 			}
 		}
 	}
@@ -72745,20 +72745,20 @@ Document.prototype._flushDoc = function (doc, callback) {
 	});
 	doc.on('end', function () {
 		result = Buffer.concat(chunks);
-		callback(result, doc._pdfMakePAges);
+		callback(result, doc._pdfMakePages);
 	});
 	doc.end();
 };
 
-Document.prototype._getPAges = function (options, cb) {
+Document.prototype._getPages = function (options, cb) {
 	if (!cb) {
-		throw '_getPAges is an async method and needs a callback argument';
+		throw '_getPages is an async method and needs a callback argument';
 	}
 	var _this = this;
 
 	this._createDoc(options, function (doc) {
-		_this._flushDoc(doc, function (ignoreBuffer, pAges) {
-			cb(pAges);
+		_this._flushDoc(doc, function (ignoreBuffer, pages) {
+			cb(pages);
 		});
 	});
 };
@@ -73163,14 +73163,14 @@ var qrEncoder = __webpack_require__(145);
 /**
  * @private
  */
-function DocMeasure(fontProvider, styleDictionary, defaultStyle, imAgeMeasure, svgMeasure, tableLayouts, imAges) {
+function DocMeasure(fontProvider, styleDictionary, defaultStyle, imageMeasure, svgMeasure, tableLayouts, images) {
 	this.textTools = new TextTools(fontProvider);
 	this.styleStack = new StyleContextStack(styleDictionary, defaultStyle);
-	this.imAgeMeasure = imAgeMeasure;
+	this.imageMeasure = imageMeasure;
 	this.svgMeasure = svgMeasure;
 	this.tableLayouts = tableLayouts;
-	this.imAges = imAges;
-	this.autoImAgeIndex = 1;
+	this.images = images;
+	this.autoImageIndex = 1;
 }
 
 /**
@@ -73205,8 +73205,8 @@ DocMeasure.prototype.measureNode = function (node) {
 			return extendMargins(self.measureLeaf(node));
 		} else if (node.toc) {
 			return extendMargins(self.measureToc(node));
-		} else if (node.imAge) {
-			return extendMargins(self.measureImAge(node));
+		} else if (node.image) {
+			return extendMargins(self.measureImage(node));
 		} else if (node.svg) {
 			return extendMargins(self.measureSVG(node));
 		} else if (node.canvas) {
@@ -73297,15 +73297,15 @@ DocMeasure.prototype.measureNode = function (node) {
 	}
 };
 
-DocMeasure.prototype.convertIfBase64ImAge = function (node) {
-	if (/^data:imAge\/(jpeg|jpg|png);base64,/.test(node.imAge)) {
-		var label = '$$pdfmake$$' + this.autoImAgeIndex++;
-		this.imAges[label] = node.imAge;
-		node.imAge = label;
+DocMeasure.prototype.convertIfBase64Image = function (node) {
+	if (/^data:image\/(jpeg|jpg|png);base64,/.test(node.image)) {
+		var label = '$$pdfmake$$' + this.autoImageIndex++;
+		this.images[label] = node.image;
+		node.image = label;
 	}
 };
 
-DocMeasure.prototype.measureImAgeWithDimensions = function (node, dimensions) {
+DocMeasure.prototype.measureImageWithDimensions = function (node, dimensions) {
 	if (node.fit) {
 		var factor = (dimensions.width / dimensions.height > node.fit[0] / node.fit[1]) ? node.fit[0] / dimensions.width : node.fit[1] / dimensions.height;
 		node._width = node._minWidth = node._maxWidth = dimensions.width * factor;
@@ -73338,14 +73338,14 @@ DocMeasure.prototype.measureImAgeWithDimensions = function (node, dimensions) {
 	node._alignment = this.styleStack.getProperty('alignment');
 };
 
-DocMeasure.prototype.measureImAge = function (node) {
-	if (this.imAges) {
-		this.convertIfBase64ImAge(node);
+DocMeasure.prototype.measureImage = function (node) {
+	if (this.images) {
+		this.convertIfBase64Image(node);
 	}
 
-	var dimensions = this.imAgeMeasure.measureImAge(node.imAge);
+	var dimensions = this.imageMeasure.measureImage(node.image);
 
-	this.measureImAgeWithDimensions(node, dimensions);
+	this.measureImageWithDimensions(node, dimensions);
 
 	return node;
 };
@@ -73354,7 +73354,7 @@ DocMeasure.prototype.measureSVG = function (node) {
 
 	var dimensions = this.svgMeasure.measureSVG(node.svg);
 
-	this.measureImAgeWithDimensions(node, dimensions);
+	this.measureImageWithDimensions(node, dimensions);
 
 	node.font = this.styleStack.getProperty('font');
 
@@ -74010,15 +74010,15 @@ DocPreprocessor.prototype.preprocessNode = function (node) {
 		return this.preprocessText(node);
 	} else if (node.toc) {
 		return this.preprocessToc(node);
-	} else if (node.imAge) {
-		return this.preprocessImAge(node);
+	} else if (node.image) {
+		return this.preprocessImage(node);
 	} else if (node.svg) {
 		return this.preprocessSVG(node);
 	} else if (node.canvas) {
 		return this.preprocessCanvas(node);
 	} else if (node.qr) {
 		return this.preprocessQr(node);
-	} else if (node.pAgeReference || node.textReference) {
+	} else if (node.pageReference || node.textReference) {
 		return this.preprocessText(node);
 	} else {
 		throw 'Unrecognized document structure: ' + JSON.stringify(node, fontStringify);
@@ -74122,17 +74122,17 @@ DocPreprocessor.prototype.preprocessText = function (node) {
 		}
 	}
 
-	if (node.pAgeReference) {
-		if (!this.nodeReferences[node.pAgeReference]) {
-			this.nodeReferences[node.pAgeReference] = {
+	if (node.pageReference) {
+		if (!this.nodeReferences[node.pageReference]) {
+			this.nodeReferences[node.pageReference] = {
 				_nodeRef: {},
 				_textNodeRef: {},
 				_pseudo: true
 			};
 		}
 		node.text = '00000';
-		node.linkToDestination = node.pAgeReference;
-		node._pAgeRef = this.nodeReferences[node.pAgeReference];
+		node.linkToDestination = node.pageReference;
+		node._pageRef = this.nodeReferences[node.pageReference];
 	}
 
 	if (node.textReference) {
@@ -74187,9 +74187,9 @@ DocPreprocessor.prototype.preprocessToc = function (node) {
 	return node;
 };
 
-DocPreprocessor.prototype.preprocessImAge = function (node) {
-	if (!isUndefined(node.imAge.type) && !isUndefined(node.imAge.data) && (node.imAge.type === 'Buffer') && isArray(node.imAge.data)) {
-		node.imAge = Buffer.from(node.imAge.data);
+DocPreprocessor.prototype.preprocessImage = function (node) {
+	if (!isUndefined(node.image.type) && !isUndefined(node.image.data) && (node.image.type === 'Buffer') && isArray(node.image.data)) {
+		node.image = Buffer.from(node.image.data);
 	}
 	return node;
 };
@@ -74232,15 +74232,15 @@ var isString = (__webpack_require__(6225).isString);
  * Creates an instance of DocumentContext - a store for current x, y positions and available width/height.
  * It facilitates column divisions and vertical sync
  */
-function DocumentContext(pAgeSize, pAgeMargins) {
-	this.pAges = [];
+function DocumentContext(pageSize, pageMargins) {
+	this.pages = [];
 
-	this.pAgeMargins = pAgeMargins;
+	this.pageMargins = pageMargins;
 
-	this.x = pAgeMargins.left;
-	this.availableWidth = pAgeSize.width - pAgeMargins.left - pAgeMargins.right;
+	this.x = pageMargins.left;
+	this.availableWidth = pageSize.width - pageMargins.left - pageMargins.right;
 	this.availableHeight = 0;
-	this.pAge = -1;
+	this.page = -1;
 
 	this.snapshots = [];
 
@@ -74250,7 +74250,7 @@ function DocumentContext(pAgeSize, pAgeMargins) {
 
 	this.backgroundLength = [];
 
-	this.addPAge(pAgeSize);
+	this.addPage(pageSize);
 }
 
 DocumentContext.prototype.beginColumnGroup = function () {
@@ -74259,13 +74259,13 @@ DocumentContext.prototype.beginColumnGroup = function () {
 		y: this.y,
 		availableHeight: this.availableHeight,
 		availableWidth: this.availableWidth,
-		pAge: this.pAge,
+		page: this.page,
 		bottomMost: {
 			x: this.x,
 			y: this.y,
 			availableHeight: this.availableHeight,
 			availableWidth: this.availableWidth,
-			pAge: this.pAge
+			page: this.page
 		},
 		endingCell: this.endingCell,
 		lastColumnWidth: this.lastColumnWidth
@@ -74280,7 +74280,7 @@ DocumentContext.prototype.beginColumn = function (width, offset, endingCell) {
 	this.calculateBottomMost(saved);
 
 	this.endingCell = endingCell;
-	this.pAge = saved.pAge;
+	this.page = saved.page;
 	this.x = this.x + this.lastColumnWidth + (offset || 0);
 	this.y = saved.y;
 	this.availableWidth = width;	//saved.availableWidth - offset;
@@ -74299,7 +74299,7 @@ DocumentContext.prototype.calculateBottomMost = function (destContext) {
 };
 
 DocumentContext.prototype.markEnding = function (endingCell) {
-	this.pAge = endingCell._columnEndingContext.pAge;
+	this.page = endingCell._columnEndingContext.page;
 	this.x = endingCell._columnEndingContext.x;
 	this.y = endingCell._columnEndingContext.y;
 	this.availableWidth = endingCell._columnEndingContext.availableWidth;
@@ -74309,7 +74309,7 @@ DocumentContext.prototype.markEnding = function (endingCell) {
 
 DocumentContext.prototype.saveContextInEndingCell = function (endingCell) {
 	endingCell._columnEndingContext = {
-		pAge: this.pAge,
+		page: this.page,
 		x: this.x,
 		y: this.y,
 		availableHeight: this.availableHeight,
@@ -74328,7 +74328,7 @@ DocumentContext.prototype.completeColumnGroup = function (height) {
 
 	var y = saved.bottomMost.y;
 	if (height) {
-		if (saved.pAge === saved.bottomMost.pAge) {
+		if (saved.page === saved.bottomMost.page) {
 			if ((saved.y + height) > y) {
 				y = saved.y + height;
 			}
@@ -74338,7 +74338,7 @@ DocumentContext.prototype.completeColumnGroup = function (height) {
 	}
 
 	this.y = y;
-	this.pAge = saved.bottomMost.pAge;
+	this.page = saved.bottomMost.page;
 	this.availableWidth = saved.availableWidth;
 	this.availableHeight = saved.bottomMost.availableHeight;
 	if (height) {
@@ -74359,13 +74359,13 @@ DocumentContext.prototype.moveDown = function (offset) {
 	return this.availableHeight > 0;
 };
 
-DocumentContext.prototype.initializePAge = function () {
-	this.y = this.pAgeMargins.top;
-	this.availableHeight = this.getCurrentPAge().pAgeSize.height - this.pAgeMargins.top - this.pAgeMargins.bottom;
-	this.pAgeSnapshot().availableWidth = this.getCurrentPAge().pAgeSize.width - this.pAgeMargins.left - this.pAgeMargins.right;
+DocumentContext.prototype.initializePage = function () {
+	this.y = this.pageMargins.top;
+	this.availableHeight = this.getCurrentPage().pageSize.height - this.pageMargins.top - this.pageMargins.bottom;
+	this.pageSnapshot().availableWidth = this.getCurrentPage().pageSize.width - this.pageMargins.left - this.pageMargins.right;
 };
 
-DocumentContext.prototype.pAgeSnapshot = function () {
+DocumentContext.prototype.pageSnapshot = function () {
 	if (this.snapshots[0]) {
 		return this.snapshots[0];
 	} else {
@@ -74376,11 +74376,11 @@ DocumentContext.prototype.pAgeSnapshot = function () {
 DocumentContext.prototype.moveTo = function (x, y) {
 	if (x !== undefined && x !== null) {
 		this.x = x;
-		this.availableWidth = this.getCurrentPAge().pAgeSize.width - this.x - this.pAgeMargins.right;
+		this.availableWidth = this.getCurrentPage().pageSize.width - this.x - this.pageMargins.right;
 	}
 	if (y !== undefined && y !== null) {
 		this.y = y;
-		this.availableHeight = this.getCurrentPAge().pAgeSize.height - this.y - this.pAgeMargins.bottom;
+		this.availableHeight = this.getCurrentPage().pageSize.height - this.y - this.pageMargins.bottom;
 	}
 };
 
@@ -74399,7 +74399,7 @@ DocumentContext.prototype.beginDetachedBlock = function () {
 		y: this.y,
 		availableHeight: this.availableHeight,
 		availableWidth: this.availableWidth,
-		pAge: this.pAge,
+		page: this.page,
 		endingCell: this.endingCell,
 		lastColumnWidth: this.lastColumnWidth
 	});
@@ -74412,123 +74412,123 @@ DocumentContext.prototype.endDetachedBlock = function () {
 	this.y = saved.y;
 	this.availableWidth = saved.availableWidth;
 	this.availableHeight = saved.availableHeight;
-	this.pAge = saved.pAge;
+	this.page = saved.page;
 	this.endingCell = saved.endingCell;
 	this.lastColumnWidth = saved.lastColumnWidth;
 };
 
-function pAgeOrientation(pAgeOrientationString, currentPAgeOrientation) {
-	if (pAgeOrientationString === undefined) {
-		return currentPAgeOrientation;
-	} else if (isString(pAgeOrientationString) && (pAgeOrientationString.toLowerCase() === 'landscape')) {
+function pageOrientation(pageOrientationString, currentPageOrientation) {
+	if (pageOrientationString === undefined) {
+		return currentPageOrientation;
+	} else if (isString(pageOrientationString) && (pageOrientationString.toLowerCase() === 'landscape')) {
 		return 'landscape';
 	} else {
 		return 'portrait';
 	}
 }
 
-var getPAgeSize = function (currentPAge, newPAgeOrientation) {
+var getPageSize = function (currentPage, newPageOrientation) {
 
-	newPAgeOrientation = pAgeOrientation(newPAgeOrientation, currentPAge.pAgeSize.orientation);
+	newPageOrientation = pageOrientation(newPageOrientation, currentPage.pageSize.orientation);
 
-	if (newPAgeOrientation !== currentPAge.pAgeSize.orientation) {
+	if (newPageOrientation !== currentPage.pageSize.orientation) {
 		return {
-			orientation: newPAgeOrientation,
-			width: currentPAge.pAgeSize.height,
-			height: currentPAge.pAgeSize.width
+			orientation: newPageOrientation,
+			width: currentPage.pageSize.height,
+			height: currentPage.pageSize.width
 		};
 	} else {
 		return {
-			orientation: currentPAge.pAgeSize.orientation,
-			width: currentPAge.pAgeSize.width,
-			height: currentPAge.pAgeSize.height
+			orientation: currentPage.pageSize.orientation,
+			width: currentPage.pageSize.width,
+			height: currentPage.pageSize.height
 		};
 	}
 
 };
 
 
-DocumentContext.prototype.moveToNextPAge = function (pAgeOrientation) {
-	var nextPAgeIndex = this.pAge + 1;
+DocumentContext.prototype.moveToNextPage = function (pageOrientation) {
+	var nextPageIndex = this.page + 1;
 
-	var prevPAge = this.pAge;
+	var prevPage = this.page;
 	var prevY = this.y;
 
-	var createNewPAge = nextPAgeIndex >= this.pAges.length;
-	if (createNewPAge) {
+	var createNewPage = nextPageIndex >= this.pages.length;
+	if (createNewPage) {
 		var currentAvailableWidth = this.availableWidth;
-		var currentPAgeOrientation = this.getCurrentPAge().pAgeSize.orientation;
+		var currentPageOrientation = this.getCurrentPage().pageSize.orientation;
 
-		var pAgeSize = getPAgeSize(this.getCurrentPAge(), pAgeOrientation);
-		this.addPAge(pAgeSize);
+		var pageSize = getPageSize(this.getCurrentPage(), pageOrientation);
+		this.addPage(pageSize);
 
-		if (currentPAgeOrientation === pAgeSize.orientation) {
+		if (currentPageOrientation === pageSize.orientation) {
 			this.availableWidth = currentAvailableWidth;
 		}
 	} else {
-		this.pAge = nextPAgeIndex;
-		this.initializePAge();
+		this.page = nextPageIndex;
+		this.initializePage();
 	}
 
 	return {
-		newPAgeCreated: createNewPAge,
-		prevPAge: prevPAge,
+		newPageCreated: createNewPage,
+		prevPage: prevPage,
 		prevY: prevY,
 		y: this.y
 	};
 };
 
 
-DocumentContext.prototype.addPAge = function (pAgeSize) {
-	var pAge = { items: [], pAgeSize: pAgeSize };
-	this.pAges.push(pAge);
+DocumentContext.prototype.addPage = function (pageSize) {
+	var page = { items: [], pageSize: pageSize };
+	this.pages.push(page);
 	this.backgroundLength.push(0);
-	this.pAge = this.pAges.length - 1;
-	this.initializePAge();
+	this.page = this.pages.length - 1;
+	this.initializePage();
 
-	this.tracker.emit('pAgeAdded');
+	this.tracker.emit('pageAdded');
 
-	return pAge;
+	return page;
 };
 
-DocumentContext.prototype.getCurrentPAge = function () {
-	if (this.pAge < 0 || this.pAge >= this.pAges.length) {
+DocumentContext.prototype.getCurrentPage = function () {
+	if (this.page < 0 || this.page >= this.pages.length) {
 		return null;
 	}
 
-	return this.pAges[this.pAge];
+	return this.pages[this.page];
 };
 
 DocumentContext.prototype.getCurrentPosition = function () {
-	var pAgeSize = this.getCurrentPAge().pAgeSize;
-	var innerHeight = pAgeSize.height - this.pAgeMargins.top - this.pAgeMargins.bottom;
-	var innerWidth = pAgeSize.width - this.pAgeMargins.left - this.pAgeMargins.right;
+	var pageSize = this.getCurrentPage().pageSize;
+	var innerHeight = pageSize.height - this.pageMargins.top - this.pageMargins.bottom;
+	var innerWidth = pageSize.width - this.pageMargins.left - this.pageMargins.right;
 
 	return {
-		pAgeNumber: this.pAge + 1,
-		pAgeOrientation: pAgeSize.orientation,
-		pAgeInnerHeight: innerHeight,
-		pAgeInnerWidth: innerWidth,
+		pageNumber: this.page + 1,
+		pageOrientation: pageSize.orientation,
+		pageInnerHeight: innerHeight,
+		pageInnerWidth: innerWidth,
 		left: this.x,
 		top: this.y,
-		verticalRatio: ((this.y - this.pAgeMargins.top) / innerHeight),
-		horizontalRatio: ((this.x - this.pAgeMargins.left) / innerWidth)
+		verticalRatio: ((this.y - this.pageMargins.top) / innerHeight),
+		horizontalRatio: ((this.x - this.pageMargins.left) / innerWidth)
 	};
 };
 
 function bottomMostContext(c1, c2) {
 	var r;
 
-	if (c1.pAge > c2.pAge) {
+	if (c1.page > c2.page) {
 		r = c1;
-	} else if (c2.pAge > c1.pAge) {
+	} else if (c2.page > c1.page) {
 		r = c2;
 	} else {
 		r = (c1.y > c2.y) ? c1 : c2;
 	}
 
 	return {
-		pAge: r.pAge,
+		page: r.page,
 		x: r.x,
 		y: r.y,
 		availableHeight: r.availableHeight,
@@ -74555,7 +74555,7 @@ var DocumentContext = __webpack_require__(3858);
 
 /**
  * Creates an instance of ElementWriter - a line/vector writer, which adds
- * elements to current pAge and sets their positions based on the context
+ * elements to current page and sets their positions based on the context
  */
 function ElementWriter(context, tracker) {
 	this.context = context;
@@ -74563,21 +74563,21 @@ function ElementWriter(context, tracker) {
 	this.tracker = tracker;
 }
 
-function addPAgeItem(pAge, item, index) {
-	if (index === null || index === undefined || index < 0 || index > pAge.items.length) {
-		pAge.items.push(item);
+function addPageItem(page, item, index) {
+	if (index === null || index === undefined || index < 0 || index > page.items.length) {
+		page.items.push(item);
 	} else {
-		pAge.items.splice(index, 0, item);
+		page.items.splice(index, 0, item);
 	}
 }
 
 ElementWriter.prototype.addLine = function (line, dontUpdateContextPosition, index) {
 	var height = line.getHeight();
 	var context = this.context;
-	var pAge = context.getCurrentPAge(),
-		position = this.getCurrentPositionOnPAge();
+	var page = context.getCurrentPage(),
+		position = this.getCurrentPositionOnPage();
 
-	if (context.availableHeight < height || !pAge) {
+	if (context.availableHeight < height || !page) {
 		return false;
 	}
 
@@ -74586,7 +74586,7 @@ ElementWriter.prototype.addLine = function (line, dontUpdateContextPosition, ind
 
 	this.alignLine(line);
 
-	addPAgeItem(pAge, {
+	addPageItem(page, {
 		type: 'line',
 		item: line
 	}, index);
@@ -74634,44 +74634,44 @@ ElementWriter.prototype.alignLine = function (line) {
 	}
 };
 
-ElementWriter.prototype.addImAge = function (imAge, index, type) {
+ElementWriter.prototype.addImage = function (image, index, type) {
 	var context = this.context;
-	var pAge = context.getCurrentPAge(),
-		position = this.getCurrentPositionOnPAge();
+	var page = context.getCurrentPage(),
+		position = this.getCurrentPositionOnPage();
 
-	if (!pAge || (imAge.absolutePosition === undefined && context.availableHeight < imAge._height && pAge.items.length > 0)) {
+	if (!page || (image.absolutePosition === undefined && context.availableHeight < image._height && page.items.length > 0)) {
 		return false;
 	}
 
-	if (imAge._x === undefined) {
-		imAge._x = imAge.x || 0;
+	if (image._x === undefined) {
+		image._x = image.x || 0;
 	}
 
-	imAge.x = context.x + imAge._x;
-	imAge.y = context.y;
+	image.x = context.x + image._x;
+	image.y = context.y;
 
-	this.alignImAge(imAge);
+	this.alignImage(image);
 
-	addPAgeItem(pAge, {
-		type: type || 'imAge',
-		item: imAge
+	addPageItem(page, {
+		type: type || 'image',
+		item: image
 	}, index);
 
-	context.moveDown(imAge._height);
+	context.moveDown(image._height);
 
 	return position;
 };
 
-ElementWriter.prototype.addSVG = function (imAge, index) {
-	return this.addImAge(imAge, index, 'svg')
+ElementWriter.prototype.addSVG = function (image, index) {
+	return this.addImage(image, index, 'svg')
 };
 
 ElementWriter.prototype.addQr = function (qr, index) {
 	var context = this.context;
-	var pAge = context.getCurrentPAge(),
-		position = this.getCurrentPositionOnPAge();
+	var page = context.getCurrentPage(),
+		position = this.getCurrentPositionOnPage();
 
-	if (!pAge || (qr.absolutePosition === undefined && context.availableHeight < qr._height)) {
+	if (!page || (qr.absolutePosition === undefined && context.availableHeight < qr._height)) {
 		return false;
 	}
 
@@ -74682,7 +74682,7 @@ ElementWriter.prototype.addQr = function (qr, index) {
 	qr.x = context.x + qr._x;
 	qr.y = context.y;
 
-	this.alignImAge(qr);
+	this.alignImage(qr);
 
 	for (var i = 0, l = qr._canvas.length; i < l; i++) {
 		var vector = qr._canvas[i];
@@ -74696,21 +74696,21 @@ ElementWriter.prototype.addQr = function (qr, index) {
 	return position;
 };
 
-ElementWriter.prototype.alignImAge = function (imAge) {
+ElementWriter.prototype.alignImage = function (image) {
 	var width = this.context.availableWidth;
-	var imAgeWidth = imAge._minWidth;
+	var imageWidth = image._minWidth;
 	var offset = 0;
-	switch (imAge._alignment) {
+	switch (image._alignment) {
 		case 'right':
-			offset = width - imAgeWidth;
+			offset = width - imageWidth;
 			break;
 		case 'center':
-			offset = (width - imAgeWidth) / 2;
+			offset = (width - imageWidth) / 2;
 			break;
 	}
 
 	if (offset) {
-		imAge.x = (imAge.x || 0) + offset;
+		image.x = (image.x || 0) + offset;
 	}
 };
 
@@ -74735,12 +74735,12 @@ ElementWriter.prototype.alignCanvas = function (node) {
 
 ElementWriter.prototype.addVector = function (vector, ignoreContextX, ignoreContextY, index) {
 	var context = this.context;
-	var pAge = context.getCurrentPAge(),
-		position = this.getCurrentPositionOnPAge();
+	var page = context.getCurrentPage(),
+		position = this.getCurrentPositionOnPage();
 
-	if (pAge) {
+	if (page) {
 		offsetVector(vector, ignoreContextX ? 0 : context.x, ignoreContextY ? 0 : context.y);
-		addPAgeItem(pAge, {
+		addPageItem(page, {
 			type: 'vector',
 			item: vector
 		}, index);
@@ -74750,8 +74750,8 @@ ElementWriter.prototype.addVector = function (vector, ignoreContextX, ignoreCont
 
 ElementWriter.prototype.beginClip = function (width, height) {
 	var ctx = this.context;
-	var pAge = ctx.getCurrentPAge();
-	pAge.items.push({
+	var page = ctx.getCurrentPage();
+	page.items.push({
 		type: 'beginClip',
 		item: { x: ctx.x, y: ctx.y, width: width, height: height }
 	});
@@ -74760,8 +74760,8 @@ ElementWriter.prototype.beginClip = function (width, height) {
 
 ElementWriter.prototype.endClip = function () {
 	var ctx = this.context;
-	var pAge = ctx.getCurrentPAge();
-	pAge.items.push({
+	var page = ctx.getCurrentPage();
+	page.items.push({
 		type: 'endClip'
 	});
 	return true;
@@ -74781,7 +74781,7 @@ function cloneLine(line) {
 
 ElementWriter.prototype.addFragment = function (block, useBlockXOffset, useBlockYOffset, dontUpdateContextPosition) {
 	var ctx = this.context;
-	var pAge = ctx.getCurrentPAge();
+	var page = ctx.getCurrentPage();
 
 	if (!useBlockXOffset && block.height > ctx.availableHeight) {
 		return false;
@@ -74793,12 +74793,12 @@ ElementWriter.prototype.addFragment = function (block, useBlockXOffset, useBlock
 				var l = cloneLine(item.item);
 
 				if (l._node) {
-					l._node.positions[0].pAgeNumber = ctx.pAge + 1;
+					l._node.positions[0].pageNumber = ctx.page + 1;
 				}
 				l.x = (l.x || 0) + (useBlockXOffset ? (block.xOffset || 0) : ctx.x);
 				l.y = (l.y || 0) + (useBlockYOffset ? (block.yOffset || 0) : ctx.y);
 
-				pAge.items.push({
+				page.items.push({
 					type: 'line',
 					item: l
 				});
@@ -74808,20 +74808,20 @@ ElementWriter.prototype.addFragment = function (block, useBlockXOffset, useBlock
 				var v = pack(item.item);
 
 				offsetVector(v, useBlockXOffset ? (block.xOffset || 0) : ctx.x, useBlockYOffset ? (block.yOffset || 0) : ctx.y);
-				pAge.items.push({
+				page.items.push({
 					type: 'vector',
 					item: v
 				});
 				break;
 
-			case 'imAge':
+			case 'image':
 			case 'svg':
 				var img = pack(item.item);
 
 				img.x = (img.x || 0) + (useBlockXOffset ? (block.xOffset || 0) : ctx.x);
 				img.y = (img.y || 0) + (useBlockYOffset ? (block.yOffset || 0) : ctx.y);
 
-				pAge.items.push({
+				page.items.push({
 					type: item.type,
 					item: img
 				});
@@ -74841,11 +74841,11 @@ ElementWriter.prototype.addFragment = function (block, useBlockXOffset, useBlock
  *
  * pushContext(context) - pushes the provided context and makes it current
  * pushContext(width, height) - creates and pushes a new context with the specified width and height
- * pushContext() - creates a new context for unbreakable blocks (with current availableWidth and full-pAge-height)
+ * pushContext() - creates a new context for unbreakable blocks (with current availableWidth and full-page-height)
  */
 ElementWriter.prototype.pushContext = function (contextOrWidth, height) {
 	if (contextOrWidth === undefined) {
-		height = this.context.getCurrentPAge().height - this.context.pAgeMargins.top - this.context.pAgeMargins.bottom;
+		height = this.context.getCurrentPage().height - this.context.pageMargins.top - this.context.pageMargins.bottom;
 		contextOrWidth = this.context.availableWidth;
 	}
 
@@ -74861,7 +74861,7 @@ ElementWriter.prototype.popContext = function () {
 	this.context = this.contextStack.pop();
 };
 
-ElementWriter.prototype.getCurrentPositionOnPAge = function () {
+ElementWriter.prototype.getCurrentPositionOnPage = function () {
 	return (this.contextStack[0] || this.context).getCurrentPosition();
 };
 
@@ -75090,34 +75090,34 @@ module.exports = {
 
 var fs = __webpack_require__(3857);
 
-function ImAgeMeasure(pdfKitDoc, imAgeDictionary) {
+function ImageMeasure(pdfKitDoc, imageDictionary) {
 	this.pdfKitDoc = pdfKitDoc;
-	this.imAgeDictionary = imAgeDictionary || {};
+	this.imageDictionary = imageDictionary || {};
 }
 
-ImAgeMeasure.prototype.measureImAge = function (src) {
-	var imAge;
+ImageMeasure.prototype.measureImage = function (src) {
+	var image;
 	var that = this;
 
-	if (!this.pdfKitDoc._imAgeRegistry[src]) {
+	if (!this.pdfKitDoc._imageRegistry[src]) {
 		try {
-			imAge = this.pdfKitDoc.openImAge(realImAgeSrc(src));
-			if (!imAge) {
-				throw 'No imAge';
+			image = this.pdfKitDoc.openImage(realImageSrc(src));
+			if (!image) {
+				throw 'No image';
 			}
 		} catch (error) {
-			throw 'Invalid imAge: ' + error.toString() + '\nImAges dictionary should contain dataURL entries (or local file paths in node.js)';
+			throw 'Invalid image: ' + error.toString() + '\nImages dictionary should contain dataURL entries (or local file paths in node.js)';
 		}
-		imAge.embed(this.pdfKitDoc);
-		this.pdfKitDoc._imAgeRegistry[src] = imAge;
+		image.embed(this.pdfKitDoc);
+		this.pdfKitDoc._imageRegistry[src] = image;
 	} else {
-		imAge = this.pdfKitDoc._imAgeRegistry[src];
+		image = this.pdfKitDoc._imageRegistry[src];
 	}
 
-	return { width: imAge.width, height: imAge.height };
+	return { width: image.width, height: image.height };
 
-	function realImAgeSrc(src) {
-		var img = that.imAgeDictionary[src];
+	function realImageSrc(src) {
+		var img = that.imageDictionary[src];
 
 		if (!img) {
 			return src;
@@ -75129,14 +75129,14 @@ ImAgeMeasure.prototype.measureImAge = function (src) {
 
 		var index = img.indexOf('base64,');
 		if (index < 0) {
-			return that.imAgeDictionary[src];
+			return that.imageDictionary[src];
 		}
 
 		return Buffer.from(img.substring(index + 7), 'base64');
 	}
 };
 
-module.exports = ImAgeMeasure;
+module.exports = ImageMeasure;
 
 
 /***/ }),
@@ -75151,7 +75151,7 @@ var TraversalTracker = __webpack_require__(8537);
 var DocPreprocessor = __webpack_require__(4889);
 var DocMeasure = __webpack_require__(1728);
 var DocumentContext = __webpack_require__(3858);
-var PAgeElementWriter = __webpack_require__(2912);
+var PageElementWriter = __webpack_require__(2912);
 var ColumnCalculator = __webpack_require__(4498);
 var TableProcessor = __webpack_require__(9342);
 var Line = __webpack_require__(4775);
@@ -75176,16 +75176,16 @@ function addAll(target, otherArray) {
 
 /**
  * Creates an instance of LayoutBuilder - layout engine which turns document-definition-object
- * into a set of pAges, lines, inlines and vectors ready to be rendered into a PDF
+ * into a set of pages, lines, inlines and vectors ready to be rendered into a PDF
  *
- * @param {Object} pAgeSize - an object defining pAge width and height
- * @param {Object} pAgeMargins - an object defining top, left, right and bottom margins
+ * @param {Object} pageSize - an object defining page width and height
+ * @param {Object} pageMargins - an object defining top, left, right and bottom margins
  */
-function LayoutBuilder(pAgeSize, pAgeMargins, imAgeMeasure, svgMeasure) {
-	this.pAgeSize = pAgeSize;
-	this.pAgeMargins = pAgeMargins;
+function LayoutBuilder(pageSize, pageMargins, imageMeasure, svgMeasure) {
+	this.pageSize = pageSize;
+	this.pageMargins = pageMargins;
 	this.tracker = new TraversalTracker();
-	this.imAgeMeasure = imAgeMeasure;
+	this.imageMeasure = imageMeasure;
 	this.svgMeasure = svgMeasure;
 	this.tableLayouts = {};
 }
@@ -75195,20 +75195,20 @@ LayoutBuilder.prototype.registerTableLayouts = function (tableLayouts) {
 };
 
 /**
- * Executes layout engine on document-definition-object and creates an array of pAges
+ * Executes layout engine on document-definition-object and creates an array of pages
  * containing positioned Blocks, Lines and inlines
  *
  * @param {Object} docStructure document-definition-object
  * @param {Object} fontProvider font provider
  * @param {Object} styleDictionary dictionary with style definitions
  * @param {Object} defaultStyle default style definition
- * @return {Array} an array of pAges
+ * @return {Array} an array of pages
  */
-LayoutBuilder.prototype.layoutDocument = function (docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, imAges, watermark, pAgeBreakBeforeFct) {
+LayoutBuilder.prototype.layoutDocument = function (docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark, pageBreakBeforeFct) {
 
-	function addPAgeBreaksIfNecessary(linearNodeList, pAges) {
+	function addPageBreaksIfNecessary(linearNodeList, pages) {
 
-		if (!isFunction(pAgeBreakBeforeFct)) {
+		if (!isFunction(pageBreakBeforeFct)) {
 			return false;
 		}
 
@@ -75219,8 +75219,8 @@ LayoutBuilder.prototype.layoutDocument = function (docStructure, fontProvider, s
 		linearNodeList.forEach(function (node) {
 			var nodeInfo = {};
 			[
-				'id', 'text', 'ul', 'ol', 'table', 'imAge', 'qr', 'canvas', 'svg', 'columns',
-				'headlineLevel', 'style', 'pAgeBreak', 'pAgeOrientation',
+				'id', 'text', 'ul', 'ol', 'table', 'image', 'qr', 'canvas', 'svg', 'columns',
+				'headlineLevel', 'style', 'pageBreak', 'pageOrientation',
 				'width', 'height'
 			].forEach(function (key) {
 				if (node[key] !== undefined) {
@@ -75228,8 +75228,8 @@ LayoutBuilder.prototype.layoutDocument = function (docStructure, fontProvider, s
 				}
 			});
 			nodeInfo.startPosition = node.positions[0];
-			nodeInfo.pAgeNumbers = Array.from(new Set(node.positions.map(function (node) { return node.pAgeNumber; })));
-			nodeInfo.pAges = pAges.length;
+			nodeInfo.pageNumbers = Array.from(new Set(node.positions.map(function (node) { return node.pageNumber; })));
+			nodeInfo.pages = pages.length;
 			nodeInfo.stack = isArray(node.stack);
 
 			node.nodeInfo = nodeInfo;
@@ -75237,31 +75237,31 @@ LayoutBuilder.prototype.layoutDocument = function (docStructure, fontProvider, s
 
 		for (var index = 0; index < linearNodeList.length; index++) {
 			var node = linearNodeList[index];
-			if (node.pAgeBreak !== 'before' && !node.pAgeBreakCalculated) {
-				node.pAgeBreakCalculated = true;
-				var pAgeNumber = node.nodeInfo.pAgeNumbers[0];
-				var followingNodesOnPAge = [];
-				var nodesOnNextPAge = [];
-				var previousNodesOnPAge = [];
-				if (pAgeBreakBeforeFct.length > 1) {
+			if (node.pageBreak !== 'before' && !node.pageBreakCalculated) {
+				node.pageBreakCalculated = true;
+				var pageNumber = node.nodeInfo.pageNumbers[0];
+				var followingNodesOnPage = [];
+				var nodesOnNextPage = [];
+				var previousNodesOnPage = [];
+				if (pageBreakBeforeFct.length > 1) {
 					for (var ii = index + 1, l = linearNodeList.length; ii < l; ii++) {
-						if (linearNodeList[ii].nodeInfo.pAgeNumbers.indexOf(pAgeNumber) > -1) {
-							followingNodesOnPAge.push(linearNodeList[ii].nodeInfo);
+						if (linearNodeList[ii].nodeInfo.pageNumbers.indexOf(pageNumber) > -1) {
+							followingNodesOnPage.push(linearNodeList[ii].nodeInfo);
 						}
-						if (pAgeBreakBeforeFct.length > 2 && linearNodeList[ii].nodeInfo.pAgeNumbers.indexOf(pAgeNumber + 1) > -1) {
-							nodesOnNextPAge.push(linearNodeList[ii].nodeInfo);
+						if (pageBreakBeforeFct.length > 2 && linearNodeList[ii].nodeInfo.pageNumbers.indexOf(pageNumber + 1) > -1) {
+							nodesOnNextPage.push(linearNodeList[ii].nodeInfo);
 						}
 					}
 				}
-				if (pAgeBreakBeforeFct.length > 3) {
+				if (pageBreakBeforeFct.length > 3) {
 					for (var ii = 0; ii < index; ii++) {
-						if (linearNodeList[ii].nodeInfo.pAgeNumbers.indexOf(pAgeNumber) > -1) {
-							previousNodesOnPAge.push(linearNodeList[ii].nodeInfo);
+						if (linearNodeList[ii].nodeInfo.pageNumbers.indexOf(pageNumber) > -1) {
+							previousNodesOnPage.push(linearNodeList[ii].nodeInfo);
 						}
 					}
 				}
-				if (pAgeBreakBeforeFct(node.nodeInfo, followingNodesOnPAge, nodesOnNextPAge, previousNodesOnPAge)) {
-					node.pAgeBreak = 'before';
+				if (pageBreakBeforeFct(node.nodeInfo, followingNodesOnPage, nodesOnNextPage, previousNodesOnPage)) {
+					node.pageBreak = 'before';
 					return true;
 				}
 			}
@@ -75271,7 +75271,7 @@ LayoutBuilder.prototype.layoutDocument = function (docStructure, fontProvider, s
 	}
 
 	this.docPreprocessor = new DocPreprocessor();
-	this.docMeasure = new DocMeasure(fontProvider, styleDictionary, defaultStyle, this.imAgeMeasure, this.svgMeasure, this.tableLayouts, imAges);
+	this.docMeasure = new DocMeasure(fontProvider, styleDictionary, defaultStyle, this.imageMeasure, this.svgMeasure, this.tableLayouts, images);
 
 
 	function resetXYs(result) {
@@ -75280,26 +75280,26 @@ LayoutBuilder.prototype.layoutDocument = function (docStructure, fontProvider, s
 		});
 	}
 
-	var result = this.tryLayoutDocument(docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, imAges, watermark);
-	while (addPAgeBreaksIfNecessary(result.linearNodeList, result.pAges)) {
+	var result = this.tryLayoutDocument(docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark);
+	while (addPageBreaksIfNecessary(result.linearNodeList, result.pages)) {
 		resetXYs(result);
-		result = this.tryLayoutDocument(docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, imAges, watermark);
+		result = this.tryLayoutDocument(docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark);
 	}
 
-	return result.pAges;
+	return result.pages;
 };
 
-LayoutBuilder.prototype.tryLayoutDocument = function (docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, imAges, watermark, pAgeBreakBeforeFct) {
+LayoutBuilder.prototype.tryLayoutDocument = function (docStructure, fontProvider, styleDictionary, defaultStyle, background, header, footer, images, watermark, pageBreakBeforeFct) {
 
 	this.linearNodeList = [];
 	docStructure = this.docPreprocessor.preprocessDocument(docStructure);
 	docStructure = this.docMeasure.measureDocument(docStructure);
 
-	this.writer = new PAgeElementWriter(
-		new DocumentContext(this.pAgeSize, this.pAgeMargins), this.tracker);
+	this.writer = new PageElementWriter(
+		new DocumentContext(this.pageSize, this.pageMargins), this.tracker);
 
 	var _this = this;
-	this.writer.context().tracker.startTracking('pAgeAdded', function () {
+	this.writer.context().tracker.startTracking('pageAdded', function () {
 		_this.addBackground(background);
 	});
 
@@ -75310,7 +75310,7 @@ LayoutBuilder.prototype.tryLayoutDocument = function (docStructure, fontProvider
 		this.addWatermark(watermark, fontProvider, defaultStyle);
 	}
 
-	return { pAges: this.writer.context().pAges, linearNodeList: this.linearNodeList };
+	return { pages: this.writer.context().pages, linearNodeList: this.linearNodeList };
 };
 
 
@@ -75320,16 +75320,16 @@ LayoutBuilder.prototype.addBackground = function (background) {
 	};
 
 	var context = this.writer.context();
-	var pAgeSize = context.getCurrentPAge().pAgeSize;
+	var pageSize = context.getCurrentPage().pageSize;
 
-	var pAgeBackground = backgroundGetter(context.pAge + 1, pAgeSize);
+	var pageBackground = backgroundGetter(context.page + 1, pageSize);
 
-	if (pAgeBackground) {
-		this.writer.beginUnbreakableBlock(pAgeSize.width, pAgeSize.height);
-		pAgeBackground = this.docPreprocessor.preprocessDocument(pAgeBackground);
-		this.processNode(this.docMeasure.measureDocument(pAgeBackground));
+	if (pageBackground) {
+		this.writer.beginUnbreakableBlock(pageSize.width, pageSize.height);
+		pageBackground = this.docPreprocessor.preprocessDocument(pageBackground);
+		this.processNode(this.docMeasure.measureDocument(pageBackground));
 		this.writer.commitUnbreakableBlock(0, 0);
-		context.backgroundLength[context.pAge] += pAgeBackground.positions.length;
+		context.backgroundLength[context.page] += pageBackground.positions.length;
 	}
 };
 
@@ -75340,15 +75340,15 @@ LayoutBuilder.prototype.addStaticRepeatable = function (headerOrFooter, sizeFunc
 };
 
 LayoutBuilder.prototype.addDynamicRepeatable = function (nodeGetter, sizeFunction) {
-	var pAges = this.writer.context().pAges;
+	var pages = this.writer.context().pages;
 
-	for (var pAgeIndex = 0, l = pAges.length; pAgeIndex < l; pAgeIndex++) {
-		this.writer.context().pAge = pAgeIndex;
+	for (var pageIndex = 0, l = pages.length; pageIndex < l; pageIndex++) {
+		this.writer.context().page = pageIndex;
 
-		var node = nodeGetter(pAgeIndex + 1, l, this.writer.context().pAges[pAgeIndex].pAgeSize);
+		var node = nodeGetter(pageIndex + 1, l, this.writer.context().pages[pageIndex].pageSize);
 
 		if (node) {
-			var sizes = sizeFunction(this.writer.context().getCurrentPAge().pAgeSize, this.pAgeMargins);
+			var sizes = sizeFunction(this.writer.context().getCurrentPage().pageSize, this.pageMargins);
 			this.writer.beginUnbreakableBlock(sizes.width, sizes.height);
 			node = this.docPreprocessor.preprocessDocument(node);
 			this.processNode(this.docMeasure.measureDocument(node));
@@ -75358,21 +75358,21 @@ LayoutBuilder.prototype.addDynamicRepeatable = function (nodeGetter, sizeFunctio
 };
 
 LayoutBuilder.prototype.addHeadersAndFooters = function (header, footer) {
-	var headerSizeFct = function (pAgeSize, pAgeMargins) {
+	var headerSizeFct = function (pageSize, pageMargins) {
 		return {
 			x: 0,
 			y: 0,
-			width: pAgeSize.width,
-			height: pAgeMargins.top
+			width: pageSize.width,
+			height: pageMargins.top
 		};
 	};
 
-	var footerSizeFct = function (pAgeSize, pAgeMargins) {
+	var footerSizeFct = function (pageSize, pageMargins) {
 		return {
 			x: 0,
-			y: pAgeSize.height - pAgeMargins.bottom,
-			width: pAgeSize.width,
-			height: pAgeMargins.bottom
+			y: pageSize.height - pageMargins.bottom,
+			width: pageSize.width,
+			height: pageMargins.bottom
 		};
 	};
 
@@ -75407,11 +75407,11 @@ LayoutBuilder.prototype.addWatermark = function (watermark, fontProvider, defaul
 	watermark.angle = !isUndefined(watermark.angle) && !isNull(watermark.angle) ? watermark.angle : null;
 
 	if (watermark.angle === null) {
-		watermark.angle = Math.atan2(this.pAgeSize.height, this.pAgeSize.width) * -180 / Math.PI;
+		watermark.angle = Math.atan2(this.pageSize.height, this.pageSize.width) * -180 / Math.PI;
 	}
 
 	if (watermark.fontSize === 'auto') {
-		watermark.fontSize = getWatermarkFontSize(this.pAgeSize, watermark, fontProvider);
+		watermark.fontSize = getWatermarkFontSize(this.pageSize, watermark, fontProvider);
 	}
 
 	var watermarkObject = {
@@ -75425,9 +75425,9 @@ LayoutBuilder.prototype.addWatermark = function (watermark, fontProvider, defaul
 
 	watermarkObject._size = getWatermarkSize(watermark, fontProvider);
 
-	var pAges = this.writer.context().pAges;
-	for (var i = 0, l = pAges.length; i < l; i++) {
-		pAges[i].watermark = watermarkObject;
+	var pages = this.writer.context().pages;
+	for (var i = 0, l = pages.length; i < l; i++) {
+		pages[i].watermark = watermarkObject;
 	}
 
 	function getWatermarkSize(watermark, fontProvider) {
@@ -75444,7 +75444,7 @@ LayoutBuilder.prototype.addWatermark = function (watermark, fontProvider, defaul
 		return { size: size, rotatedSize: rotatedSize };
 	}
 
-	function getWatermarkFontSize(pAgeSize, watermark, fontProvider) {
+	function getWatermarkFontSize(pageSize, watermark, fontProvider) {
 		var textTools = new TextTools(fontProvider);
 		var styleContextStack = new StyleContextStack(null, { font: watermark.font, bold: watermark.bold, italics: watermark.italics });
 		var rotatedSize;
@@ -75462,11 +75462,11 @@ LayoutBuilder.prototype.addWatermark = function (watermark, fontProvider, defaul
 				fontSize: c
 			});
 			rotatedSize = textTools.sizeOfRotatedText(watermark.text, watermark.angle, styleContextStack);
-			if (rotatedSize.width > pAgeSize.width) {
+			if (rotatedSize.width > pageSize.width) {
 				b = c;
 				c = (a + b) / 2;
-			} else if (rotatedSize.width < pAgeSize.width) {
-				if (rotatedSize.height > pAgeSize.height) {
+			} else if (rotatedSize.width < pageSize.width) {
+				if (rotatedSize.height > pageSize.height) {
 					b = c;
 					c = (a + b) / 2;
 				} else {
@@ -75550,8 +75550,8 @@ LayoutBuilder.prototype.processNode = function (node) {
 			self.processLeaf(node);
 		} else if (node.toc) {
 			self.processToc(node);
-		} else if (node.imAge) {
-			self.processImAge(node);
+		} else if (node.image) {
+			self.processImage(node);
 		} else if (node.svg) {
 			self.processSVG(node);
 		} else if (node.canvas) {
@@ -75574,17 +75574,17 @@ LayoutBuilder.prototype.processNode = function (node) {
 	function applyMargins(callback) {
 		var margin = node._margin;
 
-		if (node.pAgeBreak === 'before') {
-			self.writer.moveToNextPAge(node.pAgeOrientation);
-		} else if (node.pAgeBreak === 'beforeOdd') {
-			self.writer.moveToNextPAge(node.pAgeOrientation);
-			if ((self.writer.context().pAge + 1) % 2 === 1) {
-				self.writer.moveToNextPAge(node.pAgeOrientation);
+		if (node.pageBreak === 'before') {
+			self.writer.moveToNextPage(node.pageOrientation);
+		} else if (node.pageBreak === 'beforeOdd') {
+			self.writer.moveToNextPage(node.pageOrientation);
+			if ((self.writer.context().page + 1) % 2 === 1) {
+				self.writer.moveToNextPage(node.pageOrientation);
 			}
-		} else if (node.pAgeBreak === 'beforeEven') {
-			self.writer.moveToNextPAge(node.pAgeOrientation);
-			if ((self.writer.context().pAge + 1) % 2 === 0) {
-				self.writer.moveToNextPAge(node.pAgeOrientation);
+		} else if (node.pageBreak === 'beforeEven') {
+			self.writer.moveToNextPage(node.pageOrientation);
+			if ((self.writer.context().page + 1) % 2 === 0) {
+				self.writer.moveToNextPage(node.pageOrientation);
 			}
 		}
 
@@ -75600,17 +75600,17 @@ LayoutBuilder.prototype.processNode = function (node) {
 			self.writer.context().moveDown(margin[3]);
 		}
 
-		if (node.pAgeBreak === 'after') {
-			self.writer.moveToNextPAge(node.pAgeOrientation);
-		} else if (node.pAgeBreak === 'afterOdd') {
-			self.writer.moveToNextPAge(node.pAgeOrientation);
-			if ((self.writer.context().pAge + 1) % 2 === 1) {
-				self.writer.moveToNextPAge(node.pAgeOrientation);
+		if (node.pageBreak === 'after') {
+			self.writer.moveToNextPage(node.pageOrientation);
+		} else if (node.pageBreak === 'afterOdd') {
+			self.writer.moveToNextPage(node.pageOrientation);
+			if ((self.writer.context().page + 1) % 2 === 1) {
+				self.writer.moveToNextPage(node.pageOrientation);
 			}
-		} else if (node.pAgeBreak === 'afterEven') {
-			self.writer.moveToNextPAge(node.pAgeOrientation);
-			if ((self.writer.context().pAge + 1) % 2 === 0) {
-				self.writer.moveToNextPAge(node.pAgeOrientation);
+		} else if (node.pageBreak === 'afterEven') {
+			self.writer.moveToNextPage(node.pageOrientation);
+			if ((self.writer.context().page + 1) % 2 === 0) {
+				self.writer.moveToNextPage(node.pageOrientation);
 			}
 		}
 	}
@@ -75660,9 +75660,9 @@ LayoutBuilder.prototype.processColumns = function (columnNode) {
 
 LayoutBuilder.prototype.processRow = function (columns, widths, gaps, tableBody, tableRow, height) {
 	var self = this;
-	var pAgeBreaks = [], positions = [];
+	var pageBreaks = [], positions = [];
 
-	this.tracker.auto('pAgeChanged', storePAgeBreakData, function () {
+	this.tracker.auto('pageChanged', storePageBreakData, function () {
 		widths = widths || columns;
 
 		self.writer.context().beginColumnGroup();
@@ -75691,25 +75691,25 @@ LayoutBuilder.prototype.processRow = function (columns, widths, gaps, tableBody,
 		self.writer.context().completeColumnGroup(height);
 	});
 
-	return { pAgeBreaks: pAgeBreaks, positions: positions };
+	return { pageBreaks: pageBreaks, positions: positions };
 
-	function storePAgeBreakData(data) {
-		var pAgeDesc;
+	function storePageBreakData(data) {
+		var pageDesc;
 
-		for (var i = 0, l = pAgeBreaks.length; i < l; i++) {
-			var desc = pAgeBreaks[i];
-			if (desc.prevPAge === data.prevPAge) {
-				pAgeDesc = desc;
+		for (var i = 0, l = pageBreaks.length; i < l; i++) {
+			var desc = pageBreaks[i];
+			if (desc.prevPage === data.prevPage) {
+				pageDesc = desc;
 				break;
 			}
 		}
 
-		if (!pAgeDesc) {
-			pAgeDesc = data;
-			pAgeBreaks.push(pAgeDesc);
+		if (!pageDesc) {
+			pageDesc = data;
+			pageBreaks.push(pageDesc);
 		}
-		pAgeDesc.prevY = Math.max(pAgeDesc.prevY, data.prevY);
-		pAgeDesc.y = Math.min(pAgeDesc.y, data.y);
+		pageDesc.prevY = Math.max(pageDesc.prevY, data.prevY);
+		pageDesc.y = Math.min(pageDesc.y, data.y);
 	}
 
 	function colLeftOffset(i) {
@@ -75764,7 +75764,7 @@ LayoutBuilder.prototype.processList = function (orderedList, node) {
 				offsetVector(vector, -marker._minWidth, 0);
 				self.writer.addVector(vector);
 			} else if (marker._inlines) {
-				var markerLine = new Line(self.pAgeSize.width);
+				var markerLine = new Line(self.pageSize.width);
 				markerLine.addInline(marker._inlines[0]);
 				markerLine.x = -marker._minWidth;
 				markerLine.y = line.getAscenderHeight() - markerLine.getAscenderHeight();
@@ -75800,7 +75800,7 @@ LayoutBuilder.prototype.processTable = function (tableNode) {
 		var result = this.processRow(tableNode.table.body[i], tableNode.table.widths, tableNode._offsets.offsets, tableNode.table.body, i, height);
 		addAll(tableNode.positions, result.positions);
 
-		processor.endRow(i, this.writer, result.pAgeBreaks);
+		processor.endRow(i, this.writer, result.pageBreaks);
 	}
 
 	processor.endTable(this.writer);
@@ -75823,21 +75823,21 @@ LayoutBuilder.prototype.processLeaf = function (node) {
 	}
 
 	if (node._tocItemRef) {
-		line._pAgeNodeRef = node._tocItemRef;
+		line._pageNodeRef = node._tocItemRef;
 	}
 
-	if (node._pAgeRef) {
-		line._pAgeNodeRef = node._pAgeRef._nodeRef;
+	if (node._pageRef) {
+		line._pageNodeRef = node._pageRef._nodeRef;
 	}
 
 	if (line && line.inlines && isArray(line.inlines)) {
 		for (var i = 0, l = line.inlines.length; i < l; i++) {
 			if (line.inlines[i]._tocItemRef) {
-				line.inlines[i]._pAgeNodeRef = line.inlines[i]._tocItemRef;
+				line.inlines[i]._pageNodeRef = line.inlines[i]._tocItemRef;
 			}
 
-			if (line.inlines[i]._pAgeRef) {
-				line.inlines[i]._pAgeNodeRef = line.inlines[i]._pAgeRef._nodeRef;
+			if (line.inlines[i]._pageRef) {
+				line.inlines[i]._pageNodeRef = line.inlines[i]._pageRef._nodeRef;
 			}
 		}
 	}
@@ -75915,9 +75915,9 @@ LayoutBuilder.prototype.buildNextLine = function (textNode) {
 	return line;
 };
 
-// imAges
-LayoutBuilder.prototype.processImAge = function (node) {
-	var position = this.writer.addImAge(node);
+// images
+LayoutBuilder.prototype.processImage = function (node) {
+	var position = this.writer.addImage(node);
 	node.positions.push(position);
 };
 
@@ -75930,10 +75930,10 @@ LayoutBuilder.prototype.processCanvas = function (node) {
 	var height = node._minHeight;
 
 	if (node.absolutePosition === undefined && this.writer.context().availableHeight < height) {
-		// TODO: support for canvas larger than a pAge
+		// TODO: support for canvas larger than a page
 		// TODO: support for other overflow methods
 
-		this.writer.moveToNextPAge();
+		this.writer.moveToNextPage();
 	}
 
 	this.writer.alignCanvas(node);
@@ -76065,126 +76065,126 @@ var isUndefined = (__webpack_require__(6225).isUndefined);
 var ElementWriter = __webpack_require__(1196);
 
 /**
- * Creates an instance of PAgeElementWriter - an extended ElementWriter
+ * Creates an instance of PageElementWriter - an extended ElementWriter
  * which can handle:
- * - pAge-breaks (it adds new pAges when there's not enough space left),
+ * - page-breaks (it adds new pages when there's not enough space left),
  * - repeatable fragments (like table-headers, which are repeated everytime
- *                         a pAge-break occurs)
+ *                         a page-break occurs)
  * - transactions (used for unbreakable-blocks when we want to make sure
- *                 whole block will be rendered on the same pAge)
+ *                 whole block will be rendered on the same page)
  */
-function PAgeElementWriter(context, tracker) {
+function PageElementWriter(context, tracker) {
 	this.transactionLevel = 0;
 	this.repeatables = [];
 	this.tracker = tracker;
 	this.writer = new ElementWriter(context, tracker);
 }
 
-function fitOnPAge(self, addFct) {
+function fitOnPage(self, addFct) {
 	var position = addFct(self);
 	if (!position) {
-		self.moveToNextPAge();
+		self.moveToNextPage();
 		position = addFct(self);
 	}
 	return position;
 }
 
-PAgeElementWriter.prototype.addLine = function (line, dontUpdateContextPosition, index) {
-	return fitOnPAge(this, function (self) {
+PageElementWriter.prototype.addLine = function (line, dontUpdateContextPosition, index) {
+	return fitOnPage(this, function (self) {
 		return self.writer.addLine(line, dontUpdateContextPosition, index);
 	});
 };
 
-PAgeElementWriter.prototype.addImAge = function (imAge, index) {
-	return fitOnPAge(this, function (self) {
-		return self.writer.addImAge(imAge, index);
+PageElementWriter.prototype.addImage = function (image, index) {
+	return fitOnPage(this, function (self) {
+		return self.writer.addImage(image, index);
 	});
 };
 
-PAgeElementWriter.prototype.addSVG = function (imAge, index) {
-	return fitOnPAge(this, function (self) {
-		return self.writer.addSVG(imAge, index);
+PageElementWriter.prototype.addSVG = function (image, index) {
+	return fitOnPage(this, function (self) {
+		return self.writer.addSVG(image, index);
 	});
 };
 
-PAgeElementWriter.prototype.addQr = function (qr, index) {
-	return fitOnPAge(this, function (self) {
+PageElementWriter.prototype.addQr = function (qr, index) {
+	return fitOnPage(this, function (self) {
 		return self.writer.addQr(qr, index);
 	});
 };
 
-PAgeElementWriter.prototype.addVector = function (vector, ignoreContextX, ignoreContextY, index) {
+PageElementWriter.prototype.addVector = function (vector, ignoreContextX, ignoreContextY, index) {
 	return this.writer.addVector(vector, ignoreContextX, ignoreContextY, index);
 };
 
-PAgeElementWriter.prototype.beginClip = function (width, height) {
+PageElementWriter.prototype.beginClip = function (width, height) {
 	return this.writer.beginClip(width, height);
 };
 
-PAgeElementWriter.prototype.endClip = function () {
+PageElementWriter.prototype.endClip = function () {
 	return this.writer.endClip();
 };
 
-PAgeElementWriter.prototype.alignCanvas = function (node) {
+PageElementWriter.prototype.alignCanvas = function (node) {
 	this.writer.alignCanvas(node);
 };
 
-PAgeElementWriter.prototype.addFragment = function (fragment, useBlockXOffset, useBlockYOffset, dontUpdateContextPosition) {
+PageElementWriter.prototype.addFragment = function (fragment, useBlockXOffset, useBlockYOffset, dontUpdateContextPosition) {
 	if (!this.writer.addFragment(fragment, useBlockXOffset, useBlockYOffset, dontUpdateContextPosition)) {
-		this.moveToNextPAge();
+		this.moveToNextPage();
 		this.writer.addFragment(fragment, useBlockXOffset, useBlockYOffset, dontUpdateContextPosition);
 	}
 };
 
-PAgeElementWriter.prototype.moveToNextPAge = function (pAgeOrientation) {
+PageElementWriter.prototype.moveToNextPage = function (pageOrientation) {
 
-	var nextPAge = this.writer.context.moveToNextPAge(pAgeOrientation);
+	var nextPage = this.writer.context.moveToNextPage(pageOrientation);
 
-	// moveToNextPAge is called multiple times for table, because is called for each column
+	// moveToNextPage is called multiple times for table, because is called for each column
 	// and repeatables are inserted only in the first time. If columns are used, is needed
 	// call for table in first column and then for table in the second column (is other repeatables).
 	this.repeatables.forEach(function (rep) {
-		if (isUndefined(rep.insertedOnPAges[this.writer.context.pAge])) {
-			rep.insertedOnPAges[this.writer.context.pAge] = true;
+		if (isUndefined(rep.insertedOnPages[this.writer.context.page])) {
+			rep.insertedOnPages[this.writer.context.page] = true;
 			this.writer.addFragment(rep, true);
 		} else {
 			this.writer.context.moveDown(rep.height);
 		}
 	}, this);
 
-	this.writer.tracker.emit('pAgeChanged', {
-		prevPAge: nextPAge.prevPAge,
-		prevY: nextPAge.prevY,
+	this.writer.tracker.emit('pageChanged', {
+		prevPage: nextPage.prevPage,
+		prevY: nextPage.prevY,
 		y: this.writer.context.y
 	});
 };
 
-PAgeElementWriter.prototype.beginUnbreakableBlock = function (width, height) {
+PageElementWriter.prototype.beginUnbreakableBlock = function (width, height) {
 	if (this.transactionLevel++ === 0) {
 		this.originalX = this.writer.context.x;
 		this.writer.pushContext(width, height);
 	}
 };
 
-PAgeElementWriter.prototype.commitUnbreakableBlock = function (forcedX, forcedY) {
+PageElementWriter.prototype.commitUnbreakableBlock = function (forcedX, forcedY) {
 	if (--this.transactionLevel === 0) {
 		var unbreakableContext = this.writer.context;
 		this.writer.popContext();
 
-		var nbPAges = unbreakableContext.pAges.length;
-		if (nbPAges > 0) {
-			// no support for multi-pAge unbreakableBlocks
-			var fragment = unbreakableContext.pAges[0];
+		var nbPages = unbreakableContext.pages.length;
+		if (nbPages > 0) {
+			// no support for multi-page unbreakableBlocks
+			var fragment = unbreakableContext.pages[0];
 			fragment.xOffset = forcedX;
 			fragment.yOffset = forcedY;
 
 			//TODO: vectors can influence height in some situations
-			if (nbPAges > 1) {
+			if (nbPages > 1) {
 				// on out-of-context blocs (headers, footers, background) height should be the whole DocumentContext height
 				if (forcedX !== undefined || forcedY !== undefined) {
-					fragment.height = unbreakableContext.getCurrentPAge().pAgeSize.height - unbreakableContext.pAgeMargins.top - unbreakableContext.pAgeMargins.bottom;
+					fragment.height = unbreakableContext.getCurrentPage().pageSize.height - unbreakableContext.pageMargins.top - unbreakableContext.pageMargins.bottom;
 				} else {
-					fragment.height = this.writer.context.getCurrentPAge().pAgeSize.height - this.writer.context.pAgeMargins.top - this.writer.context.pAgeMargins.bottom;
+					fragment.height = this.writer.context.getCurrentPage().pageSize.height - this.writer.context.pageMargins.top - this.writer.context.pageMargins.bottom;
 					for (var i = 0, l = this.repeatables.length; i < l; i++) {
 						fragment.height -= this.repeatables[i].height;
 					}
@@ -76202,11 +76202,11 @@ PAgeElementWriter.prototype.commitUnbreakableBlock = function (forcedX, forcedY)
 	}
 };
 
-PAgeElementWriter.prototype.currentBlockToRepeatable = function () {
+PageElementWriter.prototype.currentBlockToRepeatable = function () {
 	var unbreakableContext = this.writer.context;
 	var rep = { items: [] };
 
-	unbreakableContext.pAges[0].items.forEach(function (item) {
+	unbreakableContext.pages[0].items.forEach(function (item) {
 		rep.items.push(item);
 	});
 
@@ -76215,24 +76215,24 @@ PAgeElementWriter.prototype.currentBlockToRepeatable = function () {
 	//TODO: vectors can influence height in some situations
 	rep.height = unbreakableContext.y;
 
-	rep.insertedOnPAges = [];
+	rep.insertedOnPages = [];
 
 	return rep;
 };
 
-PAgeElementWriter.prototype.pushToRepeatables = function (rep) {
+PageElementWriter.prototype.pushToRepeatables = function (rep) {
 	this.repeatables.push(rep);
 };
 
-PAgeElementWriter.prototype.popFromRepeatables = function () {
+PageElementWriter.prototype.popFromRepeatables = function () {
 	this.repeatables.pop();
 };
 
-PAgeElementWriter.prototype.context = function () {
+PageElementWriter.prototype.context = function () {
 	return this.writer.context;
 };
 
-module.exports = PAgeElementWriter;
+module.exports = PageElementWriter;
 
 
 /***/ }),
@@ -76277,7 +76277,7 @@ var PdfKitEngine = __webpack_require__(6079);
 var FontProvider = __webpack_require__(2249);
 var LayoutBuilder = __webpack_require__(2678);
 var sizes = __webpack_require__(4762);
-var ImAgeMeasure = __webpack_require__(3090);
+var ImageMeasure = __webpack_require__(3090);
 var SVGMeasure = __webpack_require__(7601);
 var textDecorator = __webpack_require__(3497);
 var TextTools = __webpack_require__(1350);
@@ -76337,11 +76337,11 @@ function PdfPrinter(fontDescriptors) {
  * @param {Object} docDefinition.content an array describing the pdf structure (for more information take a look at the examples in the /examples folder)
  * @param {Object} [docDefinition.defaultStyle] default (implicit) style definition
  * @param {Object} [docDefinition.styles] dictionary defining all styles which can be used in the document
- * @param {Object} [docDefinition.pAgeSize] pAge size (pdfkit units, A4 dimensions by default)
- * @param {Number} docDefinition.pAgeSize.width width
- * @param {Number} docDefinition.pAgeSize.height height
- * @param {Object} [docDefinition.pAgeMargins] pAge margins (pdfkit units)
- * @param {Number} docDefinition.maxPAgesNumber maximum number of pAges to render
+ * @param {Object} [docDefinition.pageSize] page size (pdfkit units, A4 dimensions by default)
+ * @param {Number} docDefinition.pageSize.width width
+ * @param {Number} docDefinition.pageSize.height height
+ * @param {Object} [docDefinition.pageMargins] page margins (pdfkit units)
+ * @param {Number} docDefinition.maxPagesNumber maximum number of pages to render
  *
  * @example
  *
@@ -76385,21 +76385,21 @@ PdfPrinter.prototype.createPdfKitDocument = function (docDefinition, options) {
 
 	docDefinition.version = docDefinition.version || '1.3';
 	docDefinition.compress = isBoolean(docDefinition.compress) ? docDefinition.compress : true;
-	docDefinition.imAges = docDefinition.imAges || {};
-	docDefinition.pAgeMargins = ((docDefinition.pAgeMargins !== undefined) && (docDefinition.pAgeMargins !== null)) ? docDefinition.pAgeMargins : 40;
+	docDefinition.images = docDefinition.images || {};
+	docDefinition.pageMargins = ((docDefinition.pageMargins !== undefined) && (docDefinition.pageMargins !== null)) ? docDefinition.pageMargins : 40;
 
-	var pAgeSize = fixPAgeSize(docDefinition.pAgeSize, docDefinition.pAgeOrientation);
+	var pageSize = fixPageSize(docDefinition.pageSize, docDefinition.pageOrientation);
 
 	var pdfOptions = {
-		size: [pAgeSize.width, pAgeSize.height],
+		size: [pageSize.width, pageSize.height],
 		pdfVersion: docDefinition.version,
 		compress: docDefinition.compress,
 		userPassword: docDefinition.userPassword,
 		ownerPassword: docDefinition.ownerPassword,
 		permissions: docDefinition.permissions,
 		fontLayoutCache: isBoolean(options.fontLayoutCache) ? options.fontLayoutCache : true,
-		bufferPAges: options.bufferPAges || false,
-		autoFirstPAge: false,
+		bufferPages: options.bufferPages || false,
+		autoFirstPage: false,
 		info: createMetadata(docDefinition),
 		font: null
 	};
@@ -76408,32 +76408,32 @@ PdfPrinter.prototype.createPdfKitDocument = function (docDefinition, options) {
 
 	this.fontProvider = new FontProvider(this.fontDescriptors, this.pdfKitDoc);
 
-	var builder = new LayoutBuilder(pAgeSize, fixPAgeMargins(docDefinition.pAgeMargins), new ImAgeMeasure(this.pdfKitDoc, docDefinition.imAges), new SVGMeasure());
+	var builder = new LayoutBuilder(pageSize, fixPageMargins(docDefinition.pageMargins), new ImageMeasure(this.pdfKitDoc, docDefinition.images), new SVGMeasure());
 
 	registerDefaultTableLayouts(builder);
 	if (options.tableLayouts) {
 		builder.registerTableLayouts(options.tableLayouts);
 	}
 
-	var pAges = builder.layoutDocument(docDefinition.content, this.fontProvider, docDefinition.styles || {}, docDefinition.defaultStyle || {
+	var pages = builder.layoutDocument(docDefinition.content, this.fontProvider, docDefinition.styles || {}, docDefinition.defaultStyle || {
 		fontSize: 12,
 		font: 'Roboto'
-	}, docDefinition.background, docDefinition.header, docDefinition.footer, docDefinition.imAges, docDefinition.watermark, docDefinition.pAgeBreakBefore);
-	var maxNumberPAges = docDefinition.maxPAgesNumber || -1;
-	if (isNumber(maxNumberPAges) && maxNumberPAges > -1) {
-		pAges = pAges.slice(0, maxNumberPAges);
+	}, docDefinition.background, docDefinition.header, docDefinition.footer, docDefinition.images, docDefinition.watermark, docDefinition.pageBreakBefore);
+	var maxNumberPages = docDefinition.maxPagesNumber || -1;
+	if (isNumber(maxNumberPages) && maxNumberPages > -1) {
+		pages = pages.slice(0, maxNumberPages);
 	}
 
-	// if pAgeSize.height is set to Infinity, calculate the actual height of the pAge that
-	// was laid out using the height of each of the items in the pAge.
-	if (pAgeSize.height === Infinity) {
-		var pAgeHeight = calculatePAgeHeight(pAges, docDefinition.pAgeMargins);
-		this.pdfKitDoc.options.size = [pAgeSize.width, pAgeHeight];
+	// if pageSize.height is set to Infinity, calculate the actual height of the page that
+	// was laid out using the height of each of the items in the page.
+	if (pageSize.height === Infinity) {
+		var pageHeight = calculatePageHeight(pages, docDefinition.pageMargins);
+		this.pdfKitDoc.options.size = [pageSize.width, pageHeight];
 	}
 
 	var patterns = createPatterns(docDefinition.patterns || {}, this.pdfKitDoc);
 
-	renderPAges(pAges, this.fontProvider, this.pdfKitDoc, patterns, options.progressCallback);
+	renderPages(pages, this.fontProvider, this.pdfKitDoc, patterns, options.progressCallback);
 
 	if (options.autoPrint) {
 		var printActionRef = this.pdfKitDoc.ref({
@@ -76480,7 +76480,7 @@ function createMetadata(docDefinition) {
 	return info;
 }
 
-function calculatePAgeHeight(pAges, margins) {
+function calculatePageHeight(pages, margins) {
 	function getItemHeight(item) {
 		if (isFunction(item.item.getHeight)) {
 			return item.item.getHeight();
@@ -76500,11 +76500,11 @@ function calculatePAgeHeight(pAges, margins) {
 		return top + height;
 	}
 
-	var fixedMargins = fixPAgeMargins(margins || 40);
+	var fixedMargins = fixPageMargins(margins || 40);
 	var height = fixedMargins.top;
 
-	pAges.forEach(function (pAge) {
-		pAge.items.forEach(function (item) {
+	pages.forEach(function (page) {
+		page.items.forEach(function (item) {
 			var bottomPosition = getBottomPosition(item);
 			if (bottomPosition > height) {
 				height = bottomPosition;
@@ -76517,30 +76517,30 @@ function calculatePAgeHeight(pAges, margins) {
 	return height;
 }
 
-function fixPAgeSize(pAgeSize, pAgeOrientation) {
-	function isNeedSwapPAgeSizes(pAgeOrientation) {
-		if (isString(pAgeOrientation)) {
-			pAgeOrientation = pAgeOrientation.toLowerCase();
-			return ((pAgeOrientation === 'portrait') && (size.width > size.height)) ||
-				((pAgeOrientation === 'landscape') && (size.width < size.height));
+function fixPageSize(pageSize, pageOrientation) {
+	function isNeedSwapPageSizes(pageOrientation) {
+		if (isString(pageOrientation)) {
+			pageOrientation = pageOrientation.toLowerCase();
+			return ((pageOrientation === 'portrait') && (size.width > size.height)) ||
+				((pageOrientation === 'landscape') && (size.width < size.height));
 		}
 		return false;
 	}
 
-	// if pAgeSize.height is set to auto, set the height to infinity so there are no pAge breaks.
-	if (pAgeSize && pAgeSize.height === 'auto') {
-		pAgeSize.height = Infinity;
+	// if pageSize.height is set to auto, set the height to infinity so there are no page breaks.
+	if (pageSize && pageSize.height === 'auto') {
+		pageSize.height = Infinity;
 	}
 
-	var size = pAgeSize2widthAndHeight(pAgeSize || 'A4');
-	if (isNeedSwapPAgeSizes(pAgeOrientation)) { // swap pAge sizes
+	var size = pageSize2widthAndHeight(pageSize || 'A4');
+	if (isNeedSwapPageSizes(pageOrientation)) { // swap page sizes
 		size = { width: size.height, height: size.width };
 	}
 	size.orientation = size.width > size.height ? 'landscape' : 'portrait';
 	return size;
 }
 
-function fixPAgeMargins(margin) {
+function fixPageMargins(margin) {
 	if (isNumber(margin)) {
 		margin = { left: margin, right: margin, top: margin, bottom: margin };
 	} else if (isArray(margin)) {
@@ -76549,7 +76549,7 @@ function fixPAgeMargins(margin) {
 		} else if (margin.length === 4) {
 			margin = { left: margin[0], top: margin[1], right: margin[2], bottom: margin[3] };
 		} else {
-			throw 'Invalid pAgeMargins definition';
+			throw 'Invalid pageMargins definition';
 		}
 	}
 
@@ -76612,36 +76612,36 @@ function registerDefaultTableLayouts(layoutBuilder) {
 	});
 }
 
-function pAgeSize2widthAndHeight(pAgeSize) {
-	if (isString(pAgeSize)) {
-		var size = sizes[pAgeSize.toUpperCase()];
+function pageSize2widthAndHeight(pageSize) {
+	if (isString(pageSize)) {
+		var size = sizes[pageSize.toUpperCase()];
 		if (!size) {
-			throw 'PAge size ' + pAgeSize + ' not recognized';
+			throw 'Page size ' + pageSize + ' not recognized';
 		}
 		return { width: size[0], height: size[1] };
 	}
 
-	return pAgeSize;
+	return pageSize;
 }
 
-function updatePAgeOrientationInOptions(currentPAge, pdfKitDoc) {
-	var previousPAgeOrientation = pdfKitDoc.options.size[0] > pdfKitDoc.options.size[1] ? 'landscape' : 'portrait';
+function updatePageOrientationInOptions(currentPage, pdfKitDoc) {
+	var previousPageOrientation = pdfKitDoc.options.size[0] > pdfKitDoc.options.size[1] ? 'landscape' : 'portrait';
 
-	if (currentPAge.pAgeSize.orientation !== previousPAgeOrientation) {
+	if (currentPage.pageSize.orientation !== previousPageOrientation) {
 		var width = pdfKitDoc.options.size[0];
 		var height = pdfKitDoc.options.size[1];
 		pdfKitDoc.options.size = [height, width];
 	}
 }
 
-function renderPAges(pAges, fontProvider, pdfKitDoc, patterns, progressCallback) {
-	pdfKitDoc._pdfMakePAges = pAges;
-	pdfKitDoc.addPAge();
+function renderPages(pages, fontProvider, pdfKitDoc, patterns, progressCallback) {
+	pdfKitDoc._pdfMakePages = pages;
+	pdfKitDoc.addPage();
 
 	var totalItems = 0;
 	if (progressCallback) {
-		pAges.forEach(function (pAge) {
-			totalItems += pAge.items.length;
+		pages.forEach(function (page) {
+			totalItems += page.items.length;
 		});
 	}
 
@@ -76649,15 +76649,15 @@ function renderPAges(pAges, fontProvider, pdfKitDoc, patterns, progressCallback)
 	progressCallback = progressCallback || function () {
 	};
 
-	for (var i = 0; i < pAges.length; i++) {
+	for (var i = 0; i < pages.length; i++) {
 		if (i > 0) {
-			updatePAgeOrientationInOptions(pAges[i], pdfKitDoc);
-			pdfKitDoc.addPAge(pdfKitDoc.options);
+			updatePageOrientationInOptions(pages[i], pdfKitDoc);
+			pdfKitDoc.addPage(pdfKitDoc.options);
 		}
 
-		var pAge = pAges[i];
-		for (var ii = 0, il = pAge.items.length; ii < il; ii++) {
-			var item = pAge.items[ii];
+		var page = pages[i];
+		for (var ii = 0, il = page.items.length; ii < il; ii++) {
+			var item = page.items[ii];
 			switch (item.type) {
 				case 'vector':
 					renderVector(item.item, patterns, pdfKitDoc);
@@ -76665,8 +76665,8 @@ function renderPAges(pAges, fontProvider, pdfKitDoc, patterns, progressCallback)
 				case 'line':
 					renderLine(item.item, item.item.x, item.item.y, patterns, pdfKitDoc);
 					break;
-				case 'imAge':
-					renderImAge(item.item, item.item.x, item.item.y, pdfKitDoc);
+				case 'image':
+					renderImage(item.item, item.item.x, item.item.y, pdfKitDoc);
 					break;
 				case 'svg':
 					renderSVG(item.item, item.item.x, item.item.y, pdfKitDoc, fontProvider);
@@ -76681,8 +76681,8 @@ function renderPAges(pAges, fontProvider, pdfKitDoc, patterns, progressCallback)
 			renderedItems++;
 			progressCallback(renderedItems / totalItems);
 		}
-		if (pAge.watermark) {
-			renderWatermark(pAge, pdfKitDoc);
+		if (page.watermark) {
+			renderWatermark(page, pdfKitDoc);
 		}
 	}
 }
@@ -76707,18 +76707,18 @@ function offsetText(y, inline) {
 }
 
 function renderLine(line, x, y, patterns, pdfKitDoc) {
-	function preparePAgeNodeRefLine(_pAgeNodeRef, inline) {
+	function preparePageNodeRefLine(_pageNodeRef, inline) {
 		var newWidth;
 		var diffWidth;
 		var textTools = new TextTools(null);
 
-		if (isUndefined(_pAgeNodeRef.positions)) {
-			throw 'PAge reference id not found';
+		if (isUndefined(_pageNodeRef.positions)) {
+			throw 'Page reference id not found';
 		}
 
-		var pAgeNumber = _pAgeNodeRef.positions[0].pAgeNumber.toString();
+		var pageNumber = _pageNodeRef.positions[0].pageNumber.toString();
 
-		inline.text = pAgeNumber;
+		inline.text = pageNumber;
 		newWidth = textTools.widthOfString(inline.text, inline.font, inline.fontSize, inline.characterSpacing, inline.fontFeatures);
 		diffWidth = inline.width - newWidth;
 		inline.width = newWidth;
@@ -76733,8 +76733,8 @@ function renderLine(line, x, y, patterns, pdfKitDoc) {
 		}
 	}
 
-	if (line._pAgeNodeRef) {
-		preparePAgeNodeRefLine(line._pAgeNodeRef, line.inlines[0]);
+	if (line._pageNodeRef) {
+		preparePageNodeRefLine(line._pageNodeRef, line.inlines[0]);
 	}
 
 	x = x || 0;
@@ -76751,8 +76751,8 @@ function renderLine(line, x, y, patterns, pdfKitDoc) {
 		var inline = line.inlines[i];
 		var shiftToBaseline = lineHeight - ((inline.font.ascender / 1000) * inline.fontSize) - descent;
 
-		if (inline._pAgeNodeRef) {
-			preparePAgeNodeRefLine(inline._pAgeNodeRef, inline);
+		if (inline._pageNodeRef) {
+			preparePageNodeRefLine(inline._pageNodeRef, inline);
 		}
 
 		var options = {
@@ -76785,11 +76785,11 @@ function renderLine(line, x, y, patterns, pdfKitDoc) {
 		var shiftedY = offsetText(y + shiftToBaseline, inline);
 		pdfKitDoc.text(inline.text, x + inline.x, shiftedY, options);
 
-		if (inline.linkToPAge) {
-			var _ref = pdfKitDoc.ref({ Type: 'Action', S: 'GoTo', D: [inline.linkToPAge, 0, 0] }).end();
+		if (inline.linkToPage) {
+			var _ref = pdfKitDoc.ref({ Type: 'Action', S: 'GoTo', D: [inline.linkToPage, 0, 0] }).end();
 			pdfKitDoc.annotate(x + inline.x, shiftedY, inline.width, inline.height, {
 				Subtype: 'Link',
-				Dest: [inline.linkToPAge - 1, 'XYZ', null, null, null]
+				Dest: [inline.linkToPage - 1, 'XYZ', null, null, null]
 			});
 		}
 
@@ -76798,18 +76798,18 @@ function renderLine(line, x, y, patterns, pdfKitDoc) {
 	textDecorator.drawDecorations(line, x, y, pdfKitDoc);
 }
 
-function renderWatermark(pAge, pdfKitDoc) {
-	var watermark = pAge.watermark;
+function renderWatermark(page, pdfKitDoc) {
+	var watermark = page.watermark;
 
 	pdfKitDoc.fill(watermark.color);
 	pdfKitDoc.opacity(watermark.opacity);
 
 	pdfKitDoc.save();
 
-	pdfKitDoc.rotate(watermark.angle, { origin: [pdfKitDoc.pAge.width / 2, pdfKitDoc.pAge.height / 2] });
+	pdfKitDoc.rotate(watermark.angle, { origin: [pdfKitDoc.page.width / 2, pdfKitDoc.page.height / 2] });
 
-	var x = pdfKitDoc.pAge.width / 2 - watermark._size.size.width / 2;
-	var y = pdfKitDoc.pAge.height / 2 - watermark._size.size.height / 2;
+	var x = pdfKitDoc.page.width / 2 - watermark._size.size.width / 2;
+	var y = pdfKitDoc.page.height / 2 - watermark._size.size.height / 2;
 
 	pdfKitDoc._font = watermark.font;
 	pdfKitDoc.fontSize(watermark.fontSize);
@@ -76910,30 +76910,30 @@ function renderVector(vector, patterns, pdfKitDoc) {
 	}
 }
 
-function renderImAge(imAge, x, y, pdfKitDoc) {
-	var opacity = isNumber(imAge.opacity) ? imAge.opacity : 1;
+function renderImage(image, x, y, pdfKitDoc) {
+	var opacity = isNumber(image.opacity) ? image.opacity : 1;
 	pdfKitDoc.opacity(opacity);
-	if (imAge.cover) {
-		var align = imAge.cover.align || 'center';
-		var valign = imAge.cover.valign || 'center';
-		var width = imAge.cover.width ? imAge.cover.width : imAge.width;
-		var height = imAge.cover.height ? imAge.cover.height : imAge.height;
+	if (image.cover) {
+		var align = image.cover.align || 'center';
+		var valign = image.cover.valign || 'center';
+		var width = image.cover.width ? image.cover.width : image.width;
+		var height = image.cover.height ? image.cover.height : image.height;
 		pdfKitDoc.save();
-		pdfKitDoc.rect(imAge.x, imAge.y, width, height).clip();
-		pdfKitDoc.imAge(imAge.imAge, imAge.x, imAge.y, { cover: [width, height], align: align, valign: valign });
+		pdfKitDoc.rect(image.x, image.y, width, height).clip();
+		pdfKitDoc.image(image.image, image.x, image.y, { cover: [width, height], align: align, valign: valign });
 		pdfKitDoc.restore();
 	} else {
-		pdfKitDoc.imAge(imAge.imAge, imAge.x, imAge.y, { width: imAge._width, height: imAge._height });
+		pdfKitDoc.image(image.image, image.x, image.y, { width: image._width, height: image._height });
 	}
-	if (imAge.link) {
-		pdfKitDoc.link(imAge.x, imAge.y, imAge._width, imAge._height, imAge.link);
+	if (image.link) {
+		pdfKitDoc.link(image.x, image.y, image._width, image._height, image.link);
 	}
-	if (imAge.linkToPAge) {
-		pdfKitDoc.ref({ Type: 'Action', S: 'GoTo', D: [imAge.linkToPAge, 0, 0] }).end();
-		pdfKitDoc.annotate(imAge.x, imAge.y, imAge._width, imAge._height, { Subtype: 'Link', Dest: [imAge.linkToPAge - 1, 'XYZ', null, null, null] });
+	if (image.linkToPage) {
+		pdfKitDoc.ref({ Type: 'Action', S: 'GoTo', D: [image.linkToPage, 0, 0] }).end();
+		pdfKitDoc.annotate(image.x, image.y, image._width, image._height, { Subtype: 'Link', Dest: [image.linkToPage - 1, 'XYZ', null, null, null] });
 	}
-	if (imAge.linkToDestination) {
-		pdfKitDoc.goTo(imAge.x, imAge.y, imAge._width, imAge._height, imAge.linkToDestination);
+	if (image.linkToDestination) {
+		pdfKitDoc.goTo(image.x, image.y, image._width, image._height, image.linkToDestination);
 	}
 }
 
@@ -78041,7 +78041,7 @@ function stripUnits(textVal) {
 	return n;
 }
 
-/** Make sure it's valid XML and the root tAge is <svg/>, returns xmldoc DOM */
+/** Make sure it's valid XML and the root tage is <svg/>, returns xmldoc DOM */
 function parseSVG(svgString) {
 	var doc;
 
@@ -78133,10 +78133,10 @@ TableProcessor.prototype.beginTable = function (writer) {
 	this.cleanUpRepeatables = false;
 
 	this.headerRows = tableNode.table.headerRows || 0;
-	this.rowsWithoutPAgeBreak = this.headerRows + (tableNode.table.keepWithHeaderRows || 0);
+	this.rowsWithoutPageBreak = this.headerRows + (tableNode.table.keepWithHeaderRows || 0);
 	this.dontBreakRows = tableNode.table.dontBreakRows || false;
 
-	if (this.rowsWithoutPAgeBreak) {
+	if (this.rowsWithoutPageBreak) {
 		writer.beginUnbreakableBlock();
 	}
 
@@ -78242,7 +78242,7 @@ TableProcessor.prototype.beginRow = function (rowIndex, writer) {
 	this.rowPaddingBottom = this.layout.paddingBottom(rowIndex, this.tableNode);
 
 	this.rowCallback = this.onRowBreak(rowIndex, writer);
-	writer.tracker.startTracking('pAgeChanged', this.rowCallback);
+	writer.tracker.startTracking('pageChanged', this.rowCallback);
 	if (this.dontBreakRows) {
 		writer.beginUnbreakableBlock();
 	}
@@ -78445,34 +78445,34 @@ TableProcessor.prototype.endTable = function (writer) {
 	}
 };
 
-TableProcessor.prototype.endRow = function (rowIndex, writer, pAgeBreaks) {
+TableProcessor.prototype.endRow = function (rowIndex, writer, pageBreaks) {
 	var l, i;
 	var self = this;
-	writer.tracker.stopTracking('pAgeChanged', this.rowCallback);
+	writer.tracker.stopTracking('pageChanged', this.rowCallback);
 	writer.context().moveDown(this.layout.paddingBottom(rowIndex, this.tableNode));
 	writer.context().availableHeight += this.reservedAtBottom;
 
-	var endingPAge = writer.context().pAge;
+	var endingPage = writer.context().page;
 	var endingY = writer.context().y;
 
 	var xs = getLineXs();
 
 	var ys = [];
 
-	var hasBreaks = pAgeBreaks && pAgeBreaks.length > 0;
+	var hasBreaks = pageBreaks && pageBreaks.length > 0;
 	var body = this.tableNode.table.body;
 
 	ys.push({
 		y0: this.rowTopY,
-		pAge: hasBreaks ? pAgeBreaks[0].prevPAge : endingPAge
+		page: hasBreaks ? pageBreaks[0].prevPage : endingPage
 	});
 
 	if (hasBreaks) {
-		for (i = 0, l = pAgeBreaks.length; i < l; i++) {
-			var pAgeBreak = pAgeBreaks[i];
-			ys[ys.length - 1].y1 = pAgeBreak.prevY;
+		for (i = 0, l = pageBreaks.length; i < l; i++) {
+			var pageBreak = pageBreaks[i];
+			ys[ys.length - 1].y1 = pageBreak.prevY;
 
-			ys.push({ y0: pAgeBreak.y, pAge: pAgeBreak.prevPAge + 1 });
+			ys.push({ y0: pageBreak.y, page: pageBreak.prevPage + 1 });
 		}
 	}
 
@@ -78490,11 +78490,11 @@ TableProcessor.prototype.endRow = function (rowIndex, writer, pAgeBreaks) {
 			y2 = y2 + this.rowPaddingBottom;
 		}
 
-		if (writer.context().pAge != ys[yi].pAge) {
-			writer.context().pAge = ys[yi].pAge;
+		if (writer.context().page != ys[yi].page) {
+			writer.context().page = ys[yi].page;
 
-			//TODO: buggy, availableHeight should be updated on every pAgeChanged event
-			// TableProcessor should be pAgeChanged listener, instead of processRow
+			//TODO: buggy, availableHeight should be updated on every pageChanged event
+			// TableProcessor should be pageChanged listener, instead of processRow
 			this.reservedAtBottom = 0;
 		}
 
@@ -78564,7 +78564,7 @@ TableProcessor.prototype.endRow = function (rowIndex, writer, pAgeBreaks) {
 							lineWidth: 0,
 							color: fillColor,
 							fillOpacity: fillOpacity
-						}, false, true, writer.context().backgroundLength[writer.context().pAge]);
+						}, false, true, writer.context().backgroundLength[writer.context().page]);
 					}
 
 					if (overlayPattern) {
@@ -78591,7 +78591,7 @@ TableProcessor.prototype.endRow = function (rowIndex, writer, pAgeBreaks) {
 		}
 	}
 
-	writer.context().pAge = endingPAge;
+	writer.context().page = endingPage;
 	writer.context().y = endingY;
 
 	var row = this.tableNode.table.body[rowIndex];
@@ -78625,7 +78625,7 @@ TableProcessor.prototype.endRow = function (rowIndex, writer, pAgeBreaks) {
 	}
 
 	if (this.dontBreakRows) {
-		writer.tracker.auto('pAgeChanged',
+		writer.tracker.auto('pageChanged',
 			function () {
 				if (!self.headerRows && self.layout.hLineWhenBroken !== false) {
 					self.drawHorizontalLine(rowIndex, writer);
@@ -78637,7 +78637,7 @@ TableProcessor.prototype.endRow = function (rowIndex, writer, pAgeBreaks) {
 		);
 	}
 
-	if (this.headerRepeatable && (rowIndex === (this.rowsWithoutPAgeBreak - 1) || rowIndex === this.tableNode.table.body.length - 1)) {
+	if (this.headerRepeatable && (rowIndex === (this.rowsWithoutPageBreak - 1) || rowIndex === this.tableNode.table.body.length - 1)) {
 		writer.commitUnbreakableBlock();
 		writer.pushToRepeatables(this.headerRepeatable);
 		this.cleanUpRepeatables = true;
@@ -79151,7 +79151,7 @@ function measure(fontProvider, textArray, styleContextStack) {
 		var lineHeight = getStyleProperty(item, styleContextStack, 'lineHeight', 1);
 		var characterSpacing = getStyleProperty(item, styleContextStack, 'characterSpacing', 0);
 		var link = getStyleProperty(item, styleContextStack, 'link', null);
-		var linkToPAge = getStyleProperty(item, styleContextStack, 'linkToPAge', null);
+		var linkToPage = getStyleProperty(item, styleContextStack, 'linkToPage', null);
 		var linkToDestination = getStyleProperty(item, styleContextStack, 'linkToDestination', null);
 		var noWrap = getStyleProperty(item, styleContextStack, 'noWrap', null);
 		var preserveLeadingSpaces = getStyleProperty(item, styleContextStack, 'preserveLeadingSpaces', false);
@@ -79197,7 +79197,7 @@ function measure(fontProvider, textArray, styleContextStack) {
 		item.decorationStyle = decorationStyle;
 		item.background = background;
 		item.link = link;
-		item.linkToPAge = linkToPAge;
+		item.linkToPage = linkToPage;
 		item.linkToDestination = linkToDestination;
 		item.noWrap = noWrap;
 		item.opacity = opacity;

@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'כתב עילי',
         size: 'גודל גופן'
       },
-      imAge: {
-        imAge: 'תמונה',
+      image: {
+        image: 'תמונה',
         insert: 'הוסף תמונה',
         resizeFull: 'גודל מלא',
         resizeHalf: 'להקטין לחצי',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Shape: Circle',
         shapeThumbnail: 'Shape: Thumbnail',
         shapeNone: 'Shape: None',
-        dragImAgeHere: 'גרור תמונה לכאן',
-        dropImAge: 'Drop imAge or Text',
+        dragImageHere: 'גרור תמונה לכאן',
+        dropImage: 'Drop image or Text',
         selectFromFiles: 'בחר מתוך קבצים',
         maximumFileSize: 'Maximum file size',
         maximumFileSizeError: 'Maximum file size exceeded.',

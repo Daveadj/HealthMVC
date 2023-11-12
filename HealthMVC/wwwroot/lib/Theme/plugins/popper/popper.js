@@ -17,7 +17,7 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAgeS OR OTHER
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
@@ -1402,7 +1402,7 @@ function getOppositeVariation(variation) {
  * - `-end`
  *
  * Variations are interpreted easily if you think of them as the left to right
- * written languAges. Horizontally (`top` and `bottom`), `start` is left and `end`
+ * written languages. Horizontally (`top` and `bottom`), `start` is left and `end`
  * is right.<br />
  * Vertically (`left` and `right`), `start` is top and `end` is bottom.
  *
@@ -1935,8 +1935,8 @@ var modifiers = {
    *
    * It accepts the following units:
    * - `px` or unit-less, interpreted as pixels
-   * - `%` or `%r`, percentAge relative to the length of the reference element
-   * - `%p`, percentAge relative to the length of the popper element
+   * - `%` or `%r`, percentage relative to the length of the reference element
+   * - `%p`, percentage relative to the length of the popper element
    * - `vw`, CSS viewport width unit
    * - `vh`, CSS viewport height unit
    *

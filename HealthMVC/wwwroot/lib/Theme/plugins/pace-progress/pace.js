@@ -12,7 +12,7 @@
     ghostTime: 100,
     maxProgressPerFrame: 20,
     easeFactor: 1.25,
-    startOnPAgeLoad: true,
+    startOnPageLoad: true,
     restartOnPushState: true,
     restartOnRequestAfter: 500,
     target: 'body',
@@ -939,7 +939,7 @@
     module.exports = Pace;
   }
 
-  if (options.startOnPAgeLoad) {
+  if (options.startOnPageLoad) {
     Pace.start();
   }
 

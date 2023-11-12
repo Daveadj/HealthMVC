@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'حرف فوقي',
         size: 'الحجم'
       },
-      imAge: {
-        imAge: 'صورة',
+      image: {
+        image: 'صورة',
         insert: 'إضافة صورة',
         resizeFull: 'الحجم بالكامل',
         resizeHalf: 'تصغير للنصف',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'الشكل: دائرة',
         shapeThumbnail: 'الشكل: صورة مصغرة',
         shapeNone: 'الشكل: لا شيء',
-        dragImAgeHere: 'إدرج الصورة هنا',
-        dropImAge: 'إسقاط صورة أو نص',
+        dragImageHere: 'إدرج الصورة هنا',
+        dropImage: 'إسقاط صورة أو نص',
         selectFromFiles: 'حدد ملف',
         maximumFileSize: 'الحد الأقصى لحجم الملف',
         maximumFileSizeError: 'تم تجاوز الحد الأقصى لحجم الملف',

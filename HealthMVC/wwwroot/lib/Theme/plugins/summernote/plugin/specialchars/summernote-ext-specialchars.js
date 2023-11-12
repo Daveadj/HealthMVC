@@ -47,7 +47,7 @@
         '&lsquo;', '&rsquo;', '&sbquo;', '&ldquo;', '&rdquo;',
         '&bdquo;', '&dagger;', '&Dagger;', '&bull;', '&hellip;',
         '&permil;', '&prime;', '&Prime;', '&lsaquo;', '&rsaquo;',
-        '&oline;', '&frasl;', '&euro;', '&imAge;', '&weierp;',
+        '&oline;', '&frasl;', '&euro;', '&image;', '&weierp;',
         '&real;', '&trade;', '&alefsym;', '&larr;', '&uarr;',
         '&rarr;', '&darr;', '&harr;', '&crarr;', '&lArr;',
         '&uArr;', '&rArr;', '&dArr;', '&hArr;', '&forall;',
@@ -143,7 +143,7 @@
       };
 
       /**
-       * show imAge dialog
+       * show image dialog
        *
        * @param {jQuery} $dialog
        * @return {Promise}

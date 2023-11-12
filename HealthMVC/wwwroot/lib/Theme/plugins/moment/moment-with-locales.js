@@ -2015,7 +2015,7 @@
         meridiemParse: defaultLocaleMeridiemParse,
     };
 
-    // internal storAge for locale config files
+    // internal storage for locale config files
     var locales = {},
         localeFamilies = {},
         globalLocale;
@@ -2534,7 +2534,7 @@
     hooks.createFromInputFallback = deprecate(
         'value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), ' +
             'which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are ' +
-            'discourAged. Please refer to http://momentjs.com/guides/#/warnings/js-date/ for more info.',
+            'discouraged. Please refer to http://momentjs.com/guides/#/warnings/js-date/ for more info.',
         function (config) {
             config._d = new Date(config._i + (config._useUTC ? ' UTC' : ''));
         }
@@ -4022,7 +4022,7 @@
     }
 
     var lang = deprecate(
-        'moment().lang() is deprecated. Instead, use moment().localeData() to get the languAge configuration. Use moment().locale() to change languAges.',
+        'moment().lang() is deprecated. Instead, use moment().localeData() to get the language configuration. Use moment().locale() to change languages.',
         function (key) {
             if (key === undefined) {
                 return this.localeData();
@@ -7964,7 +7964,7 @@
             h: 'en time',
             hh: '%d timer',
             d: 'en dag',
-            dd: '%d dAge',
+            dd: '%d dage',
             M: 'en måned',
             MM: '%d måneder',
             y: 'et år',
@@ -7985,7 +7985,7 @@
             m: ['eine Minute', 'einer Minute'],
             h: ['eine Stunde', 'einer Stunde'],
             d: ['ein Tag', 'einem Tag'],
-            dd: [number + ' TAge', number + ' TAgen'],
+            dd: [number + ' Tage', number + ' Tagen'],
             w: ['eine Woche', 'einer Woche'],
             M: ['ein Monat', 'einem Monat'],
             MM: [number + ' Monate', number + ' Monaten'],
@@ -8058,7 +8058,7 @@
             m: ['eine Minute', 'einer Minute'],
             h: ['eine Stunde', 'einer Stunde'],
             d: ['ein Tag', 'einem Tag'],
-            dd: [number + ' TAge', number + ' TAgen'],
+            dd: [number + ' Tage', number + ' Tagen'],
             w: ['eine Woche', 'einer Woche'],
             M: ['ein Monat', 'einem Monat'],
             MM: [number + ' Monate', number + ' Monaten'],
@@ -8131,7 +8131,7 @@
             m: ['eine Minute', 'einer Minute'],
             h: ['eine Stunde', 'einer Stunde'],
             d: ['ein Tag', 'einem Tag'],
-            dd: [number + ' TAge', number + ' TAgen'],
+            dd: [number + ' Tage', number + ' Tagen'],
             w: ['eine Woche', 'einer Woche'],
             M: ['ein Monat', 'einem Monat'],
             MM: [number + ' Monate', number + ' Monaten'],
@@ -10126,7 +10126,7 @@
             h: 'ien oere',
             hh: '%d oeren',
             d: 'ien dei',
-            dd: '%d dAgen',
+            dd: '%d dagen',
             M: 'ien moanne',
             MM: '%d moannen',
             y: 'ien jier',
@@ -13953,7 +13953,7 @@
             h: 'en time',
             hh: '%d timer',
             d: 'en dag',
-            dd: '%d dAger',
+            dd: '%d dager',
             w: 'en uke',
             ww: '%d uker',
             M: 'en måned',
@@ -14165,7 +14165,7 @@
             h: 'één uur',
             hh: '%d uur',
             d: 'één dag',
-            dd: '%d dAgen',
+            dd: '%d dagen',
             M: 'één maand',
             MM: '%d maanden',
             y: 'één jaar',
@@ -14263,7 +14263,7 @@
             h: 'één uur',
             hh: '%d uur',
             d: 'één dag',
-            dd: '%d dAgen',
+            dd: '%d dagen',
             w: 'één week',
             ww: '%d weken',
             M: 'één maand',
@@ -15139,7 +15139,7 @@
     //! moment.js locale configuration
 
     hooks.defineLocale('se', {
-        months: 'ođđajAgemánnu_guovvamánnu_njukčamánnu_cuoŋománnu_miessemánnu_geassemánnu_suoidnemánnu_borgemánnu_čakčamánnu_golggotmánnu_skábmamánnu_juovlamánnu'.split(
+        months: 'ođđajagemánnu_guovvamánnu_njukčamánnu_cuoŋománnu_miessemánnu_geassemánnu_suoidnemánnu_borgemánnu_čakčamánnu_golggotmánnu_skábmamánnu_juovlamánnu'.split(
             '_'
         ),
         monthsShort: 'ođđj_guov_njuk_cuo_mies_geas_suoi_borg_čakč_golg_skáb_juov'.split(

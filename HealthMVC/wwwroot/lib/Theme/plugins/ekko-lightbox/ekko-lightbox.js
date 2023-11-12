@@ -24,14 +24,14 @@ var Lightbox = (function ($) {
 		maxHeight: 9999,
 		showArrows: true, //display the left / right arrows or not
 		wrapping: true, //if true, gallery loops infinitely
-		type: null, //force the lightbox into imAge / youtube mode. if null, or not imAge|youtube|vimeo; detect it
+		type: null, //force the lightbox into image / youtube mode. if null, or not image|youtube|vimeo; detect it
 		alwaysShowClose: false, //always show the close button, even if there is no title
-		loadingMessAge: '<div class="ekko-lightbox-loader"><div><div></div><div></div></div></div>', // http://tobiasahlin.com/spinkit/
+		loadingMessage: '<div class="ekko-lightbox-loader"><div><div></div><div></div></div></div>', // http://tobiasahlin.com/spinkit/
 		leftArrow: '<span>&#10094;</span>',
 		rightArrow: '<span>&#10095;</span>',
 		strings: {
 			close: 'Close',
-			fail: 'Failed to load imAge:',
+			fail: 'Failed to load image:',
 			type: 'Could not detect remote target type. Force the type using data-type'
 		},
 		doc: document, // if in an iframe can specify top.document
@@ -252,26 +252,26 @@ var Lightbox = (function ($) {
 
 				type = type || false;
 
-				if (!type && this._isImAge(src)) type = 'imAge';
+				if (!type && this._isImage(src)) type = 'image';
 				if (!type && this._getYoutubeId(src)) type = 'youtube';
 				if (!type && this._getVimeoId(src)) type = 'vimeo';
 				if (!type && this._getInstagramId(src)) type = 'instagram';
 
-				if (!type || ['imAge', 'youtube', 'vimeo', 'instagram', 'video', 'url'].indexOf(type) < 0) type = 'url';
+				if (!type || ['image', 'youtube', 'vimeo', 'instagram', 'video', 'url'].indexOf(type) < 0) type = 'url';
 
 				return type;
 			}
 		}, {
-			key: '_isImAge',
-			value: function _isImAge(string) {
-				return string && string.match(/(^data:imAge\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|webp|svg)((\?|#).*)?$)/i);
+			key: '_isImage',
+			value: function _isImage(string) {
+				return string && string.match(/(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|webp|svg)((\?|#).*)?$)/i);
 			}
 		}, {
 			key: '_containerToUse',
 			value: function _containerToUse() {
 				var _this2 = this;
 
-				// if currently showing an imAge, fade it out and remove
+				// if currently showing an image, fade it out and remove
 				var $toUse = this._$lightboxBodyTwo;
 				var $current = this._$lightboxBodyOne;
 
@@ -299,12 +299,12 @@ var Lightbox = (function ($) {
 				var currentRemote = this._$element.attr('data-remote') || this._$element.attr('href');
 				var currentType = this._detectRemoteType(currentRemote, this._$element.attr('data-type') || false);
 
-				if (['imAge', 'youtube', 'vimeo', 'instagram', 'video', 'url'].indexOf(currentType) < 0) return this._error(this._config.strings.type);
+				if (['image', 'youtube', 'vimeo', 'instagram', 'video', 'url'].indexOf(currentType) < 0) return this._error(this._config.strings.type);
 
 				switch (currentType) {
-					case 'imAge':
-						this._preloadImAge(currentRemote, $toUse);
-						this._preloadImAgeByIndex(this._galleryIndex, 3);
+					case 'image':
+						this._preloadImage(currentRemote, $toUse);
+						this._preloadImageByIndex(this._galleryIndex, 3);
 						break;
 					case 'youtube':
 						this._showYoutubeVideo(currentRemote, $toUse);
@@ -352,7 +352,7 @@ var Lightbox = (function ($) {
 				if (show) {
 					this._$modalDialog.css('display', 'none');
 					this._$modal.removeClass('in show');
-					$('.modal-backdrop').append(this._config.loadingMessAge);
+					$('.modal-backdrop').append(this._config.loadingMessage);
 				} else {
 					this._$modalDialog.css('display', 'block');
 					this._$modal.addClass('in show');
@@ -504,15 +504,15 @@ var Lightbox = (function ($) {
 			}
 		}, {
 			key: '_error',
-			value: function _error(messAge) {
-				console.error(messAge);
-				this._containerToUse().html(messAge);
+			value: function _error(message) {
+				console.error(message);
+				this._containerToUse().html(message);
 				this._resize(300, 300);
 				return this;
 			}
 		}, {
-			key: '_preloadImAgeByIndex',
-			value: function _preloadImAgeByIndex(startIndex, numberOfTimes) {
+			key: '_preloadImageByIndex',
+			value: function _preloadImageByIndex(startIndex, numberOfTimes) {
 
 				if (!this._$galleryItems) return;
 
@@ -520,37 +520,37 @@ var Lightbox = (function ($) {
 				if (typeof next == 'undefined') return;
 
 				var src = next.attr('data-remote') || next.attr('href');
-				if (next.attr('data-type') === 'imAge' || this._isImAge(src)) this._preloadImAge(src, false);
+				if (next.attr('data-type') === 'image' || this._isImage(src)) this._preloadImage(src, false);
 
-				if (numberOfTimes > 0) return this._preloadImAgeByIndex(startIndex + 1, numberOfTimes - 1);
+				if (numberOfTimes > 0) return this._preloadImageByIndex(startIndex + 1, numberOfTimes - 1);
 			}
 		}, {
-			key: '_preloadImAge',
-			value: function _preloadImAge(src, $containerForImAge) {
+			key: '_preloadImage',
+			value: function _preloadImage(src, $containerForImage) {
 				var _this4 = this;
 
-				$containerForImAge = $containerForImAge || false;
+				$containerForImage = $containerForImage || false;
 
-				var img = new ImAge();
-				if ($containerForImAge) {
+				var img = new Image();
+				if ($containerForImage) {
 					(function () {
 
 						// if loading takes > 200ms show a loader
 						var loadingTimeout = setTimeout(function () {
-							$containerForImAge.append(_this4._config.loadingMessAge);
+							$containerForImage.append(_this4._config.loadingMessage);
 						}, 200);
 
 						img.onload = function () {
 							if (loadingTimeout) clearTimeout(loadingTimeout);
 							loadingTimeout = null;
-							var imAge = $('<img />');
-							imAge.attr('src', img.src);
-							imAge.addClass('img-fluid');
+							var image = $('<img />');
+							image.attr('src', img.src);
+							image.addClass('img-fluid');
 
 							// backward compatibility for bootstrap v3
-							imAge.css('width', '100%');
+							image.css('width', '100%');
 
-							$containerForImAge.html(imAge);
+							$containerForImage.html(image);
 							if (_this4._$modalArrows) _this4._$modalArrows.css('display', ''); // remove display to default to css property
 
 							_this4._resize(img.width, img.height);
@@ -585,7 +585,7 @@ var Lightbox = (function ($) {
 				this._wantedWidth = width;
 				this._wantedHeight = height;
 
-				var imAgeAspecRatio = width / height;
+				var imageAspecRatio = width / height;
 
 				// if width > the available space, scale down the expected width and height
 				var widthBorderAndPadding = this._padding.left + this._padding.right + this._border.left + this._border.right;
@@ -597,7 +597,7 @@ var Lightbox = (function ($) {
 				var maxWidth = Math.min(width + widthBorderAndPadding, this._config.doc.body.clientWidth - addMargin, this._config.maxWidth);
 
 				if (width + widthBorderAndPadding > maxWidth) {
-					height = (maxWidth - widthBorderAndPadding - discountMargin) / imAgeAspecRatio;
+					height = (maxWidth - widthBorderAndPadding - discountMargin) / imageAspecRatio;
 					width = maxWidth;
 				} else width = width + widthBorderAndPadding;
 
@@ -619,7 +619,7 @@ var Lightbox = (function ($) {
 
 				if (height > maxHeight) {
 					// if height > the available height, scale down the width
-					width = Math.ceil(maxHeight * imAgeAspecRatio) + widthBorderAndPadding;
+					width = Math.ceil(maxHeight * imageAspecRatio) + widthBorderAndPadding;
 				}
 
 				this._$lightboxContainer.css('height', maxHeight);

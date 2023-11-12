@@ -38,8 +38,8 @@ var __webpack_exports__ = {};
         size: 'Μέγεθος',
         sizeunit: 'Μονάδα μεγέθους'
       },
-      imAge: {
-        imAge: 'Εικόνα',
+      image: {
+        image: 'Εικόνα',
         insert: 'Εισαγωγή',
         resizeFull: 'Πλήρες μέγεθος',
         resizeHalf: 'Μισό μέγεθος',
@@ -52,8 +52,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Σχήμα: Κύκλος',
         shapeThumbnail: 'Σχήμα: Μικρογραφία',
         shapeNone: 'Σχήμα: Κανένα',
-        dragImAgeHere: 'Σύρτε την εικόνα εδώ',
-        dropImAge: 'Αφήστε την εικόνα',
+        dragImageHere: 'Σύρτε την εικόνα εδώ',
+        dropImage: 'Αφήστε την εικόνα',
         selectFromFiles: 'Επιλογή από αρχεία',
         maximumFileSize: 'Μέγιστο μέγεθος αρχείου',
         maximumFileSizeError: 'Το μέγεθος είναι μεγαλύτερο από το μέγιστο επιτρεπτό.',

@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Superscript',
         size: 'Teckenstorlek'
       },
-      imAge: {
-        imAge: 'Bild',
+      image: {
+        image: 'Bild',
         insert: 'Infoga bild',
         resizeFull: 'Full storlek',
         resizeHalf: 'Halv storlek',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Shape: Circle',
         shapeThumbnail: 'Shape: Thumbnail',
         shapeNone: 'Shape: None',
-        dragImAgeHere: 'Dra en bild hit',
-        dropImAge: 'Drop imAge or Text',
+        dragImageHere: 'Dra en bild hit',
+        dropImage: 'Drop image or Text',
         selectFromFiles: 'Välj från filer',
         maximumFileSize: 'Maximum file size',
         maximumFileSizeError: 'Maximum file size exceeded.',

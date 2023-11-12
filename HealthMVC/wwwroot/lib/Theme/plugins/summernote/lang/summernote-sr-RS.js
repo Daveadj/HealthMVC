@@ -37,8 +37,8 @@ var __webpack_exports__ = {};
         superscript: 'Superscript',
         size: 'Величина фонта'
       },
-      imAge: {
-        imAge: 'Слика',
+      image: {
+        image: 'Слика',
         insert: 'Уметни слику',
         resizeFull: 'Пуна величина',
         resizeHalf: 'Умањи на 50%',
@@ -50,8 +50,8 @@ var __webpack_exports__ = {};
         shapeCircle: 'Shape: Circle',
         shapeThumbnail: 'Shape: Thumbnail',
         shapeNone: 'Shape: None',
-        dragImAgeHere: 'Превуци слику овде',
-        dropImAge: 'Drop imAge or Text',
+        dragImageHere: 'Превуци слику овде',
+        dropImage: 'Drop image or Text',
         selectFromFiles: 'Изабери из датотеке',
         maximumFileSize: 'Maximum file size',
         maximumFileSizeError: 'Maximum file size exceeded.',

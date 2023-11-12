@@ -37,7 +37,7 @@ The plugin also adds four public methods:
     the user moves the mouse. Optionally supply a position (passed on to
     setCrosshair()) to move it to.
 
-    Example usAge:
+    Example usage:
 
     var myFlot = $.plot( $("#graph"), ..., { crosshair: { mode: "x" } } };
     $("#graph").bind( "plothover", function ( evt, position, item ) {
@@ -112,8 +112,8 @@ The plugin also adds four public methods:
         function onMouseMove(e) {
             var offset = plot.offset();
             if (crosshair.locked) {
-                var mouseX = Math.max(0, Math.min(e.pAgeX - offset.left, plot.width()));
-                var mouseY = Math.max(0, Math.min(e.pAgeY - offset.top, plot.height()));
+                var mouseX = Math.max(0, Math.min(e.pageX - offset.left, plot.width()));
+                var mouseY = Math.max(0, Math.min(e.pageY - offset.top, plot.height()));
 
                 if ((mouseX > crosshair.x - 4) && (mouseX < crosshair.x + 4) && (mouseY > crosshair.y - 4) && (mouseY < crosshair.y + 4)) {
                     if (!crosshair.highlighted) {
@@ -134,8 +134,8 @@ The plugin also adds four public methods:
                 return;
             }
 
-            crosshair.x = Math.max(0, Math.min(e.pAgeX - offset.left, plot.width()));
-            crosshair.y = Math.max(0, Math.min(e.pAgeY - offset.top, plot.height()));
+            crosshair.x = Math.max(0, Math.min(e.pageX - offset.left, plot.width()));
+            crosshair.y = Math.max(0, Math.min(e.pageY - offset.top, plot.height()));
             plot.triggerRedrawOverlay();
         }
 
