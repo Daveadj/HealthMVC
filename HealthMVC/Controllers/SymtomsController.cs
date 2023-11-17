@@ -23,35 +23,59 @@ namespace HealthMVC.Controllers
         public async Task<IActionResult> Index()
 
         {
-            var sym = await _symtomService.GetSymptoms(_configModel.Token, _configModel.language);
-            return View(sym);
+            try
+            {
+                var sym = await _symtomService.GetSymptoms(_configModel.Token, _configModel.language);
+                return View(sym);
+            }
+            catch (Exception)
+            {
+                string errormessage = "Issues Loading Symptoms";
+                return RedirectToAction("ErrorView", new { errormessage });
+            }
         }
 
         public async Task<IActionResult> Specilisation()
 
         {
-            var spec = await _symtomService.GetSpecialisations(_configModel.Token, _configModel.language);
-            var specialisation = spec.Select(specialisation => new Specialisation
+            try
             {
-                Id = specialisation.Id,
-                Name = specialisation.Name,
-            }).ToList();
-            await _healthDbContext.Specialisation.AddRangeAsync(specialisation);
-            await _healthDbContext.SaveChangesAsync();
-            return View(spec);
+                var spec = await _symtomService.GetSpecialisations(_configModel.Token, _configModel.language);
+                var specialisation = spec.Select(specialisation => new Specialisation
+                {
+                    Id = specialisation.Id,
+                    Name = specialisation.Name,
+                }).ToList();
+                await _healthDbContext.Specialisation.AddRangeAsync(specialisation);
+                await _healthDbContext.SaveChangesAsync();
+                return View(spec);
+            }
+            catch (Exception)
+            {
+                string errormessage = "Error loading specialisation";
+                return RedirectToAction("ErrorView", new { errormessage });
+            }
         }
 
         public async Task<IActionResult> Form()
         {
-            var symList = await _symtomService.GetSymptoms(_configModel.Token, _configModel.language);
-            ViewBag.AvailableSymptoms = symList;
+            try
+            {
+                var symList = await _symtomService.GetSymptoms(_configModel.Token, _configModel.language);
+                ViewBag.AvailableSymptoms = symList;
 
-            var enumValues = Enum.GetValues(typeof(Gender)).Cast<Gender>().ToList();
-            ViewBag.EnumValues = enumValues;
+                var enumValues = Enum.GetValues(typeof(Gender)).Cast<Gender>().ToList();
+                ViewBag.EnumValues = enumValues;
 
-            var yearList = Enumerable.Range(DateTime.Now.Year - 100, 100).ToList();
-            ViewBag.YearList = yearList;
-            return View();
+                var yearList = Enumerable.Range(DateTime.Now.Year - 100, 100).ToList();
+                ViewBag.YearList = yearList;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                string errormessage = ex.Message;
+                return RedirectToAction("ErrorView", new { errormessage });
+            }
         }
 
         [HttpPost]
@@ -252,12 +276,20 @@ namespace HealthMVC.Controllers
 
         public ActionResult DoctorPatient(int doctorId)
         {
-            var doctorPatients = _healthDbContext.DoctorPatients.Include(dp => dp.Doctor)
+            try
+            {
+                var doctorPatients = _healthDbContext.DoctorPatients.Include(dp => dp.Doctor)
                 .Include(dp => dp.Person)
                 .Where(dp => dp.DoctorId == doctorId)
                 .ToList();
 
-            return View(doctorPatients);
+                return View(doctorPatients);
+            }
+            catch (Exception ex)
+            {
+                string errormessage = ex.Message;
+                return RedirectToAction("ErrorView", new { errormessage });
+            }
         }
 
         public ActionResult PersonIssues(int personId)
